@@ -313,6 +313,7 @@ def main():
     parser = argparse.ArgumentParser(description="Run agent tasks and save artifacts")
     parser.add_argument("--model", "-m", type=str, help="Model to use", default="o3")
     parser.add_argument("--concurrent", "-c", action="store_true", help="Run tasks in parallel", default=False)
+    parser.add_argument("--workers", type=int, default=0, help="Number of workers to use with --concurrent (default: auto)")
     parser.add_argument("--task", "--id", type=str, help="Task to run", default="")
     parser.add_argument("--run-all", "-a", action="store_true", help="Run all selected tasks", default=False)
     parser.add_argument("--headless", action="store_true", help="Run in headless mode", default=False)
@@ -396,7 +397,17 @@ def main():
         log_error("No tasks found to run")
         return {}
 
-    num_workers = min(len(task_names), 6) if args.concurrent else 1
+    if args.workers < 0:
+        log_error("--workers must be 0 or greater")
+        return {}
+
+    if args.concurrent:
+        if args.workers > 0:
+            num_workers = min(len(task_names), args.workers)
+        else:
+            num_workers = min(len(task_names), 6)
+    else:
+        num_workers = 1
 
     console.print(create_table_options(args, num_workers, task_names))
     console.print()
