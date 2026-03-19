@@ -423,6 +423,7 @@ def main():
         post_run_js_snippet=js_snippet_source,
         post_run_js_snippet_path=str(js_snippet_path) if js_snippet_path else None,
         post_run_url=args.post_run_url or None,
+        registration_paths=[str(task_source.resolve())],
     )
 
     total_task_runs = len(task_names) * args.iterations

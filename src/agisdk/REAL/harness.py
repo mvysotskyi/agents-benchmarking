@@ -31,12 +31,13 @@ from agisdk.REAL.demo_agent.basic_agent import DemoAgentArgs
 
 # Ray remote actor for distributed task execution
 if RAY_AVAILABLE:
-    @ray.remote(resources={"memory_gb": 1})
+    @ray.remote(resources={"memory_gb": 3})
     def run_task_ray(
         task_name: str,
         agent_args: "AbstractAgentArgs",
         env_args_dict: Dict[str, Any],
         results_dir: str,
+        registration_paths: Optional[List[str]] = None,
         continue_previous: bool = False,
         use_cache: bool = True,
         run_uuid: Optional[str] = None,
@@ -55,8 +56,12 @@ if RAY_AVAILABLE:
         from pathlib import Path
         from agisdk.REAL.browsergym.experiments import EnvArgs, ExpArgs, get_exp_result
         from agisdk.REAL.logging import logger as rich_logger
+        from eval.register import register_evaluation_tasks
         
         rich_logger.info(f"Running task: {task_name}")
+
+        if registration_paths:
+            register_evaluation_tasks([Path(path) for path in registration_paths])
         
         # Set task name in env args
         env_args_dict["task_name"] = task_name
@@ -175,6 +180,7 @@ class harness:
         post_run_js_snippet: str = None,
         post_run_js_snippet_path: str = None,
         post_run_url: str = None,
+        registration_paths: Optional[List[str]] = None,
     ):
         """
         Initialize the harness with the provided configuration.
@@ -229,6 +235,7 @@ class harness:
         self.post_run_js_snippet = post_run_js_snippet
         self.post_run_js_snippet_path = post_run_js_snippet_path
         self.post_run_url = post_run_url
+        self.registration_paths = registration_paths or []
         
         logger.info(f"Harness initialized with model={model or 'custom'}, task={task_name or task_type}, Sampling each task {sample_tasks} times")
         # Initialize agent arguments
@@ -366,6 +373,7 @@ class harness:
             post_run_js_snippet=self.post_run_js_snippet,
             post_run_js_snippet_path=self.post_run_js_snippet_path,
             post_run_url=self.post_run_url,
+            registration_paths=self.registration_paths,
         )
         
         # Format and return results
@@ -536,6 +544,7 @@ class harness:
         post_run_js_snippet: Optional[str] = None,
         post_run_js_snippet_path: Optional[str] = None,
         post_run_url: Optional[str] = None,
+        registration_paths: Optional[List[str]] = None,
     ) -> Dict[str, Any]:
         """
         Run tasks with the provided agent and environment configuration.
@@ -654,6 +663,7 @@ class harness:
                         agent_args=agent_args,
                         env_args_dict=env_args_dict,
                         results_dir=results_dir,
+                        registration_paths=registration_paths,
                         continue_previous=continue_previous,
                         use_cache=use_cache,
                         run_uuid=run_uuid,
@@ -690,6 +700,7 @@ class harness:
                         post_run_js_snippet=post_run_js_snippet,
                         post_run_js_snippet_path=post_run_js_snippet_path,
                         post_run_url=post_run_url,
+                        registration_paths=registration_paths,
                     )
                     results[task_name] = exp_record
         
@@ -741,6 +752,7 @@ class harness:
         post_run_js_snippet: Optional[str] = None,
         post_run_js_snippet_path: Optional[str] = None,
         post_run_url: Optional[str] = None,
+        registration_paths: Optional[List[str]] = None,
     ) -> Tuple[str, Dict[str, Any]]:
         """
         Run a single task with the provided agent and environment configuration.
@@ -758,6 +770,10 @@ class harness:
             Tuple of (task_name, results_dict)
         """
         print(f"Running task: {task_name}")
+
+        if registration_paths:
+            from eval.register import register_evaluation_tasks
+            register_evaluation_tasks([Path(path) for path in registration_paths])
         
         # Set task name in env args
         env_args_dict["task_name"] = task_name
