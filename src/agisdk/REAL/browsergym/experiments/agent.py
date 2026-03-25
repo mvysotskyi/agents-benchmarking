@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
-from typing import Any
+from typing import Any, Optional
 
 from agisdk.REAL.browsergym.core.action.base import AbstractActionSet
 from agisdk.REAL.browsergym.core.action.highlevel import HighLevelActionSet
@@ -27,6 +27,7 @@ DEFAULT_OBS_PREPROCESSOR: callable = default_obs_preprocessor
 class AgentInfo:
     think: str = None
     chat_messages: list = None
+    raw_model_response: str = None
     stats: dict = field(default_factory=dict)
     markdown_page: str = ""
     html_page: str = ""
@@ -71,7 +72,7 @@ class Agent(ABC):
         return DEFAULT_OBS_PREPROCESSOR(obs)
 
     @abstractmethod
-    def get_action(self, obs: Any) -> tuple[str, AgentInfo]:
+    def get_action(self, obs: Any) -> tuple[Optional[str], AgentInfo]:
         """
         Updates the agent with the current observation, and returns its next action (plus an info dict, optional).
 
@@ -97,13 +98,15 @@ class Agent(ABC):
 
         Returns:
         --------
-        action: str
+        action: Optional[str]
             The action to be processed by `action_mapping()` (if any), and executed in the environment.
+            Returning `None` signals that the agent has no further action to take and the episode should end.
         info: AgentInfo
             Additional information about the action. with the following entries
             being handled by BrowserGym:
                 - "think": optional chain of thought
                 - "messages": list of messages with the LLM
+                - "raw_model_response": optional raw LLM output before any action normalization
                 - "stats": dict of extra statistics that will be saved and
                   aggregated.
                 - "markdown_page": str, string that will be displayed by agentlab's xray tool.

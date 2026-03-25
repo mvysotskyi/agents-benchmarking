@@ -6,7 +6,7 @@ import logging
 import time
 
 from PIL import Image
-from typing import Literal, Optional
+from typing import Any, Literal, Optional
 
 from agisdk.REAL.browsergym.experiments import Agent, AbstractAgentArgs
 from agisdk.REAL.browsergym.core.action.highlevel import HighLevelActionSet
@@ -15,6 +15,22 @@ from agisdk.REAL.browsergym.utils.obs import flatten_axtree_to_str, flatten_dom_
 from ..logging import logger as rich_logger
 
 logger = logging.getLogger(__name__)
+
+
+def _normalize_model_action(action: Any) -> Optional[str]:
+    """Normalize model output into an executable action string or `None`."""
+    if action is None:
+        return None
+
+    if not isinstance(action, str):
+        logger.warning(
+            "Model returned a non-string action of type %s; treating it as no action.",
+            type(action).__name__,
+        )
+        return None
+
+    action = action.strip()
+    return action or None
 
 # Handling Screenshots
 def image_to_jpg_base64_url(image: np.ndarray | Image.Image):
@@ -307,7 +323,8 @@ class DemoAgent(Agent):
                 "claude-3.5-sonnet": "claude-3-5-sonnet-20241022",
                 "claude-opus-4": "claude-opus-4-20250514",
                 "claude-sonnet-4": "claude-sonnet-4-20250514",
-                "sonnet-3.7": "claude-3-7-sonnet-20250219"
+                "sonnet-3.7": "claude-3-7-sonnet-20250219",
+                "claude-opus-4-6": "claude-opus-4-6"
             }
             
             # Parse model name and thinking mode
@@ -429,7 +446,7 @@ class DemoAgent(Agent):
         self.action_history = []
         self.last_observation = None
 
-    def get_action(self, obs: dict) -> tuple[str, dict]:
+    def get_action(self, obs: dict) -> tuple[Optional[str], dict]:
         # Print task start information if this is the first action
         if len(self.action_history) == 0:
             goal_str = str(obs.get("goal_object", ""))
@@ -663,14 +680,26 @@ class DemoAgent(Agent):
         # logger.info(full_prompt_txt)
 
         # query model using the abstraction function
-        action = self.query_model(system_msgs, user_msgs)
+        raw_action = self.query_model(system_msgs, user_msgs)
+        action = _normalize_model_action(raw_action)
+
+        step_num = len(self.action_history) + 1
+
+        if action is None:
+            rich_logger.warning("Model returned no executable action; ending the episode.")
+            rich_logger.task_step(step_num, "no_action", details="Model response was empty or invalid.")
+            logger.warning("Model returned an empty or invalid action response: %r", raw_action)
+            self.update_last_observation(obs)
+            return None, {
+                "model_response": raw_action,
+                "raw_model_response": raw_action,
+            }
 
         # Extract action type for a cleaner log message
         action_type = action.split("(")[0] if "(" in action else "unknown"
         action_args = action.split("(", 1)[1].rstrip(")") if "(" in action else ""
 
         # Log concise action summary to console
-        step_num = len(self.action_history) + 1
         action_summary = f"{action_type}"
         if action_args:
             action_summary += f"({action_args[:50]}{'...' if len(action_args) > 50 else ''})"
@@ -684,6 +713,7 @@ class DemoAgent(Agent):
 
         return action, {
             "model_response": action,
+            "raw_model_response": raw_action,
         }
 
 

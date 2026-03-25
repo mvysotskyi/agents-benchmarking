@@ -414,8 +414,8 @@ class StepInfo:
         Whether the episode is terminated i.e. reached a terminal state.
     truncated: bool
         Whether the episode is truncated i.e. reached a maximum number of steps.
-    action: str
-        The action taken by the agent.
+    action: Optional[str]
+        The action taken by the agent. `None` means the agent stopped without producing an action.
     agent_info: dict
         Additional information from the agent.
     stats: dict
@@ -430,14 +430,14 @@ class StepInfo:
     raw_reward: float = 0
     terminated: bool = None
     truncated: bool = None
-    action: str = None
+    action: Optional[str] = None
     agent_info: dict = field(default_factory=dict)
     stats: dict = None
     profiling: StepTimestamps = field(default_factory=StepTimestamps)
     task_info: dict = None
     model_name: str = None
 
-    def from_step(self, env: gym.Env, action: str, obs_preprocessor: callable):
+    def from_step(self, env: gym.Env, action: Optional[str], obs_preprocessor: callable):
         t = self.profiling
         t.env_start = time.time()
         self.obs, self.reward, self.terminated, self.truncated, env_info = env.step(action)
@@ -625,6 +625,7 @@ def _save_summary_info(
     
     last_agent_step = _get_last_agent_step(episode_info)
     agent_response = _extract_agent_response(last_agent_step)
+    raw_agent_response = _extract_raw_agent_response(last_agent_step)
     
     # Extract task_id from path if possible
     task_id = None
@@ -683,6 +684,7 @@ def _save_summary_info(
         "score": float(sum([step.raw_reward for step in episode_info if step.raw_reward]) or 0.0),
         "task_id": task_id or "",
         "agent_response": agent_response,
+        "raw_agent_response": raw_agent_response,
         "finish_state": finish_state,
         "finish_page_content": final_page_content,
         "finish_page_html": final_page_html,
@@ -712,6 +714,7 @@ def _save_summary_info(
         exp_dir=exp_dir,
         episode_info=episode_info,
         agent_response=agent_response,
+        raw_agent_response=raw_agent_response,
         post_run_url=post_run_url,
         post_run_js_result=post_run_js_result,
         post_run_js_error=post_run_js_error,
@@ -735,7 +738,11 @@ def _get_last_agent_step(episode_info: list[StepInfo]) -> Optional[StepInfo]:
         agent_info = step_info.agent_info or {}
         if step_info.action:
             return step_info
-        if agent_info.get("model_response") or agent_info.get("chat_messages"):
+        if (
+            agent_info.get("model_response")
+            or agent_info.get("raw_model_response")
+            or agent_info.get("chat_messages")
+        ):
             return step_info
     return episode_info[-1] if episode_info else None
 
@@ -768,9 +775,23 @@ def _extract_agent_response(step_info: Optional[StepInfo]) -> str:
     return step_info.action or ""
 
 
+def _extract_raw_agent_response(step_info: Optional[StepInfo]) -> str:
+    if step_info is None:
+        return ""
+
+    agent_info = step_info.agent_info or {}
+
+    raw_model_response = agent_info.get("raw_model_response")
+    if raw_model_response:
+        return raw_model_response
+
+    return _extract_agent_response(step_info)
+
+
 def _build_agent_outputs_payload(
     episode_info: list[StepInfo],
     agent_response: str,
+    raw_agent_response: str,
     post_run_url,
     post_run_js_result,
     post_run_js_error,
@@ -787,6 +808,7 @@ def _build_agent_outputs_payload(
         if not (
             step_info.action
             or agent_info.get("model_response")
+            or agent_info.get("raw_model_response")
             or agent_info.get("chat_messages")
             or agent_info.get("err_msg")
         ):
@@ -797,6 +819,7 @@ def _build_agent_outputs_payload(
                 "step": step_info.step,
                 "action": step_info.action,
                 "model_response": agent_info.get("model_response"),
+                "raw_model_response": agent_info.get("raw_model_response"),
                 "chat_messages": agent_info.get("chat_messages"),
                 "err_msg": agent_info.get("err_msg"),
                 "stack_trace": agent_info.get("stack_trace"),
@@ -814,6 +837,7 @@ def _build_agent_outputs_payload(
     return {
         "primary_output": primary_output,
         "agent_response": agent_response,
+        "raw_agent_response": raw_agent_response,
         "post_run_url": post_run_url,
         "post_run_js_result": post_run_js_result,
         "post_run_js_error": post_run_js_error,
@@ -831,6 +855,7 @@ def _save_agent_outputs(
     exp_dir,
     episode_info: list[StepInfo],
     agent_response: str,
+    raw_agent_response: str,
     post_run_url,
     post_run_js_result,
     post_run_js_error,
@@ -844,6 +869,7 @@ def _save_agent_outputs(
     payload = _build_agent_outputs_payload(
         episode_info=episode_info,
         agent_response=agent_response,
+        raw_agent_response=raw_agent_response,
         post_run_url=post_run_url,
         post_run_js_result=post_run_js_result,
         post_run_js_error=post_run_js_error,
@@ -1380,7 +1406,7 @@ def _get_env_name(task_name: str):
     return f"browsergym/{task_name}"
 
 
-def _send_chat_info(chat: Chat, action: str, agent_info: dict):
+def _send_chat_info(chat: Chat, action: Optional[str], agent_info: dict):
     """Send the think and action info to the chat."""
     msg = ""
     if "think" in agent_info:
