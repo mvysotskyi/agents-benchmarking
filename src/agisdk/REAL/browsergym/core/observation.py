@@ -6,6 +6,7 @@ import playwright.sync_api
 import PIL.Image
 import pkgutil
 import re
+import time
 
 from typing import Literal
 
@@ -14,6 +15,8 @@ from .constants import BROWSERGYM_VISIBILITY_ATTRIBUTE as VIS_ATTR
 from .constants import BROWSERGYM_SETOFMARKS_ATTRIBUTE as SOM_ATTR
 
 MARK_FRAMES_MAX_TRIES = 3
+SCREENSHOT_MAX_TRIES = 5
+SCREENSHOT_RETRY_SLEEP_SECONDS = 0.5
 
 
 logger = logging.getLogger(__name__)
@@ -114,14 +117,38 @@ def extract_screenshot(page: playwright.sync_api.Page):
 
     """
 
-    cdp = page.context.new_cdp_session(page)
-    cdp_answer = cdp.send(
-        "Page.captureScreenshot",
-        {
-            "format": "png",
-        },
-    )
-    cdp.detach()
+    cdp_answer = None
+    last_error = None
+
+    for retries_left in reversed(range(SCREENSHOT_MAX_TRIES)):
+        cdp = page.context.new_cdp_session(page)
+        try:
+            cdp_answer = cdp.send(
+                "Page.captureScreenshot",
+                {
+                    "format": "png",
+                },
+            )
+            break
+        except playwright.sync_api.Error as e:
+            last_error = e
+            err_msg = str(e)
+            if retries_left > 0 and "Unable to capture screenshot" in err_msg:
+                logger.warning(
+                    "A transient error occurred while capturing a screenshot. "
+                    f"Retrying ({retries_left}/{SCREENSHOT_MAX_TRIES} tries left).\n{repr(e)}"
+                )
+                time.sleep(SCREENSHOT_RETRY_SLEEP_SECONDS)
+                continue
+            raise
+        finally:
+            try:
+                cdp.detach()
+            except playwright.sync_api.Error:
+                logger.debug("Failed to detach CDP session after screenshot capture.", exc_info=True)
+
+    if cdp_answer is None:
+        raise last_error or RuntimeError("Failed to capture screenshot.")
 
     # bytes of a png file
     png_base64 = cdp_answer["data"]
