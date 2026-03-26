@@ -29,6 +29,7 @@ EXPERIMENT_KEYS = {
     "url",
     "results_dir",
     "headless",
+    "use_screenshot",
     "verbose",
     "concurrent",
     "workers",
@@ -60,6 +61,7 @@ class ExperimentSpec:
     max_steps: int = 50
     url: str = ""
     headless: bool = False
+    use_screenshot: bool | None = None
     verbose: bool = False
     concurrent: bool = False
     workers: int = 0
@@ -117,6 +119,12 @@ def parse_args() -> argparse.Namespace:
         "--dry-run",
         action="store_true",
         help="Print the commands that would run without starting them",
+    )
+    parser.add_argument(
+        "--use-screenshot",
+        action=argparse.BooleanOptionalAction,
+        default=None,
+        help="Override screenshot usage for all experiments in this batch",
     )
     return parser.parse_args()
 
@@ -224,6 +232,7 @@ def _coerce_experiment(raw: dict, base_dir: Path, model_name: str, index: int) -
         "url": raw.get("url", ""),
         "results_dir": raw.get("results_dir", ""),
         "headless": raw.get("headless", False),
+        "use_screenshot": raw.get("use_screenshot"),
         "verbose": raw.get("verbose", False),
         "concurrent": raw.get("concurrent", False),
         "workers": raw.get("workers", 0),
@@ -249,6 +258,8 @@ def _coerce_experiment(raw: dict, base_dir: Path, model_name: str, index: int) -
     values["url"] = _ensure_string(values["url"], "url")
     values["results_dir"] = _ensure_string(values["results_dir"], "results_dir")
     values["headless"] = _ensure_bool(values["headless"], "headless")
+    if values["use_screenshot"] is not None:
+        values["use_screenshot"] = _ensure_bool(values["use_screenshot"], "use_screenshot")
     values["verbose"] = _ensure_bool(values["verbose"], "verbose")
     values["concurrent"] = _ensure_bool(values["concurrent"], "concurrent")
     values["workers"] = _ensure_int(values["workers"], "workers")
@@ -378,6 +389,8 @@ def build_main_command(spec: ExperimentSpec, entrypoint: Path) -> list[str]:
         command.append("--run-all")
     if spec.headless:
         command.append("--headless")
+    if spec.use_screenshot is not None:
+        command.append("--use-screenshot" if spec.use_screenshot else "--no-use-screenshot")
     if spec.verbose:
         command.append("--verbose")
     if spec.application:
@@ -586,6 +599,9 @@ def main() -> int:
 
     if args.fail_fast:
         config.fail_fast = True
+    if args.use_screenshot is not None:
+        for spec in config.experiments:
+            spec.use_screenshot = args.use_screenshot
 
     enabled_experiments = [spec for spec in config.experiments if spec.enabled]
     if not enabled_experiments:

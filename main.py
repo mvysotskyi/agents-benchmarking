@@ -61,6 +61,7 @@ def create_table_options(args: argparse.Namespace, num_workers: int, task_names:
     table.add_row("Model", f"[yellow]{args.model}[/yellow]")
     table.add_row("Concurrent", "[green]Yes[/green]" if args.concurrent else "[red]No[/red]")
     table.add_row("Headless", "[green]Yes[/green]" if args.headless else "[red]No[/red]")
+    table.add_row("Screenshots", "[green]Yes[/green]" if args.use_screenshot else "[red]No[/red]")
     table.add_row("Workers", f"[cyan]{num_workers}[/cyan]")
     table.add_row("Results Dir", f"[magenta]{Path(args.results_dir).resolve()}[/magenta]")
     table.add_row("Max Steps", f"[yellow]{args.max_steps}[/yellow]")
@@ -285,6 +286,7 @@ def save_run_manifest(
         "created_at": datetime.now().isoformat(),
         "model": args.model,
         "headless": args.headless,
+        "use_screenshot": args.use_screenshot,
         "concurrent": args.concurrent,
         "num_workers": num_workers,
         "max_steps": args.max_steps,
@@ -317,6 +319,12 @@ def main():
     parser.add_argument("--task", "--id", type=str, help="Task to run", default="")
     parser.add_argument("--run-all", "-a", action="store_true", help="Run all selected tasks", default=False)
     parser.add_argument("--headless", action="store_true", help="Run in headless mode", default=False)
+    parser.add_argument(
+        "--use-screenshot",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Whether to include and save screenshots during task runs",
+    )
     parser.add_argument("--verbose", action="store_true", help="Verbose output", default=False)
     parser.add_argument("--application", "--app", type=str, help="Filter tasks by application name", default="")
     parser.add_argument("--run-random", "-r", action="store_true", help="Run random tasks from the selected pool", default=False)
@@ -422,7 +430,7 @@ def main():
         max_steps=args.max_steps,
         use_html=False,
         use_axtree=True,
-        use_screenshot=True,
+        use_screenshot=args.use_screenshot,
         system_prompt_append=system_prompt_append,
         use_cache=False,
         force_refresh=True,
