@@ -7,7 +7,32 @@ import json
 from copy import deepcopy
 
 
-def compute_final_state(env_state: dict) -> dict:
+def _normalize_env_state(env_state: Any) -> Any:
+    """
+    Normalize raw environment state into a JSON-like structure when possible.
+
+    Callers sometimes pass the parsed /finish payload, a raw JSON string, or
+    placeholder sentinels when no environment state is available yet.
+    """
+    if env_state is None:
+        return {}
+
+    if isinstance(env_state, str):
+        stripped = env_state.strip()
+        if not stripped or stripped == "<>":
+            return {}
+        try:
+            parsed = json.loads(stripped)
+        except json.JSONDecodeError:
+            # Preserve unexpected raw values for debugging without breaking
+            # dict-only consumers such as final-state merging.
+            return {"_raw": env_state}
+        return parsed
+
+    return env_state
+
+
+def compute_final_state(env_state: Any) -> Any:
     """
     Compute the final state of entities from multiple create/edit operations.
     
@@ -24,7 +49,8 @@ def compute_final_state(env_state: dict) -> dict:
     Returns:
         Enhanced env_state with additional 'finalState' key containing merged entity states
     """
-    if not env_state:
+    env_state = _normalize_env_state(env_state)
+    if not isinstance(env_state, dict) or not env_state:
         return env_state
     
     result = deepcopy(env_state)
@@ -379,9 +405,10 @@ class WebCloneEvaluator:
             Tuple of (reward, done, message, info)
         """
         results = []
+        env_state = _normalize_env_state(env_state)
         
         # Optionally compute final state from multiple operations
-        if use_final_state and env_state:
+        if use_final_state and isinstance(env_state, dict) and env_state:
             env_state = compute_final_state(env_state)
             if 'finalState' in env_state:
                 rich_logger.info("📊 Computed Final State (merged from create/edit operations):")
@@ -423,4 +450,3 @@ class WebCloneEvaluator:
         message = "Task completed successfully!" if is_correct else "Task not completed successfully."
         info = {"results": results}
         return reward, done, message, info
-

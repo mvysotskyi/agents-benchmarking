@@ -216,7 +216,7 @@ class AbstractWebCloneTask(AbstractBrowserTask):
             response = assistant_messages[1]['message']
         if done:
             # env_state_json = self.get_finish_json(timeout=timeout)
-            env_state_json = "<>"
+            env_state_json = {}
             reward, _, message, info = self.evaluator.evaluate(env_state_json, model_response)
             message = "Task completed!" if done else "Task still in progress"
             info = {"env_state": env_state_json}
