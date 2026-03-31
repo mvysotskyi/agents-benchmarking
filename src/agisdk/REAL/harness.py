@@ -43,11 +43,12 @@ if RAY_AVAILABLE:
         run_uuid: Optional[str] = None,
         save_step_screenshots: bool = False,
         save_step_info: bool = False,
-    show_task_completion_summary: bool = True,
-    post_run_js_snippet: Optional[str] = None,
-    post_run_js_snippet_path: Optional[str] = None,
-    post_run_url: Optional[str] = None,
-) -> Tuple[str, Dict[str, Any]]:
+        show_task_completion_summary: bool = True,
+        post_run_js_snippet: Optional[str] = None,
+        post_run_js_snippet_path: Optional[str] = None,
+        post_run_url: Optional[str] = None,
+        initial_delay: float = 0,
+    ) -> Tuple[str, Dict[str, Any]]:
         """Run a single task."""
         # Import required modules inside the function for Ray workers
         import os
@@ -78,6 +79,7 @@ if RAY_AVAILABLE:
             post_run_js_snippet=post_run_js_snippet,
             post_run_js_snippet_path=post_run_js_snippet_path,
             post_run_url=post_run_url,
+            initial_delay=initial_delay,
         )
         
         # Start timing
@@ -180,6 +182,7 @@ class harness:
         post_run_js_snippet: str = None,
         post_run_js_snippet_path: str = None,
         post_run_url: str = None,
+        initial_delay: float = 0,
         registration_paths: Optional[List[str]] = None,
     ):
         """
@@ -220,6 +223,7 @@ class harness:
             post_run_js_snippet: JavaScript source to execute against the final live page before teardown.
             post_run_js_snippet_path: Original file path for the post-run JavaScript snippet.
             post_run_url: Optional URL to visit after task completion before capturing extra page data and running post-run JS.
+            initial_delay: Seconds to wait after page load before the agent takes its first action.
         """
         self.results_dir = results_dir
         self.num_workers = num_workers
@@ -235,6 +239,7 @@ class harness:
         self.post_run_js_snippet = post_run_js_snippet
         self.post_run_js_snippet_path = post_run_js_snippet_path
         self.post_run_url = post_run_url
+        self.initial_delay = initial_delay
         self.registration_paths = registration_paths or []
         
         logger.info(f"Harness initialized with model={model or 'custom'}, task={task_name or task_type}, Sampling each task {sample_tasks} times")
@@ -373,6 +378,7 @@ class harness:
             post_run_js_snippet=self.post_run_js_snippet,
             post_run_js_snippet_path=self.post_run_js_snippet_path,
             post_run_url=self.post_run_url,
+            initial_delay=self.initial_delay,
             registration_paths=self.registration_paths,
         )
         
@@ -544,6 +550,7 @@ class harness:
         post_run_js_snippet: Optional[str] = None,
         post_run_js_snippet_path: Optional[str] = None,
         post_run_url: Optional[str] = None,
+        initial_delay: float = 0,
         registration_paths: Optional[List[str]] = None,
     ) -> Dict[str, Any]:
         """
@@ -673,6 +680,7 @@ class harness:
                         post_run_js_snippet=post_run_js_snippet,
                         post_run_js_snippet_path=post_run_js_snippet_path,
                         post_run_url=post_run_url,
+                        initial_delay=initial_delay,
                     )
                     for task_name in tasks_to_run
                 ]
@@ -700,6 +708,7 @@ class harness:
                         post_run_js_snippet=post_run_js_snippet,
                         post_run_js_snippet_path=post_run_js_snippet_path,
                         post_run_url=post_run_url,
+                        initial_delay=initial_delay,
                         registration_paths=registration_paths,
                     )
                     results[task_name] = exp_record
@@ -752,6 +761,7 @@ class harness:
         post_run_js_snippet: Optional[str] = None,
         post_run_js_snippet_path: Optional[str] = None,
         post_run_url: Optional[str] = None,
+        initial_delay: float = 0,
         registration_paths: Optional[List[str]] = None,
     ) -> Tuple[str, Dict[str, Any]]:
         """
@@ -792,6 +802,7 @@ class harness:
             post_run_js_snippet=post_run_js_snippet,
             post_run_js_snippet_path=post_run_js_snippet_path,
             post_run_url=post_run_url,
+            initial_delay=initial_delay,
         )
         
         # Start timing
@@ -818,10 +829,10 @@ class harness:
             "agent_type": agent_type,
             "model_name": model_name,
             "max_steps": max_steps,
-            "leaderboard": is_leaderboard,  # Store leaderboard flag in metadata
+            "leaderboard": is_leaderboard,
             "cache_key": f"{task_name}_{agent_type}_{model_name}_{max_steps}{leaderboard_suffix}",
             "experiment_status": "started",
-            "run_uuid": run_uuid,  # Add the run UUID for tracking
+            "run_uuid": run_uuid,
         }
         
         # Write initial summary info

@@ -159,6 +159,7 @@ class ExpArgs:
     post_run_js_snippet: str = None
     post_run_js_snippet_path: str = None
     post_run_url: str = None
+    initial_delay: float = 0
 
     def prepare(self, exp_root):
         """Prepare the experiment directory and save the experiment arguments.
@@ -255,6 +256,13 @@ class ExpArgs:
                 env, seed=self.env_args.task_seed, obs_preprocessor=agent.obs_preprocessor
             )
             logger.debug(f"Environment reset.")
+
+            if self.initial_delay > 0:
+                logger.info(f"Waiting {self.initial_delay}s for page to fully load before first action.")
+                time.sleep(self.initial_delay)
+                step_info.obs = env.unwrapped._get_obs()
+                if agent.obs_preprocessor:
+                    step_info.obs = agent.obs_preprocessor(step_info.obs)
 
             while not step_info.is_done:  # set a limit
                 logger.debug(f"Starting step {step_info.step}.")

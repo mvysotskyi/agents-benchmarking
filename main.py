@@ -333,11 +333,13 @@ def main():
     parser.add_argument("--max-steps", type=int, default=50, help="Maximum number of agent steps per task")
     parser.add_argument("--task-file", type=str, default="", help="Path to a YAML or JSON testcase file")
     parser.add_argument("--url", type=str, default="", help="Start URL override for testcase files that do not define one")
+    parser.add_argument("--task-range", type=str, default="", help="Slice range of tasks to run, e.g. '2:5' (indices 2-4), '3:' (from 3), ':5' (first 5)")
     parser.add_argument("--results-dir", type=str, default="results", help="Directory where task artifacts will be saved")
     parser.add_argument("--js-snippet-file", type=str, default="", help="Path to a JavaScript file to execute on the final page for each testcase")
     parser.add_argument("--post-run-url", type=str, default="", help="Optional URL to open after each testcase before capturing extra page data and running the JS snippet")
     parser.add_argument("--system-prompt", type=str, default="", help="Append extra instructions to the built-in agent system prompt")
     parser.add_argument("--system-prompt-file", type=str, default="", help="Append extra system instructions from a text file")
+    parser.add_argument("--initial-delay", type=float, default=0, help="Seconds to wait after page load before the agent takes its first action")
     args = parser.parse_args()
 
     os.environ["VERBOSE"] = "1" if args.verbose else "0"
@@ -394,6 +396,23 @@ def main():
             log_error(f"Task {args.task} not found")
             return {}
 
+    if args.task_range:
+        try:
+            parts = args.task_range.split(":")
+            if len(parts) == 1:
+                idx = int(parts[0])
+                all_tasks = all_tasks[idx : idx + 1]
+            elif len(parts) == 2:
+                start = int(parts[0]) if parts[0] else None
+                end = int(parts[1]) if parts[1] else None
+                all_tasks = all_tasks[start:end]
+            else:
+                log_error(f"Invalid --task-range format: '{args.task_range}'. Use 'start:end', 'start:', ':end', or a single index.")
+                return {}
+        except ValueError:
+            log_error(f"Invalid --task-range format: '{args.task_range}'. Indices must be integers.")
+            return {}
+
     if args.run_random:
         num_tasks = len(all_tasks) if not args.max_tasks else min(args.max_tasks, len(all_tasks))
         all_tasks = get_random_tasks(all_tasks, num_tasks)
@@ -442,6 +461,7 @@ def main():
         post_run_js_snippet=js_snippet_source,
         post_run_js_snippet_path=str(js_snippet_path) if js_snippet_path else None,
         post_run_url=args.post_run_url or None,
+        initial_delay=args.initial_delay,
         registration_paths=[str(task_source.resolve())],
     )
 

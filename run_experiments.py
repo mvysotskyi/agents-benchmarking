@@ -40,6 +40,8 @@ EXPERIMENT_KEYS = {
     "post_run_url",
     "system_prompt",
     "system_prompt_file",
+    "task_range",
+    "initial_delay",
     "extra_args",
 }
 PATH_FIELDS = {"task_file", "results_dir", "post_run_js_snippet_path", "system_prompt_file"}
@@ -70,6 +72,8 @@ class ExperimentSpec:
     post_run_url: str = ""
     system_prompt: str = ""
     system_prompt_file: str = ""
+    task_range: str = ""
+    initial_delay: float = 0
     extra_args: list[str] = field(default_factory=list)
 
 
@@ -241,6 +245,8 @@ def _coerce_experiment(raw: dict, base_dir: Path, model_name: str, index: int) -
         "post_run_url": raw.get("post_run_url", ""),
         "system_prompt": raw.get("system_prompt", ""),
         "system_prompt_file": raw.get("system_prompt_file", ""),
+        "task_range": raw.get("task_range", ""),
+        "initial_delay": raw.get("initial_delay", 0),
         "extra_args": raw.get("extra_args", []),
     }
 
@@ -270,6 +276,8 @@ def _coerce_experiment(raw: dict, base_dir: Path, model_name: str, index: int) -
     values["post_run_url"] = _ensure_string(values["post_run_url"], "post_run_url")
     values["system_prompt"] = _ensure_string(values["system_prompt"], "system_prompt")
     values["system_prompt_file"] = _ensure_string(values["system_prompt_file"], "system_prompt_file")
+    values["task_range"] = _ensure_string(values["task_range"], "task_range")
+    values["initial_delay"] = _ensure_float(values["initial_delay"], "initial_delay")
     values["extra_args"] = _ensure_string_list(values["extra_args"], "extra_args")
 
     if values["iterations"] < 1:
@@ -280,6 +288,8 @@ def _coerce_experiment(raw: dict, base_dir: Path, model_name: str, index: int) -
         raise ValueError("'workers' must be 0 or greater.")
     if values["max_tasks"] is not None and values["max_tasks"] < 0:
         raise ValueError("'max_tasks' must be 0 or greater.")
+    if values["initial_delay"] < 0:
+        raise ValueError("'initial_delay' must be 0 or greater.")
 
     for field_name in PATH_FIELDS:
         values[field_name] = _resolve_config_path(values[field_name], base_dir)
@@ -417,6 +427,10 @@ def build_main_command(spec: ExperimentSpec, entrypoint: Path) -> list[str]:
         command.extend(["--system-prompt", spec.system_prompt])
     if spec.system_prompt_file:
         command.extend(["--system-prompt-file", spec.system_prompt_file])
+    if spec.task_range:
+        command.extend(["--task-range", spec.task_range])
+    if spec.initial_delay > 0:
+        command.extend(["--initial-delay", str(spec.initial_delay)])
     command.extend(spec.extra_args)
 
     return command
