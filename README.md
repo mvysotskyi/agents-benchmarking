@@ -72,6 +72,95 @@ Use `run_experiments.py` to launch many `main.py` runs at once from JSON. The la
 
 Each model key can define shared `defaults` plus a `testcases` list. Each testcase can override any supported `main.py` option, including `results_dir`, `max_steps`, `post_run_url`, `post_run_js_snippet_path` (or the legacy alias `js_snippet_file`), `system_prompt`, and `extra_args`.
 
+## Evaluation
+
+After running experiments, evaluate agent performance using two complementary methods:
+
+### Objective Evaluation
+
+Automated pass/fail scoring by comparing agent outputs against ground truth answers. Each benchmark app has a dedicated evaluator:
+
+- **Circuit** — builds component graphs from circuit exports and computes graph edit distance (requires `networkx`)
+- **Flightradar** — extracts JSON from agent responses and compares field-by-field against expected values
+- **Voidcut** — validates video editor timeline exports block-by-block against scenario rules
+
+```bash
+# Evaluate all result directories under a root
+poetry run python -m evaluation.objective.batch_evaluate clean_results/open_source
+
+# Multiple roots, parallel workers
+poetry run python -m evaluation.objective.batch_evaluate \
+  clean_results/open_source clean_results/closed_source --workers 8
+```
+
+Result directories are auto-discovered by naming convention (`_circuit`, `_frad`, `_video`/`_voidcut`). Each directory gets an `objective_evaluation.json` file with `{test_id: 0|1}` scores.
+
+You can also run individual evaluators directly:
+
+```bash
+# Circuit
+poetry run python -m evaluation.objective.evaluate_circuit_scheme \
+  --test-cases tasks/circuit.yaml --responses results/results_gpt54_circuit
+
+# Flightradar
+poetry run python -m evaluation.objective.evaluate \
+  --test-cases tasks/flightradar.yaml --responses results/results_gpt54_frad
+
+# Voidcut
+poetry run python -m evaluation.objective.eval_voidcut \
+  results/results_gpt54_video gt_all.json --tolerance_ms 1000 --verbose
+```
+
+### LLM-as-a-Judge Evaluation
+
+A 3-stage pipeline that uses LLM models to assess agent behavior from screenshots and action traces:
+
+1. **Stage 1** — Screenshot diff filtering: compares consecutive screenshots using ImageMagick (`compare`) to detect visually significant changes via RMSE, perceptual hash, and changed pixel fraction
+2. **Stage 2** — Per-change judgment: sends flagged screenshot pairs to an LLM (default: `gpt-4o-mini`) to classify the visible change, task relevance, and progress
+3. **Stage 3** — Final outcome: sends the full trajectory and final screenshot to an LLM (default: `gpt-5.1`) to produce a 1-5 score with reasoning
+
+**Requirements:** `OPENAI_API_KEY` env variable, ImageMagick installed.
+
+```bash
+# Basic batch run
+poetry run python -m evaluation.llm_judge.batch_run_llm_as_judge results/
+
+# Parallel with task YAML overrides
+poetry run python -m evaluation.llm_judge.batch_run_llm_as_judge results/ \
+  --parallel 4 \
+  --task-yaml circuit=tasks/circuit.yaml \
+  --task-yaml frad=tasks/flightradar.yaml
+
+# Generate summary CSVs
+poetry run python -m evaluation.llm_judge.batch_run_llm_as_judge results/ \
+  --summary-csv llm_summary.csv --runs-csv llm_runs.csv
+
+# Skip already-evaluated directories
+poetry run python -m evaluation.llm_judge.batch_run_llm_as_judge results/ \
+  --skip-existing --match "closed_source"
+
+# Custom models and reasoning
+poetry run python -m evaluation.llm_judge.batch_run_llm_as_judge results/ \
+  --stage2-model gpt-4o-mini --stage3-model gpt-5.1 \
+  --stage3-reasoning-effort high
+
+# Feed objective results into Stage 3 for consistency checks
+poetry run python -m evaluation.llm_judge.batch_run_llm_as_judge results/ \
+  --objective-evaluation-json results/results_gpt54_circuit/objective_evaluation.json
+
+# Dry run (no API calls)
+poetry run python -m evaluation.llm_judge.batch_run_llm_as_judge results/ --dry-run
+```
+
+Each result directory gets an `llm_judgments.json` file. The optional summary CSVs aggregate scores across models and apps.
+
+**Key options:**
+- `--parallel N` — concurrent worker threads
+- `--rmse-threshold`, `--phash-threshold`, `--changed-fraction-threshold` — Stage 1 sensitivity
+- `--stage2-image-detail` / `--stage3-image-detail` — image detail level (`low`/`auto`/`high`)
+- `--max-judgments` — cap Stage 2 API calls per directory
+- `--base-url` — custom OpenAI-compatible API endpoint
+
 ## Adding New Tasks
 
 Create a JSON file in `tasks/eval/<application>/<task-id>.json`:
