@@ -1,0 +1,1 @@
+window.CircuitJS1.exportCircuit();

@@ -1,3 +1,5 @@
+__pycache__/
+
 results
 *.DS_Store
 *.pyc
@@ -13,3 +15,6 @@ build
 .env.*
 
 **/.claude/settings.local.json
+results_*/
+tasks_new/
+tests/

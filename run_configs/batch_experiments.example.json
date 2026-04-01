@@ -21,7 +21,7 @@
           "task_file": "tasks_new/circuit_new.yaml",
           "results_dir": "./new_results/results_qwen3_circuit",
           "post_run_url": "",
-          "post_run_js_snippet_path": "./get_txt_export_snippet.js",
+          "post_run_js_snippet_path": "./assets/circuit_txt_export_snippet.js",
           "url": "http://localhost:8000/circuitjs.html?startCircuit=%24%201%200.000005%2010.20027730826997%2050%205%2050%205e-11"
         },
         {
