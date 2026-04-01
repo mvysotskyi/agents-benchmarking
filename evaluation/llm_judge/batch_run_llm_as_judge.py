@@ -15,7 +15,7 @@ from evaluation.llm_judge.screenshot_diff import ScreenshotDiffThresholds
 
 
 LOGGER = logging.getLogger(__name__)
-REPO_ROOT = Path(__file__).resolve().parent.parent
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 RESULTS_DIR_RE = re.compile(r"^results_([^_]+)_(.+)$")
 DEFAULT_SUMMARY_CSV_NAME = "llm_judge_batch_summary.csv"
 DEFAULT_RUNS_CSV_NAME = "llm_judge_batch_runs.csv"
