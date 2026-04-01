@@ -26,10 +26,11 @@ except ModuleNotFoundError:
 REPO_ROOT = Path(__file__).resolve().parent.parent
 TASK_ID_RE = re.compile(r"(tc_[a-z]+_\d+)")
 CODE_BLOCK_RE = re.compile(r"```(?:[\w+-]+\n)?(.*?)```", re.DOTALL)
-STAGE2_SYSTEM_PROMPT_PATH = REPO_ROOT / "stage2_sys_prompt.txt"
-STAGE2_TASK_PROMPT_PATH = REPO_ROOT / "stage2_task_prompt.txt"
-STAGE3_SYSTEM_PROMPT_PATH = REPO_ROOT / "stage3_sys_prompt.txt"
-STAGE3_TASK_PROMPT_PATH = REPO_ROOT / "stage3_task_prompt.txt"
+PROMPTS_DIR = Path(__file__).resolve().parent / "prompts"
+STAGE2_SYSTEM_PROMPT_PATH = PROMPTS_DIR / "stage2_sys_prompt.txt"
+STAGE2_TASK_PROMPT_PATH = PROMPTS_DIR / "stage2_task_prompt.txt"
+STAGE3_SYSTEM_PROMPT_PATH = PROMPTS_DIR / "stage3_sys_prompt.txt"
+STAGE3_TASK_PROMPT_PATH = PROMPTS_DIR / "stage3_task_prompt.txt"
 DEFAULT_STAGE2_MODEL = "gpt-4o-mini"
 DEFAULT_STAGE3_MODEL = "gpt-5.1"
 DEFAULT_OUTPUT_FILENAME = "llm_judgments.json"

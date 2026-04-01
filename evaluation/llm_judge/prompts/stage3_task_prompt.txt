@@ -1,0 +1,40 @@
+Task instruction:
+{TASK_PROMPT}
+
+Optional success condition:
+{SUCCESS_CONDITION}
+
+Optional benchmark reference answer (`llm_judge_gt`):
+{LLM_JUDGE_GT}
+
+Optional OBJECTIVE EVALUATION RESULT (binary 0 or 1):
+{OBJECTIVE_EVALUATION_RESULT}
+
+Sequence of screenshot-based events extracted from the trajectory:
+{TRAJECTORY_EVENTS_JSON}
+
+Final agent answer:
+{FINAL_AGENT_ANSWER}
+
+Please inspect the final screenshot and judge partial success.
+
+Return a strict JSON object with this schema:
+
+{
+  "score": 1,
+  "reason": "<brief explanation>"
+}
+
+Rules:
+- Base the judgment on visible evidence from the trajectory events and the final screenshot first.
+- Be strict about required details in the final visible state.
+- Penalize clearly redundant, duplicated, extra, or wrong visible elements when they conflict with the intended final result.
+- Use `llm_judge_gt` only as reference context, not as proof that the agent reached the required final state.
+- Use `OBJECTIVE EVALUATION RESULT` only as supporting context, not as proof by itself.
+- If `OBJECTIVE EVALUATION RESULT` is provided and equals `0`, do not assign score `5`.
+- Use the final agent answer only as supporting context, not as proof of success.
+- If the evidence supports only partial completion, use the lower partial score that best matches the rubric.
+- If the trajectory shows useful progress but the final screenshot does not preserve it, score the visible final state plus clearly supported trajectory progress conservatively.
+- In the reason, mention the most important satisfied requirement and the most important missing, wrong, or redundant detail when applicable.
+- Keep the reason short, concrete, and tied to the visible evidence.
+- Do not output markdown.

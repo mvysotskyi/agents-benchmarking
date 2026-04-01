@@ -1,0 +1,32 @@
+Task instruction:
+{TASK_PROMPT}
+
+Optional success condition:
+{SUCCESS_CONDITION}
+
+Action performed between screenshots:
+{ACTION_TEXT}
+
+Prior visible-state summary:
+{PRIOR_STATE_SUMMARY_JSON}
+
+Please compare the screenshots and return a strict JSON object with this schema:
+
+{
+  "visible_action": "<short textual description of the actual action if visually supported or consistent, otherwise 'unknown'>",
+  "visible_change_summary": "<1-2 sentence factual description of what visibly changed>",
+  "visible_change_type": "navigation | ui_interaction | content_update | object_added | object_removed | selection_changed | text_changed | dialog_opened | dialog_closed | error | no_clear_change | other",
+  "task_relevance": "high | medium | low | none",
+  "progress": "positive | neutral | negative",
+  "confidence": "high | medium | low",
+  "uncertainty_note": "<brief note if ambiguous, otherwise empty string>",
+  "updated_visible_state_summary": "<compact visible-state summary to carry into later steps; if no reliable update is possible, repeat the prior summary>"
+}
+
+Rules:
+- Base the answer on visual evidence from the screenshots first, action text second.
+- If the action suggests something happened but the screenshots do not confirm it, say "no_clear_change" or mark confidence low.
+- If the screenshots show a likely change but the exact object is unclear, describe it conservatively.
+- Do not claim task success.
+- Keep the updated visible-state summary short and durable. Include only facts still visible after the current screenshot.
+- Do not output markdown.
