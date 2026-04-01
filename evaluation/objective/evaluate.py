@@ -1,5 +1,7 @@
 """CLI script to evaluate saved agent responses against test case ground truth."""
 
+from __future__ import annotations
+
 import argparse
 import json
 import re
@@ -10,14 +12,19 @@ from typing import Any
 from dotenv import load_dotenv
 from rich.console import Console
 
-from computer_use.evals.evaluation_framework import (
+from evaluation.objective.evaluation_framework import (
     LLMJudgeTestResult,
     ObjectiveTestResult,
     evaluate_llm_judge,
     evaluate_objective,
     load_test_cases,
 )
-from computer_use.providers import LLMProvider, get_provider
+
+try:
+    from computer_use.providers import LLMProvider, get_provider
+except ImportError:
+    LLMProvider = None  # type: ignore[assignment,misc]
+    get_provider = None  # type: ignore[assignment]
 
 
 # ── Response loading ───────────────────────────────────────────────────────────

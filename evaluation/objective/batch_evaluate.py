@@ -23,7 +23,7 @@ from pathlib import Path
 
 
 TASKS_DIR = Path("tasks")
-GT_VOIDCUT = Path("gt_all.json")
+GT_VOIDCUT = Path("assets/gt_all.json")
 
 APP_CIRCUIT = "circuit"
 APP_FRAD = "frad"

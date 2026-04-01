@@ -4,6 +4,8 @@ Shared evaluation logic: dataclasses, comparison utilities, and scoring
 functions used by both the agent runner and the evaluator scripts.
 """
 
+from __future__ import annotations
+
 import itertools
 import json
 from pathlib import Path
@@ -17,7 +19,12 @@ from rich.console import Console
 import yaml
 
 import argparse
-from computer_use.providers import LLMProvider, get_provider
+
+try:
+    from computer_use.providers import LLMProvider, get_provider
+except ImportError:
+    LLMProvider = None  # type: ignore[assignment,misc]
+    get_provider = None  # type: ignore[assignment]
 
 
 # ── Dataclasses ────────────────────────────────────────────────────────────────

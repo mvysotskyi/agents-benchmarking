@@ -9,9 +9,9 @@ from pathlib import Path
 from dotenv import load_dotenv
 from rich.console import Console
 
-from computer_use.evals.circuit.build_graph import build_component_graph
-from computer_use.evals.circuit.calc_similarity import compare_circuit_exports
-from computer_use.evals.evaluation_framework import load_test_cases
+from evaluation.objective.circuit.build_graph import build_component_graph
+from evaluation.objective.circuit.calc_similarity import compare_circuit_exports
+from evaluation.objective.evaluation_framework import load_test_cases
 
 
 def extract_test_id(task_identifier: str) -> str | None:
