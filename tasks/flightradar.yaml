@@ -1,0 +1,249 @@
+test_cases:
+- id: "tc_frad_001"
+  description: |-
+    Watch the Germany-Poland border region.
+  prompt: |-
+    Watch the Germany-Poland border region. Identify the first aircraft from the start of playback whose track crosses from Poland into Germany (not the other direction). You must confirm direction by comparing two successive positions (before/after). Report callsign and the UTC time of crossing (to the minute shown by playback).
+    
+    RESULT FORMAT:
+    {
+      "callsign": "<callsign>",
+      "crossing_time_utc": "<HH:MM UTC>"
+    }
+  gt: {answer: "{\"callsign\": \"LOT335\"}"}
+- id: "tc_frad_002"
+  description: |-
+    Search for AIRPORT = ORY.
+  prompt: |-
+    Search for AIRPORT = ORY. Perform 3 zoom-in steps. Then, within radius = 30 km of ORY, count how many aircraft in view have an Airborne status in their details.
+    
+    RESULT FORMAT:
+    {
+      "count": <N>,
+      "callsigns": ["<CS1>", "<CS2>", "..."]
+    }
+  gt: {answer: "{\"count\": 11, \"callsigns\": [\"TVF78HY\", \"EJU54MG\", \"TVF3828\", \"CTM3813\", \"FMY8055\", \"TVF3124\", \"ITY313\", \"N113QS\", \"MIM962\", \"SPG054\", \"MAU15\"]}"}
+- id: "tc_frad_003"
+  description: |-
+    Zoom into Zurich, Switzerland.
+  prompt: |-
+    Zoom into Zurich, Switzerland. Among aircraft within ~80 km of the airport, find the two flying aircraft that are closest to each other at the start of playback.
+    
+    Open both and report:
+    - both callsigns
+    - their altitudes
+    
+    RESULT FORMAT:
+    {
+      "aircraft_1_callsign": "<callsign>",
+      "aircraft_1_altitude_ft": "<altitude>",
+      "aircraft_2_callsign": "<callsign>",
+      "aircraft_2_altitude_ft": "<altitude>"
+    }
+  gt: {answer: "{\"aircraft_1_callsign\": \"DFC99Q\", \"aircraft_1_altitude_ft\": \"1,224 ft\", \"aircraft_2_callsign\": \"AEE483\", \"aircraft_2_altitude_ft\": \"1,560 ft\"}"}
+- id: "tc_frad_004"
+  description: |-
+    Zoom into La Manche channel.
+  prompt: |-
+    Zoom into La Manche channel. Find the flight that:
+    - at the start of playback was flying in France
+    - first crossed UK border
+    
+    RESULT FORMAT:
+    {
+      "answer": "<callsign>"
+    }
+  gt: {answer: "{\"answer\": \"IBE31HY\"}"}
+- id: "tc_frad_005"
+  description: |-
+    Locate flight VOE25HV.
+  prompt: |-
+    Locate flight VOE25HV. Set playback time to 07:50 UTC. Locate the aircraft closest to the VOE25HV flight's aircraft. Report the callsign of the closest aircraft and the time when the aircraft takes over VOE25HV.
+    
+    RESULT FORMAT:
+    {
+      "closest_callsign": "<callsign>",
+      "overtake_time_utc": "<HH:MM UTC>"
+    }
+  gt: {answer: "{\"closest_callsign\": \"N656FN\", \"overtake_time_utc\": \"07:54 UTC\"}"}
+- id: "tc_frad_006"
+  description: |-
+    Scroll to Karlovy Vary Airport.
+  prompt: |-
+    Scroll to Karlovy Vary Airport. Draw a 40 km radius circle around the airport.
+    
+    Find the flight that was inside the circle at the start of playback and left the circle last.
+    
+    RESULT FORMAT:
+    {
+      "answer": "<callsign>"
+    }
+  gt: {answer: "{\"answer\": \"TVS5AD\"}"}
+- id: "tc_frad_007"
+  description: |-
+    Start playback from step 1.
+  prompt: |-
+    Start playback from step 1. Search for flight with callsign MSR726. Based ONLY on this flight's track history (trajectory) that you see at the current moment, report how many country borders the flight will cross.
+    
+    RESULT FORMAT:
+    {
+      "num_country_borders": <N>,
+      "countries": ["<country1>", "<country2>", "..."]
+    }
+  gt: {answer: "{\"num_country_borders\": 4, \"countries\": [\"Belgium\", \"Germany\", \"Austria\", \"Slovenia\"]}"}
+- id: "tc_frad_008"
+  description: |-
+    First, set the playback time to 11:40:00 UTC, allowing a ±1 minute tolerance.
+  prompt: |-
+    First, set the playback time to 11:40:00 UTC, allowing a ±1 minute tolerance. Next, draw a 450 km radius circle centered on Thiruvananthapuram International Airport (TRV). Finally, count the number of aircraft located within this circle at that time.
+    
+    RESULT FORMAT:
+    {
+      "count": <N>
+    }
+  gt: {answer: "{\"count\": 2}"}
+- id: "tc_frad_009"
+  description: |-
+    First, set the playback time to 12:15:00 UTC, allowing a Â±1 minute tolerance.
+  prompt: |-
+    First, set the playback time to 12:15:00 UTC, allowing a Â±1 minute tolerance. Next, check the flight path of WJA1422 and determine whether it ever enters the 200 km radius circle centered on Missoula Montana Airport (MSO).
+    
+    RESULT FORMAT:
+    {
+      "enters_circle": <true_or_false>
+    }
+  gt: {answer: "{\"enters_circle\": false}"}
+- id: "tc_frad_010"
+  description: |-
+    First, locate aircraft SAS907 on the map and begin tracking it.
+  prompt: |-
+    First, locate aircraft SAS907 on the map and begin tracking it. Next, report the time at which it crosses the Canada-United States border.
+    
+    RESULT FORMAT:
+    {
+      "crossing_time_utc": "<HH:MM UTC>"
+    }
+  gt: {answer: "{\"crossing_time_utc\": \"16:39 UTC\"}"}
+- id: "tc_frad_011"
+  description: |-
+    First, locate aircraft SAS907 on the map.
+  prompt: |-
+    First, locate aircraft SAS907 on the map. Set the playback time to 17:15 UTC and the playback speed to 8Ã— to begin tracking it. Next, report how many airports its flight path will enter within the 50 km radius circle around each airport over the next 40 minutes, and list the corresponding airports.
+    
+    RESULT FORMAT:
+    {
+      "count": <N>,
+      "airports": ["<airport1>", "<airport2>", "..."]
+    }
+  gt: {answer: "{\"count\": 13, \"airports\": [\"WZZ107U\", \"R20819\", \"FIN7DR\", \"RYR2NM\", \"RYR82VY\", \"DLH4TV\", \"VTB300\", \"RCR4022\", \"WZZ1312\", \"RYR7NJ\", \"WZZ100J\", \"WZZ104L\"]}"}
+- id: "tc_frad_012"
+  description: |-
+    Playback the timeline to 11:43 UTC.
+  prompt: |-
+    Playback the timeline to 11:43 UTC. Zoom in 3x on the map and scroll to the region south of Bremen. Track the two airplanes: RYR82DL and EWG7AG. Report the time when RYR82DL first becomes farther east than EWG7AG. Report UTC time.
+    
+    RESULT FORMAT:
+    {
+      "answer": "<HH:MM UTC>"
+    }
+  gt: {answer: "{\"answer\": \"10:20 UTC\"}"}
+- id: "tc_frad_013"
+  description: |-
+    Set playback to the start (step 1).
+  prompt: |-
+    Set playback to the start (step 1). Locate HRO (Boone County Airport) and draw a 20 km radius circle around the airport. Identify the two flights in the area: JIA5519 and FTH9.
+    
+    RESULT FORMAT:
+    {
+      "flight_1_callsign": "<callsign>",
+      "flight_1_entry_time_utc": "<time>",
+      "flight_1_exit_time_utc": "<time>",
+      "flight_2_callsign": "<callsign>",
+      "flight_2_entry_time_utc": "<time>",
+      "flight_2_exit_time_utc": "<time>"
+    }
+  gt: {answer: "{\"flight_1_callsign\": \"JIA5519\", \"flight_1_entry_time_utc\": \"16:06:47 UTC\", \"flight_1_exit_time_utc\": \"16:10:02 UTC\", \"flight_2_callsign\": \"FTH9\", \"flight_2_entry_time_utc\": \"16:07:50 UTC\", \"flight_2_exit_time_utc\": \"16:10:39 UTC\"}"}
+- id: "tc_frad_014"
+  description: |-
+    Scroll to Budapest Ferenc Liszt Airport (BUD).
+  prompt: |-
+    Scroll to Budapest Ferenc Liszt Airport (BUD). Set the playback speed to 8x—. Starting from the beginning of playback, observe the airport for 9 minutes of playback time. Count how many NEW aircraft land at the airport during this 9-minute playback period and report the total number.
+    
+    RESULT FORMAT:
+    {
+      "count": <N>
+    }
+  gt: {answer: "{\"count\": 7}"}
+- id: "tc_frad_015"
+  description: |-
+    Zoom to New York â€“ John F.
+  prompt: |-
+    Zoom to New York â€“ John F. Kennedy International Airport (JFK). Set the playback time to 11:31 UTC. Observe departures from the airport and identify the first flight that departs after this time.
+    
+    Report:
+    - The flight callsign.
+    - The exact departure time (±30 seconds).
+    
+    RESULT FORMAT:
+    {
+      "callsign": "<callsign>",
+      "departure_time_utc": "<HH:MM:SS UTC>"
+    }
+  gt: {answer: "{\"callsign\": \"AAL1\", \"departure_time_utc\": \"11:38:00 UTC\"}"}
+- id: "tc_frad_016"
+  description: |-
+    Search for flight TAM3855 using the search bar.
+  prompt: |-
+    Search for flight TAM3855 using the search bar. Open its flight details panel. Report the departure airport code and the destination airport code exactly as they appear in the UI.
+    
+    RESULT FORMAT:
+    {
+      "departure": "<airport_code>",
+      "destination": "<airport_code>"
+    }
+  gt: {answer: "{\"departure\": \"REC\", \"destination\": \"GIG\"}"}
+- id: "tc_frad_017"
+  description: |-
+    Set the playback time to exactly 14:30:00 UTC.
+  prompt: |-
+    Set the playback time to exactly 14:30:00 UTC. Pause the playback. Search for flight VVC5776. Look at its current telemetry data and report its exact altitude and ground speed at that specific time.
+    
+    RESULT FORMAT:
+    {
+      "altitude": "<value>",
+      "ground_speed": "<value>"
+    }
+  gt: {answer: "{\"altitude\": \"29'695 ft\", \"ground_speed\": \"384 kts\"}"}
+- id: "tc_frad_018"
+  description: |-
+    Set the playback time to its starting point - 06:00:00 UTC.
+  prompt: |-
+    Set the playback time to its starting point - 06:00:00 UTC. Pause the playback. Search for flight RSCU52. Report the airport id currently closest to the flight's position at that specific time.
+    
+    RESULT FORMAT:
+    {
+      "airport_id": "<airport_id>"
+    }
+  gt: {answer: "{\"airport_id\": \"ADL\"}"}
+- id: "tc_frad_019"
+  description: |-
+    Set the playback time at 14:00:00 UTC.
+  prompt: |-
+    Set the playback time at 14:00:00 UTC. Search for airport ICN to center the map. Zoom in exactly 3 steps. Count the total number of aircraft icons currently visible on the screen.
+    
+    RESULT FORMAT:
+    {
+      "count": <N>
+    }
+  gt: {answer: "{\"count\": 2}"}
+- id: "tc_frad_020"
+  description: |-
+    Set the playback time to exactly 08:00:00 UTC.
+  prompt: |-
+    Set the playback time to exactly 08:00:00 UTC. Pause the playback. Search for flight UAL571. Open its flight details panel. Report the flight's current Status (e.g., Airborne, On ground).
+    
+    RESULT FORMAT:
+    {
+      "status": "<status>"
+    }
+  gt: {answer: "{\"status\": \"On ground\"}"}

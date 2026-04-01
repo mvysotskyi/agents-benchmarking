@@ -1,0 +1,121 @@
+test_cases:
+- id: "tc_vid_001"
+  description: |-
+    Add a video 'White candle' from 'Sample media' dropdown.
+  prompt: |-
+    Add a video 'White candle' from 'Sample media' dropdown.Then trim portion from 4s till 11s, then export trimmed video.
+  gt: {}
+- id: "tc_vid_002"
+  description: |-
+    Add a video 'Flower Video' from 'Sample media' dropdown.
+  prompt: |-
+    Add a video 'Flower Video' from 'Sample media' dropdown. Then add audio clip from 'Sample media'. Add audio clip as a sound background for the end of video clip. Then export.
+  gt: {}
+- id: "tc_vid_003"
+  description: |-
+    Add 3 videos 'Flower Video', 'White candle' and 'Tuning a radio' from 'Sample media' dropdown.
+  prompt: |-
+    Add 3 videos 'Flower Video', 'White candle' and 'Tuning a radio' from 'Sample media' dropdown. Then combine them into one clip in that other. Then export.
+  gt: {}
+- id: "tc_vid_004"
+  description: |-
+    Add 2 videos 'Flower Video' and 'Tuning a radio' from 'Sample media' dropdown.
+  prompt: |-
+    Add 2 videos 'Flower Video' and 'Tuning a radio' from 'Sample media' dropdown. Combine them into one clip. Then add audio clip from 'Sample Media'. Put that clip as a background for the transition between videos. Then export.
+  gt: {}
+- id: "tc_vid_005"
+  description: |-
+    Add a video 'Flower Video' from 'Sample media' dropdown.
+  prompt: |-
+    Add a video 'Flower Video' from 'Sample media' dropdown. Trim first 3s. Then duplicate it 4 times. Then export.
+  gt: {}
+- id: "tc_vid_006"
+  description: |-
+    Add a video 'Flower Video' from 'Sample media' dropdown.
+  prompt: |-
+    Add a video 'Flower Video' from 'Sample media' dropdown. Apply fade-out transition to last 3s of the video. Then export.
+  gt: {}
+- id: "tc_vid_007"
+  description: |-
+    Add a video 'Flower Video' from 'Sample media' dropdown.
+  prompt: |-
+    Add a video 'Flower Video' from 'Sample media' dropdown. Apply light correction to whole video and boost only the contrast. Then export.
+  gt: {}
+- id: "tc_vid_008"
+  description: |-
+    Add 3 videos 'Flower Video', 'White candle' and 'Tuning a radio' from 'Sample media' dropdown.
+  prompt: |-
+    Add 3 videos 'Flower Video', 'White candle' and 'Tuning a radio' from 'Sample media' dropdown. Then combine them into one clip in that other. Then apply light correction to each of the video. Boost contrast of the first one. Boost brightness of the second one. Boost saturation of the third one. Then export.
+  gt: {}
+- id: "tc_vid_009"
+  description: |-
+    Add 2 videos 'Flower Video' and 'Tuning a radio' from 'Sample media' dropdown.
+  prompt: |-
+    Add 2 videos 'Flower Video' and 'Tuning a radio' from 'Sample media' dropdown. Combine them into one clip in reverse order. Add light correction effect to first 4s of the first video and increase contrast. Add fade-out with the easy-out easing to the last 3s of the second video. Then export.
+  gt: {}
+- id: "tc_vid_010"
+  description: |-
+    Add video "Flower Video" from 'Sample media' dropdown.
+  prompt: |-
+    Add video "Flower Video" from 'Sample media' dropdown. Split it in the middle. Insert second video 'Tuning a radio' in the that middle moment. Then export.
+  gt: {}
+- id: "tc_vid_011"
+  description: |-
+    Add 3 videos 'Flower Video', 'White candle' and 'Tuning a radio' from 'Sample media' dropdown.
+  prompt: |-
+    Add 3 videos 'Flower Video', 'White candle' and 'Tuning a radio' from 'Sample media' dropdown. Then combine them into one clip in that other. Make a 1s empty gap between first and second video. Then make a 2s empty gap between second and third video. Then export.
+  gt: {}
+- id: "tc_vid_012"
+  description: |-
+    Add a text block to the stream.
+  prompt: |-
+    Add a text block to the stream. Make it state "Welcome home!" in red font on a black background. Make it last for 2s. Then export.
+  gt: {}
+- id: "tc_vid_013"
+  description: |-
+    Add a text block to the stream.
+  prompt: |-
+    Add a text block to the stream. Make it state "Hello!" in black font on blue background. Make it 500ms long. Duplicate this block two times. Adjust second block to be on the red background. Adjust thrid block to be on the green background. Then export.
+  gt: {}
+- id: "tc_vid_014"
+  description: |-
+    Add 3 videos 'Flower Video', 'White candle' and 'Tuning a radio' from 'Sample media' dropdown.
+  prompt: |-
+    Add 3 videos 'Flower Video', 'White candle' and 'Tuning a radio' from 'Sample media' dropdown. Then combine them into one clip in that other. Then add a text block before each video stating "Act I","Act II" and "Act III" respectfully. Make "Act" blocks be black text on white background with 1s duration. Then export.
+  gt: {}
+- id: "tc_vid_015"
+  description: |-
+    Add a video 'White candle' from 'Sample media' dropdown.
+  prompt: |-
+    Add a video 'White candle' from 'Sample media' dropdown. Then trim it to 10s. Then add text block "The End" with 2s duration, black text on white background. Add fade-out effect to the closing titles. Then export.
+  gt: {}
+- id: "tc_vid_016"
+  description: |-
+    Add a video "Flower Video" from the "Sample media" dropdown.
+  prompt: |-
+    Add a video "Flower Video" from the "Sample media" dropdown. Drag the video to the stream. Export the video without making any edits.
+  gt: {}
+- id: "tc_vid_017"
+  description: |-
+    Add a text block to the stream.
+  prompt: |-
+    Add a text block to the stream. Make it state "Hello!". Export the result.
+  gt: {}
+- id: "tc_vid_018"
+  description: |-
+    Add 2 videos "Flower Video" and "White candle" from the "Sample media" dropdown.
+  prompt: |-
+    Add 2 videos "Flower Video" and "White candle" from the "Sample media" dropdown. Place them one after another in that order. Export the result.
+  gt: {}
+- id: "tc_vid_019"
+  description: |-
+    Add a video "White candle" from the "Sample media" dropdown.
+  prompt: |-
+    Add a video "White candle" from the "Sample media" dropdown. Drag the video to the stream. Trim the video so that only the first 5 seconds remain. Export the result.
+  gt: {}
+- id: "tc_vid_020"
+  description: |-
+    Add a video "Flower Video" from the "Sample media" dropdown.
+  prompt: |-
+    Add a video "Flower Video" from the "Sample media" dropdown. Drag the video to the stream. Apply light correction to the whole video. Increase only the contrast. Export the result.
+  gt: {}

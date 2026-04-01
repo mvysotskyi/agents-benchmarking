@@ -1,0 +1,597 @@
+test_cases:
+- id: "tc_circuit_001"
+  description: |-
+    TITLE: Design a 2-to-1 Multiplexer Using Logic Gates GOAL: Implement a circui...
+  prompt: |-
+    TITLE: Design a 2-to-1 Multiplexer Using Logic Gates
+    
+    GOAL:
+    Implement a circuit whose output follows the equation:
+    Y = S'*A + S*B
+    
+    REQUIREMENTS:
+    
+    1. Start with a blank circuit.
+    
+    2. Add the following components:
+       - Two input switches: A and B
+       - One select switch: S
+       - One NOT gate
+       - Two AND gates
+       - One OR gate
+    
+    3. Wiring (implement a real MUX):
+       - Invert S using the NOT gate to generate S'
+       - Connect:
+           S' and A -> first AND gate
+           S  and B ->second AND gate
+       - Connect the outputs of both AND gates to the OR gate
+    
+    4. Define the final output:
+       - The output of the OR gate must be the circuit output Y.
+    
+    SUCCESS CONDITION:
+    The constructed circuit must implement the Boolean function:
+    Y = S'*A + S*B
+  gt: {answer: "$ 1 0.000005 10.20027730826997 50 5 50 5e-11\nL 160 144 64 144 0 0 false 5 0\nL 160 224 64 224 0 1 false 5 0\nL 160 368 64 368 0 1 false 5 0\nI 160 368 288 368 0 0.5 5\n150 160 160 288 160 0 2 0 5\n150 160 240 288 240 0 2 5 5\n152 368 224 496 224 0 2 5 5\nM 496 224 592 224 0 2.5\nw 288 160 368 208 0\nw 288 240 368 240 0\nw 160 368 160 256 0\nw 288 368 160 176 0"}
+- id: "tc_circuit_002"
+  description: |-
+    TITLE: Build a NOT Gate using a NAND Gate GOAL: Implement a logical NOT funct...
+  prompt: |-
+    TITLE: Build a NOT Gate using a NAND Gate
+    
+    GOAL:
+    Implement a logical NOT function using only a Universal NAND gate.
+    
+    REQUIREMENTS:
+    1. Components: One input switch (A), one 2-input NAND gate.
+    2. Wiring: Connect the single input A to both input pins of the NAND gate (fanning out the signal). 
+    3.Output: The output of the NAND gate is Y.
+    
+    SUCCESS CONDITION:
+    The circuit must invert the input:
+    
+    If A = 0, Y = 1
+    If A = 1, Y = 0
+  gt: {answer: "$ 1 0.000005 10.20027730826997 50 5 50 5e-11\nL 80 160 32 160 0 0 false 5 0\n151 144 160 320 160 0 2 5 5\nw 80 160 144 144 0\nw 80 160 144 176 0\nM 320 160 416 160 0 2.5"}
+- id: "tc_circuit_003"
+  description: |-
+    TITLE: Build a Half-Adder Using Logic Gates GOAL: Implement a circuit that co...
+  prompt: |-
+    TITLE: Build a Half-Adder Using Logic Gates
+    
+    GOAL:
+    Implement a circuit that computes the binary half-adder functions:
+    
+    SUM   = A XOR B
+    CARRY = A AND B
+    
+    REQUIREMENTS:
+    
+    1. Start with a blank circuit.
+    
+    2. Add the following components:
+       - Two input switches: A and B
+       - One XOR gate
+       - One AND gate
+    
+    3. Wiring:
+       - Connect A and B to the inputs of the XOR gate.
+       - The output of the XOR gate is SUM.
+    
+       - Connect A and B to the inputs of the AND gate.
+       - The output of the AND gate is CARRY.
+    
+       - Both A and B must fan out to both gates.
+    
+    SUCCESS CONDITION:
+    The circuit must implement the functions:
+    SUM = A XOR B  
+    CARRY = A AND B
+  gt: {answer: "$ 1 0.000005 10.20027730826997 50 5 50 5e-11\nL 112 176 48 176 0 0 false 5 0\nL 112 320 32 320 0 1 false 5 0\nM 400 176 480 176 0 2.5\nM 416 304 496 304 0 2.5\n154 224 176 400 176 0 2 5 5\n150 224 304 416 304 0 2 0 5\nw 112 176 224 288 0\nw 112 176 224 160 0\nw 112 320 224 192 0\nw 112 320 224 320 0"}
+- id: "tc_circuit_004"
+  description: |-
+    TITLE: Build a 1-Bit Comparator with Three Outputs GOAL: Construct a circuit...
+  prompt: |-
+    TITLE: Build a 1-Bit Comparator with Three Outputs
+    
+    GOAL:
+    Construct a circuit that compares two 1-bit inputs A and B and produces three outputs:
+    
+    A_GT_B  = 1 when A > B
+    A_EQ_B  = 1 when A = B
+    A_LT_B  = 1 when A < B
+    
+    REQUIREMENTS:
+    
+    1. Start with a blank circuit.
+    
+    2. Add the following components:
+       - Two input switches: A and B
+       - Two NOT gates
+       - Two AND gates
+       - One XNOR gate
+         (If XNOR is unavailable, implement equality using XOR + NOT.)
+    
+    3. Wiring:
+       - Implement:
+           A_GT_B = A · B'
+         using one NOT gate and one AND gate.
+    
+       - Implement:
+           A_LT_B = A' · B
+         using the other NOT gate and the second AND gate.
+    
+       - Implement:
+           A_EQ_B = A XNOR B
+         using the XNOR gate
+         (or XOR followed by NOT if necessary).
+    
+    4. Define outputs:
+       - Output of the first AND gate ? A_GT_B
+       - Output of the second AND gate ? A_LT_B
+       - Output of the XNOR gate ? A_EQ_B
+    
+    SUCCESS CONDITION:
+    The circuit must implement the comparator functions:
+    
+    A_GT_B = A * B'  
+    A_LT_B = A' * B  
+    A_EQ_B = A XNOR B
+  gt: {answer: "$ 1 0.000005 10.20027730826997 50 5 50 5e-11\nL 80 96 32 96 0 0 false 5 0\nL 80 144 32 144 0 0 false 5 0\nM 320 32 384 32 0 2.5\nM 320 192 384 192 0 2.5\nM 448 320 512 320 0 2.5\n154 240 320 368 320 0 2 0 5\n150 224 192 320 192 0 2 0 5\n150 224 32 320 32 0 2 0 5\nI 368 320 448 320 0 0.5 5\nI 80 96 176 96 0 0.5 5\nI 80 144 176 144 0 0.5 5\nw 80 96 224 16 0\nw 176 144 224 48 0\nw 176 96 224 176 0\nw 80 144 224 208 0\nw 80 144 240 304 0\nw 80 96 240 336 0"}
+- id: "tc_circuit_005"
+  description: |-
+    TITLE: Build a 2-Input Priority Encoder GOAL: Construct a circuit with two in...
+  prompt: |-
+    TITLE: Build a 2-Input Priority Encoder
+    
+    GOAL:
+    Construct a circuit with two inputs, A (High Priority) and B (Low Priority), that generates two outputs to indicate if the system is active and which input is being serviced.
+    
+    REQUIREMENTS:
+    
+    1. Add the following components:
+    Two input switches: A and B
+    Two output indicators: ACTIVE and ID
+    One OR gate
+    
+    2. Wiring:
+    Connect both A and B to the inputs of the OR gate.
+    The output of the OR gate is the circuit output ACTIVE.
+    Connect input A directly to the circuit output ID.
+    
+    SUCCESS CONDITION:
+    The circuit must implement the functions:
+    
+    ACTIVE = A + B
+    ID = A
+  gt: {answer: "$ 1 0.000005 10.20027730826997 50 5 50 5e-11\nM 416 160 528 160 0 2.5\nM 416 224 528 224 0 2.5\nL 256 144 192 144 0 0 false 5 0\nL 256 176 192 176 0 0 false 5 0\n152 256 160 416 160 0 2 0 5\nw 256 144 416 224 0"}
+- id: "tc_circuit_006"
+  description: |-
+    TITLE: Build a 3-Input Odd-Parity Circuit GOAL: Construct a circuit with thre...
+  prompt: |-
+    TITLE: Build a 3-Input Odd-Parity Circuit
+    
+    GOAL:
+    Construct a circuit with three binary inputs:
+    
+    A, B, C
+    
+    and one output:
+    
+    Y
+    
+    such that:
+    - Y = 1 when an odd number of inputs are 1
+    - Y = 0 when an even number of inputs are 1
+    
+    Examples:
+    - 000 -> 0
+    - 001 -> 1
+    - 010 -> 1
+    - 011 -> 0
+    - 111 -> 1
+    
+    REQUIREMENTS:
+    
+    1. Start with a blank circuit.
+    
+    2. Add the following components:
+       - Three input switches: A, B, C
+       - Two XOR gates
+    
+    3. Wiring:
+       - The implementation is:
+           Y = A XOR B XOR C
+    
+    4. Define output:
+       - The final parity result must be the circuit output Y.
+    
+    SUCCESS CONDITION:
+    The circuit must output 1 exactly when the number of asserted inputs is odd.
+  gt: {answer: "$ 1 0.000005 10.20027730826997 50 5 50 5e-11\nL 80 144 32 144 0 1 false 5 0\nL 80 176 32 192 0 1 false 5 0\nL 192 192 32 240 0 0 false 5 0\n154 80 160 192 160 0 2 0 5\n154 192 176 336 176 0 2 0 5\nM 336 176 432 176 0 2.5"}
+- id: "tc_circuit_007"
+  description: |-
+    TITLE: Build a Full-Adder Using Logic Gates GOAL: Construct a circuit that co...
+  prompt: |-
+    TITLE: Build a Full-Adder Using Logic Gates
+    
+    GOAL:
+    Construct a circuit that computes the 1-bit full-adder functions:
+    
+    SUM  = A XOR B XOR CIN
+    COUT = majority(A, B, CIN)
+    
+    Inputs:
+    A, B, CIN
+    
+    Outputs:
+    SUM, COUT
+    
+    REQUIREMENTS:
+    
+    1. Start with a blank circuit.
+    
+    2. Add the following components:
+       - Three input switches: A, B, CIN
+       - Logic gates as needed
+    
+    3. Wiring:
+       - The SUM output must equal:
+           A ? B ? CIN
+       - The carry-out COUT must be 1 when at least two of the three inputs are 1.
+       - The implementation for carry-out is:
+           COUT = A·B + A·CIN + B·CIN
+    
+    4. Define outputs:
+       - The output wire for the sum computation must be the circuit output SUM.
+       - The output wire for the carry computation must be the circuit output COUT.
+    
+    SUCCESS CONDITION:
+    The circuit must correctly implement the full-adder truth table:
+    
+    SUM  = A ? B ? CIN
+    COUT = A·B + A·CIN + B·CIN
+  gt: {answer: "$ 1 0.000005 10.20027730826997 50 5 50 5e-11\nL 100 100 64 100 0 1 false 5 0\nL 100 200 64 200 0 0 false 5 0\nL 100 300 64 300 0 1 false 5 0\n154 200 150 232 150 0 2 5 5\n154 300 200 332 200 0 2 0 5\n150 200 350 232 350 0 2 0 5\n150 200 450 232 450 0 2 5 5\n150 200 550 232 550 0 2 0 5\n152 300 400 332 400 0 2 5 5\n152 400 480 432 480 0 2 5 5\nM 332 200 380 200 0 2.5\nM 432 480 480 480 0 2.5\nw 100 100 200 134 0\nw 100 200 200 166 0\nw 232 150 300 184 0\nw 100 300 300 216 0\nw 100 100 200 334 0\nw 100 200 200 366 0\nw 100 100 200 434 0\nw 100 300 200 466 0\nw 100 200 200 534 0\nw 100 300 200 566 0\nw 232 350 300 384 0\nw 232 450 300 416 0\nw 332 400 400 464 0\nw 232 550 400 496 0"}
+- id: "tc_circuit_008"
+  description: |-
+    TITLE: Build a 3-Bit Binary to Gray Code Converter GOAL: Construct a circuit...
+  prompt: |-
+    TITLE: Build a 3-Bit Binary to Gray Code Converter
+    
+    GOAL:
+    Construct a circuit that converts a standard 3-bit binary number (B2, B1, B0) into a 3-bit Gray code (G2, G1, G0). This introduces the concept of non-weighted codes where only one bit changes between consecutive values.
+    
+    REQUIREMENTS:
+    
+    1. Add the following components:
+      Three input switches: B2 (Most Significant Bit), B1, and B0 (Least Significant Bit)
+      Three output indicators: G2, G1, and G0
+      Two XOR gates
+    
+    3. Wiring:
+      G2: Connect input B2 directly to the first circuit output.
+      G1: Connect input B2 and input B1 to the first XOR gate.
+      G0: Connect input B1 and input B0 to the second XOR gate.
+    
+    4. Define outputs:
+      The direct wire from B2 must be the circuit output G2.
+      The output of the first XOR gate must be the circuit output G1.
+      The output of the second XOR gate must be the circuit output G0.
+    
+    SUCCESS CONDITION:
+    The circuit must implement the functions:
+    
+    G2 = B2
+    G1 = B2 XOR B1
+    G0 = B1 XOR B0
+  gt: {answer: "$ 1 0.000005 10.20027730826997 50 5 50 5e-11\nL 100 100 64 100 0 0 false 5 0\nL 100 200 64 200 0 1 false 5 0\nL 100 300 64 300 0 1 false 5 0\n154 300 150 332 150 0 2 5 5\n154 300 250 332 250 0 2 0 5\nM 332 100 380 100 0 2.5\nM 332 150 380 150 0 2.5\nM 332 250 380 250 0 2.5\nw 100 100 332 100 0\nw 100 100 300 134 0\nw 100 200 300 166 0\nw 100 200 300 234 0\nw 100 300 300 266 0"}
+- id: "tc_circuit_009"
+  description: |-
+    TITLE: Non-Standard Voltage Divider REQUIERMENTS: - Add a 2-terminal DC Volta...
+  prompt: |-
+    TITLE: Non-Standard Voltage Divider
+    
+    REQUIERMENTS:
+    - Add a 2-terminal DC Voltage Source and set its Max Voltage to 12 V.
+    - Add a Resistor (R1) and set its resistance to 3.3 k ohms. Connect one end of R1 to the positive terminal of the voltage source.
+    - Add a second Resistor (R2) and set its resistance to 4.7 k ohms. Connect one end of R2 to the other end of R1.
+    - Connect the free end of R2 to the negative terminal of the voltage source to close the loop.
+    - Add a Ground connection to the negative terminal of the voltage source.
+    
+    FINAL INSTRUCTION:
+    Once the circuit reaches a steady state, hover your mouse over Resistor R2 and report the exact Voltage Drop (Vd) displayed in the information box at the bottom right corner of the screen.
+    
+    RESULT FORMAT
+    
+    {
+        "voltage_drop_R2": "value"
+    }
+  gt: {answer: "$ 1 0.000005 10.20027730826997 50 5 50 5e-11\nv 64 304 64 192 0 0 40 12 0 0 0.5\ng 64 304 432 336 0 0\nw 64 192 176 192 0\nr 64 304 224 240 0 4700\nr 176 192 224 240 0 3300"}
+- id: "tc_circuit_010"
+  description: |-
+    TITLE: Current Source Parallel Network REQUIERMENTS: - Add a DC Current Sourc...
+  prompt: |-
+    TITLE: Current Source Parallel Network
+    
+    REQUIERMENTS:
+    - Add a DC Current Source and set its Current to 15 mA.
+    - Create a parallel network of three resistors connected across the terminals of the current source.
+    - Set the first resistor (R1) to 500 ohms.
+    - Set the second resistor (R2) to 1 k ohms.
+    - Set the third resistor (R3) to 2 k ohms.
+    - Connect a Ground to the negative terminal of the current source.
+    
+    FINAL INSTRUCTION:
+    Once the circuit reaches a steady state, hover your mouse over the Current Source and report the exact Voltage (V) displayed in the information box at the bottom right corner of the screen.
+    
+    RESULT FORMAT
+    
+    {
+        "current_source_voltage": "value"
+    }
+  gt: {answer: "$ 1 0.000005 10.20027730826997 50 5 50 5e-11\ni 80 -32 80 208 0 0.015\nr 240 -32 240 208 0 500\nr 304 -32 304 208 0 1000\nr 368 -32 368 208 0 2000\nw 80 -32 240 -32 0\nw 80 208 240 208 0\nw 304 -32 368 -32 0\nw 240 208 304 208 0\nw 240 -32 304 -32 0\nw 304 208 368 208 0"}
+- id: "tc_circuit_011"
+  description: |-
+    TITLE: Loaded Divider Power Dissipation REQUIERMENTS: - Add a 2-terminal DC V...
+  prompt: |-
+    TITLE: Loaded Divider Power Dissipation
+    
+    REQUIERMENTS:
+    - Add a 2-terminal DC Voltage Source set to 24 V. Ground the negative terminal.
+    - Connect a Resistor (R1) set to 150 ohms to the positive terminal of the source.
+    - From the other side of R1, connect two resistors in parallel that both go to ground:
+    - R2 set to 330 ohms
+    - R3 set to 470 ohms.
+    
+    FINAL INSTRUCTION:
+    Once the circuit reaches a steady state, hover your mouse over Resistor R1 (150 ohms) and report the exact Power dissipated (P) displayed in the information box at the bottom right corner of the screen.
+    
+    RESULT FORMAT
+    
+    {
+        "power_R1": "value"
+    }
+  gt: {answer: "$ 1 0.000005 10.20027730826997 50 5 50 5e-11\nv 128 144 128 272 0 0 40 24 0 0 0.5\ng 448 208 560 208 0 0\nw 128 144 448 208 0\nr 128 272 272 272 0 150\nr 272 272 448 208 0 330\nr 272 272 416 304 0 470\nw 416 304 448 208 0"}
+- id: "tc_circuit_012"
+  description: |-
+    TITLE: Inverting Summing Amplifier REQUIERMENTS: - Add an Ideal Op-Amp. Conne...
+  prompt: |-
+    TITLE: Inverting Summing Amplifier
+    
+    REQUIERMENTS:
+    - Add an Ideal Op-Amp. Connect its non-inverting (+) input directly to Ground.
+    - Add a 1-terminal DC Voltage source (V1) set to 1.5 V. Connect it to a Resistor (R1) set to 2 k ohms.
+    - Add a second 1-terminal DC Voltage source (V2) set to -3.0 V. Connect it to a Resistor (R2) set to 5 k ohms.
+    - Connect the free ends of both R1 and R2 to the inverting (-) input of the Op-Amp.
+    - Add a Feedback Resistor (Rf) set to 10 k ohms between the Op-Amp's output terminal and its inverting (-) input terminal.
+    
+    FINAL INSTRUCTION:
+    Once the circuit reaches a steady state, hover your mouse over the Op-Amp and report the exact Output Voltage (Vout) displayed in the information box at the bottom right corner of the screen.
+    
+    RESULT FORMAT
+    
+    {
+        "opamp_output_voltage": "value"
+    }
+  gt: {answer: "$ 1 0.000005 10.20027730826997 50 5 50 5e-11\na 320 160 320 336 9 15 -15 1000000 0.000014998800095992316 0 100000\nR 64 48 0 80 0 0 40 1.5 0 0 0.5\nr 64 48 112 144 0 2000\nR 176 48 272 48 0 0 40 -3 0 0 0.5\nr 176 48 112 144 0 5000\nr 112 144 320 336 0 10000\nw 112 144 304 160 0\ng 336 160 336 80 0 0\no 1 64 0 4099 5 0.0015625 0 2 1 3"}
+- id: "tc_circuit_013"
+  description: |-
+    TITLE: Multi-Loop DC Network (Kirchhoff's Test) REQUIERMENTS: - Add a 2-termi...
+  prompt: |-
+    TITLE: Multi-Loop DC Network (Kirchhoff's Test)
+    
+    REQUIERMENTS:
+    - Add a 2-terminal DC Voltage Source on the left side and set it to 15 V. Ground its negative terminal.
+    - Add a second 2-terminal DC Voltage Source on the right side and set it to 9 V. Ground its negative terminal.
+    - Add a Resistor (R1) set to 1 k ohms. Connect one end to the positive terminal of the 15 V source.
+    - Add a Resistor (R2) set to 2.2 k ohms. Connect one end to the positive terminal of the 9 V source.
+    - Connect the free ends of R1 and R2 together at a single top junction.
+    - Add a Resistor (R3) set to 3.3 k ohms. Connect its top end to the junction between R1 and R2.
+    - Connect the bottom end of R3 to Ground.
+    
+    FINAL INSTRUCTION:
+    Once the circuit reaches a steady state, hover your mouse over Resistor R3 (the 3.3 k ohm resistor) and report the exact Current (I) displayed in the information box at the bottom right corner of the screen.
+    
+    RESULT FORMAT
+    
+    {
+        "current_R3": "value"
+    }
+  gt: {answer: "$ 1 0.000005 10.20027730826997 50 5 50 5e-11\nv 64 112 64 272 0 0 40 15 0 0 0.5\nv 528 112 528 272 0 0 40 9 0 0 0.5\ng 272 112 272 64 0 0\nw 64 112 272 112 0\nw 528 112 272 112 0\nr 64 272 272 272 0 1000\nr 528 272 272 272 0 2200\nr 272 272 272 112 0 3300"}
+- id: "tc_circuit_014"
+  description: |-
+    TITLE: RLC DC Steady-State Trick REQUIERMENTS: - Add a 2-terminal DC Voltage...
+  prompt: |-
+    TITLE: RLC DC Steady-State Trick
+    
+    REQUIERMENTS:
+    - Add a 2-terminal DC Voltage Source set to 24 V. Ground the negative terminal.
+    - Connect a Resistor (R1) set to 1 k ohms to the positive terminal of the source. Let's call the other end of this resistor Node A.
+    - From Node A, create a path to Ground containing an Inductor (100 mH) in series with a Resistor (R2) set to 2.2 k ohms.
+    - From Node A, create a second parallel path to Ground containing a Capacitor (10 uF) in series with a Resistor (R3) set to 4.7 k ohms.
+    
+    FINAL INSTRUCTION:
+    Then, hover your mouse over the Capacitor. Wait for the simulation to charge the capacitor and reach a complete DC steady state (Capacity (I) displayed on information box is less than 20 nA) and report the exact Voltage (Vd) displayed in the information box at the bottom right corner of the screen.
+    
+    RESULT FORMAT
+    
+    {
+        "capacitor_voltage_drop": "value"
+    }
+  gt: {answer: "$ 1 0.000005 10.20027730826997 50 5 50 5e-11\nv 192 128 448 128 0 0 40 24 0 0 0.5\ng 192 128 96 128 0 0\nr 448 128 448 240 0 1000\nl 448 240 192 240 0 0.1 0.0074999999999964505 0\nr 192 240 192 128 0 2200\nr 192 128 272 176 0 4700\nc 272 176 448 240 4 0.00001 -16.49999999990424 0.001 0"}
+- id: "tc_circuit_015"
+  description: |-
+    TITLE: Dual-Source T-Network REQUIERMENTS: - Add a 2-terminal DC Voltage Sour...
+  prompt: |-
+    TITLE: Dual-Source T-Network
+    
+    REQUIERMENTS:
+    - Add a 2-terminal DC Voltage Source on the left side and set its Max Voltage to 12 V. Ground its negative terminal.
+    - Add a second 2-terminal DC Voltage Source on the right side and set its Max Voltage to 5 V. Ground its negative terminal.
+    - Add a Resistor (R1) set to 100 ohms. Connect one end to the positive terminal of the 12 V source. Let's call the other end of this resistor Node X.
+    - Add a Resistor (R3) set to 220 ohms. Connect one end to the positive terminal of the 5 V source, and connect the other end directly to Node X.
+    - Add a Resistor (R2) set to 330 ohms. Connect its top end to Node X and its bottom end to Ground.
+    
+    FINAL INSTRUCTION:
+    Once the circuit reaches a steady state, hover your mouse over Resistor R2 (the 330 ohm resistor connected to Ground) and report the exact Current (I) displayed in the information box at the bottom right corner of the screen.
+    
+    RESULT FORMAT
+    
+    {
+        "current_R2": "value"
+    }
+  gt: {answer: "$ 1 0.000005 10.20027730826997 50 5 50 5e-11\nv 176 144 176 272 0 0 40 12 0 0 0.5\nv 432 144 432 272 0 0 40 5 0 0 0.5\ng 304 80 304 48 0 0\nw 176 144 304 80 0\nw 432 144 304 80 0\nr 176 272 304 336 0 100\nr 304 336 432 272 0 220\nr 304 336 304 80 0 330"}
+- id: "tc_circuit_016"
+  description: |-
+    TITLE: Build a Direct Wire from Input to Output GOAL: Construct the simplest...
+  prompt: |-
+    TITLE: Build a Direct Wire from Input to Output
+    
+    GOAL:
+    Construct the simplest possible circuit where the output follows the input directly.
+    
+    REQUIREMENTS:
+    
+    1. Start from a blank circuit.
+    
+    2. Add the following components:
+        - One input switch: A
+        - One output switch: Y
+    
+    3. Wiring:
+        - Connect input A directly to the circuit output Y using only a wire.
+        - Do not add any logic gates.
+    
+    4. Define output:
+        - The direct wire from A must be the circuit output Y.
+    
+    SUCCESS CONDITION:
+    The constructed circuit must implement the function:
+    
+    Y = A
+  gt: {answer: "$ 1 0.000005 10.20027730826997 50 5 50 5e-11\nL 688 624 560 624 0 0 false 5 0\nM 1120 624 1264 624 0 2.5\nw 688 624 1120 624 0"}
+- id: "tc_circuit_017"
+  description: |-
+    TITLE: Build a NOT Gate GOAL: Implement a circuit that inverts a single binar...
+  prompt: |-
+    TITLE: Build a NOT Gate
+    
+    GOAL:
+    Implement a circuit that inverts a single binary input.
+    
+    REQUIREMENTS:
+    
+    1. Start from a blank circuit.
+    
+    2. Add the following components:
+        - One input switch: A
+        - One NOT gate
+        - One output switch: Y
+    
+    3. Wiring:
+        - Connect input A to the input of the NOT gate.
+    
+    4. Define output:
+        - The output of the NOT gate must be the circuit output Y.
+    
+    SUCCESS CONDITION:
+    The constructed circuit must implement the function:
+    
+    Y = A'
+  gt: {answer: "$ 1 0.000005 10.20027730826997 50 5 50 5e-11\nL 688 624 560 624 0 0 false 5 0\nM 1120 624 1264 624 0 2.5\nI 688 624 1120 624 0 0.5 5"}
+- id: "tc_circuit_018"
+  description: |-
+    TITLE: Build a 2-Input AND Gate Circuit GOAL: Implement a circuit whose outpu...
+  prompt: |-
+    TITLE: Build a 2-Input AND Gate Circuit
+    
+    GOAL:
+    Implement a circuit whose output is 1 only when both inputs are 1.
+    
+    REQUIREMENTS:
+    
+    1. Start from a blank circuit.
+    
+    2. Add the following components:
+        - Two input switches: A and B
+        - One AND gate
+        - One output switch: Y
+    
+    3. Wiring:
+        - Connect A and B to the two inputs of the AND gate.
+    
+    4. Define output:
+        - The output of the AND gate must be the circuit output Y.
+    
+    SUCCESS CONDITION:
+    The constructed circuit must implement the function:
+    
+    Y = A * B
+  gt: {answer: "$ 1 0.000005 10.20027730826997 50 5 50 5e-11\nL 560 512 400 512 0 0 false 5 0\nL 560 720 400 720 0 0 false 5 0\n150 800 608 944 608 0 2 0 5\nM 1104 608 1232 608 0 2.5\nw 560 512 800 592 0\nw 560 720 800 624 0\nw 944 608 1104 608 0"}
+- id: "tc_circuit_019"
+  description: |-
+    TITLE: Fan Out One Input to Two Outputs GOAL: Construct a circuit where one i...
+  prompt: |-
+    TITLE: Fan Out One Input to Two Outputs
+    
+    GOAL:
+    Construct a circuit where one input signal is copied directly to two outputs.
+    
+    REQUIREMENTS:
+    
+    1. Start from a blank circuit.
+    
+    2. Add the following components:
+        - One input switch: A
+        - Two output switches: Y1, Y2
+    
+    3. Wiring:
+        - Connect input A directly to circuit output Y1.
+        - Also connect input A directly to circuit output Y2.
+        - Use only wires.
+        - Do not add any logic gates.
+    
+    4. Define outputs:
+        - The first direct wire from A must be the circuit output Y1.
+        - The second direct wire from A must be the circuit output Y2.
+    
+    SUCCESS CONDITION:
+    The constructed circuit must implement the functions:
+    
+    Y1 = A
+    Y2 = A
+  gt: {answer: "$ 1 0.000005 10.20027730826997 50 5 50 5e-11\nL 464 336 304 336 0 0 false 5 0\nw 464 336 672 240 0\nM 672 240 800 240 0 2.5\nM 672 336 800 336 0 2.5\nw 464 336 672 336 0"}
+- id: "tc_circuit_020"
+  description: |-
+    TITLE: Build a Direct Wire and an Inverted Output from the Same Input GOAL: C...
+  prompt: |-
+    TITLE: Build a Direct Wire and an Inverted Output from the Same Input
+    
+    GOAL:
+    Construct a circuit where one input is sent directly to one output and inverted for a second output.
+    
+    REQUIREMENTS:
+    
+    1. Start from a blank circuit.
+    
+    2. Add the following components:
+        - One input switch: A
+        - Two output switches: Y1, Y2
+        - One NOT gate
+    
+    3. Wiring:
+        - Connect input A directly to circuit output Y1 using only a wire.
+        - Also connect input A to the input of the NOT gate.
+        - Connect the output of the NOT gate to circuit output Y2.
+    
+    4. Define outputs:
+        - The direct wire from A must be the circuit output Y1.
+        - The output of the NOT gate must be the circuit output Y2.
+    
+    SUCCESS CONDITION:
+    The constructed circuit must implement the functions:
+    
+    Y1 = A
+    Y2 = A'
+  gt: {answer: "$ 1 0.000005 10.20027730826997 50 5 50 5e-11\nL 464 336 304 336 0 0 false 5 0\nI 464 336 672 336 0 0.5 5\nw 464 336 672 240 0\nM 672 240 800 240 0 2.5\nM 672 336 800 336 0 2.5"}
