@@ -1,0 +1,210 @@
+test_cases:
+- id: "tc_graph_001"
+  description: |-
+    In the “Range ?
+  prompt: |-
+    In the “Range ? Map ? Table” workflow, add a Filter node after the Map node. Configure the filter to pass only values where value > 10, then reconnect the workflow so that the Filter output feeds into the Table node.
+  gt: {}
+- id: "tc_graph_002"
+  description: |-
+    Open the workflow named **"Order Processing Pipeline"** and insert a Filter node between the Database Connector and the If node.
+  prompt: |-
+    Open the workflow named **"Order Processing Pipeline"** and insert a Filter node between the Database Connector and the If node. Configure the filter to only pass orders where `status === 'completed'`.
+  gt: {}
+- id: "tc_graph_003"
+  description: |-
+    Create a new workflow named **"Newsletter System"** with exactly 5 nodes: **Manual Trigger -> HTTP Request -> Map -> Filter -> Send Email**.
+  prompt: |-
+    Create a new workflow named **"Newsletter System"** with exactly 5 nodes: **Manual Trigger -> HTTP Request -> Map -> Filter -> Send Email**.
+    
+    Set:
+    - **HTTP Request** method to **GET**
+    - **HTTP Request** URL to `https://jsonplaceholder.typicode.com/users`
+    - **Filter** to pass only items where `item.address?.city === "Gwenborough"`
+    - **Send Email** From to `newsletter@example.com`
+    - **Send Email** Recipients to `local-subscribers@example.com`
+    - **Send Email** Subject to `Local Newsletter`
+    
+    Do not add extra nodes.
+  gt: {}
+- id: "tc_graph_004"
+  description: |-
+    Create a new workflow named **"ICML Project"** with exactly these nodes:
+  prompt: |-
+    Create a new workflow named **"ICML Project"** with exactly these nodes:
+    
+    `Manual Trigger -> Database Connector -> If`
+    
+    From **If**:
+    - **true -> Crypto**
+    - **false -> Guardrails**
+    
+    Then:
+    - `Crypto -> Merge`
+    - `Guardrails -> Merge`
+    - `Merge -> Send Email`
+    
+    Set the **If** condition to check: `item.country === "UK"`
+    
+    Set **Send Email** subject to:`ICML Project notification`
+    
+    Do not add any extra nodes.
+  gt: {}
+- id: "tc_graph_005"
+  description: |-
+    Open **"API Data Pipeline"**.
+  prompt: |-
+    Open **"API Data Pipeline"**. Insert a **Filter** node between **Map** and **Sort**.
+    Configure it to pass only items where `item.email.includes(".org")`.
+    Then change **Sort** to use field `email` with direction `asc`.
+    Final graph must be: `HTTP Request -> Map -> Filter -> Sort`.
+    Do not add any other nodes.
+  gt: {}
+- id: "tc_graph_006"
+  description: |-
+    Open **"Enterprise Data Pipeline"**.
+  prompt: |-
+    Open **"Enterprise Data Pipeline"**.
+    In the main **Switch** node, add a new case labeled **`priority_urgent`** with expression `item.priority === 'urgent'`.
+    Connect the new **`priority_urgent`** output to the same **Edit Fields (Set)** node currently connected to the **default** output.
+    Do not change any other routes or node settings.
+  gt: {}
+- id: "tc_graph_007"
+  description: |-
+    Create a workflow named **"ICML Project"** with exactly these nodes:
+  prompt: |-
+    Create a workflow named **"ICML Project"** with exactly these nodes:
+    `Chat Trigger -> Database Connector -> If -> Send Email`
+    
+    Set the **If** condition to check `country === "UK"`.
+    Connect **Send Email** only to the **true** output of the **If** node.
+    Set **Send Email** subject to: `ICML Project notification`
+    Do not add extra nodes.
+  gt: {}
+- id: "tc_graph_008"
+  description: |-
+    Open **"Enterprise Data Pipeline"** and do exactly these 3 edge changes:
+  prompt: |-
+    Open **"Enterprise Data Pipeline"** and do exactly these 3 edge changes:
+    
+    1. Disconnect the edge from the top-row **No Operation** node to the top-row **Merge** node.
+    2. Connect that same **No Operation** node to the **Switch** node.
+    3. Rewire the **`priority_low`** output of the **Switch** to the lower **Edit Fields (Set)** node.
+    
+    Do not create, delete, move, or reconfigure any nodes.
+  gt: {}
+- id: "tc_graph_009"
+  description: |-
+    Open the workflow named **"API Data Pipeline"** and use the node search box to find **Send Email**.
+  prompt: |-
+    Open the workflow named **"API Data Pipeline"** and use the node search box to find **Send Email**. Add it to the canvas, place it after the **Sort** node, and connect the workflow correctly.
+  gt: {}
+- id: "tc_graph_010"
+  description: |-
+    Open the workflow named **"API Data Pipeline"** and update the **HTTP Request** node so that its URL becomes **`https://api.chucknorris.io/jokes/random`** while keeping the method as **GET**.
+  prompt: |-
+    Open the workflow named **"API Data Pipeline"** and update the **HTTP Request** node so that its URL becomes **`https://api.chucknorris.io/jokes/random`** while keeping the method as **GET**. Then add a **Wait** node immediately after the HTTP Request node, reconnect the workflow correctly, and configure the delay to **1 second**.
+  gt: {}
+- id: "tc_graph_011"
+  description: |-
+    Open the workflow named **"Enterprise Data Pipeline"** and modify it as follows: find the **Switch** node that routes items by priority, add a new output branch labeled **`priority_urgent`**, update the downstream flow so that urgent items go through their own **Edit Fields (Set)** path before joining the main pipeline, keep the existing high / medium / low routes unchanged, and leave the default route enabled.
+  prompt: |-
+    Open the workflow named **"Enterprise Data Pipeline"** and modify it as follows: find the **Switch** node that routes items by priority, add a new output branch labeled **`priority_urgent`**, update the downstream flow so that urgent items go through their own **Edit Fields (Set)** path before joining the main pipeline, keep the existing high / medium / low routes unchanged, and leave the default route enabled.
+  gt: {}
+- id: "tc_graph_012"
+  description: |-
+    Open **"Range ?
+  prompt: |-
+    Open **"Range ? Map ? Table (scaffolding)"**.
+    Insert a **Formula** node between **Map** and **Table**.
+    Configure it to add a new field named **`double`** with value **`item.value * 2`**.
+    Reconnect the workflow so the final path is `Range -> Map -> Formula -> Table`.
+    Do not add any other nodes.
+  gt: {}
+- id: "tc_graph_013"
+  description: |-
+    Open **"Enterprise Data Pipeline"**.
+  prompt: |-
+    Open **"Enterprise Data Pipeline"**.
+    Find the **Data Table** node that receives inputs from the priority branches.
+    Disconnect the input coming from the lower **Edit Fields (Set)** node, then reconnect that lower **Edit Fields (Set)** node into the **Merge** node used by the other branch output before notification.
+    Do not change any node settings.
+  gt: {}
+- id: "tc_graph_014"
+  description: |-
+    Create a new workflow named **"Example Todo Fetch"**.
+  prompt: |-
+    Create a new workflow named **"Example Todo Fetch"**. Add a **Manual Trigger**, an **HTTP Request**, and a **No Operation** node, connect them in sequence, and configure the HTTP Request to fetch **`https://jsonplaceholder.typicode.com/todos/1`** with method **GET**.
+  gt: {}
+- id: "tc_graph_015"
+  description: |-
+    Open the workflow named **"API Data Pipeline"** and perform a structural modification: remove the **Sort** node and reconnect the **Map** node directly to the next downstream node so the workflow remains valid.
+  prompt: |-
+    Open the workflow named **"API Data Pipeline"** and perform a structural modification: remove the **Sort** node and reconnect the **Map** node directly to the next downstream node so the workflow remains valid.
+  gt: {}
+- id: "tc_graph_016"
+  description: |-
+    Delete the Map node from the “Range ?
+  prompt: |-
+    Delete the Map node from the “Range ? Map ? Table” workflow and connect the Range node directly to the Table node.
+  gt: {}
+- id: "tc_graph_017"
+  description: |-
+    Create a new workflow named “Fetch Example Data”.
+  prompt: |-
+    Create a new workflow named “Fetch Example Data”. Add an HTTP Request node set to GET https://jsonplaceholder.typicode.com/todos/1 and save the workflow.
+  gt: {}
+- id: "tc_graph_018"
+  description: |-
+    Open the “Range ?
+  prompt: |-
+    Open the “Range ? Map ? Table” workflow and change the Table Preview node’s Limit value from 50 to 100.
+  gt: {}
+- id: "tc_graph_019"
+  description: |-
+    Insert a Wait node between the Map and Table Preview nodes in the “Range ?
+  prompt: |-
+    Insert a Wait node between the Map and Table Preview nodes in the “Range ? Map ? Table” workflow. Configure the delay to wait 1 second.
+  gt: {}
+- id: "tc_graph_020"
+  description: |-
+    Open the workflow named **"API Data Pipeline"** and change the Limit node's maximum items value from **5** to **10**.
+  prompt: |-
+    Open the workflow named **"API Data Pipeline"** and change the Limit node's maximum items value from **5** to **10**.
+  gt: {}
+- id: "tc_graph_021"
+  description: |-
+    TODO
+  prompt: |-
+    
+  gt: {}
+- id: "tc_graph_022"
+  description: |-
+    TODO
+  prompt: |-
+    
+  gt: {}
+- id: "tc_graph_023"
+  description: |-
+    Average score:
+  prompt: |-
+    Average score:
+  gt: {}
+- id: "tc_graph_024"
+  description: |-
+    TODO
+  prompt: |-
+    
+  gt: {}
+- id: "tc_graph_025"
+  description: |-
+    TODO
+  prompt: |-
+    
+  gt: {}
+- id: "tc_graph_026"
+  description: |-
+    TODO
+  prompt: |-
+    
+  gt: {}

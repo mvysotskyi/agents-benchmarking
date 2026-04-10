@@ -1,0 +1,131 @@
+test_cases:
+- id: "tc_clone3d_001"
+  description: |-
+    easy
+  prompt: |-
+    Open the Four Objects Scene, then set the color of all elements to red (255, 0, 0) - one by one.
+  gt: {}
+- id: "tc_clone3d_002"
+  description: |-
+    easy
+  prompt: |-
+    Create a new scene, then add a cone named Yellow Cone. Set its position to (0.5, 1.5, 0), rotation to (0, 0, -90), scale to (1, 2, 1), and color to yellow (255, 255, 0).
+  gt: {}
+- id: "tc_clone3d_003"
+  description: |-
+    easy
+  prompt: |-
+    Open the Geometric Garden, then delete all elements except the cube.
+  gt: {}
+- id: "tc_clone3d_004"
+  description: |-
+    easy
+  prompt: |-
+    Open the Single Cube Scene, then double its current scale along all three axes, and set the scene's background color to white (255, 255, 255).
+  gt: {}
+- id: "tc_clone3d_005"
+  description: |-
+    easy
+  prompt: |-
+    Open the Row of Objects Scene, then reorder the elements as sphere, cone, cube, and cylinder along the positive X-axis.
+  gt: {}
+- id: "tc_clone3d_006"
+  description: |-
+    Hard
+  prompt: |-
+    Open the Four Objects Scene, then add a torus and place it along the only axis in the X–Z plane that does not contain any existing element. Then set its distance from the central point to be the same as that of the other elements.
+  gt: {}
+- id: "tc_clone3d_007"
+  description: |-
+    Hard
+  prompt: |-
+    Open the Geometric Garden, first delete the torus Ring, and ensure that the bottom surface of each remaining element is in contact with the X–Z plane.
+  gt: {}
+- id: "tc_clone3d_008"
+  description: |-
+    Hard
+  prompt: |-
+    Open the Two Objects Scene, then adjust only the Y-axis scale to double the volume of each element individually. Next, set the cylinder’s color to red (255, 0, 0), the cube’s color to blue (0, 0, 255), and the scene's background color to green (0, 255, 0).
+  gt: {}
+- id: "tc_clone3d_009"
+  description: |-
+    Hard
+  prompt: |-
+    Open Basic Shape and use the blue sphere as the reference point. Then position the other two elements at a distance of 3 units from the reference along the X-axis, while preserving their original orientations.
+  gt: {}
+- id: "tc_clone3d_010"
+  description: |-
+    Hard
+  prompt: |-
+    Create a new scene, then generate cubes by assigning one default cube to each octant in 3D space, positioned at coordinates with absolute values of (1, 1, 1). Name all the cubes as Cube.
+  gt: {}
+- id: "tc_clone3d_011"
+  description: |-
+    Hard
+  prompt: |-
+    Open the Single Cube Scene, then add two cubes that, together with the given Cube 1, form a unified larger cube with the same rotation. The bottom cube should have its lower surface in contact with the X–Z plane, and the total height along the Y-axis should be 3. Ensure that there is no overlap among the three individual cubes. Name the bottom cube Cube 2 and set its color to blue (0, 0, 255). Name the top cube Cube 3 and set its color to green (0, 255, 0).
+  gt: {}
+- id: "tc_clone3d_012"
+  description: |-
+    Hard
+  prompt: |-
+    Open the Empty Scene and create a cube with a volume of 8 and the theoretically smallest possible surface area. Then set its position to (1, 1, 1), rotation to (45, 45, 45), color to blue (0, 0, 255), and opacity to 0.5. Finally, set the background color to white (255, 255, 255).
+  gt: {}
+- id: "tc_clone3d_013"
+  description: |-
+    Hard
+  prompt: |-
+    Open the Empty Scene and create cubes with all possible combinations of length, width, and height such that the volume is 8 and the surface area is 28. Set the position of each cube to (0, 0, 0) and assign all of them the same name, Cube 1.
+  gt: {}
+- id: "tc_clone3d_014"
+  description: |-
+    Hard
+  prompt: |-
+    Open the Four Objects Scene and use the cube as the reference. Then place the other elements along the positive Y-axis in the following order: cylinder, cone, and sphere. Each element should be in exact contact with the next, ensuring they are connected without any overlap.
+  gt: {}
+- id: "tc_clone3d_015"
+  description: |-
+    Hard
+  prompt: |-
+    Open the Geometric Garden and use the stone block cube as the reference. Then identify the two remaining elements whose centers are closest to that of the stone block cube. Finally, change their color to red (255, 0, 0).
+  gt: {}
+- id: "tc_clone3d_016"
+  description: |-
+    Hard
+  prompt: |-
+    Open the row of objects in the scene. Then reorder the given elements (cube, sphere, cylinder, cone) along the positive X-axis, arranging them from smallest to largest by volume while preserving their original color order unchanged, simultaneously.
+  gt: {}
+- id: "tc_clone3d_017"
+  description: |-
+    Hard
+  prompt: |-
+    Open the Geometric Garden and use the stone block as the reference. Then, adjust the positions of the other objects along the X- and Z-axes while keeping their Y-axis positions fixed, with all rotations and scales unchanged. The objective is to minimise the total exposed volume of all objects, excluding any overlapping volume from the calculation.
+  gt: {}
+- id: "tc_clone3d_018"
+  description: |-
+    Hard
+  prompt: |-
+    Open the row of objects in the scene. Then reorder the given elements (cube, sphere, cylinder, cone) along the positive X-axis, arranging them from smallest to largest based on the sum of their surface area and volume, while preserving their original color order.
+  gt: {}
+- id: "tc_clone3d_019"
+  description: |-
+    Hard
+  prompt: |-
+    Create a new scene for constructing a 3D snowman.
+    First, add a cylinder and name it Body. Set its position to (0, 0.5, 0), using the default rotation, scale, color, and opacity.
+    Second, add a sphere named Head and set its position to (0, 1.4, 0).
+    Third, add a torus named Right Eye. Set its position to (0.45, 1.6, 0.2), rotation to (0, 90, 0), scale to (0.2, 0.2, 0.2), and color to black (0, 0, 0).
+    Fourth, duplicate the Right Eye and rename it Left Eye. Set its position symmetrically along the Z-axis opposite to the right eye.
+    Fifth, add a cone named Nose. Set its position to (0.5, 1.5, 0), rotation to (0, 0, -90), scale to (0.1, 0.2, 0.1), and color to yellow (255, 255, 0).
+    Sixth, add another torus named Mouth. Set its position to (0.5, 1.3, 0), rotation to (0, 90, 0), scale to (0.3, 0.1, 0.1), and color to red (255, 0, 0).
+    Seventh, add a cube named Right Arm. Set its position to (0, 0.5, 0.6), rotation to (-45, 0, 0), and scale to (0.3, 0.8, 0.3).
+    Finally, duplicate the Right Arm and rename it Left Arm. Set its position symmetrically along the Z-axis opposite to the right arm, and apply the opposite rotation along the X-axis.
+  gt: {}
+- id: "tc_clone3d_020"
+  description: |-
+    Hard
+  prompt: |-
+    Create a new scene for constructing a 3D snowman.
+    The snowman consists of the following components: a cylinder named Body with default rotation, scale, color, and opacity; a sphere named Head with default scale, color, and opacity; two toruses of equal size named Right Eye and Left Eye, each scaled to (0.2, 0.2, 0.2) and colored black (0, 0, 0); another torus representing the Mouth, scaled to (0.3, 0.1, 0.1) and colored red (255, 0, 0); a cone named Nose, scaled to (0.1, 0.2, 0.1) and colored yellow (255, 255, 0); and two cubes named Right Arm and Left Arm, each scaled to (0.3, 0.8, 0.3).
+    These components constitute all the elements required to construct the snowman. Your task is to determine their positions and rotations (except for the Body, which is fixed as the reference). Each element should be connected or tangent to the others. The final snowman should face the positive direction of the X-axis.
+  gt: {}
