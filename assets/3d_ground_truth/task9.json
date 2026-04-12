@@ -1,0 +1,98 @@
+{
+  "id": "83cdaf5b-c10f-43f4-ab5c-e2a594fd1a50",
+  "name": "Basic Shapes",
+  "createdAt": 1775568120879,
+  "updatedAt": 1775568146331,
+  "version": 1,
+  "metadata": {
+    "description": "",
+    "thumbnail": null
+  },
+  "scene": {
+    "objects": [
+      {
+        "id": "8261a3e3-03b1-4c82-b66a-9720115ae2d1",
+        "type": "cube",
+        "name": "Red Cube",
+        "visible": true,
+        "locked": false,
+        "position": [
+          -3,
+          0.5,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "color": "#ff4444",
+        "opacity": 1,
+        "wireframe": false
+      },
+      {
+        "id": "866bb0b7-7d6c-4dec-9e52-1e0087668d0a",
+        "type": "sphere",
+        "name": "Blue Sphere",
+        "visible": true,
+        "locked": false,
+        "position": [
+          0,
+          0.5,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "color": "#4488ff",
+        "opacity": 1,
+        "wireframe": false
+      },
+      {
+        "id": "af0f2db3-f1e1-4357-b17e-facea07519d2",
+        "type": "cylinder",
+        "name": "Green Cylinder",
+        "visible": true,
+        "locked": false,
+        "position": [
+          3,
+          0.5,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "color": "#44ff88",
+        "opacity": 1,
+        "wireframe": false
+      }
+    ],
+    "settings": {
+      "showGrid": true,
+      "showAxes": true,
+      "backgroundColor": "#1a1a2e",
+      "fov": 50,
+      "cameraType": "perspective",
+      "orthoZoom": 10
+    }
+  }
+}

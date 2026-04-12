@@ -1,0 +1,48 @@
+{
+  "id": "f77eba2a-0aeb-4d7e-a8ae-ac5c320a78c5",
+  "name": "Empty Scene",
+  "createdAt": 1775574563521,
+  "updatedAt": 1775574563521,
+  "version": 1,
+  "metadata": {
+    "description": "",
+    "thumbnail": null
+  },
+  "scene": {
+    "objects": [
+      {
+        "id": "cone-d5a1029c-6246-4566-a1f8-0be3d77ad1bf",
+        "type": "cone",
+        "name": "Yellow Cone",
+        "visible": true,
+        "locked": false,
+        "position": [
+          0.5,
+          1.5,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          -90
+        ],
+        "scale": [
+          1,
+          2,
+          1
+        ],
+        "color": "#ffff00",
+        "opacity": 1,
+        "wireframe": false
+      }
+    ],
+    "settings": {
+      "showGrid": true,
+      "showAxes": true,
+      "backgroundColor": "#1a1a2e",
+      "fov": 50,
+      "cameraType": "perspective",
+      "orthoZoom": 10
+    }
+  }
+}

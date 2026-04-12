@@ -1,0 +1,98 @@
+{
+  "id": "997d560e-fb4a-474a-966e-60645619812b",
+  "name": "Single Cube Scene",
+  "createdAt": 1775565851247,
+  "updatedAt": 1775567373003,
+  "version": 1,
+  "metadata": {
+    "description": "",
+    "thumbnail": null
+  },
+  "scene": {
+    "objects": [
+      {
+        "id": "d8559bd2-e5a7-46d2-8c48-31b7cb15f23c",
+        "type": "cube",
+        "name": "Cube 1",
+        "visible": true,
+        "locked": false,
+        "position": [
+          0,
+          1,
+          0
+        ],
+        "rotation": [
+          0,
+          45,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "color": "#ff6600",
+        "opacity": 1,
+        "wireframe": false
+      },
+      {
+        "id": "cube-97401a3a-9b59-41e1-83df-fe4f8f8e9195",
+        "type": "cube",
+        "name": "Cube 2",
+        "visible": true,
+        "locked": false,
+        "position": [
+          0,
+          0.25,
+          0
+        ],
+        "rotation": [
+          0,
+          45,
+          0
+        ],
+        "scale": [
+          1,
+          0.5,
+          1
+        ],
+        "color": "#0000ff",
+        "opacity": 1,
+        "wireframe": false
+      },
+      {
+        "id": "cube-e0257113-9b0b-445e-b5e4-8d37097a98de",
+        "type": "cube",
+        "name": "Cube 3",
+        "visible": true,
+        "locked": false,
+        "position": [
+          0,
+          2.25,
+          0
+        ],
+        "rotation": [
+          0,
+          45,
+          0
+        ],
+        "scale": [
+          1,
+          1.5,
+          1
+        ],
+        "color": "#00ff00",
+        "opacity": 1,
+        "wireframe": false
+      }
+    ],
+    "settings": {
+      "showGrid": true,
+      "showAxes": true,
+      "backgroundColor": "#1a1a2e",
+      "fov": 50,
+      "cameraType": "perspective",
+      "orthoZoom": 10
+    }
+  }
+}

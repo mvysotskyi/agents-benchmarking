@@ -1,0 +1,123 @@
+{
+  "id": "63c291bf-5f91-4c1f-bdcb-8e1a8c1d5ab2",
+  "name": "Four Objects Scene",
+  "createdAt": 1775574305842,
+  "updatedAt": 1775574357436,
+  "version": 1,
+  "metadata": {
+    "description": "",
+    "thumbnail": null
+  },
+  "scene": {
+    "objects": [
+      {
+        "id": "acdd696f-cdda-47af-86e0-2fe5ccd59858",
+        "type": "cube",
+        "name": "Cube 1",
+        "visible": true,
+        "locked": false,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "color": "#ff0000",
+        "opacity": 1,
+        "wireframe": false
+      },
+      {
+        "id": "73968009-57d7-44fa-b80b-3ffa62214c8b",
+        "type": "sphere",
+        "name": "Sphere 1",
+        "visible": true,
+        "locked": false,
+        "position": [
+          3,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "color": "#ff0000",
+        "opacity": 1,
+        "wireframe": false
+      },
+      {
+        "id": "8c1e9f34-699e-4759-919b-7d1dc6acdd09",
+        "type": "cylinder",
+        "name": "Cylinder 1",
+        "visible": true,
+        "locked": false,
+        "position": [
+          -3,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "color": "#ff0000",
+        "opacity": 1,
+        "wireframe": false
+      },
+      {
+        "id": "c264f1e1-f305-4fee-b780-600c17377a27",
+        "type": "cone",
+        "name": "Cone 1",
+        "visible": true,
+        "locked": false,
+        "position": [
+          0,
+          0,
+          3
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "color": "#ff0000",
+        "opacity": 1,
+        "wireframe": false
+      }
+    ],
+    "settings": {
+      "showGrid": true,
+      "showAxes": true,
+      "backgroundColor": "#1a1a2e",
+      "fov": 50,
+      "cameraType": "perspective",
+      "orthoZoom": 10
+    }
+  }
+}

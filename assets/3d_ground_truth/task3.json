@@ -1,0 +1,48 @@
+{
+  "id": "79cb1e0a-d316-44f2-adf6-6c495ab8a581",
+  "name": "Geometric Garden",
+  "createdAt": 1775574563521,
+  "updatedAt": 1775574563521,
+  "version": 1,
+  "metadata": {
+    "description": "",
+    "thumbnail": null
+  },
+  "scene": {
+    "objects": [
+      {
+        "id": "e97433c7-8943-4edc-bc9d-0ffbf94d0f0f",
+        "type": "cube",
+        "name": "Stone Block",
+        "visible": true,
+        "locked": false,
+        "position": [
+          0,
+          0.5,
+          0
+        ],
+        "rotation": [
+          0,
+          45,
+          0
+        ],
+        "scale": [
+          1.5,
+          1,
+          1.5
+        ],
+        "color": "#888888",
+        "opacity": 1,
+        "wireframe": false
+      }
+    ],
+    "settings": {
+      "showGrid": true,
+      "showAxes": true,
+      "backgroundColor": "#1a1a2e",
+      "fov": 50,
+      "cameraType": "perspective",
+      "orthoZoom": 10
+    }
+  }
+}

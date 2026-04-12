@@ -1,0 +1,148 @@
+{
+  "id": "a8cc41ff-2ca6-4207-b330-c0894135c4cd",
+  "name": "Four Objects Scene",
+  "createdAt": 1775571881793,
+  "updatedAt": 1775573845582,
+  "version": 1,
+  "metadata": {
+    "description": "",
+    "thumbnail": null
+  },
+  "scene": {
+    "objects": [
+      {
+        "id": "1c8a639b-cc30-4fe8-8671-a76995cf78bb",
+        "type": "cube",
+        "name": "Cube 1",
+        "visible": true,
+        "locked": false,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "color": "#ffffff",
+        "opacity": 1,
+        "wireframe": false
+      },
+      {
+        "id": "13580080-3186-41fd-9efe-5bd27a9c790d",
+        "type": "sphere",
+        "name": "Sphere 1",
+        "visible": true,
+        "locked": false,
+        "position": [
+          3,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "color": "#ffffff",
+        "opacity": 1,
+        "wireframe": false
+      },
+      {
+        "id": "4ec341e5-ef6b-4156-a0d0-bb86c777634a",
+        "type": "cylinder",
+        "name": "Cylinder 1",
+        "visible": true,
+        "locked": false,
+        "position": [
+          -3,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "color": "#ffffff",
+        "opacity": 1,
+        "wireframe": false
+      },
+      {
+        "id": "32c05224-1700-43d9-9c8a-251a2fbb27d1",
+        "type": "cone",
+        "name": "Cone 1",
+        "visible": true,
+        "locked": false,
+        "position": [
+          0,
+          0,
+          3
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "color": "#ffffff",
+        "opacity": 1,
+        "wireframe": false
+      },
+      {
+        "id": "torus-1d03ff29-b4ed-4664-b78f-b8817c175a01",
+        "type": "torus",
+        "name": "Torus 1",
+        "visible": true,
+        "locked": false,
+        "position": [
+          0,
+          0,
+          -3
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "color": "#ffffff",
+        "opacity": 1,
+        "wireframe": false
+      }
+    ],
+    "settings": {
+      "showGrid": true,
+      "showAxes": true,
+      "backgroundColor": "#1a1a2e",
+      "fov": 50,
+      "cameraType": "perspective",
+      "orthoZoom": 10
+    }
+  }
+}

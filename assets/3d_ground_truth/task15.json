@@ -1,0 +1,148 @@
+{
+  "id": "02deb39d-dd4d-4043-8205-0694a2d44d64",
+  "name": "Geometric Garden",
+  "createdAt": 1775561628884,
+  "updatedAt": 1775561628884,
+  "version": 1,
+  "metadata": {
+    "description": "",
+    "thumbnail": null
+  },
+  "scene": {
+    "objects": [
+      {
+        "id": "f93a720a-5b0b-4229-9a7a-8cd6278c768d",
+        "type": "cube",
+        "name": "Stone Block",
+        "visible": true,
+        "locked": false,
+        "position": [
+          0,
+          0.5,
+          0
+        ],
+        "rotation": [
+          0,
+          45,
+          0
+        ],
+        "scale": [
+          1.5,
+          1,
+          1.5
+        ],
+        "color": "#888888",
+        "opacity": 1,
+        "wireframe": false
+      },
+      {
+        "id": "fea330d5-58ab-411e-8855-30d370a5f691",
+        "type": "sphere",
+        "name": "Garden Ball",
+        "visible": true,
+        "locked": false,
+        "position": [
+          3,
+          0.75,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "color": "#ff0000",
+        "opacity": 1,
+        "wireframe": false
+      },
+      {
+        "id": "d0d1635e-26ef-454b-870b-08b2228f2b77",
+        "type": "cylinder",
+        "name": "Pillar",
+        "visible": true,
+        "locked": false,
+        "position": [
+          -3,
+          1,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          0.5,
+          2,
+          0.5
+        ],
+        "color": "#ddccaa",
+        "opacity": 1,
+        "wireframe": false
+      },
+      {
+        "id": "ee163bb9-f884-46cc-a158-1c041851e412",
+        "type": "cone",
+        "name": "Tree Top",
+        "visible": true,
+        "locked": false,
+        "position": [
+          0,
+          2.5,
+          3
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1.5,
+          2,
+          1.5
+        ],
+        "color": "#228833",
+        "opacity": 1,
+        "wireframe": false
+      },
+      {
+        "id": "7e4d0921-21a1-4868-9db7-b1ee4731f216",
+        "type": "torus",
+        "name": "Ring",
+        "visible": true,
+        "locked": false,
+        "position": [
+          0,
+          1.5,
+          -3
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "color": "#cc8844",
+        "opacity": 1,
+        "wireframe": false
+      }
+    ],
+    "settings": {
+      "showGrid": true,
+      "showAxes": true,
+      "backgroundColor": "#1a1a2e",
+      "fov": 50,
+      "cameraType": "perspective",
+      "orthoZoom": 10
+    }
+  }
+}

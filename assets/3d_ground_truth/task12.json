@@ -1,0 +1,48 @@
+{
+  "id": "05ddbc1e-c8f1-48e9-aa3a-4300046d269f",
+  "name": "Empty Scene",
+  "createdAt": 1775565323446,
+  "updatedAt": 1775565323446,
+  "version": 1,
+  "metadata": {
+    "description": "",
+    "thumbnail": null
+  },
+  "scene": {
+    "objects": [
+      {
+        "id": "cube-2696f677-5624-41e0-be5a-9d83245b24d9",
+        "type": "cube",
+        "name": "Cube 1",
+        "visible": true,
+        "locked": false,
+        "position": [
+          1,
+          1,
+          1
+        ],
+        "rotation": [
+          45,
+          45,
+          45
+        ],
+        "scale": [
+          2,
+          2,
+          2
+        ],
+        "color": "#0000ff",
+        "opacity": 0.5,
+        "wireframe": false
+      }
+    ],
+    "settings": {
+      "showGrid": true,
+      "showAxes": true,
+      "backgroundColor": "#ffffff",
+      "fov": 50,
+      "cameraType": "perspective",
+      "orthoZoom": 10
+    }
+  }
+}
