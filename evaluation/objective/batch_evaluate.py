@@ -24,14 +24,17 @@ from pathlib import Path
 
 TASKS_DIR = Path("tasks")
 GT_VOIDCUT = Path("assets/gt_all.json")
+GT_3D = Path("assets/3d_ground_truth")
 
 APP_CIRCUIT = "circuit"
 APP_FRAD = "frad"
 APP_VIDEO = "video"
+APP_3D = "3d"
 
 CIRCUIT_PATTERNS = ("_circuit",)
 FRAD_PATTERNS = ("_frad",)
 VIDEO_PATTERNS = ("_video", "_voidcut")
+THREE_D_PATTERNS = ("_3d", "_clone3d", "_graph")
 
 
 @dataclass
@@ -69,6 +72,9 @@ def classify_app(dirname: str) -> str | None:
     for pattern in VIDEO_PATTERNS:
         if pattern in lower:
             return APP_VIDEO
+    for pattern in THREE_D_PATTERNS:
+        if pattern in lower:
+            return APP_3D
     return None
 
 
@@ -120,6 +126,13 @@ def _build_command(job: EvalJob) -> list[str]:
             sys.executable, "-m", "evaluation.objective.eval_voidcut",
             str(job.results_dir),
             str(GT_VOIDCUT),
+        ]
+
+    if job.app == APP_3D:
+        return [
+            sys.executable, "-m", "evaluation.objective.eval_3d_editor",
+            str(job.results_dir),
+            str(GT_3D),
         ]
 
     raise ValueError(f"Unknown app type: {job.app}")
@@ -249,11 +262,11 @@ def main() -> None:
     aggregated = _aggregate_results(outcomes)
 
     print("\n" + "=" * 70)
-    print(f"{'Model':<20s} {'Circuit':>12s} {'FlightRadar':>12s} {'VoidCut':>12s}")
-    print("-" * 70)
+    print(f"{'Model':<20s} {'Circuit':>12s} {'FlightRadar':>12s} {'VoidCut':>12s} {'3D Editor':>12s}")
+    print("-" * 82)
     for model in sorted(aggregated):
         cells: list[str] = []
-        for app in (APP_CIRCUIT, APP_FRAD, APP_VIDEO):
+        for app in (APP_CIRCUIT, APP_FRAD, APP_VIDEO, APP_3D):
             info = aggregated[model].get(app)
             if info is None:
                 cells.append("—")
@@ -261,8 +274,8 @@ def main() -> None:
                 cells.append("ERROR")
             else:
                 cells.append(f"{info['passed']}/{info['total']}")
-        print(f"{model:<20s} {cells[0]:>12s} {cells[1]:>12s} {cells[2]:>12s}")
-    print("=" * 70)
+        print(f"{model:<20s} {cells[0]:>12s} {cells[1]:>12s} {cells[2]:>12s} {cells[3]:>12s}")
+    print("=" * 82)
 
     if args.output:
         output_path = Path(args.output)
