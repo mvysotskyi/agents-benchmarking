@@ -1,0 +1,87 @@
+{
+  "id": "4a88f7c8-9019-4bb4-9513-fff671196b7a",
+  "name": "Example Todo Fetch",
+  "createdAt": 1776166142618,
+  "updatedAt": 1776166218162,
+  "version": 1,
+  "metadata": {
+    "description": "",
+    "thumbnail": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyODAnIGhlaWdodD0nMTYwJyB2aWV3Qm94PScwIDAgODg4IDYwJz48bGluZSB4MT0nNDQ0JyB5MT0nMzYnIHgyPSc4NjgnIHkyPSczNicgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PGxpbmUgeDE9JzYwJyB5MT0nMzYnIHgyPSc0MDQnIHkyPSczNicgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PHJlY3QgeD0nODY4JyB5PScyMCcgd2lkdGg9JzgwJyBoZWlnaHQ9JzMyJyByeD0nNCcgZmlsbD0nIzNiODJmNicgb3BhY2l0eT0nMC44NScgLz48dGV4dCB4PSc4NzQnIHk9JzQwJyBmb250LXNpemU9JzEwJyBmaWxsPSd3aGl0ZSc+bm9PcGVyYXRpb248L3RleHQ+PHJlY3QgeD0nMjAnIHk9JzIwJyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzI2JyB5PSc0MCcgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPm1hbnVhbFRyaWdnZTwvdGV4dD48cmVjdCB4PSc0MDQnIHk9JzIwJyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzQxMCcgeT0nNDAnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5odHRwUmVxdWVzdDwvdGV4dD48L3N2Zz4="
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "fee738cb-e71f-47c9-ae2b-45326ba6c6f5",
+        "type": "noOperation",
+        "position": {
+          "x": 1200,
+          "y": 704
+        },
+        "data": {},
+        "width": 215,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 1200,
+          "y": 704
+        },
+        "dragging": false
+      },
+      {
+        "id": "bf2cb8fb-cdb0-400f-8e60-caf72971be5f",
+        "type": "manualTrigger",
+        "position": {
+          "x": 352,
+          "y": 704
+        },
+        "data": {},
+        "width": 303,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 352,
+          "y": 704
+        },
+        "dragging": false
+      },
+      {
+        "id": "b3d990ed-7b45-445d-84af-c4a50c329bfd",
+        "type": "httpRequest",
+        "position": {
+          "x": 736,
+          "y": 704
+        },
+        "data": {
+          "method": "GET",
+          "url": "https://jsonplaceholder.typicode.com/todos/1",
+          "headers": {},
+          "body": ""
+        },
+        "width": 387,
+        "height": 141,
+        "selected": true,
+        "positionAbsolute": {
+          "x": 736,
+          "y": 704
+        },
+        "dragging": false
+      }
+    ],
+    "edges": [
+      {
+        "source": "b3d990ed-7b45-445d-84af-c4a50c329bfd",
+        "sourceHandle": null,
+        "target": "fee738cb-e71f-47c9-ae2b-45326ba6c6f5",
+        "targetHandle": null,
+        "id": "reactflow__edge-b3d990ed-7b45-445d-84af-c4a50c329bfd-fee738cb-e71f-47c9-ae2b-45326ba6c6f5"
+      },
+      {
+        "source": "bf2cb8fb-cdb0-400f-8e60-caf72971be5f",
+        "sourceHandle": "trigger",
+        "target": "b3d990ed-7b45-445d-84af-c4a50c329bfd",
+        "targetHandle": null,
+        "id": "reactflow__edge-bf2cb8fb-cdb0-400f-8e60-caf72971be5ftrigger-b3d990ed-7b45-445d-84af-c4a50c329bfd"
+      }
+    ]
+  }
+}

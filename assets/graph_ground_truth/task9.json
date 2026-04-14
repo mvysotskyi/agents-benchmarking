@@ -1,0 +1,177 @@
+{
+  "id": "c60e0679-0f05-4317-9b69-98144988556a",
+  "name": "ICML Project",
+  "createdAt": 1776161698955,
+  "updatedAt": 1776162260881,
+  "version": 1,
+  "metadata": {
+    "description": "",
+    "thumbnail": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyODAnIGhlaWdodD0nMTYwJyB2aWV3Qm94PScwIDAgMTM1MiAyNjQnPjxsaW5lIHgxPSc5MicgeTE9JzUyJyB4Mj0nMjAnIHkyPScyNjAnIHN0cm9rZT0nIzY0NzQ4Yicgc3Ryb2tlLXdpZHRoPScyJyAvPjxsaW5lIHgxPSc2MCcgeTE9JzI2MCcgeDI9JzQzNicgeTI9JzEzMicgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PGxpbmUgeDE9JzQ3NicgeTE9JzEzMicgeDI9Jzk0OCcgeTI9JzM2JyBzdHJva2U9JyM2NDc0OGInIHN0cm9rZS13aWR0aD0nMicgLz48bGluZSB4MT0nNDc2JyB5MT0nMTMyJyB4Mj0nODg0JyB5Mj0nMjI4JyBzdHJva2U9JyM2NDc0OGInIHN0cm9rZS13aWR0aD0nMicgLz48bGluZSB4MT0nOTg4JyB5MT0nMzYnIHgyPScxMzMyJyB5Mj0nMTMyJyBzdHJva2U9JyM2NDc0OGInIHN0cm9rZS13aWR0aD0nMicgLz48bGluZSB4MT0nOTI0JyB5MT0nMjI4JyB4Mj0nMTMzMicgeTI9JzEzMicgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PHJlY3QgeD0nNTInIHk9JzM2JyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzU4JyB5PSc1NicgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPm1hbnVhbFRyaWdnZTwvdGV4dD48cmVjdCB4PScyMCcgeT0nMjQ0JyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzI2JyB5PScyNjQnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5kYXRhYmFzZUNvbm48L3RleHQ+PHJlY3QgeD0nNDM2JyB5PScxMTYnIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nNDQyJyB5PScxMzYnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5pZjwvdGV4dD48cmVjdCB4PSc5NDgnIHk9JzIwJyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9Jzk1NCcgeT0nNDAnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5jcnlwdG88L3RleHQ+PHJlY3QgeD0nODg0JyB5PScyMTInIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nODkwJyB5PScyMzInIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5ndWFyZHJhaWxzPC90ZXh0PjxyZWN0IHg9JzEzMzInIHk9JzExNicgd2lkdGg9JzgwJyBoZWlnaHQ9JzMyJyByeD0nNCcgZmlsbD0nIzNiODJmNicgb3BhY2l0eT0nMC44NScgLz48dGV4dCB4PScxMzM4JyB5PScxMzYnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5tZXJnZTwvdGV4dD48L3N2Zz4="
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "994813f1-1c15-4234-93d8-e312a81b1601",
+        "type": "manualTrigger",
+        "position": {
+          "x": 720,
+          "y": 800
+        },
+        "data": {},
+        "width": 303,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 720,
+          "y": 800
+        },
+        "dragging": false
+      },
+      {
+        "id": "daa22bf2-933d-4d1d-a0ef-70f75dc2c81e",
+        "type": "databaseConnector",
+        "position": {
+          "x": 688,
+          "y": 1008
+        },
+        "data": {
+          "table": "",
+          "where": ""
+        },
+        "width": 372,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 688,
+          "y": 1008
+        },
+        "dragging": false
+      },
+      {
+        "id": "dbf529a5-4c84-4f13-911f-3ea49eb94c6b",
+        "type": "if",
+        "position": {
+          "x": 1104,
+          "y": 880
+        },
+        "data": {
+          "expression": "item.country === \"UK\"",
+          "notes": ""
+        },
+        "width": 379,
+        "height": 169,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 1104,
+          "y": 880
+        },
+        "dragging": false
+      },
+      {
+        "id": "304edb06-8f18-45b2-bd60-213d3d1e3a0c",
+        "type": "crypto",
+        "position": {
+          "x": 1616,
+          "y": 784
+        },
+        "data": {
+          "operation": "hash",
+          "algorithm": "sha256",
+          "field": "body"
+        },
+        "width": 228,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 1616,
+          "y": 784
+        },
+        "dragging": false
+      },
+      {
+        "id": "d9e8d9bc-0279-4b26-86ad-9b38211cbf7a",
+        "type": "guardrails",
+        "position": {
+          "x": 1552,
+          "y": 976
+        },
+        "data": {
+          "checks": [
+            "pii",
+            "nsfw"
+          ],
+          "action": "block"
+        },
+        "width": 360,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 1552,
+          "y": 976
+        },
+        "dragging": false
+      },
+      {
+        "id": "375c0ecf-3e94-4dbf-86c2-d4d799c433ea",
+        "type": "merge",
+        "position": {
+          "x": 2000,
+          "y": 880
+        },
+        "data": {},
+        "width": 236,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 2000,
+          "y": 880
+        },
+        "dragging": false
+      }
+    ],
+    "edges": [
+      {
+        "source": "994813f1-1c15-4234-93d8-e312a81b1601",
+        "sourceHandle": "trigger",
+        "target": "daa22bf2-933d-4d1d-a0ef-70f75dc2c81e",
+        "targetHandle": null,
+        "id": "reactflow__edge-994813f1-1c15-4234-93d8-e312a81b1601trigger-daa22bf2-933d-4d1d-a0ef-70f75dc2c81e"
+      },
+      {
+        "source": "daa22bf2-933d-4d1d-a0ef-70f75dc2c81e",
+        "sourceHandle": null,
+        "target": "dbf529a5-4c84-4f13-911f-3ea49eb94c6b",
+        "targetHandle": null,
+        "id": "reactflow__edge-daa22bf2-933d-4d1d-a0ef-70f75dc2c81e-dbf529a5-4c84-4f13-911f-3ea49eb94c6b"
+      },
+      {
+        "source": "dbf529a5-4c84-4f13-911f-3ea49eb94c6b",
+        "sourceHandle": "onTrue",
+        "target": "304edb06-8f18-45b2-bd60-213d3d1e3a0c",
+        "targetHandle": null,
+        "id": "reactflow__edge-dbf529a5-4c84-4f13-911f-3ea49eb94c6bonTrue-304edb06-8f18-45b2-bd60-213d3d1e3a0c"
+      },
+      {
+        "source": "dbf529a5-4c84-4f13-911f-3ea49eb94c6b",
+        "sourceHandle": "onFalse",
+        "target": "d9e8d9bc-0279-4b26-86ad-9b38211cbf7a",
+        "targetHandle": null,
+        "id": "reactflow__edge-dbf529a5-4c84-4f13-911f-3ea49eb94c6bonFalse-d9e8d9bc-0279-4b26-86ad-9b38211cbf7a"
+      },
+      {
+        "source": "304edb06-8f18-45b2-bd60-213d3d1e3a0c",
+        "sourceHandle": null,
+        "target": "375c0ecf-3e94-4dbf-86c2-d4d799c433ea",
+        "targetHandle": null,
+        "id": "reactflow__edge-304edb06-8f18-45b2-bd60-213d3d1e3a0c-375c0ecf-3e94-4dbf-86c2-d4d799c433ea"
+      },
+      {
+        "source": "d9e8d9bc-0279-4b26-86ad-9b38211cbf7a",
+        "sourceHandle": null,
+        "target": "375c0ecf-3e94-4dbf-86c2-d4d799c433ea",
+        "targetHandle": null,
+        "id": "reactflow__edge-d9e8d9bc-0279-4b26-86ad-9b38211cbf7a-375c0ecf-3e94-4dbf-86c2-d4d799c433ea"
+      }
+    ]
+  }
+}

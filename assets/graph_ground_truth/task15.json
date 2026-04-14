@@ -1,0 +1,327 @@
+{
+  "id": "d3e8bd09-6a7b-4b15-b1b1-e4006ef56f80",
+  "name": "Data Categorization Pipeline",
+  "createdAt": 1764596023636,
+  "updatedAt": 1776167586568,
+  "version": 1,
+  "metadata": {
+    "description": "A sample workflow that fetches user data, filters active users, categorizes them with AI, and routes to different processing paths.",
+    "thumbnail": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyODAnIGhlaWdodD0nMTYwJyB2aWV3Qm94PScwIDAgMzQxNiAzNzYnPjxsaW5lIHgxPSc2MCcgeTE9JzMyNCcgeDI9JzQwNCcgeTI9JzMyNCcgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PGxpbmUgeDE9JzQ0NCcgeTE9JzMyNCcgeDI9JzgzNicgeTI9JzMyNCcgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PGxpbmUgeDE9Jzg3NicgeTE9JzMyNCcgeDI9JzExODgnIHkyPSczMjQnIHN0cm9rZT0nIzY0NzQ4Yicgc3Ryb2tlLXdpZHRoPScyJyAvPjxsaW5lIHgxPScxMjI4JyB5MT0nMzI0JyB4Mj0nMTY2OCcgeTI9JzMyNCcgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PGxpbmUgeDE9JzE3MDgnIHkxPSczMjQnIHgyPScyMTAwJyB5Mj0nMzI0JyBzdHJva2U9JyM2NDc0OGInIHN0cm9rZS13aWR0aD0nMicgLz48bGluZSB4MT0nMjE0MCcgeTE9JzMyNCcgeDI9JzI1NDgnIHkyPSczNicgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PGxpbmUgeDE9JzIxNDAnIHkxPSczMjQnIHgyPScyNTQ4JyB5Mj0nMjEyJyBzdHJva2U9JyM2NDc0OGInIHN0cm9rZS13aWR0aD0nMicgLz48bGluZSB4MT0nMjE0MCcgeTE9JzMyNCcgeDI9JzI1NDgnIHkyPSczNzInIHN0cm9rZT0nIzY0NzQ4Yicgc3Ryb2tlLXdpZHRoPScyJyAvPjxsaW5lIHgxPScyNTg4JyB5MT0nMzYnIHgyPSczMTA4JyB5Mj0nMjYwJyBzdHJva2U9JyM2NDc0OGInIHN0cm9rZS13aWR0aD0nMicgLz48bGluZSB4MT0nMjU4OCcgeTE9JzIxMicgeDI9JzMxMDgnIHkyPScyNjAnIHN0cm9rZT0nIzY0NzQ4Yicgc3Ryb2tlLXdpZHRoPScyJyAvPjxsaW5lIHgxPScyNTg4JyB5MT0nMzcyJyB4Mj0nMzEwOCcgeTI9JzI2MCcgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PGxpbmUgeDE9JzMxNDgnIHkxPScyNjAnIHgyPSczMzk2JyB5Mj0nMjYwJyBzdHJva2U9JyM2NDc0OGInIHN0cm9rZS13aWR0aD0nMicgLz48cmVjdCB4PScyMCcgeT0nMzA4JyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzI2JyB5PSczMjgnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5tYW51YWxUcmlnZ2U8L3RleHQ+PHJlY3QgeD0nNDA0JyB5PSczMDgnIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nNDEwJyB5PSczMjgnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5kYXRhYmFzZUNvbm48L3RleHQ+PHJlY3QgeD0nODM2JyB5PSczMDgnIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nODQyJyB5PSczMjgnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5maWx0ZXI8L3RleHQ+PHJlY3QgeD0nMTE4OCcgeT0nMzA4JyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzExOTQnIHk9JzMyOCcgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPmVkaXRGaWVsZHM8L3RleHQ+PHJlY3QgeD0nMTY2OCcgeT0nMzA4JyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzE2NzQnIHk9JzMyOCcgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPmFpVHJhbnNmb3JtPC90ZXh0PjxyZWN0IHg9JzIxMDAnIHk9JzMwOCcgd2lkdGg9JzgwJyBoZWlnaHQ9JzMyJyByeD0nNCcgZmlsbD0nIzNiODJmNicgb3BhY2l0eT0nMC44NScgLz48dGV4dCB4PScyMTA2JyB5PSczMjgnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5zd2l0Y2g8L3RleHQ+PHJlY3QgeD0nMjU0OCcgeT0nMjAnIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nMjU1NCcgeT0nNDAnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5lZGl0RmllbGRzPC90ZXh0PjxyZWN0IHg9JzI1NDgnIHk9JzE5Nicgd2lkdGg9JzgwJyBoZWlnaHQ9JzMyJyByeD0nNCcgZmlsbD0nIzNiODJmNicgb3BhY2l0eT0nMC44NScgLz48dGV4dCB4PScyNTU0JyB5PScyMTYnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5lZGl0RmllbGRzPC90ZXh0PjxyZWN0IHg9JzI1NDgnIHk9JzM1Nicgd2lkdGg9JzgwJyBoZWlnaHQ9JzMyJyByeD0nNCcgZmlsbD0nIzNiODJmNicgb3BhY2l0eT0nMC44NScgLz48dGV4dCB4PScyNTU0JyB5PSczNzYnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5lZGl0RmllbGRzPC90ZXh0PjxyZWN0IHg9JzMxMDgnIHk9JzI0NCcgd2lkdGg9JzgwJyBoZWlnaHQ9JzMyJyByeD0nNCcgZmlsbD0nIzNiODJmNicgb3BhY2l0eT0nMC44NScgLz48dGV4dCB4PSczMTE0JyB5PScyNjQnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5tZXJnZTwvdGV4dD48cmVjdCB4PSczMzk2JyB5PScyNDQnIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nMzQwMicgeT0nMjY0JyBmb250LXNpemU9JzEwJyBmaWxsPSd3aGl0ZSc+ZGF0YVRhYmxlPC90ZXh0Pjwvc3ZnPg=="
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "trigger-1",
+        "type": "manualTrigger",
+        "position": {
+          "x": -1040,
+          "y": 528
+        },
+        "data": {},
+        "width": 303,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": -1040,
+          "y": 528
+        },
+        "dragging": false
+      },
+      {
+        "id": "db-fetch-1",
+        "type": "databaseConnector",
+        "position": {
+          "x": -656,
+          "y": 528
+        },
+        "data": {
+          "table": "users",
+          "where": "",
+          "limit": 10
+        },
+        "width": 372,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": -656,
+          "y": 528
+        },
+        "dragging": false
+      },
+      {
+        "id": "filter-1",
+        "type": "filter",
+        "position": {
+          "x": -224,
+          "y": 528
+        },
+        "data": {
+          "predicate": "item.status === 'active'"
+        },
+        "width": 312,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": -224,
+          "y": 528
+        },
+        "dragging": false
+      },
+      {
+        "id": "edit-fields-1",
+        "type": "editFields",
+        "position": {
+          "x": 128,
+          "y": 528
+        },
+        "data": {
+          "fields": {
+            "fullRecord": "=JSON.stringify(item)",
+            "userName": "=item.name",
+            "userEmail": "=item.email",
+            "daysActive": "=Math.floor((Date.now() - new Date(item.created).getTime()) / 86400000)"
+          }
+        },
+        "width": 431,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 128,
+          "y": 528
+        },
+        "dragging": false
+      },
+      {
+        "id": "ai-categorize-1",
+        "type": "aiTransform",
+        "position": {
+          "x": 608,
+          "y": 528
+        },
+        "data": {
+          "provider": "openai",
+          "model": "gpt-4o-mini",
+          "field": "fullRecord",
+          "prompt": "Analyze this user record and categorize them as \"high_value\", \"engaged\", or \"at_risk\" based on their activity. Respond with only the category name."
+        },
+        "width": 374,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 608,
+          "y": 528
+        },
+        "dragging": false
+      },
+      {
+        "id": "switch-1",
+        "type": "switch",
+        "position": {
+          "x": 1040,
+          "y": 528
+        },
+        "data": {
+          "cases": [
+            {
+              "label": "high_value",
+              "expr": "item.result === 'high_value'"
+            },
+            {
+              "label": "engaged",
+              "expr": "item.result === 'engaged'"
+            },
+            {
+              "label": "at_risk",
+              "expr": "item.result === 'at_risk'"
+            }
+          ],
+          "default": false
+        },
+        "width": 323,
+        "height": 197,
+        "selected": true,
+        "positionAbsolute": {
+          "x": 1040,
+          "y": 528
+        },
+        "dragging": false
+      },
+      {
+        "id": "edit-highvalue-1",
+        "type": "editFields",
+        "position": {
+          "x": 1488,
+          "y": 240
+        },
+        "data": {
+          "fields": {
+            "priority": "=\"premium\"",
+            "action": "=\"assign_account_manager\"",
+            "processed": "=true"
+          }
+        },
+        "width": 431,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 1488,
+          "y": 240
+        },
+        "dragging": false
+      },
+      {
+        "id": "edit-engaged-1",
+        "type": "editFields",
+        "position": {
+          "x": 1488,
+          "y": 416
+        },
+        "data": {
+          "fields": {
+            "priority": "=\"normal\"",
+            "action": "=\"send_engagement_email\"",
+            "processed": "=true"
+          }
+        },
+        "width": 431,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 1488,
+          "y": 416
+        },
+        "dragging": false
+      },
+      {
+        "id": "edit-atrisk-1",
+        "type": "editFields",
+        "position": {
+          "x": 1488,
+          "y": 576
+        },
+        "data": {
+          "fields": {
+            "priority": "=\"urgent\"",
+            "action": "=\"trigger_retention_campaign\"",
+            "processed": "=true"
+          }
+        },
+        "width": 431,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 1488,
+          "y": 576
+        },
+        "dragging": false
+      },
+      {
+        "id": "merge-1",
+        "type": "merge",
+        "position": {
+          "x": 2048,
+          "y": 464
+        },
+        "data": {},
+        "width": 236,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 2048,
+          "y": 464
+        },
+        "dragging": false
+      },
+      {
+        "id": "data-table-1",
+        "type": "dataTable",
+        "position": {
+          "x": 2336,
+          "y": 464
+        },
+        "data": {
+          "tableName": "processed_users",
+          "operation": "upsert",
+          "keyField": "id"
+        },
+        "width": 327,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 2336,
+          "y": 464
+        },
+        "dragging": false
+      }
+    ],
+    "edges": [
+      {
+        "id": "e-trigger-db",
+        "source": "trigger-1",
+        "target": "db-fetch-1",
+        "sourceHandle": "trigger"
+      },
+      {
+        "id": "e-db-filter",
+        "source": "db-fetch-1",
+        "target": "filter-1"
+      },
+      {
+        "id": "e-filter-edit",
+        "source": "filter-1",
+        "target": "edit-fields-1"
+      },
+      {
+        "id": "e-edit-ai",
+        "source": "edit-fields-1",
+        "target": "ai-categorize-1"
+      },
+      {
+        "id": "e-ai-switch",
+        "source": "ai-categorize-1",
+        "target": "switch-1"
+      },
+      {
+        "id": "e-switch-highvalue",
+        "source": "switch-1",
+        "target": "edit-highvalue-1",
+        "sourceHandle": "high_value",
+        "label": "high_value"
+      },
+      {
+        "id": "e-switch-engaged",
+        "source": "switch-1",
+        "target": "edit-engaged-1",
+        "sourceHandle": "engaged",
+        "label": "engaged"
+      },
+      {
+        "id": "e-switch-atrisk",
+        "source": "switch-1",
+        "target": "edit-atrisk-1",
+        "sourceHandle": "at_risk",
+        "label": "at_risk"
+      },
+      {
+        "id": "e-highvalue-merge",
+        "source": "edit-highvalue-1",
+        "target": "merge-1"
+      },
+      {
+        "id": "e-engaged-merge",
+        "source": "edit-engaged-1",
+        "target": "merge-1"
+      },
+      {
+        "id": "e-atrisk-merge",
+        "source": "edit-atrisk-1",
+        "target": "merge-1"
+      },
+      {
+        "id": "e-merge-table",
+        "source": "merge-1",
+        "target": "data-table-1"
+      }
+    ]
+  }
+}

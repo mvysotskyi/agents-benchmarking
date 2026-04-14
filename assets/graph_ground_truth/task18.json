@@ -1,0 +1,454 @@
+{
+  "id": "46f807f9-a733-406c-8e24-8d91d17d1e22",
+  "name": "Enterprise Data Pipeline",
+  "createdAt": 1764597200000,
+  "updatedAt": 1776166302753,
+  "version": 1,
+  "metadata": {
+    "description": "An API-triggered data pipeline that validates, enriches, routes by priority, logs an audit trail, sends notifications, and responds to the original webhook.",
+    "thumbnail": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyODAnIGhlaWdodD0nMTYwJyB2aWV3Qm94PScwIDAgNDA0MCAxMjQwJz48bGluZSB4MT0nMTQ2MCcgeTE9JzM2JyB4Mj0nMjAyMCcgeTI9JzM2JyBzdHJva2U9JyM2NDc0OGInIHN0cm9rZS13aWR0aD0nMicgLz48bGluZSB4MT0nMTQ2MCcgeTE9JzczNicgeDI9JzIwMjAnIHkyPSc2MzYnIHN0cm9rZT0nIzY0NzQ4Yicgc3Ryb2tlLXdpZHRoPScyJyAvPjxsaW5lIHgxPScxNDYwJyB5MT0nNzM2JyB4Mj0nMjAyMCcgeTI9JzYzNicgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PGxpbmUgeDE9JzE0NjAnIHkxPSc3MzYnIHgyPScyMDIwJyB5Mj0nNjM2JyBzdHJva2U9JyM2NDc0OGInIHN0cm9rZS13aWR0aD0nMicgLz48bGluZSB4MT0nMTQ2MCcgeTE9JzczNicgeDI9JzIwMjAnIHkyPSc5ODYnIHN0cm9rZT0nIzY0NzQ4Yicgc3Ryb2tlLXdpZHRoPScyJyAvPjxsaW5lIHgxPSczMjYwJyB5MT0nNzM2JyB4Mj0nNDAyMCcgeTI9JzUzNicgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PGxpbmUgeDE9Jzg2MCcgeTE9JzM2JyB4Mj0nODIwJyB5Mj0nNDM2JyBzdHJva2U9JyM2NDc0OGInIHN0cm9rZS13aWR0aD0nMicgLz48bGluZSB4MT0nODYwJyB5MT0nNDM2JyB4Mj0nODIwJyB5Mj0nODM2JyBzdHJva2U9JyM2NDc0OGInIHN0cm9rZS13aWR0aD0nMicgLz48bGluZSB4MT0nODYwJyB5MT0nODM2JyB4Mj0nODIwJyB5Mj0nMTIzNicgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PGxpbmUgeDE9Jzg2MCcgeTE9JzEyMzYnIHgyPScxNDIwJyB5Mj0nNzM2JyBzdHJva2U9JyM2NDc0OGInIHN0cm9rZS13aWR0aD0nMicgLz48bGluZSB4MT0nMjA2MCcgeTE9JzYzNicgeDI9JzI2MjAnIHkyPSc3ODYnIHN0cm9rZT0nIzY0NzQ4Yicgc3Ryb2tlLXdpZHRoPScyJyAvPjxsaW5lIHgxPScyNjYwJyB5MT0nNzg2JyB4Mj0nMzIyMCcgeTI9JzczNicgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PGxpbmUgeDE9JzIwNjAnIHkxPSczNicgeDI9JzI2MjAnIHkyPSczNicgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PGxpbmUgeDE9JzI2NjAnIHkxPSczNicgeDI9JzMyMjAnIHkyPSczNicgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PGxpbmUgeDE9JzIwNjAnIHkxPSc5ODYnIHgyPScyMDIwJyB5Mj0nMzYnIHN0cm9rZT0nIzY0NzQ4Yicgc3Ryb2tlLXdpZHRoPScyJyAvPjxyZWN0IHg9JzIwJyB5PScyMCcgd2lkdGg9JzgwJyBoZWlnaHQ9JzMyJyByeD0nNCcgZmlsbD0nIzNiODJmNicgb3BhY2l0eT0nMC44NScgLz48dGV4dCB4PScyNicgeT0nNDAnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz53ZWJob29rVHJpZ2c8L3RleHQ+PHJlY3QgeD0nODIwJyB5PScyMCcgd2lkdGg9JzgwJyBoZWlnaHQ9JzMyJyByeD0nNCcgZmlsbD0nIzNiODJmNicgb3BhY2l0eT0nMC44NScgLz48dGV4dCB4PSc4MjYnIHk9JzQwJyBmb250LXNpemU9JzEwJyBmaWxsPSd3aGl0ZSc+ZWRpdEZpZWxkczwvdGV4dD48cmVjdCB4PSc4MjAnIHk9JzQyMCcgd2lkdGg9JzgwJyBoZWlnaHQ9JzMyJyByeD0nNCcgZmlsbD0nIzNiODJmNicgb3BhY2l0eT0nMC44NScgLz48dGV4dCB4PSc4MjYnIHk9JzQ0MCcgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPmh0dHBSZXF1ZXN0PC90ZXh0PjxyZWN0IHg9JzgyMCcgeT0nODIwJyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzgyNicgeT0nODQwJyBmb250LXNpemU9JzEwJyBmaWxsPSd3aGl0ZSc+ZmlsdGVyPC90ZXh0PjxyZWN0IHg9JzgyMCcgeT0nMTIyMCcgd2lkdGg9JzgwJyBoZWlnaHQ9JzMyJyByeD0nNCcgZmlsbD0nIzNiODJmNicgb3BhY2l0eT0nMC44NScgLz48dGV4dCB4PSc4MjYnIHk9JzEyNDAnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz53YWl0PC90ZXh0PjxyZWN0IHg9JzE0MjAnIHk9JzIwJyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzE0MjYnIHk9JzQwJyBmb250LXNpemU9JzEwJyBmaWxsPSd3aGl0ZSc+bm9PcGVyYXRpb248L3RleHQ+PHJlY3QgeD0nMjAyMCcgeT0nMjAnIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nMjAyNicgeT0nNDAnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5tZXJnZTwvdGV4dD48cmVjdCB4PScxNDIwJyB5PSc3MjAnIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nMTQyNicgeT0nNzQwJyBmb250LXNpemU9JzEwJyBmaWxsPSd3aGl0ZSc+c3dpdGNoPC90ZXh0PjxyZWN0IHg9JzIwMjAnIHk9JzYyMCcgd2lkdGg9JzgwJyBoZWlnaHQ9JzMyJyByeD0nNCcgZmlsbD0nIzNiODJmNicgb3BhY2l0eT0nMC44NScgLz48dGV4dCB4PScyMDI2JyB5PSc2NDAnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5lZGl0RmllbGRzPC90ZXh0PjxyZWN0IHg9JzIwMjAnIHk9Jzk3MCcgd2lkdGg9JzgwJyBoZWlnaHQ9JzMyJyByeD0nNCcgZmlsbD0nIzNiODJmNicgb3BhY2l0eT0nMC44NScgLz48dGV4dCB4PScyMDI2JyB5PSc5OTAnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5lZGl0RmllbGRzPC90ZXh0PjxyZWN0IHg9JzI2MjAnIHk9Jzc3MCcgd2lkdGg9JzgwJyBoZWlnaHQ9JzMyJyByeD0nNCcgZmlsbD0nIzNiODJmNicgb3BhY2l0eT0nMC44NScgLz48dGV4dCB4PScyNjI2JyB5PSc3OTAnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5kYXRhVGFibGU8L3RleHQ+PHJlY3QgeD0nMzIyMCcgeT0nNzIwJyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzMyMjYnIHk9Jzc0MCcgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPmVkaXRGaWVsZHM8L3RleHQ+PHJlY3QgeD0nNDAyMCcgeT0nNTIwJyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzQwMjYnIHk9JzU0MCcgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPnNlbmRFbWFpbDwvdGV4dD48cmVjdCB4PSc0MDIwJyB5PSc5NzAnIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nNDAyNicgeT0nOTkwJyBmb250LXNpemU9JzEwJyBmaWxsPSd3aGl0ZSc+aHR0cFJlcXVlc3Q8L3RleHQ+PHJlY3QgeD0nMjYyMCcgeT0nMjAnIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nMjYyNicgeT0nNDAnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5lZGl0RmllbGRzPC90ZXh0PjxyZWN0IHg9JzMyMjAnIHk9JzIwJyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzMyMjYnIHk9JzQwJyBmb250LXNpemU9JzEwJyBmaWxsPSd3aGl0ZSc+cmVzcG9uZFRvV2ViPC90ZXh0Pjwvc3ZnPg=="
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "webhook-trigger",
+        "type": "webhookTrigger",
+        "position": {
+          "x": -1200,
+          "y": -400
+        },
+        "data": {
+          "method": "POST",
+          "path": "/hook/enterprise-pipeline"
+        },
+        "width": 330,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": -1200,
+          "y": -400
+        },
+        "dragging": false
+      },
+      {
+        "id": "request-validator",
+        "type": "editFields",
+        "position": {
+          "x": -400,
+          "y": -400
+        },
+        "data": {
+          "fields": {
+            "isValid": "=item.payload !== undefined",
+            "timestamp": "=new Date().toISOString()"
+          }
+        },
+        "width": 431,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": -400,
+          "y": -400
+        },
+        "dragging": false
+      },
+      {
+        "id": "data-enrichment",
+        "type": "httpRequest",
+        "position": {
+          "x": -400,
+          "y": 0
+        },
+        "data": {
+          "method": "POST",
+          "url": "https://api.internal.example.com/enrich",
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "body": ""
+        },
+        "width": 387,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": -400,
+          "y": 0
+        },
+        "dragging": false
+      },
+      {
+        "id": "schema-validator",
+        "type": "filter",
+        "position": {
+          "x": -400,
+          "y": 400
+        },
+        "data": {
+          "predicate": "item.isValid === true && item.payload !== null"
+        },
+        "width": 312,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": -400,
+          "y": 400
+        },
+        "dragging": false
+      },
+      {
+        "id": "rate-limiter",
+        "type": "wait",
+        "position": {
+          "x": -400,
+          "y": 800
+        },
+        "data": {
+          "durationSeconds": 1,
+          "reason": "Rate limiting before priority routing"
+        },
+        "width": 350,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": -400,
+          "y": 800
+        },
+        "dragging": false
+      },
+      {
+        "id": "error-handler",
+        "type": "noOperation",
+        "position": {
+          "x": 200,
+          "y": -400
+        },
+        "data": {},
+        "width": 215,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 200,
+          "y": -400
+        },
+        "dragging": false
+      },
+      {
+        "id": "merge-1",
+        "type": "merge",
+        "position": {
+          "x": 800,
+          "y": -400
+        },
+        "data": {},
+        "width": 236,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 800,
+          "y": -400
+        },
+        "dragging": false
+      },
+      {
+        "id": "router-1",
+        "type": "switch",
+        "position": {
+          "x": 200,
+          "y": 300
+        },
+        "data": {
+          "cases": [
+            {
+              "label": "priority_high",
+              "expr": "item.priority === 'high'"
+            },
+            {
+              "label": "priority_medium",
+              "expr": "item.priority === 'medium'"
+            },
+            {
+              "label": "priority_low",
+              "expr": "item.priority === 'low'"
+            }
+          ],
+          "default": true
+        },
+        "width": 323,
+        "height": 225,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 200,
+          "y": 300
+        },
+        "dragging": false
+      },
+      {
+        "id": "standard-processor",
+        "type": "editFields",
+        "position": {
+          "x": 800,
+          "y": 200
+        },
+        "data": {
+          "fields": {
+            "processedBy": "=\"standard_pipeline\"",
+            "processedAt": "=new Date().toISOString()"
+          }
+        },
+        "width": 431,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 800,
+          "y": 200
+        },
+        "dragging": false
+      },
+      {
+        "id": "batch-processor",
+        "type": "editFields",
+        "position": {
+          "x": 800,
+          "y": 550
+        },
+        "data": {
+          "fields": {
+            "processedBy": "=\"batch_pipeline\"",
+            "batchId": "=Math.random().toString(36).substring(2, 11)"
+          }
+        },
+        "width": 431,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 800,
+          "y": 550
+        },
+        "dragging": false
+      },
+      {
+        "id": "audit-logger",
+        "type": "dataTable",
+        "position": {
+          "x": 1400,
+          "y": 350
+        },
+        "data": {
+          "tableName": "pipeline_audit",
+          "operation": "insert",
+          "keyField": "id"
+        },
+        "width": 327,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 1400,
+          "y": 350
+        },
+        "dragging": false
+      },
+      {
+        "id": "notification-service",
+        "type": "editFields",
+        "position": {
+          "x": 2000,
+          "y": 300
+        },
+        "data": {
+          "fields": {
+            "notificationType": "=\"pipeline_complete\"",
+            "message": "=\"Processing completed successfully\""
+          }
+        },
+        "width": 431,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 2000,
+          "y": 300
+        },
+        "dragging": false
+      },
+      {
+        "id": "email-sender",
+        "type": "sendEmail",
+        "position": {
+          "x": 2800,
+          "y": 100
+        },
+        "data": {
+          "transport": "smtp",
+          "from": "pipeline@enterprise.example.com",
+          "to": "admin@enterprise.example.com",
+          "subject": "Pipeline Notification",
+          "body": "The enterprise data pipeline has completed processing."
+        },
+        "width": 312,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 2800,
+          "y": 100
+        },
+        "dragging": false
+      },
+      {
+        "id": "slack-integration",
+        "type": "httpRequest",
+        "position": {
+          "x": 2800,
+          "y": 550
+        },
+        "data": {
+          "method": "POST",
+          "url": "https://hooks.slack.com/services/example",
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "body": "{\"text\": \"Pipeline processing complete\"}"
+        },
+        "width": 387,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 2800,
+          "y": 550
+        },
+        "dragging": false
+      },
+      {
+        "id": "response-builder",
+        "type": "editFields",
+        "position": {
+          "x": 1400,
+          "y": -400
+        },
+        "data": {
+          "fields": {
+            "status": "=\"success\"",
+            "processedCount": "=array.length",
+            "completedAt": "=new Date().toISOString()"
+          }
+        },
+        "width": 431,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 1400,
+          "y": -400
+        },
+        "dragging": false
+      },
+      {
+        "id": "webhook-response",
+        "type": "respondToWebhook",
+        "position": {
+          "x": 2000,
+          "y": -400
+        },
+        "data": {
+          "statusCode": 200,
+          "body": "",
+          "headers": {
+            "Content-Type": "application/json"
+          }
+        },
+        "width": 353,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 2000,
+          "y": -400
+        },
+        "dragging": false
+      }
+    ],
+    "edges": [
+      {
+        "id": "e-errorhandler-merge",
+        "source": "error-handler",
+        "target": "merge-1"
+      },
+      {
+        "id": "e-router-high",
+        "source": "router-1",
+        "target": "standard-processor",
+        "sourceHandle": "priority_high",
+        "label": "priority_high"
+      },
+      {
+        "id": "e-router-medium",
+        "source": "router-1",
+        "target": "standard-processor",
+        "sourceHandle": "priority_medium",
+        "label": "priority_medium"
+      },
+      {
+        "id": "e-router-low",
+        "source": "router-1",
+        "target": "standard-processor",
+        "sourceHandle": "priority_low",
+        "label": "priority_low"
+      },
+      {
+        "id": "e-router-default",
+        "source": "router-1",
+        "target": "batch-processor",
+        "sourceHandle": "default",
+        "label": "default"
+      },
+      {
+        "id": "e-notification-email",
+        "source": "notification-service",
+        "target": "email-sender"
+      },
+      {
+        "id": "e-validator-enrichment",
+        "source": "request-validator",
+        "target": "data-enrichment"
+      },
+      {
+        "id": "e-enrichment-schema",
+        "source": "data-enrichment",
+        "target": "schema-validator"
+      },
+      {
+        "id": "e-schema-ratelimit",
+        "source": "schema-validator",
+        "target": "rate-limiter"
+      },
+      {
+        "id": "e-ratelimit-router",
+        "source": "rate-limiter",
+        "target": "router-1"
+      },
+      {
+        "id": "e-standard-audit",
+        "source": "standard-processor",
+        "target": "audit-logger"
+      },
+      {
+        "id": "e-audit-notification",
+        "source": "audit-logger",
+        "target": "notification-service"
+      },
+      {
+        "id": "e-merge-response",
+        "source": "merge-1",
+        "target": "response-builder"
+      },
+      {
+        "id": "e-response-webhook",
+        "source": "response-builder",
+        "target": "webhook-response"
+      },
+      {
+        "source": "batch-processor",
+        "sourceHandle": null,
+        "target": "merge-1",
+        "targetHandle": null,
+        "id": "reactflow__edge-batch-processor-merge-1"
+      }
+    ]
+  }
+}

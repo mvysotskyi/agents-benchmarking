@@ -1,0 +1,490 @@
+{
+  "id": "88f5c302-b4e3-4fb7-a4a8-bab8e8c44609",
+  "name": "Enterprise Data Pipeline",
+  "createdAt": 1764597200000,
+  "updatedAt": 1776166963772,
+  "version": 1,
+  "metadata": {
+    "description": "An API-triggered data pipeline that validates, enriches, routes by priority, logs an audit trail, sends notifications, and responds to the original webhook.",
+    "thumbnail": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyODAnIGhlaWdodD0nMTYwJyB2aWV3Qm94PScwIDAgNDA0MCAxMjQwJz48bGluZSB4MT0nMTQ2MCcgeTE9JzM2JyB4Mj0nMjAyMCcgeTI9JzM2JyBzdHJva2U9JyM2NDc0OGInIHN0cm9rZS13aWR0aD0nMicgLz48bGluZSB4MT0nMTQ2MCcgeTE9JzczNicgeDI9JzIwMjAnIHkyPSc2MzYnIHN0cm9rZT0nIzY0NzQ4Yicgc3Ryb2tlLXdpZHRoPScyJyAvPjxsaW5lIHgxPScxNDYwJyB5MT0nNzM2JyB4Mj0nMjAyMCcgeTI9JzYzNicgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PGxpbmUgeDE9JzE0NjAnIHkxPSc3MzYnIHgyPScyMDIwJyB5Mj0nNjM2JyBzdHJva2U9JyM2NDc0OGInIHN0cm9rZS13aWR0aD0nMicgLz48bGluZSB4MT0nMTQ2MCcgeTE9JzczNicgeDI9JzIwMjAnIHkyPSc5ODYnIHN0cm9rZT0nIzY0NzQ4Yicgc3Ryb2tlLXdpZHRoPScyJyAvPjxsaW5lIHgxPSczMjYwJyB5MT0nNzM2JyB4Mj0nNDAyMCcgeTI9JzUzNicgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PGxpbmUgeDE9Jzg2MCcgeTE9JzM2JyB4Mj0nODIwJyB5Mj0nNDM2JyBzdHJva2U9JyM2NDc0OGInIHN0cm9rZS13aWR0aD0nMicgLz48bGluZSB4MT0nODYwJyB5MT0nNDM2JyB4Mj0nODIwJyB5Mj0nODM2JyBzdHJva2U9JyM2NDc0OGInIHN0cm9rZS13aWR0aD0nMicgLz48bGluZSB4MT0nODYwJyB5MT0nODM2JyB4Mj0nODIwJyB5Mj0nMTIzNicgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PGxpbmUgeDE9Jzg2MCcgeTE9JzEyMzYnIHgyPScxNDIwJyB5Mj0nNzM2JyBzdHJva2U9JyM2NDc0OGInIHN0cm9rZS13aWR0aD0nMicgLz48bGluZSB4MT0nMjA2MCcgeTE9JzYzNicgeDI9JzI2MjAnIHkyPSc3ODYnIHN0cm9rZT0nIzY0NzQ4Yicgc3Ryb2tlLXdpZHRoPScyJyAvPjxsaW5lIHgxPScyMDYwJyB5MT0nOTg2JyB4Mj0nMjYyMCcgeTI9Jzc4Nicgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PGxpbmUgeDE9JzI2NjAnIHkxPSc3ODYnIHgyPSczMjIwJyB5Mj0nNzM2JyBzdHJva2U9JyM2NDc0OGInIHN0cm9rZS13aWR0aD0nMicgLz48bGluZSB4MT0nMjA2MCcgeTE9JzM2JyB4Mj0nMjYyMCcgeTI9JzM2JyBzdHJva2U9JyM2NDc0OGInIHN0cm9rZS13aWR0aD0nMicgLz48bGluZSB4MT0nMjY2MCcgeTE9JzM2JyB4Mj0nMzIyMCcgeTI9JzM2JyBzdHJva2U9JyM2NDc0OGInIHN0cm9rZS13aWR0aD0nMicgLz48bGluZSB4MT0nMTQ2MCcgeTE9JzczNicgeDI9JzIwMjAnIHkyPSc4MDQnIHN0cm9rZT0nIzY0NzQ4Yicgc3Ryb2tlLXdpZHRoPScyJyAvPjxsaW5lIHgxPScyMDYwJyB5MT0nODA0JyB4Mj0nMjYyMCcgeTI9Jzc4Nicgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PHJlY3QgeD0nMjAnIHk9JzIwJyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzI2JyB5PSc0MCcgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPndlYmhvb2tUcmlnZzwvdGV4dD48cmVjdCB4PSc4MjAnIHk9JzIwJyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzgyNicgeT0nNDAnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5lZGl0RmllbGRzPC90ZXh0PjxyZWN0IHg9JzgyMCcgeT0nNDIwJyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzgyNicgeT0nNDQwJyBmb250LXNpemU9JzEwJyBmaWxsPSd3aGl0ZSc+aHR0cFJlcXVlc3Q8L3RleHQ+PHJlY3QgeD0nODIwJyB5PSc4MjAnIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nODI2JyB5PSc4NDAnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5maWx0ZXI8L3RleHQ+PHJlY3QgeD0nODIwJyB5PScxMjIwJyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzgyNicgeT0nMTI0MCcgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPndhaXQ8L3RleHQ+PHJlY3QgeD0nMTQyMCcgeT0nMjAnIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nMTQyNicgeT0nNDAnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5ub09wZXJhdGlvbjwvdGV4dD48cmVjdCB4PScyMDIwJyB5PScyMCcgd2lkdGg9JzgwJyBoZWlnaHQ9JzMyJyByeD0nNCcgZmlsbD0nIzNiODJmNicgb3BhY2l0eT0nMC44NScgLz48dGV4dCB4PScyMDI2JyB5PSc0MCcgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPm1lcmdlPC90ZXh0PjxyZWN0IHg9JzE0MjAnIHk9JzcyMCcgd2lkdGg9JzgwJyBoZWlnaHQ9JzMyJyByeD0nNCcgZmlsbD0nIzNiODJmNicgb3BhY2l0eT0nMC44NScgLz48dGV4dCB4PScxNDI2JyB5PSc3NDAnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5zd2l0Y2g8L3RleHQ+PHJlY3QgeD0nMjAyMCcgeT0nNjIwJyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzIwMjYnIHk9JzY0MCcgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPmVkaXRGaWVsZHM8L3RleHQ+PHJlY3QgeD0nMjAyMCcgeT0nOTcwJyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzIwMjYnIHk9Jzk5MCcgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPmVkaXRGaWVsZHM8L3RleHQ+PHJlY3QgeD0nMjYyMCcgeT0nNzcwJyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzI2MjYnIHk9Jzc5MCcgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPmRhdGFUYWJsZTwvdGV4dD48cmVjdCB4PSczMjIwJyB5PSc3MjAnIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nMzIyNicgeT0nNzQwJyBmb250LXNpemU9JzEwJyBmaWxsPSd3aGl0ZSc+ZWRpdEZpZWxkczwvdGV4dD48cmVjdCB4PSc0MDIwJyB5PSc1MjAnIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nNDAyNicgeT0nNTQwJyBmb250LXNpemU9JzEwJyBmaWxsPSd3aGl0ZSc+c2VuZEVtYWlsPC90ZXh0PjxyZWN0IHg9JzQwMjAnIHk9Jzk3MCcgd2lkdGg9JzgwJyBoZWlnaHQ9JzMyJyByeD0nNCcgZmlsbD0nIzNiODJmNicgb3BhY2l0eT0nMC44NScgLz48dGV4dCB4PSc0MDI2JyB5PSc5OTAnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5odHRwUmVxdWVzdDwvdGV4dD48cmVjdCB4PScyNjIwJyB5PScyMCcgd2lkdGg9JzgwJyBoZWlnaHQ9JzMyJyByeD0nNCcgZmlsbD0nIzNiODJmNicgb3BhY2l0eT0nMC44NScgLz48dGV4dCB4PScyNjI2JyB5PSc0MCcgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPmVkaXRGaWVsZHM8L3RleHQ+PHJlY3QgeD0nMzIyMCcgeT0nMjAnIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nMzIyNicgeT0nNDAnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5yZXNwb25kVG9XZWI8L3RleHQ+PHJlY3QgeD0nMjAyMCcgeT0nNzg4JyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzIwMjYnIHk9JzgwOCcgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPmVkaXRGaWVsZHM8L3RleHQ+PC9zdmc+"
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "webhook-trigger",
+        "type": "webhookTrigger",
+        "position": {
+          "x": -1200,
+          "y": -400
+        },
+        "data": {
+          "method": "POST",
+          "path": "/hook/enterprise-pipeline"
+        },
+        "width": 330,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": -1200,
+          "y": -400
+        },
+        "dragging": false
+      },
+      {
+        "id": "request-validator",
+        "type": "editFields",
+        "position": {
+          "x": -400,
+          "y": -400
+        },
+        "data": {
+          "fields": {
+            "isValid": "=item.payload !== undefined",
+            "timestamp": "=new Date().toISOString()"
+          }
+        },
+        "width": 431,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": -400,
+          "y": -400
+        },
+        "dragging": false
+      },
+      {
+        "id": "data-enrichment",
+        "type": "httpRequest",
+        "position": {
+          "x": -400,
+          "y": 0
+        },
+        "data": {
+          "method": "POST",
+          "url": "https://api.internal.example.com/enrich",
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "body": ""
+        },
+        "width": 387,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": -400,
+          "y": 0
+        },
+        "dragging": false
+      },
+      {
+        "id": "schema-validator",
+        "type": "filter",
+        "position": {
+          "x": -400,
+          "y": 400
+        },
+        "data": {
+          "predicate": "item.isValid === true && item.payload !== null"
+        },
+        "width": 312,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": -400,
+          "y": 400
+        },
+        "dragging": false
+      },
+      {
+        "id": "rate-limiter",
+        "type": "wait",
+        "position": {
+          "x": -400,
+          "y": 800
+        },
+        "data": {
+          "durationSeconds": 1,
+          "reason": "Rate limiting before priority routing"
+        },
+        "width": 350,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": -400,
+          "y": 800
+        },
+        "dragging": false
+      },
+      {
+        "id": "error-handler",
+        "type": "noOperation",
+        "position": {
+          "x": 200,
+          "y": -400
+        },
+        "data": {},
+        "width": 215,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 200,
+          "y": -400
+        },
+        "dragging": false
+      },
+      {
+        "id": "merge-1",
+        "type": "merge",
+        "position": {
+          "x": 800,
+          "y": -400
+        },
+        "data": {},
+        "width": 236,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 800,
+          "y": -400
+        },
+        "dragging": false
+      },
+      {
+        "id": "router-1",
+        "type": "switch",
+        "position": {
+          "x": 200,
+          "y": 300
+        },
+        "data": {
+          "cases": [
+            {
+              "label": "priority_high",
+              "expr": "item.priority === 'high'"
+            },
+            {
+              "label": "priority_medium",
+              "expr": "item.priority === 'medium'"
+            },
+            {
+              "label": "priority_low",
+              "expr": "item.priority === 'low'"
+            },
+            {
+              "label": "priority_urgent"
+            }
+          ],
+          "default": true
+        },
+        "width": 323,
+        "height": 253,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 200,
+          "y": 300
+        },
+        "dragging": false
+      },
+      {
+        "id": "standard-processor",
+        "type": "editFields",
+        "position": {
+          "x": 800,
+          "y": 200
+        },
+        "data": {
+          "fields": {
+            "processedBy": "=\"standard_pipeline\"",
+            "processedAt": "=new Date().toISOString()"
+          }
+        },
+        "width": 431,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 800,
+          "y": 200
+        },
+        "dragging": false
+      },
+      {
+        "id": "batch-processor",
+        "type": "editFields",
+        "position": {
+          "x": 800,
+          "y": 550
+        },
+        "data": {
+          "fields": {
+            "processedBy": "=\"batch_pipeline\"",
+            "batchId": "=Math.random().toString(36).substring(2, 11)"
+          }
+        },
+        "width": 431,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 800,
+          "y": 550
+        },
+        "dragging": false
+      },
+      {
+        "id": "audit-logger",
+        "type": "dataTable",
+        "position": {
+          "x": 1400,
+          "y": 350
+        },
+        "data": {
+          "tableName": "pipeline_audit",
+          "operation": "insert",
+          "keyField": "id"
+        },
+        "width": 327,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 1400,
+          "y": 350
+        },
+        "dragging": false
+      },
+      {
+        "id": "notification-service",
+        "type": "editFields",
+        "position": {
+          "x": 2000,
+          "y": 300
+        },
+        "data": {
+          "fields": {
+            "notificationType": "=\"pipeline_complete\"",
+            "message": "=\"Processing completed successfully\""
+          }
+        },
+        "width": 431,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 2000,
+          "y": 300
+        },
+        "dragging": false
+      },
+      {
+        "id": "email-sender",
+        "type": "sendEmail",
+        "position": {
+          "x": 2800,
+          "y": 100
+        },
+        "data": {
+          "transport": "smtp",
+          "from": "pipeline@enterprise.example.com",
+          "to": "admin@enterprise.example.com",
+          "subject": "Pipeline Notification",
+          "body": "The enterprise data pipeline has completed processing."
+        },
+        "width": 312,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 2800,
+          "y": 100
+        },
+        "dragging": false
+      },
+      {
+        "id": "slack-integration",
+        "type": "httpRequest",
+        "position": {
+          "x": 2800,
+          "y": 550
+        },
+        "data": {
+          "method": "POST",
+          "url": "https://hooks.slack.com/services/example",
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "body": "{\"text\": \"Pipeline processing complete\"}"
+        },
+        "width": 387,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 2800,
+          "y": 550
+        },
+        "dragging": false
+      },
+      {
+        "id": "response-builder",
+        "type": "editFields",
+        "position": {
+          "x": 1400,
+          "y": -400
+        },
+        "data": {
+          "fields": {
+            "status": "=\"success\"",
+            "processedCount": "=array.length",
+            "completedAt": "=new Date().toISOString()"
+          }
+        },
+        "width": 431,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 1400,
+          "y": -400
+        },
+        "dragging": false
+      },
+      {
+        "id": "webhook-response",
+        "type": "respondToWebhook",
+        "position": {
+          "x": 2000,
+          "y": -400
+        },
+        "data": {
+          "statusCode": 200,
+          "body": "",
+          "headers": {
+            "Content-Type": "application/json"
+          }
+        },
+        "width": 353,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 2000,
+          "y": -400
+        },
+        "dragging": false
+      },
+      {
+        "id": "94d1c44f-7c46-4f52-baad-1d8d5ed7c1f6",
+        "type": "editFields",
+        "position": {
+          "x": 800,
+          "y": 368
+        },
+        "data": {
+          "fields": {
+            "status": "ready"
+          }
+        },
+        "width": 431,
+        "height": 141,
+        "selected": true,
+        "positionAbsolute": {
+          "x": 800,
+          "y": 368
+        },
+        "dragging": false
+      }
+    ],
+    "edges": [
+      {
+        "id": "e-errorhandler-merge",
+        "source": "error-handler",
+        "target": "merge-1"
+      },
+      {
+        "id": "e-router-high",
+        "source": "router-1",
+        "target": "standard-processor",
+        "sourceHandle": "priority_high",
+        "label": "priority_high"
+      },
+      {
+        "id": "e-router-medium",
+        "source": "router-1",
+        "target": "standard-processor",
+        "sourceHandle": "priority_medium",
+        "label": "priority_medium"
+      },
+      {
+        "id": "e-router-low",
+        "source": "router-1",
+        "target": "standard-processor",
+        "sourceHandle": "priority_low",
+        "label": "priority_low"
+      },
+      {
+        "id": "e-router-default",
+        "source": "router-1",
+        "target": "batch-processor",
+        "sourceHandle": "default",
+        "label": "default"
+      },
+      {
+        "id": "e-notification-email",
+        "source": "notification-service",
+        "target": "email-sender"
+      },
+      {
+        "id": "e-validator-enrichment",
+        "source": "request-validator",
+        "target": "data-enrichment"
+      },
+      {
+        "id": "e-enrichment-schema",
+        "source": "data-enrichment",
+        "target": "schema-validator"
+      },
+      {
+        "id": "e-schema-ratelimit",
+        "source": "schema-validator",
+        "target": "rate-limiter"
+      },
+      {
+        "id": "e-ratelimit-router",
+        "source": "rate-limiter",
+        "target": "router-1"
+      },
+      {
+        "id": "e-standard-audit",
+        "source": "standard-processor",
+        "target": "audit-logger"
+      },
+      {
+        "id": "e-batch-audit",
+        "source": "batch-processor",
+        "target": "audit-logger"
+      },
+      {
+        "id": "e-audit-notification",
+        "source": "audit-logger",
+        "target": "notification-service"
+      },
+      {
+        "id": "e-merge-response",
+        "source": "merge-1",
+        "target": "response-builder"
+      },
+      {
+        "id": "e-response-webhook",
+        "source": "response-builder",
+        "target": "webhook-response"
+      },
+      {
+        "source": "router-1",
+        "sourceHandle": "priority_urgent",
+        "target": "94d1c44f-7c46-4f52-baad-1d8d5ed7c1f6",
+        "targetHandle": null,
+        "id": "reactflow__edge-router-1priority_urgent-94d1c44f-7c46-4f52-baad-1d8d5ed7c1f6"
+      },
+      {
+        "source": "94d1c44f-7c46-4f52-baad-1d8d5ed7c1f6",
+        "sourceHandle": null,
+        "target": "audit-logger",
+        "targetHandle": null,
+        "id": "reactflow__edge-94d1c44f-7c46-4f52-baad-1d8d5ed7c1f6-audit-logger"
+      }
+    ]
+  }
+}

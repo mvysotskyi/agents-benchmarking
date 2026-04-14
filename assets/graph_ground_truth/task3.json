@@ -1,0 +1,80 @@
+{
+  "id": "f2962325-5ce5-4376-98d1-633973706d55",
+  "name": "Range → Map → Table",
+  "createdAt": 1776159479277,
+  "updatedAt": 1776159517750,
+  "version": 1,
+  "metadata": {
+    "description": "",
+    "thumbnail": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyODAnIGhlaWdodD0nMTYwJyB2aWV3Qm94PScwIDAgNTQ4IDYwJz48bGluZSB4MT0nNjAnIHkxPSc0NCcgeDI9JzE5MicgeTI9JzM2JyBzdHJva2U9JyM2NDc0OGInIHN0cm9rZS13aWR0aD0nMicgLz48bGluZSB4MT0nMjMyJyB5MT0nMzYnIHgyPSc1MjgnIHkyPSc1Micgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PHJlY3QgeD0nMjAnIHk9JzI4JyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzI2JyB5PSc0OCcgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPnJhbmdlR2VuZXJhdDwvdGV4dD48cmVjdCB4PScxOTInIHk9JzIwJyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzE5OCcgeT0nNDAnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5tYXA8L3RleHQ+PHJlY3QgeD0nNTI4JyB5PSczNicgd2lkdGg9JzgwJyBoZWlnaHQ9JzMyJyByeD0nNCcgZmlsbD0nIzNiODJmNicgb3BhY2l0eT0nMC44NScgLz48dGV4dCB4PSc1MzQnIHk9JzU2JyBmb250LXNpemU9JzEwJyBmaWxsPSd3aGl0ZSc+dGFibGVQcmV2aWV3PC90ZXh0Pjwvc3ZnPg=="
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "rangeGenerator",
+        "position": {
+          "x": 100,
+          "y": 200
+        },
+        "data": {
+          "start": 1,
+          "stop": 5,
+          "step": 1
+        },
+        "width": 150,
+        "height": 22
+      },
+      {
+        "id": "n2",
+        "type": "map",
+        "position": {
+          "x": 272,
+          "y": 192
+        },
+        "data": {
+          "expression": "{ squared: item.value * item.value }"
+        },
+        "width": 303,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 272,
+          "y": 192
+        },
+        "dragging": false
+      },
+      {
+        "id": "n3",
+        "type": "tablePreview",
+        "position": {
+          "x": 608,
+          "y": 208
+        },
+        "data": {
+          "limit": 100
+        },
+        "width": 150,
+        "height": 22,
+        "selected": true,
+        "positionAbsolute": {
+          "x": 608,
+          "y": 208
+        },
+        "dragging": false
+      }
+    ],
+    "edges": [
+      {
+        "id": "e1",
+        "source": "n1",
+        "target": "n2"
+      },
+      {
+        "id": "e2",
+        "source": "n2",
+        "target": "n3"
+      }
+    ]
+  }
+}

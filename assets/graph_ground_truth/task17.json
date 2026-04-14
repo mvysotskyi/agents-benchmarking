@@ -1,0 +1,115 @@
+{
+  "id": "da68991f-291c-48a2-b20b-e2b5d4317fcc",
+  "name": "Range → Map → Table",
+  "createdAt": 1776166622496,
+  "updatedAt": 1776166710079,
+  "version": 1,
+  "metadata": {
+    "description": "",
+    "thumbnail": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyODAnIGhlaWdodD0nMTYwJyB2aWV3Qm94PScwIDAgODQwIDcyJz48bGluZSB4MT0nNjAnIHkxPSc2OCcgeDI9JzIxMicgeTI9JzM2JyBzdHJva2U9JyM2NDc0OGInIHN0cm9rZS13aWR0aD0nMicgLz48bGluZSB4MT0nNTg4JyB5MT0nMzYnIHgyPSc4MjAnIHkyPSc2OCcgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PGxpbmUgeDE9JzI1MicgeTE9JzM2JyB4Mj0nNTQ4JyB5Mj0nMzYnIHN0cm9rZT0nIzY0NzQ4Yicgc3Ryb2tlLXdpZHRoPScyJyAvPjxyZWN0IHg9JzIwJyB5PSc1Micgd2lkdGg9JzgwJyBoZWlnaHQ9JzMyJyByeD0nNCcgZmlsbD0nIzNiODJmNicgb3BhY2l0eT0nMC44NScgLz48dGV4dCB4PScyNicgeT0nNzInIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5yYW5nZUdlbmVyYXQ8L3RleHQ+PHJlY3QgeD0nMjEyJyB5PScyMCcgd2lkdGg9JzgwJyBoZWlnaHQ9JzMyJyByeD0nNCcgZmlsbD0nIzNiODJmNicgb3BhY2l0eT0nMC44NScgLz48dGV4dCB4PScyMTgnIHk9JzQwJyBmb250LXNpemU9JzEwJyBmaWxsPSd3aGl0ZSc+bWFwPC90ZXh0PjxyZWN0IHg9JzgyMCcgeT0nNTInIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nODI2JyB5PSc3MicgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPnRhYmxlUHJldmlldzwvdGV4dD48cmVjdCB4PSc1NDgnIHk9JzIwJyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzU1NCcgeT0nNDAnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5mb3JtdWxhPC90ZXh0Pjwvc3ZnPg=="
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "rangeGenerator",
+        "position": {
+          "x": 48,
+          "y": 320
+        },
+        "data": {
+          "start": 1,
+          "stop": 5,
+          "step": 1
+        },
+        "width": 150,
+        "height": 22,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 48,
+          "y": 320
+        },
+        "dragging": false
+      },
+      {
+        "id": "n2",
+        "type": "map",
+        "position": {
+          "x": 240,
+          "y": 288
+        },
+        "data": {
+          "expression": "{ squared: item.value * item.value }"
+        },
+        "width": 303,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 240,
+          "y": 288
+        },
+        "dragging": false
+      },
+      {
+        "id": "n3",
+        "type": "tablePreview",
+        "position": {
+          "x": 848,
+          "y": 320
+        },
+        "data": {
+          "limit": 50
+        },
+        "width": 150,
+        "height": 22,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 848,
+          "y": 320
+        },
+        "dragging": false
+      },
+      {
+        "id": "f3a32ba8-a56d-400a-ab5e-a25b96b17ab0",
+        "type": "formula",
+        "position": {
+          "x": 576,
+          "y": 288
+        },
+        "data": {
+          "field": "double",
+          "expression": "item.value * 2"
+        },
+        "width": 242,
+        "height": 141,
+        "selected": true,
+        "positionAbsolute": {
+          "x": 576,
+          "y": 288
+        },
+        "dragging": false
+      }
+    ],
+    "edges": [
+      {
+        "id": "e1",
+        "source": "n1",
+        "target": "n2"
+      },
+      {
+        "source": "f3a32ba8-a56d-400a-ab5e-a25b96b17ab0",
+        "sourceHandle": null,
+        "target": "n3",
+        "targetHandle": null,
+        "id": "reactflow__edge-f3a32ba8-a56d-400a-ab5e-a25b96b17ab0-n3"
+      },
+      {
+        "source": "n2",
+        "sourceHandle": null,
+        "target": "f3a32ba8-a56d-400a-ab5e-a25b96b17ab0",
+        "targetHandle": null,
+        "id": "reactflow__edge-n2-f3a32ba8-a56d-400a-ab5e-a25b96b17ab0"
+      }
+    ]
+  }
+}

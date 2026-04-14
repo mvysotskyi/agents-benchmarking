@@ -1,0 +1,139 @@
+{
+  "id": "b398e447-1d98-406d-b081-ad201180081b",
+  "name": "API Data Pipeline",
+  "createdAt": 1764595985088,
+  "updatedAt": 1776162603902,
+  "version": 1,
+  "metadata": {
+    "description": "Fetch data from an API, transform it, and aggregate results.",
+    "thumbnail": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyODAnIGhlaWdodD0nMTYwJyB2aWV3Qm94PScwIDAgMTUyOCA2MCc+PGxpbmUgeDE9JzYwJyB5MT0nMzYnIHgyPSczNzInIHkyPSczNicgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PGxpbmUgeDE9JzEyMTInIHkxPSczNicgeDI9JzE1MDgnIHkyPSczNicgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PGxpbmUgeDE9JzQxMicgeTE9JzM2JyB4Mj0nODA0JyB5Mj0nMzYnIHN0cm9rZT0nIzY0NzQ4Yicgc3Ryb2tlLXdpZHRoPScyJyAvPjxsaW5lIHgxPSc4NDQnIHkxPSczNicgeDI9JzExNzInIHkyPSczNicgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PHJlY3QgeD0nMjAnIHk9JzIwJyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzI2JyB5PSc0MCcgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPm1hbnVhbFRyaWdnZTwvdGV4dD48cmVjdCB4PSczNzInIHk9JzIwJyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzM3OCcgeT0nNDAnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5odHRwUmVxdWVzdDwvdGV4dD48cmVjdCB4PScxMTcyJyB5PScyMCcgd2lkdGg9JzgwJyBoZWlnaHQ9JzMyJyByeD0nNCcgZmlsbD0nIzNiODJmNicgb3BhY2l0eT0nMC44NScgLz48dGV4dCB4PScxMTc4JyB5PSc0MCcgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPm1hcDwvdGV4dD48cmVjdCB4PScxNTA4JyB5PScyMCcgd2lkdGg9JzgwJyBoZWlnaHQ9JzMyJyByeD0nNCcgZmlsbD0nIzNiODJmNicgb3BhY2l0eT0nMC44NScgLz48dGV4dCB4PScxNTE0JyB5PSc0MCcgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPnNvcnQ8L3RleHQ+PHJlY3QgeD0nODA0JyB5PScyMCcgd2lkdGg9JzgwJyBoZWlnaHQ9JzMyJyByeD0nNCcgZmlsbD0nIzNiODJmNicgb3BhY2l0eT0nMC44NScgLz48dGV4dCB4PSc4MTAnIHk9JzQwJyBmb250LXNpemU9JzEwJyBmaWxsPSd3aGl0ZSc+ZmlsdGVyPC90ZXh0Pjwvc3ZnPg=="
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "trigger-1",
+        "type": "manualTrigger",
+        "position": {
+          "x": -336,
+          "y": 192
+        },
+        "data": {},
+        "width": 303,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": -336,
+          "y": 192
+        },
+        "dragging": false
+      },
+      {
+        "id": "http-1",
+        "type": "httpRequest",
+        "position": {
+          "x": 16,
+          "y": 192
+        },
+        "data": {
+          "method": "GET",
+          "url": "https://jsonplaceholder.typicode.com/users",
+          "headers": {},
+          "body": ""
+        },
+        "width": 387,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 16,
+          "y": 192
+        },
+        "dragging": false
+      },
+      {
+        "id": "map-1",
+        "type": "map",
+        "position": {
+          "x": 816,
+          "y": 192
+        },
+        "data": {
+          "expression": "({ id: item.id, name: item.name, email: item.email, city: item.address?.city })"
+        },
+        "width": 303,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 816,
+          "y": 192
+        },
+        "dragging": false
+      },
+      {
+        "id": "sort-1",
+        "type": "sort",
+        "position": {
+          "x": 1152,
+          "y": 192
+        },
+        "data": {
+          "field": "email",
+          "direction": "desc"
+        },
+        "width": 276,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 1152,
+          "y": 192
+        },
+        "dragging": false
+      },
+      {
+        "id": "7025ff37-b340-4ea4-b1df-80d2f655876f",
+        "type": "filter",
+        "position": {
+          "x": 448,
+          "y": 192
+        },
+        "data": {
+          "predicate": "item.email.includes(\".org\")"
+        },
+        "width": 312,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 448,
+          "y": 192
+        },
+        "dragging": false
+      }
+    ],
+    "edges": [
+      {
+        "id": "e1",
+        "source": "trigger-1",
+        "target": "http-1",
+        "sourceHandle": "trigger"
+      },
+      {
+        "id": "e3",
+        "source": "map-1",
+        "target": "sort-1"
+      },
+      {
+        "source": "http-1",
+        "sourceHandle": null,
+        "target": "7025ff37-b340-4ea4-b1df-80d2f655876f",
+        "targetHandle": null,
+        "id": "reactflow__edge-http-1-7025ff37-b340-4ea4-b1df-80d2f655876f"
+      },
+      {
+        "source": "7025ff37-b340-4ea4-b1df-80d2f655876f",
+        "sourceHandle": null,
+        "target": "map-1",
+        "targetHandle": null,
+        "id": "reactflow__edge-7025ff37-b340-4ea4-b1df-80d2f655876f-map-1"
+      }
+    ]
+  }
+}

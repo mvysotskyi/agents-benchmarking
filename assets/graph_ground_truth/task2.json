@@ -1,0 +1,34 @@
+{
+  "id": "2bf9051a-826f-4e9f-b16a-981af27d5ae1",
+  "name": "Fetch Example Data",
+  "createdAt": 1776159257389,
+  "updatedAt": 1776159299745,
+  "version": 1,
+  "metadata": {
+    "description": "",
+    "thumbnail": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyODAnIGhlaWdodD0nMTYwJyB2aWV3Qm94PScwIDAgMTAwIDYwJz48cmVjdCB4PScyMCcgeT0nMjAnIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nMjYnIHk9JzQwJyBmb250LXNpemU9JzEwJyBmaWxsPSd3aGl0ZSc+aHR0cFJlcXVlc3Q8L3RleHQ+PC9zdmc+"
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "13a9ab0d-0c16-4930-82f1-aecd41dd5339",
+        "type": "httpRequest",
+        "position": {
+          "x": 736.3352842753718,
+          "y": 640.6492708182766
+        },
+        "data": {
+          "method": "GET",
+          "url": "https://jsonplaceholder.typicode.com/todos/1",
+          "headers": {},
+          "body": ""
+        },
+        "width": 387,
+        "height": 141,
+        "selected": true,
+        "dragging": false
+      }
+    ],
+    "edges": []
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "id": "606b79cd-f719-41dc-aec7-3cff23313377",
+  "name": "ICML Project",
+  "createdAt": 1776163545717,
+  "updatedAt": 1776164599044,
+  "version": 1,
+  "metadata": {
+    "description": "",
+    "thumbnail": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyODAnIGhlaWdodD0nMTYwJyB2aWV3Qm94PScwIDAgMTI4OCAyOTYnPjxsaW5lIHgxPSc4MjgnIHkxPScxMTYnIHgyPScxMjY4JyB5Mj0nMjkyJyBzdHJva2U9JyM2NDc0OGInIHN0cm9rZS13aWR0aD0nMicgLz48bGluZSB4MT0nODI4JyB5MT0nMTE2JyB4Mj0nMTI2OCcgeTI9JzM2JyBzdHJva2U9JyM2NDc0OGInIHN0cm9rZS13aWR0aD0nMicgLz48bGluZSB4MT0nNDEyJyB5MT0nMTMyJyB4Mj0nNzg4JyB5Mj0nMTE2JyBzdHJva2U9JyM2NDc0OGInIHN0cm9rZS13aWR0aD0nMicgLz48bGluZSB4MT0nNjAnIHkxPScxMzInIHgyPSczNzInIHkyPScxMzInIHN0cm9rZT0nIzY0NzQ4Yicgc3Ryb2tlLXdpZHRoPScyJyAvPjxyZWN0IHg9JzIwJyB5PScxMTYnIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nMjYnIHk9JzEzNicgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPmNoYXRUcmlnZ2VyPC90ZXh0PjxyZWN0IHg9JzM3MicgeT0nMTE2JyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzM3OCcgeT0nMTM2JyBmb250LXNpemU9JzEwJyBmaWxsPSd3aGl0ZSc+ZGF0YWJhc2VDb25uPC90ZXh0PjxyZWN0IHg9Jzc4OCcgeT0nMTAwJyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9Jzc5NCcgeT0nMTIwJyBmb250LXNpemU9JzEwJyBmaWxsPSd3aGl0ZSc+aWY8L3RleHQ+PHJlY3QgeD0nMTI2OCcgeT0nMjc2JyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzEyNzQnIHk9JzI5NicgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPnNlbmRFbWFpbDwvdGV4dD48cmVjdCB4PScxMjY4JyB5PScyMCcgd2lkdGg9JzgwJyBoZWlnaHQ9JzMyJyByeD0nNCcgZmlsbD0nIzNiODJmNicgb3BhY2l0eT0nMC44NScgLz48dGV4dCB4PScxMjc0JyB5PSc0MCcgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPnNlbmRFbWFpbDwvdGV4dD48L3N2Zz4="
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "c3a6f1e2-3f09-4f69-a862-31dc940f5b52",
+        "type": "chatTrigger",
+        "position": {
+          "x": 560,
+          "y": 656
+        },
+        "data": {
+          "provider": "slack",
+          "channelId": ""
+        },
+        "width": 303,
+        "height": 141,
+        "selected": true,
+        "positionAbsolute": {
+          "x": 560,
+          "y": 656
+        },
+        "dragging": false
+      },
+      {
+        "id": "78479789-542c-4164-bec5-a5978140a261",
+        "type": "databaseConnector",
+        "position": {
+          "x": 912,
+          "y": 656
+        },
+        "data": {
+          "table": "",
+          "where": ""
+        },
+        "width": 372,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 912,
+          "y": 656
+        },
+        "dragging": false
+      },
+      {
+        "id": "833f461c-f401-44cd-8a4f-f7948322a70d",
+        "type": "if",
+        "position": {
+          "x": 1328,
+          "y": 640
+        },
+        "data": {
+          "expression": "item.country === \"FR\"",
+          "notes": ""
+        },
+        "width": 379,
+        "height": 169,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 1328,
+          "y": 640
+        },
+        "dragging": false
+      },
+      {
+        "id": "6318c058-abab-4cf4-bac9-0dc73cce9a73",
+        "type": "sendEmail",
+        "position": {
+          "x": 1808,
+          "y": 816
+        },
+        "data": {
+          "transport": "smtp",
+          "from": "",
+          "to": "",
+          "subject": "ICML Project notification",
+          "body": ""
+        },
+        "width": 312,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 1808,
+          "y": 816
+        },
+        "dragging": false
+      },
+      {
+        "id": "40398088-039e-4fb4-81e2-c7090dfa8451",
+        "type": "sendEmail",
+        "position": {
+          "x": 1808,
+          "y": 560
+        },
+        "data": {
+          "transport": "smtp",
+          "from": "",
+          "to": "",
+          "subject": "Notification de projet ICML",
+          "body": ""
+        },
+        "width": 312,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 1808,
+          "y": 560
+        },
+        "dragging": false
+      }
+    ],
+    "edges": [
+      {
+        "source": "833f461c-f401-44cd-8a4f-f7948322a70d",
+        "sourceHandle": "onFalse",
+        "target": "6318c058-abab-4cf4-bac9-0dc73cce9a73",
+        "targetHandle": null,
+        "id": "reactflow__edge-833f461c-f401-44cd-8a4f-f7948322a70donFalse-6318c058-abab-4cf4-bac9-0dc73cce9a73"
+      },
+      {
+        "source": "833f461c-f401-44cd-8a4f-f7948322a70d",
+        "sourceHandle": "onTrue",
+        "target": "40398088-039e-4fb4-81e2-c7090dfa8451",
+        "targetHandle": null,
+        "id": "reactflow__edge-833f461c-f401-44cd-8a4f-f7948322a70donTrue-40398088-039e-4fb4-81e2-c7090dfa8451"
+      },
+      {
+        "source": "78479789-542c-4164-bec5-a5978140a261",
+        "sourceHandle": null,
+        "target": "833f461c-f401-44cd-8a4f-f7948322a70d",
+        "targetHandle": null,
+        "id": "reactflow__edge-78479789-542c-4164-bec5-a5978140a261-833f461c-f401-44cd-8a4f-f7948322a70d"
+      },
+      {
+        "source": "c3a6f1e2-3f09-4f69-a862-31dc940f5b52",
+        "sourceHandle": "trigger",
+        "target": "78479789-542c-4164-bec5-a5978140a261",
+        "targetHandle": null,
+        "id": "reactflow__edge-c3a6f1e2-3f09-4f69-a862-31dc940f5b52trigger-78479789-542c-4164-bec5-a5978140a261",
+        "selected": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "id": "97905dbe-52d6-4037-b420-6511fac736b0",
+  "name": "Range → Map → Table",
+  "createdAt": 1776159193133,
+  "updatedAt": 1776159218243,
+  "version": 1,
+  "metadata": {
+    "description": "",
+    "thumbnail": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyODAnIGhlaWdodD0nMTYwJyB2aWV3Qm94PScwIDAgNTQ4IDYwJz48cmVjdCB4PScyMCcgeT0nMjAnIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nMjYnIHk9JzQwJyBmb250LXNpemU9JzEwJyBmaWxsPSd3aGl0ZSc+cmFuZ2VHZW5lcmF0PC90ZXh0PjxyZWN0IHg9JzUyOCcgeT0nMjgnIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nNTM0JyB5PSc0OCcgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPnRhYmxlUHJldmlldzwvdGV4dD48L3N2Zz4="
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "n1",
+        "type": "rangeGenerator",
+        "position": {
+          "x": 100,
+          "y": 200
+        },
+        "data": {
+          "start": 1,
+          "stop": 5,
+          "step": 1
+        },
+        "width": 150,
+        "height": 22,
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "n3",
+        "type": "tablePreview",
+        "position": {
+          "x": 608,
+          "y": 208
+        },
+        "data": {
+          "limit": 50
+        },
+        "width": 150,
+        "height": 22,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 608,
+          "y": 208
+        },
+        "dragging": false
+      }
+    ],
+    "edges": []
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "id": "cff3749e-2bce-4f6b-857a-87da08c97bc6",
+  "name": "Newsletter System",
+  "createdAt": 1776161018820,
+  "updatedAt": 1776161443245,
+  "version": 1,
+  "metadata": {
+    "description": "",
+    "thumbnail": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyODAnIGhlaWdodD0nMTYwJyB2aWV3Qm94PScwIDAgOTA0IDI5Nic+PGxpbmUgeDE9JzYwJyB5MT0nMTgwJyB4Mj0nMzg4JyB5Mj0nMzYnIHN0cm9rZT0nIzY0NzQ4Yicgc3Ryb2tlLXdpZHRoPScyJyAvPjxsaW5lIHgxPSc0MjgnIHkxPSczNicgeDI9JzQzNicgeTI9JzI5Micgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PGxpbmUgeDE9JzQ3NicgeTE9JzI5MicgeDI9Jzg4NCcgeTI9JzI5Micgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PGxpbmUgeDE9JzkyNCcgeTE9JzI5MicgeDI9Jzg4NCcgeTI9JzM2JyBzdHJva2U9JyM2NDc0OGInIHN0cm9rZS13aWR0aD0nMicgLz48cmVjdCB4PScyMCcgeT0nMTY0JyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzI2JyB5PScxODQnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5tYW51YWxUcmlnZ2U8L3RleHQ+PHJlY3QgeD0nMzg4JyB5PScyMCcgd2lkdGg9JzgwJyBoZWlnaHQ9JzMyJyByeD0nNCcgZmlsbD0nIzNiODJmNicgb3BhY2l0eT0nMC44NScgLz48dGV4dCB4PSczOTQnIHk9JzQwJyBmb250LXNpemU9JzEwJyBmaWxsPSd3aGl0ZSc+aHR0cFJlcXVlc3Q8L3RleHQ+PHJlY3QgeD0nNDM2JyB5PScyNzYnIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nNDQyJyB5PScyOTYnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5tYXA8L3RleHQ+PHJlY3QgeD0nODg0JyB5PScyNzYnIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nODkwJyB5PScyOTYnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5maWx0ZXI8L3RleHQ+PHJlY3QgeD0nODg0JyB5PScyMCcgd2lkdGg9JzgwJyBoZWlnaHQ9JzMyJyByeD0nNCcgZmlsbD0nIzNiODJmNicgb3BhY2l0eT0nMC44NScgLz48dGV4dCB4PSc4OTAnIHk9JzQwJyBmb250LXNpemU9JzEwJyBmaWxsPSd3aGl0ZSc+c2VuZEVtYWlsPC90ZXh0Pjwvc3ZnPg=="
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "3e22f99d-c8fb-4e8e-9866-a180afad9358",
+        "type": "manualTrigger",
+        "position": {
+          "x": 368,
+          "y": 848
+        },
+        "data": {},
+        "width": 303,
+        "height": 141,
+        "selected": false,
+        "dragging": false,
+        "positionAbsolute": {
+          "x": 368,
+          "y": 848
+        }
+      },
+      {
+        "id": "9569c568-b790-4256-9511-45f09e786ece",
+        "type": "httpRequest",
+        "position": {
+          "x": 736,
+          "y": 704
+        },
+        "data": {
+          "method": "GET",
+          "url": "https://jsonplaceholder.typicode.com/users",
+          "headers": {},
+          "body": ""
+        },
+        "width": 387,
+        "height": 141,
+        "selected": false,
+        "dragging": false,
+        "positionAbsolute": {
+          "x": 736,
+          "y": 704
+        }
+      },
+      {
+        "id": "70999e7a-3339-42d5-a4d9-bae46e988ff1",
+        "type": "map",
+        "position": {
+          "x": 784,
+          "y": 960
+        },
+        "data": {
+          "expression": "item"
+        },
+        "width": 303,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 784,
+          "y": 960
+        },
+        "dragging": false
+      },
+      {
+        "id": "4e6c280c-5984-4b48-870c-08333523844d",
+        "type": "filter",
+        "position": {
+          "x": 1232,
+          "y": 960
+        },
+        "data": {
+          "predicate": "item.address?.city === \"Gwenborough\""
+        },
+        "width": 312,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 1232,
+          "y": 960
+        },
+        "dragging": false
+      },
+      {
+        "id": "6c83bd7b-d644-4b38-baed-9bcab8342367",
+        "type": "sendEmail",
+        "position": {
+          "x": 1232,
+          "y": 704
+        },
+        "data": {
+          "transport": "smtp",
+          "from": "newsletter@example.com",
+          "to": "local-subscribers@example.com",
+          "subject": "Local Newsletter",
+          "body": ""
+        },
+        "width": 312,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 1232,
+          "y": 704
+        },
+        "dragging": false
+      }
+    ],
+    "edges": [
+      {
+        "source": "3e22f99d-c8fb-4e8e-9866-a180afad9358",
+        "sourceHandle": "trigger",
+        "target": "9569c568-b790-4256-9511-45f09e786ece",
+        "targetHandle": null,
+        "id": "reactflow__edge-3e22f99d-c8fb-4e8e-9866-a180afad9358trigger-9569c568-b790-4256-9511-45f09e786ece"
+      },
+      {
+        "source": "9569c568-b790-4256-9511-45f09e786ece",
+        "sourceHandle": null,
+        "target": "70999e7a-3339-42d5-a4d9-bae46e988ff1",
+        "targetHandle": null,
+        "id": "reactflow__edge-9569c568-b790-4256-9511-45f09e786ece-70999e7a-3339-42d5-a4d9-bae46e988ff1"
+      },
+      {
+        "source": "70999e7a-3339-42d5-a4d9-bae46e988ff1",
+        "sourceHandle": null,
+        "target": "4e6c280c-5984-4b48-870c-08333523844d",
+        "targetHandle": null,
+        "id": "reactflow__edge-70999e7a-3339-42d5-a4d9-bae46e988ff1-4e6c280c-5984-4b48-870c-08333523844d"
+      },
+      {
+        "source": "4e6c280c-5984-4b48-870c-08333523844d",
+        "sourceHandle": null,
+        "target": "6c83bd7b-d644-4b38-baed-9bcab8342367",
+        "targetHandle": null,
+        "id": "reactflow__edge-4e6c280c-5984-4b48-870c-08333523844d-6c83bd7b-d644-4b38-baed-9bcab8342367"
+      }
+    ]
+  }
+}
