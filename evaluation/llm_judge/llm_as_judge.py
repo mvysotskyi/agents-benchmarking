@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-from __future__ import annotations
 
 import base64
 import json
@@ -17,10 +16,7 @@ from typing import Any
 from evaluation.llm_judge.read_step_states import as_dict, load_pickle
 from evaluation.llm_judge.screenshot_diff import ScreenshotDiffThresholds, compare_screenshots, sorted_screenshot_paths
 
-try:
-    from tqdm.auto import tqdm
-except ModuleNotFoundError:
-    tqdm = None
+from tqdm.auto import tqdm
 
 
 REPO_ROOT = Path(__file__).resolve().parent.parent

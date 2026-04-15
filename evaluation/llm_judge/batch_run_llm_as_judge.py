@@ -23,6 +23,7 @@ DEFAULT_TASK_YAMLS = {
     "circuit": REPO_ROOT / "tasks" / "circuit.yaml",
     "frad": REPO_ROOT / "tasks" / "flightradar.yaml",
     "voidcut": REPO_ROOT / "tasks" / "voidcut.yaml",
+    "3d": REPO_ROOT / "tasks" / "clone3d.yaml"
 }
 
 
@@ -67,7 +68,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--runs-csv",
         type=Path,
         default=None,
-        help="Optional detailed per-run CSV path.",
+        help=f"Detailed per-run CSV path. Defaults to <input_dir>/{DEFAULT_RUNS_CSV_NAME}.",
     )
     parser.add_argument(
         "--output-name",
@@ -179,7 +180,7 @@ def main() -> int:
         parser=parser,
     )
     summary_csv = args.summary_csv or (args.input_dir / DEFAULT_SUMMARY_CSV_NAME)
-    runs_csv = args.runs_csv
+    runs_csv = args.runs_csv or (args.input_dir / DEFAULT_RUNS_CSV_NAME)
 
     stage2_image_detail = args.stage2_image_detail or args.image_detail or "low"
     stage3_image_detail = args.stage3_image_detail or args.image_detail or "high"
@@ -206,13 +207,11 @@ def main() -> int:
     LOGGER.info("Discovered %d results directories under %s", len(jobs), args.input_dir)
     results = execute_jobs(jobs=jobs, config=config, parallel=args.parallel, skip_existing=args.skip_existing)
     write_summary_csv(results=results, input_dir=args.input_dir, output_path=summary_csv)
-    if runs_csv is not None:
-        write_runs_csv(results=results, input_dir=args.input_dir, output_path=runs_csv)
+    write_runs_csv(results=results, input_dir=args.input_dir, output_path=runs_csv)
 
     failed = [result for result in results if result.status == "failed"]
     LOGGER.info("Wrote summary CSV to %s", summary_csv)
-    if runs_csv is not None:
-        LOGGER.info("Wrote detailed runs CSV to %s", runs_csv)
+    LOGGER.info("Wrote detailed runs CSV to %s", runs_csv)
     if failed:
         LOGGER.error("%d job(s) failed.", len(failed))
         return 1
