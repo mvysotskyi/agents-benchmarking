@@ -4,8 +4,10 @@ import networkx as nx
 
 try:
     from .build_graph import build_component_graph
+    from .truth_table import compare_circuit_truth_tables
 except ImportError:
     from build_graph import build_component_graph
+    from truth_table import compare_circuit_truth_tables
 
 
 def node_subst_cost(left, right):
@@ -25,6 +27,7 @@ def node_subst_cost(left, right):
     similar_pairs = {
         ("AND", "NAND"),
         ("OR", "NOR"),
+        ("XOR", "XNOR"),
     }
     if (left_type, right_type) in similar_pairs or (right_type, left_type) in similar_pairs:
         return 1.0
@@ -110,7 +113,11 @@ def compare_circuit_exports(export_gt: str, export_pred: str):
     G_pred = build_component_graph(export_pred)
 
     ged = compute_circuit_ged(G_gt, G_pred)
-    similarity = compute_circuit_similarity(G_gt, G_pred)
+    structural_similarity = compute_circuit_similarity(G_gt, G_pred)
+    truth_table = compare_circuit_truth_tables(export_gt, export_pred)
+    similarity = structural_similarity
+    if truth_table["applicable"] and truth_table["equivalent"]:
+        similarity = 1.0
 
     return {
         "gt_nodes": G_gt.number_of_nodes(),
@@ -119,6 +126,12 @@ def compare_circuit_exports(export_gt: str, export_pred: str):
         "pred_edges": G_pred.number_of_edges(),
         "ged": ged,
         "similarity": similarity,
+        "structural_similarity": structural_similarity,
+        "truth_table_applicable": truth_table["applicable"],
+        "truth_table_equivalent": truth_table["equivalent"],
+        "truth_table_similarity": truth_table["similarity"],
+        "truth_table_reason": truth_table["reason"],
+        "truth_table_matched_input_order": truth_table["matched_input_order"],
     }
 
 

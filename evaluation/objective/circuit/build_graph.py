@@ -1,3 +1,4 @@
+import re
 from dataclasses import dataclass
 from itertools import combinations
 from typing import Any, Dict, List, Tuple
@@ -8,9 +9,19 @@ import networkx as nx
 Point = Tuple[int, int]
 
 IGNORED_CODES = {"o"}
-TWO_INPUT_GATE_CODES = {"150", "151", "152", "154"}
+TWO_INPUT_GATE_CODES = {"150", "151", "152", "153", "154", "155"}
 TWO_TERMINAL_CODES = {"v", "i", "r", "l", "c"}
 SINGLE_TERMINAL_CODES = {"L", "M", "g", "R"}
+
+# Mapping from XML tag names to legacy CircuitJS element codes.
+XML_TAG_TO_CODE: Dict[str, str] = {
+    "And": "150",
+    "Nand": "151",
+    "Or": "152",
+    "Nor": "153",
+    "Xor": "154",
+    "Xnor": "155",
+}
 
 
 @dataclass
@@ -22,6 +33,9 @@ class Component:
     x2: int
     y2: int
     raw: str
+
+    def _is_horizontal(self) -> bool:
+        return abs(self.x2 - self.x1) >= abs(self.y2 - self.y1)
 
     def pin_points(self) -> Dict[str, Point]:
         """
@@ -51,18 +65,32 @@ class Component:
             }
 
         if self.code in TWO_INPUT_GATE_CODES:
+            if self._is_horizontal():
+                return {
+                    "in1": (self.x1, self.y1 - 16),
+                    "in2": (self.x1, self.y1 + 16),
+                    "out": (self.x2, self.y2),
+                }
             return {
-                "in1": (self.x1, self.y1 - 16),
-                "in2": (self.x1, self.y1 + 16),
+                "in1": (self.x1 - 16, self.y1),
+                "in2": (self.x1 + 16, self.y1),
                 "out": (self.x2, self.y2),
             }
 
         if self.code == "a":
-            # The op-amp sample in the GT set connects at these three points.
+            # CircuitJS op-amps expose two adjacent inputs at the first anchor
+            # and one output at the second anchor; the adjacent pair rotates
+            # with the symbol orientation.
+            if self._is_horizontal():
+                return {
+                    "in1": (self.x1, self.y1 - 16),
+                    "in2": (self.x1, self.y1 + 16),
+                    "out": (self.x2, self.y2),
+                }
             return {
                 "in1": (self.x1 - 16, self.y1),
-                "out": (self.x1 + 16, self.y1),
-                "in2": (self.x2, self.y2),
+                "in2": (self.x1 + 16, self.y1),
+                "out": (self.x2, self.y2),
             }
 
         if self.code in TWO_TERMINAL_CODES:
@@ -88,9 +116,11 @@ class Component:
             "R": "RAIL",
             "I": "NOT",
             "150": "AND",
-            "151": "CODE_151",
+            "151": "NAND",
             "152": "OR",
-            "154": "CODE_154",
+            "153": "NOR",
+            "154": "XOR",
+            "155": "XNOR",
             "a": "AMPLIFIER",
             "c": "CAPACITOR",
             "i": "CURRENT_SOURCE",
@@ -144,6 +174,85 @@ def clean_export_text(export_text: str) -> List[str]:
     return [line.strip() for line in text.splitlines() if line.strip()]
 
 
+def _extract_xml_export_block(text: str) -> str | None:
+    """Return the ``<cir>...</cir>`` block even when wrapped in banner text."""
+    stripped = text.strip()
+
+    if stripped.startswith('"') and stripped.endswith('"'):
+        stripped = stripped[1:-1].strip()
+
+    start = stripped.find("<cir")
+    if start == -1:
+        return None
+
+    end = stripped.rfind("</cir>")
+    if end == -1 or end < start:
+        return stripped[start:]
+
+    return stripped[start:end + len("</cir>")]
+
+
+def _is_xml_format(text: str) -> bool:
+    """Detect whether the export text uses the XML ``<cir>`` format."""
+    return _extract_xml_export_block(text) is not None
+
+
+_XML_ELEMENT_RE = re.compile(
+    r'<(?P<tag>\w+)\s+x="(?P<coords>[^"]+)"[^/]*/>', re.DOTALL
+)
+
+
+def _parse_xml_export(
+    export_text: str,
+) -> Tuple[List[Component], List[Tuple[Point, Point]]]:
+    """Parse the XML ``<cir>`` export format into components and wires."""
+    components: List[Component] = []
+    wires: List[Tuple[Point, Point]] = []
+    comp_idx = 0
+
+    xml_export = _extract_xml_export_block(export_text)
+    if xml_export is None:
+        return components, wires
+
+    for match in _XML_ELEMENT_RE.finditer(xml_export):
+        tag = match.group("tag")
+        coords_str = match.group("coords")
+
+        try:
+            coords = list(map(int, coords_str.split()))
+        except ValueError:
+            continue
+        if len(coords) < 4:
+            continue
+        x1, y1, x2, y2 = coords[:4]
+
+        # Map multi-char XML tag names to legacy numeric codes.
+        code = XML_TAG_TO_CODE.get(tag, tag)
+
+        if code in IGNORED_CODES:
+            continue
+
+        if code == "w":
+            wires.append(((x1, y1), (x2, y2)))
+            continue
+
+        raw = match.group(0)
+        components.append(
+            Component(
+                cid=f"c{comp_idx}",
+                code=code,
+                x1=x1,
+                y1=y1,
+                x2=x2,
+                y2=y2,
+                raw=raw,
+            )
+        )
+        comp_idx += 1
+
+    return components, wires
+
+
 def parse_circuit_export(
     export_text: str,
 ) -> Tuple[List[Component], List[Tuple[Point, Point]]]:
@@ -151,7 +260,13 @@ def parse_circuit_export(
     Parse the CircuitJS export into:
       - component list
       - wire segments as point pairs
+
+    Supports both the legacy plain-text format and the newer XML
+    ``<cir>`` format.
     """
+    if _is_xml_format(export_text):
+        return _parse_xml_export(export_text)
+
     lines = clean_export_text(export_text)
 
     components: List[Component] = []

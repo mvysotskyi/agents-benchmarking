@@ -20,6 +20,31 @@ def extract_test_id(task_identifier: str) -> str | None:
     return match.group(1) if match else None
 
 
+def _unwrap_circuit_answer(answer: str) -> str:
+    """Unwrap a gt.answer that may be a JSON envelope around the circuit export.
+
+    The new YAML format stores the circuit data as::
+
+        gt: {answer: '{"answer": "<cir ...>...</cir>"}'}
+
+    This helper detects the JSON envelope and returns the inner ``answer``
+    value.  If the string is not a JSON envelope it is returned as-is
+    (legacy plain-text format).
+    """
+    stripped = answer.strip()
+    if not stripped.startswith("{"):
+        return answer
+    try:
+        parsed = json.loads(stripped)
+    except (json.JSONDecodeError, TypeError):
+        return answer
+    if isinstance(parsed, dict) and "answer" in parsed:
+        inner = parsed["answer"]
+        if isinstance(inner, str) and inner.strip():
+            return inner
+    return answer
+
+
 def load_ground_truth_exports(test_cases_path: str) -> dict[str, str]:
     """Load `gt.answer` exports keyed by test id."""
     ground_truth_exports: dict[str, str] = {}
@@ -28,7 +53,7 @@ def load_ground_truth_exports(test_cases_path: str) -> dict[str, str]:
         gt = test_case.get("gt", {})
         answer = gt.get("answer")
         if isinstance(answer, str) and answer.strip():
-            ground_truth_exports[test_id] = answer
+            ground_truth_exports[test_id] = _unwrap_circuit_answer(answer)
     return ground_truth_exports
 
 
@@ -143,15 +168,32 @@ def evaluate_circuit_schemes(
             continue
 
         try:
-            similarity = compare_circuit_exports(gt_export, pred_export)["similarity"]
+            comparison = compare_circuit_exports(gt_export, pred_export)
         except Exception as exc:
             similarities[test_id] = 0.0
             failed_predictions += 1
             console.print(f"[red]{test_id}: failed to score export ({exc}), score 0.0[/red]")
             continue
 
+        similarity = comparison["similarity"]
         similarities[test_id] = round(float(similarity), 6)
-        console.print(f"[green]{test_id}: {similarities[test_id]:.6f}[/green]")
+        if (
+            comparison.get("truth_table_applicable")
+            and comparison.get("truth_table_equivalent")
+            and comparison.get("structural_similarity") != 1.0
+        ):
+            console.print(
+                f"[green]{test_id}: {similarities[test_id]:.6f}[/green] "
+                f"[dim](truth-table equivalent; structural "
+                f"{comparison['structural_similarity']:.6f})[/dim]"
+            )
+        elif comparison.get("truth_table_applicable"):
+            console.print(
+                f"[green]{test_id}: {similarities[test_id]:.6f}[/green] "
+                f"[dim](truth-table {comparison['truth_table_similarity']:.6f})[/dim]"
+            )
+        else:
+            console.print(f"[green]{test_id}: {similarities[test_id]:.6f}[/green]")
 
     output_path = scheme_similarity_output_path(results_dir)
     output_path.write_text(json.dumps(similarities, indent=2), encoding="utf-8")
