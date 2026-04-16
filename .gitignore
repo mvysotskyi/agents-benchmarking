@@ -18,3 +18,5 @@ build
 results_*/
 tasks_new/
 tests/
+human_results/
+legacy_results/
