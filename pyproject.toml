@@ -34,6 +34,9 @@ networkx = ">=3.0"
 pyyaml = ">=6.0"
 
 
+[tool.poetry.group.dev.dependencies]
+pytest = "^9.0.3"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
