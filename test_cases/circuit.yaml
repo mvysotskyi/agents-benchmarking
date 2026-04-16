@@ -1,0 +1,624 @@
+test_cases:
+- id: "tc_circuit_001"
+  prompt: |-
+    # Build a Direct Wire from Input to Output
+    
+    ## GOAL
+    Construct the simplest possible circuit where the output follows the input directly.
+    
+    ## STEPS
+    
+    1. Add the following components:
+       - One input switch: A
+       - One output switch: Y
+    
+    2. Wiring:
+       - Connect input A directly to the circuit output Y using only a wire.
+       - Do not add any logic gates.
+    
+    3. Define output:
+       - The direct wire from A must be the circuit output Y.
+    
+    # RESULT FORMAT
+    
+    ```json
+    {"answer": "done"}
+    ```
+  gt: {}
+- id: "tc_circuit_002"
+  prompt: |-
+    # Build a NOT Gate
+    
+    ## GOAL
+    Implement a circuit that inverts a single binary input.
+    
+    ## STEPS
+    
+    1. Add the following components:
+       - One input switch: A
+       - One NOT gate
+       - One output switch: Y
+    
+    2. Wiring:
+       - Connect input A to the input of the NOT gate.
+    
+    3. Define output:
+       - The output of the NOT gate must be the circuit output Y.
+    
+    # RESULT FORMAT
+    
+    ```json
+    {"answer": "done"}
+    ```
+  gt: {}
+- id: "tc_circuit_003"
+  prompt: |-
+    # Build a 2-Input AND Gate Circuit
+    
+    ## GOAL
+    Implement a circuit whose output is 1 only when both inputs are 1.
+    
+    ## STEPS
+    
+    1. Add the following components:
+       - Two input switches: A and B
+       - One AND gate
+       - One output switch: Y
+    
+    2. Wiring:
+       - Connect A and B to the two inputs of the AND gate.
+    
+    3. Define output:
+       - The output of the AND gate must be the circuit output Y.
+    
+    # RESULT FORMAT
+    
+    ```json
+    {"answer": "done"}
+    ```
+  gt: {}
+- id: "tc_circuit_004"
+  prompt: |-
+    # Fan Out One Input to Two Outputs
+    
+    ## GOAL
+    Construct a circuit where one input signal is copied directly to two outputs.
+    
+    ## STEPS
+    
+    1. Add the following components:
+       - One input switch: A
+       - Two output switches: Y1, Y2
+    
+    2. Wiring:
+       - Connect input A directly to circuit output Y1.
+       - Also connect input A directly to circuit output Y2.
+       - Use only wires.
+       - Do not add any logic gates.
+    
+    3. Define outputs:
+       - The first direct wire from A must be the circuit output Y1.
+       - The second direct wire from A must be the circuit output Y2.
+    
+    # RESULT FORMAT
+    
+    ```json
+    {"answer": "done"}
+    ```
+  gt: {}
+- id: "tc_circuit_005"
+  prompt: |-
+    # Build a Direct Wire and an Inverted Output from the Same Input
+    
+    ## GOAL
+    Construct a circuit where one input is sent directly to one output and inverted for a second output.
+    
+    ## STEPS
+    
+    1. Add the following components:
+       - One input switch: A
+       - Two output switches: Y1, Y2
+       - One NOT gate
+    
+    2. Wiring:
+       - Connect input A directly to circuit output Y1 using only a wire.
+       - Also connect input A to the input of the NOT gate.
+       - Connect the output of the NOT gate to circuit output Y2.
+    
+    3. Define outputs:
+       - The direct wire from A must be the circuit output Y1.
+       - The output of the NOT gate must be the circuit output Y2.
+    
+    # RESULT FORMAT
+    
+    ```json
+    {"answer": "done"}
+    ```
+  gt: {}
+- id: "tc_circuit_006"
+  prompt: |-
+    # Design a 2-to-1 Multiplexer Using Logic Gates
+    
+    ## GOAL
+    Implement a circuit whose output follows the equation:
+    Y = S' * A + S * B
+    
+    ## STEPS
+    
+    1. Add the following components:
+       - Two input switches: A and B
+       - One select switch: S
+       - One NOT gate
+       - Two AND gates
+       - One OR gate
+       - One output switch: Y
+    
+    2. Wiring:
+       - Invert S using the NOT gate to generate S'.
+       - Connect S' and A to the first AND gate.
+       - Connect S and B to the second AND gate.
+       - Connect the outputs of both AND gates to the OR gate.
+    
+    3. Define output:
+       - The output of the OR gate must be the circuit output Y.
+    
+    # RESULT FORMAT
+    
+    ```json
+    {"answer": "done"}
+    ```
+  gt: {}
+- id: "tc_circuit_007"
+  prompt: |-
+    # Build a NOT Gate Using a NAND Gate
+    
+    ## GOAL
+    Implement a logical NOT function using only a universal NAND gate.
+    
+    ## STEPS
+    
+    1. Add the following components:
+       - One input switch: A
+       - One 2-input NAND gate
+       - One output switch: Y
+    
+    2. Wiring:
+       - Connect input A to both input pins of the NAND gate (fanning out the signal).
+    
+    3. Define output:
+       - The output of the NAND gate must be the circuit output Y.
+    
+    # RESULT FORMAT
+    
+    ```json
+    {"answer": "done"}
+    ```
+  gt: {}
+- id: "tc_circuit_008"
+  prompt: |-
+    # Build a Half-Adder Using Logic Gates
+    
+    ## GOAL
+    Implement a circuit that computes the binary half-adder functions:
+    
+    SUM   = A XOR B
+    CARRY = A AND B
+    
+    ## STEPS
+    
+    1. Add the following components:
+       - Two input switches: A and B
+       - One XOR gate
+       - One AND gate
+       - Two output switches: SUM and CARRY
+    
+    2. Wiring:
+       - Connect A and B to the inputs of the XOR gate.
+       - Connect A and B to the inputs of the AND gate.
+       - Both A and B must fan out to both gates.
+    
+    3. Define outputs:
+       - The output of the XOR gate must be the circuit output SUM.
+       - The output of the AND gate must be the circuit output CARRY.
+    
+    # RESULT FORMAT
+    
+    ```json
+    {"answer": "done"}
+    ```
+  gt: {}
+- id: "tc_circuit_009"
+  prompt: |-
+    # Build a 1-Bit Comparator with Three Outputs
+    
+    ## GOAL
+    Construct a circuit that compares two 1-bit inputs A and B and produces three outputs:
+    
+    A_GT_B = 1 when A > B
+    A_EQ_B = 1 when A = B
+    A_LT_B = 1 when A < B
+    
+    ## STEPS
+    
+    1. Add the following components:
+       - Two input switches: A and B
+       - Two NOT gates
+       - Two AND gates
+       - One XNOR gate
+       - Three output switches: A_GT_B, A_EQ_B, and A_LT_B
+    
+    2. Wiring:
+       - Connect input B to the first NOT gate.
+       - Connect input A and the output of the first NOT gate to the inputs of the first AND gate.
+       - Connect input A to the second NOT gate.
+       - Connect the output of the second NOT gate and input B to the inputs of the second AND gate.
+       - Connect inputs A and B to the inputs of the XNOR gate.
+    
+    3. Define outputs:
+       - The output of the first AND gate must be the circuit output A_GT_B.
+       - The output of the second AND gate must be the circuit output A_LT_B.
+       - The output of the XNOR gate must be the circuit output A_EQ_B.
+    
+    # RESULT FORMAT
+    
+    ```json
+    {"answer": "done"}
+    ```
+  gt: {}
+- id: "tc_circuit_010"
+  prompt: |-
+    # Build a 2-Input Priority Encoder
+    
+    ## GOAL
+    Construct a circuit with two inputs, A (high priority) and B (low priority), that generates two outputs to indicate if the system is active and which input is being serviced.
+    
+    ## STEPS
+    
+    1. Add the following components:
+       - Two input switches: A and B
+       - One OR gate
+       - Two output switches: ACTIVE and ID
+    
+    2. Wiring:
+       - Connect both A and B to the inputs of the OR gate.
+       - Connect input A directly to the circuit output ID.
+    
+    3. Define outputs:
+       - The output of the OR gate must be the circuit output ACTIVE.
+       - The direct wire from A must be the circuit output ID.
+    
+    # RESULT FORMAT
+    
+    ```json
+    {"answer": "done"}
+    ```
+  gt: {}
+- id: "tc_circuit_011"
+  prompt: |-
+    # Build a 3-Input Odd-Parity Circuit
+    
+    ## GOAL
+    Construct a circuit with three binary inputs (A, B, C) and one output (Y) such that:
+    - Y = 1 when an odd number of inputs are 1
+    - Y = 0 when an even number of inputs are 1
+    
+    ## STEPS
+    
+    1. Add the following components:
+       - Three input switches: A, B, C
+       - Two XOR gates
+       - One output switch: Y
+    
+    2. Wiring:
+       - Connect A and B to the inputs of the first XOR gate.
+       - Connect the output of the first XOR gate and C to the inputs of the second XOR gate.
+    
+    3. Define output:
+       - The output of the second XOR gate must be the circuit output Y.
+    
+    # RESULT FORMAT
+    
+    ```json
+    {"answer": "done"}
+    ```
+  gt: {}
+- id: "tc_circuit_012"
+  prompt: |-
+    # Build a Full-Adder Using Logic Gates
+    
+    ## GOAL
+    Construct a circuit that computes the 1-bit full-adder functions:
+    
+    SUM  = A XOR B XOR CIN
+    COUT = (A AND B) OR (A AND CIN) OR (B AND CIN)
+    
+    ## STEPS
+    
+    1. Add the following components:
+       - Three input switches: A, B, CIN
+       - Two XOR gates
+       - Three AND gates
+       - Two OR gates
+       - Two output switches: SUM and COUT
+    
+    2. Wiring:
+       - Connect A and B to the inputs of the first XOR gate.
+       - Connect the output of the first XOR gate and CIN to the inputs of the second XOR gate.
+       - Connect A and B to the inputs of the first AND gate.
+       - Connect A and CIN to the inputs of the second AND gate.
+       - Connect B and CIN to the inputs of the third AND gate.
+       - Connect the outputs of the first and second AND gates to the inputs of the first OR gate.
+       - Connect the output of the first OR gate and the output of the third AND gate to the inputs of the second OR gate.
+    
+    3. Define outputs:
+       - The output of the second XOR gate must be the circuit output SUM.
+       - The output of the second OR gate must be the circuit output COUT.
+    
+    # RESULT FORMAT
+    
+    ```json
+    {"answer": "done"}
+    ```
+  gt: {}
+- id: "tc_circuit_013"
+  prompt: |-
+    # Build a 3-Bit Binary to Gray Code Converter
+    
+    ## GOAL
+    Construct a circuit that converts a standard 3-bit binary number (B2, B1, B0) into a 3-bit Gray code (G2, G1, G0).
+    
+    ## STEPS
+    
+    1. Add the following components:
+       - Three input switches: B2 (most significant bit), B1, and B0 (least significant bit)
+       - Two XOR gates
+       - Three output switches: G2, G1, and G0
+    
+    2. Wiring:
+       - Connect input B2 directly to the circuit output G2.
+       - Connect inputs B2 and B1 to the first XOR gate.
+       - Connect inputs B1 and B0 to the second XOR gate.
+    
+    3. Define outputs:
+       - The direct wire from B2 must be the circuit output G2.
+       - The output of the first XOR gate must be the circuit output G1.
+       - The output of the second XOR gate must be the circuit output G0.
+    
+    # RESULT FORMAT
+    
+    ```json
+    {"answer": "done"}
+    ```
+  gt: {}
+- id: "tc_circuit_014"
+  prompt: |-
+    # Non-Standard Voltage Divider
+    
+    ## GOAL
+    Construct a voltage divider circuit and measure the voltage drop across the second resistor.
+    
+    ## STEPS
+    
+    1. Add and configure components:
+       - Add a 2-terminal DC Voltage Source and set its voltage to 12 V.
+       - Add a Resistor (R1) and set its resistance to 3.3 k ohms.
+       - Add a second Resistor (R2) and set its resistance to 4.7 k ohms.
+       - Add a Ground connection.
+    
+    2. Wiring:
+       - Connect one end of R1 to the positive terminal of the voltage source.
+       - Connect the other end of R1 to one end of R2.
+       - Connect the free end of R2 to the negative terminal of the voltage source to close the loop.
+       - Connect Ground to the negative terminal of the voltage source.
+    
+    3. Once the circuit reaches a steady state, hover your mouse over Resistor R2 and report the exact Voltage Drop (Vd) displayed in the information box at the bottom right corner of the screen.
+    
+    # RESULT FORMAT
+    
+    ```json
+    {
+        "voltage_drop_R2": "value"
+    }
+    ```
+  gt: {answer: "{\n    \"voltage_drop_R2\": \"7.05 V\"\n}"}
+- id: "tc_circuit_015"
+  prompt: |-
+    # Current Source Parallel Network
+    
+    ## GOAL
+    Construct a parallel resistor network driven by a current source and measure the voltage across the current source.
+    
+    ## STEPS
+    
+    1. Add and configure components:
+       - Add a DC Current Source and set its current to 15 mA.
+       - Add a Resistor (R1) and set its resistance to 500 ohms.
+       - Add a Resistor (R2) and set its resistance to 1 k ohms.
+       - Add a Resistor (R3) and set its resistance to 2 k ohms.
+       - Add a Ground connection.
+    
+    2. Wiring:
+       - Create a parallel network of R1, R2, and R3 connected across the terminals of the current source.
+       - Connect Ground to the negative terminal of the current source.
+    
+    3. Once the circuit reaches a steady state, hover your mouse over the Current Source and report the exact Voltage (V) displayed in the information box at the bottom right corner of the screen.
+    
+    # RESULT FORMAT
+    
+    ```json
+    {
+        "current_source_voltage": "value"
+    }
+    ```
+  gt: {answer: "{\n    \"current_source_voltage\": \"4.286 V\"\n}"}
+- id: "tc_circuit_016"
+  prompt: |-
+    # Loaded Divider Power Dissipation
+    
+    ## GOAL
+    Construct a loaded voltage divider and measure the power dissipated by the first resistor.
+    
+    ## STEPS
+    
+    1. Add and configure components:
+       - Add a 2-terminal DC Voltage Source and set its voltage to 24 V.
+       - Add a Resistor (R1) and set its resistance to 150 ohms.
+       - Add a Resistor (R2) and set its resistance to 330 ohms.
+       - Add a Resistor (R3) and set its resistance to 470 ohms.
+       - Add a Ground connection.
+    
+    2. Wiring:
+       - Connect Ground to the negative terminal of the voltage source.
+       - Connect one end of R1 to the positive terminal of the source.
+       - From the other end of R1, connect R2 and R3 in parallel, both going to Ground.
+    
+    3. Once the circuit reaches a steady state, hover your mouse over Resistor R1 (150 ohms) and report the exact Power dissipated (P) displayed in the information box at the bottom right corner of the screen.
+    
+    # RESULT FORMAT
+    
+    ```json
+    {
+        "power_R1": "value"
+    }
+    ```
+  gt: {answer: "{\n    \"power_R1\": \"731 mW\"\n}"}
+- id: "tc_circuit_017"
+  prompt: |-
+    # Inverting Summing Amplifier
+    
+    ## GOAL
+    Construct an inverting summing amplifier using an ideal op-amp and measure its output voltage.
+    
+    ## STEPS
+    
+    1. Add and configure components:
+       - Add an Ideal Op-Amp.
+       - Add a 1-terminal DC Voltage Source (V1) and set it to 1.5 V.
+       - Add a Resistor (R1) and set its resistance to 2 k ohms.
+       - Add a 1-terminal DC Voltage Source (V2) and set it to -3.0 V.
+       - Add a Resistor (R2) and set its resistance to 5 k ohms.
+       - Add a Feedback Resistor (Rf) and set its resistance to 10 k ohms.
+       - Add a Ground connection.
+    
+    2. Wiring:
+       - Connect the non-inverting (+) input of the Op-Amp directly to Ground.
+       - Connect V1 to one end of R1.
+       - Connect V2 to one end of R2.
+       - Connect the free ends of both R1 and R2 to the inverting (-) input of the Op-Amp.
+       - Connect Rf between the Op-Amp's output terminal and its inverting (-) input terminal.
+    
+    3. Once the circuit reaches a steady state, hover your mouse over the Op-Amp and report the exact Output Voltage (Vout) displayed in the information box at the bottom right corner of the screen.
+    
+    # RESULT FORMAT
+    
+    ```json
+    {
+        "opamp_output_voltage": "value"
+    }
+    ```
+  gt: {answer: "{\n    \"opamp_output_voltage\": \"-1.5 V\"\n}"}
+- id: "tc_circuit_018"
+  prompt: |-
+    # Multi-Loop DC Network (Kirchhoff's Test)
+    
+    ## GOAL
+    Construct a multi-loop DC network and measure the current through the grounded resistor.
+    
+    ## STEPS
+    
+    1. Add and configure components:
+       - Add a 2-terminal DC Voltage Source (left side) and set its voltage to 15 V.
+       - Add a 2-terminal DC Voltage Source (right side) and set its voltage to 9 V.
+       - Add a Resistor (R1) and set its resistance to 1 k ohms.
+       - Add a Resistor (R2) and set its resistance to 2.2 k ohms.
+       - Add a Resistor (R3) and set its resistance to 3.3 k ohms.
+       - Add a Ground connection.
+    
+    2. Wiring:
+       - Ground the negative terminal of the 15 V source.
+       - Ground the negative terminal of the 9 V source.
+       - Connect one end of R1 to the positive terminal of the 15 V source.
+       - Connect one end of R2 to the positive terminal of the 9 V source.
+       - Connect the free ends of R1 and R2 together at a single top junction.
+       - Connect the top end of R3 to the junction between R1 and R2.
+       - Connect the bottom end of R3 to Ground.
+    
+    3. Once the circuit reaches a steady state, hover your mouse over Resistor R3 (the 3.3 k ohm resistor) and report the exact Current (I) displayed in the information box at the bottom right corner of the screen.
+    
+    # RESULT FORMAT
+    
+    ```json
+    {
+        "current_R3": "value"
+    }
+    ```
+  gt: {answer: "{\n    \"current_R3\": \"3.29 mA\"\n}"}
+- id: "tc_circuit_019"
+  prompt: |-
+    # RLC DC Steady-State Trick
+    
+    ## GOAL
+    Construct an RLC circuit driven by DC and measure the capacitor voltage at steady state.
+    
+    ## STEPS
+    
+    1. Add and configure components:
+       - Add a 2-terminal DC Voltage Source and set its voltage to 24 V.
+       - Add a Resistor (R1) and set its resistance to 1 k ohms.
+       - Add an Inductor and set its inductance to 100 mH.
+       - Add a Resistor (R2) and set its resistance to 2.2 k ohms.
+       - Add a Capacitor and set its capacitance to 10 uF.
+       - Add a Resistor (R3) and set its resistance to 4.7 k ohms.
+       - Add a Ground connection.
+    
+    2. Wiring:
+       - Ground the negative terminal of the voltage source.
+       - Connect one end of R1 to the positive terminal of the source. Call the other end of R1 "Node A".
+       - From Node A, create a path to Ground containing the Inductor in series with R2.
+       - From Node A, create a second parallel path to Ground containing the Capacitor in series with R3.
+    
+    3. Hover your mouse over the Capacitor. Wait for the simulation to charge the capacitor and reach a complete DC steady state (capacitor current displayed in the information box is less than 20 nA) and report the exact Voltage Drop (Vd) displayed in the information box at the bottom right corner of the screen.
+    
+    # RESULT FORMAT
+    
+    ```json
+    {
+        "capacitor_voltage_drop": "value"
+    }
+    ```
+  gt: {answer: "{\n    \"capacitor_voltage_drop\": \"16.5 V\"\n}"}
+- id: "tc_circuit_020"
+  prompt: |-
+    # Wheatstone Bridge Voltage Measurement
+    
+    ## GOAL
+    Construct a Wheatstone bridge circuit and measure the voltage drop across one of the bridge resistors.
+    
+    ## STEPS
+    
+    1. Add and configure components:
+       - Add a 2-terminal DC Voltage Source and set its voltage to 10 V.
+       - Add a Resistor (R1) and set its resistance to 1 k ohms.
+       - Add a Resistor (R2) and set its resistance to 2.2 k ohms.
+       - Add a Resistor (R3) and set its resistance to 3.3 k ohms.
+       - Add a Resistor (R4) and set its resistance to 4.7 k ohms.
+       - Add a Ground connection.
+    
+    2. Wiring:
+       - Ground the negative terminal of the voltage source.
+       - Connect one end of R1 to the positive terminal of the voltage source.
+       - Connect one end of R2 to the positive terminal of the voltage source.
+       - Connect the free end of R1 to one end of R3.
+       - Connect the free end of R2 to one end of R4.
+       - Connect the free ends of R3 and R4 together and to Ground.
+    
+    3. Once the circuit reaches a steady state, hover your mouse over Resistor R4 (the 4.7 k ohm resistor) and report the exact Voltage Drop (Vd) displayed in the information box at the bottom right corner of the screen.
+    
+    # RESULT FORMAT
+    
+    ```json
+    {
+        "voltage_drop_R4": "value"
+    }
+    ```
+  gt: {answer: "{\n    \"voltage_drop_R4\": \"6.812 V\"\n}"}
