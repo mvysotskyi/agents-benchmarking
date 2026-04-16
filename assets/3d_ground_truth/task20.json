@@ -1,8 +1,8 @@
 {
-  "id": "cb16ecc4-31de-45cc-857d-bf77a88b5548",
+  "id": "de4ed620-e521-493d-a5cb-34fca5e1774b",
   "name": "Untitled Scene",
-  "createdAt": 1775555948767,
-  "updatedAt": 1775555948767,
+  "createdAt": 1776260849186,
+  "updatedAt": 1776263640387,
   "version": 1,
   "metadata": {
     "description": "",
@@ -11,200 +11,150 @@
   "scene": {
     "objects": [
       {
-        "id": "cylinder-7f9c8521-f8e2-4624-ac2e-3d27448283a4",
+        "id": "cube-411fb22c-7691-446a-a2f3-db81ac69736a",
+        "type": "cube",
+        "name": "Tabletop",
+        "visible": true,
+        "locked": false,
+        "position": [
+          0,
+          4.2,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          4,
+          0.4,
+          4
+        ],
+        "color": "#ffffff",
+        "opacity": 1,
+        "wireframe": false
+      },
+      {
+        "id": "cylinder-172b6778-ed35-4b3c-af58-d6480ca63229",
         "type": "cylinder",
-        "name": "Body",
+        "name": "Tableleg",
         "visible": true,
         "locked": false,
         "position": [
-          0,
-          0.5,
-          0
-        ],
-        "rotation": [
-          0,
-          0,
-          0
-        ],
-        "scale": [
-          1,
-          1,
-          1
-        ],
-        "color": "#ffffff",
-        "opacity": 1,
-        "wireframe": false
-      },
-      {
-        "id": "sphere-c0bf16ce-860f-4787-b42a-9f18d6c3a1e8",
-        "type": "sphere",
-        "name": "Head",
-        "visible": true,
-        "locked": false,
-        "position": [
-          0,
-          1.4,
-          0
-        ],
-        "rotation": [
-          0,
-          0,
-          0
-        ],
-        "scale": [
-          1,
-          1,
-          1
-        ],
-        "color": "#ffffff",
-        "opacity": 1,
-        "wireframe": false
-      },
-      {
-        "id": "torus-335929fe-6b12-4a2b-a651-b664849d4b60",
-        "type": "torus",
-        "name": "Right Eye",
-        "visible": true,
-        "locked": false,
-        "position": [
-          0.45,
-          1.6,
-          0.2
-        ],
-        "rotation": [
-          0,
-          90,
-          0
-        ],
-        "scale": [
-          0.2,
-          0.2,
-          0.2
-        ],
-        "color": "#000000",
-        "opacity": 1,
-        "wireframe": false
-      },
-      {
-        "id": "torus-fd331fb9-5947-4d2d-9e0e-3b600f09090e",
-        "type": "torus",
-        "name": "Left Eye",
-        "visible": true,
-        "locked": false,
-        "position": [
-          0.45,
-          1.6,
-          -0.2
-        ],
-        "rotation": [
-          0,
-          90,
-          0
-        ],
-        "scale": [
-          0.2,
-          0.2,
-          0.2
-        ],
-        "color": "#000000",
-        "opacity": 1,
-        "wireframe": false
-      },
-      {
-        "id": "cone-0065e20b-9a65-4cfd-b040-75758a1ee5a9",
-        "type": "cone",
-        "name": "Nose",
-        "visible": true,
-        "locked": false,
-        "position": [
-          0.5,
           1.5,
-          0
+          2,
+          1.5
         ],
         "rotation": [
           0,
           0,
-          -90
+          0
         ],
         "scale": [
-          0.1,
-          0.2,
-          0.1
-        ],
-        "color": "#ffff00",
-        "opacity": 1,
-        "wireframe": false
-      },
-      {
-        "id": "torus-09bf8e95-4cea-48f4-b61d-d3e6da22df4b",
-        "type": "torus",
-        "name": "Mouth",
-        "visible": true,
-        "locked": false,
-        "position": [
           0.5,
-          1.3,
-          0
-        ],
-        "rotation": [
-          0,
-          90,
-          0
-        ],
-        "scale": [
-          0.3,
-          0.1,
-          0.1
-        ],
-        "color": "#ff0000",
-        "opacity": 1,
-        "wireframe": false
-      },
-      {
-        "id": "cube-b5893bd1-e7c7-462e-aed4-4080367e7571",
-        "type": "cube",
-        "name": "Left Arm",
-        "visible": true,
-        "locked": false,
-        "position": [
-          0,
-          0.5,
-          -0.6
-        ],
-        "rotation": [
-          45,
-          0,
-          0
-        ],
-        "scale": [
-          0.3,
-          0.8,
-          0.3
+          4,
+          0.5
         ],
         "color": "#ffffff",
         "opacity": 1,
         "wireframe": false
       },
       {
-        "id": "cube-a62ca95e-515c-4d47-bbf6-02f9078417bb",
-        "type": "cube",
-        "name": "Right Arm",
+        "id": "cylinder-b340855f-8b23-462a-b328-80b7a770cd4a",
+        "type": "cylinder",
+        "name": "Tableleg",
         "visible": true,
         "locked": false,
         "position": [
-          0,
-          0.5,
-          0.6
+          -1.5,
+          2,
+          1.5
         ],
         "rotation": [
-          -45,
+          0,
           0,
           0
         ],
         "scale": [
-          0.3,
-          0.8,
-          0.3
+          0.5,
+          4,
+          0.5
+        ],
+        "color": "#ffffff",
+        "opacity": 1,
+        "wireframe": false
+      },
+      {
+        "id": "cylinder-0a0bda82-0319-4c64-ab97-fc67655b919d",
+        "type": "cylinder",
+        "name": "Tableleg",
+        "visible": true,
+        "locked": false,
+        "position": [
+          1.5,
+          2,
+          -1.5
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          0.5,
+          4,
+          0.5
+        ],
+        "color": "#ffffff",
+        "opacity": 1,
+        "wireframe": false
+      },
+      {
+        "id": "cylinder-bbe15906-86f6-4913-b092-44cff2bc32d7",
+        "type": "cylinder",
+        "name": "Tableleg",
+        "visible": true,
+        "locked": false,
+        "position": [
+          -1.5,
+          2,
+          -1.5
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          0.5,
+          4,
+          0.5
+        ],
+        "color": "#ffffff",
+        "opacity": 1,
+        "wireframe": false
+      },
+      {
+        "id": "sphere-4740d0bb-ad3f-4121-9012-62b745d31dfe",
+        "type": "sphere",
+        "name": "Ball",
+        "visible": true,
+        "locked": false,
+        "position": [
+          0,
+          4.9,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
         ],
         "color": "#ffffff",
         "opacity": 1,
