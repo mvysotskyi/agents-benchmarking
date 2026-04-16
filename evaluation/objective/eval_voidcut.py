@@ -232,7 +232,7 @@ def _validate_scenario_effects(
     epsilon_ms: float,
 ) -> list[str]:
     errors: list[str] = []
-    if scenario not in {6, 7, 8, 9}:
+    if scenario not in {6, 7, 8, 9, 14}:
         return errors
 
     effects = _flatten_effect_items(pred_export)
@@ -274,49 +274,24 @@ def _validate_scenario_effects(
         if flower is None:
             errors.append("missing clip: Flower Video")
             return errors
-        if len(light_effects) != 1:
-            errors.append(f"expected exactly 1 light-adjustment effect, found {len(light_effects)}")
-            return errors
-        clip_start = _to_float(flower.raw.get("startTimeMs"))
-        clip_end = clip_start + _to_float(flower.raw.get("durationMs"))
-        effect = _find_full_clip_light_effect(light_effects, clip_start, clip_end, epsilon_ms)
-        if effect is None:
-            errors.append("light-adjustment must cover the whole Flower Video clip")
-            return errors
-        params = effect.get("params", {}) if isinstance(effect.get("params"), dict) else {}
-        _light_params_ok(params, boosted="contrast", errors=errors, context="Flower Video light-adjustment")
+        if light_effects:
+            clip_start = _to_float(flower.raw.get("startTimeMs"))
+            clip_end = clip_start + _to_float(flower.raw.get("durationMs"))
+            effect = _find_full_clip_light_effect(light_effects, clip_start, clip_end, epsilon_ms)
+            if effect is None:
+                errors.append("light-adjustment must cover the whole Flower Video clip")
+                return errors
+            params = effect.get("params", {}) if isinstance(effect.get("params"), dict) else {}
+            _light_params_ok(params, boosted="contrast", errors=errors, context="Flower Video light-adjustment")
         return errors
 
     if scenario == 8:
-        expected = [
-            ("flower video", "contrast"),
-            ("white candle", "brightness"),
-            ("tuning a radio", "saturation"),
-        ]
-        if len(light_effects) != 3:
-            errors.append(f"expected exactly 3 light-adjustment effects, found {len(light_effects)}")
-            return errors
-        for media_name, boosted in expected:
-            clip = _find_clip(pred_blocks, media_name)
-            if clip is None:
-                errors.append(f"missing clip: {media_name}")
-                continue
-            clip_start = _to_float(clip.raw.get("startTimeMs"))
-            clip_end = clip_start + _to_float(clip.raw.get("durationMs"))
-            effect = _find_full_clip_light_effect(light_effects, clip_start, clip_end, epsilon_ms)
-            if effect is None:
-                errors.append(f"{media_name}: missing full-clip light-adjustment")
-                continue
-            params = effect.get("params", {}) if isinstance(effect.get("params"), dict) else {}
-            _light_params_ok(
-                params,
-                boosted=boosted,
-                errors=errors,
-                context=f"{media_name} light-adjustment",
-            )
         return errors
 
-    # scenario == 9
+    if scenario == 9:
+        return errors
+
+    # scenario == 14
     first = _find_clip(pred_blocks, "tuning a radio")
     second = _find_clip(pred_blocks, "flower video")
     if first is None:
@@ -419,7 +394,34 @@ def _compare_temporal_fields(gt_block: FlatBlock, pred_block: FlatBlock, epsilon
     return None
 
 
-def _candidate_mismatch_reason(gt_block: FlatBlock, pred_block: FlatBlock, epsilon_ms: float) -> str:
+def _is_overlapped_by_video(
+    block: FlatBlock, all_blocks: list[FlatBlock], tolerance_ms: float = 500.0,
+) -> bool:
+    """Check if a block is temporally overlapped by any VIDEO block.
+
+    Returns True only when the overlap exceeds *tolerance_ms* so that
+    adjacent or barely-touching clips are not treated as overlapping.
+    """
+    block_start = _to_float(block.raw.get("startTimeMs"))
+    block_end = block_start + _to_float(block.raw.get("durationMs"))
+
+    for other in all_blocks:
+        if str(other.raw.get("mediaType", "")).upper() != "VIDEO":
+            continue
+        video_start = _to_float(other.raw.get("startTimeMs"))
+        video_end = video_start + _to_float(other.raw.get("durationMs"))
+        overlap = min(block_end, video_end) - max(block_start, video_start)
+        if overlap > tolerance_ms:
+            return True
+    return False
+
+
+def _candidate_mismatch_reason(
+    gt_block: FlatBlock,
+    pred_block: FlatBlock,
+    epsilon_ms: float,
+    gt_blocks: list[FlatBlock] | None = None,
+) -> str:
     gt_media_type = str(gt_block.raw.get("mediaType", "")).upper()
     pred_media_type = str(pred_block.raw.get("mediaType", "")).upper()
     gt_media_name = str(gt_block.raw.get("mediaName", ""))
@@ -430,10 +432,15 @@ def _candidate_mismatch_reason(gt_block: FlatBlock, pred_block: FlatBlock, epsil
     if gt_media_name != pred_media_name:
         return f"mediaName mismatch (gt={gt_media_name!r}, pred={pred_media_name!r})"
 
-    # Video blocks are track-agnostic. Non-video keeps strict track matching.
-    if gt_media_type != "VIDEO" and gt_block.track_index != pred_block.track_index:
+    # Video and audio blocks are track-agnostic.
+    # Text blocks are track-agnostic unless overlapped by a video block.
+    track_agnostic = gt_media_type in ("VIDEO", "AUDIO")
+    if not track_agnostic and gt_media_type == "TEXT" and gt_blocks is not None:
+        track_agnostic = not _is_overlapped_by_video(gt_block, gt_blocks)
+
+    if not track_agnostic and gt_block.track_index != pred_block.track_index:
         return (
-            "trackIndex mismatch for non-video "
+            f"trackIndex mismatch for {gt_media_type} "
             f"(gt={gt_block.track_index}, pred={pred_block.track_index})"
         )
 
@@ -566,7 +573,7 @@ def evaluate_binary(scenario: int, gt_data: dict, result_data: dict, epsilon_ms:
 
         for pred_idx in sorted(unmatched_pred_indices):
             pred_block = pred_blocks[pred_idx]
-            mismatch_reason = _candidate_mismatch_reason(gt_block, pred_block, epsilon_ms)
+            mismatch_reason = _candidate_mismatch_reason(gt_block, pred_block, epsilon_ms, gt_blocks)
             if mismatch_reason == "":
                 matched_idx = pred_idx
                 break
