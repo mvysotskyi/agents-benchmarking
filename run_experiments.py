@@ -315,7 +315,7 @@ def load_batch_config(config_path: Path) -> BatchConfig:
 
     models = _ensure_mapping(config.get("models"), "'models'")
     experiments: list[ExperimentSpec] = []
-    base_dir = config_path.parent
+    base_dir = ROOT_DIR
 
     for model_name, model_block in models.items():
         if not isinstance(model_name, str):
