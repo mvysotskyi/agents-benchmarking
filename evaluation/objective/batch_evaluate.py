@@ -22,7 +22,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 
-TASKS_DIR = Path("tasks")
+TASKS_DIR = Path("test_cases")
 GT_VOIDCUT = Path("assets/gt_all.json")
 GT_3D = Path("assets/3d_ground_truth")
 

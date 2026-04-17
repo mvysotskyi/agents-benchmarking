@@ -40,11 +40,16 @@ EXPERIMENT_KEYS = {
     "post_run_url",
     "system_prompt",
     "system_prompt_file",
+    "prefix_prompt",
+    "prefix_prompt_file",
     "task_range",
     "initial_delay",
+    "seed",
+    "reasoning",
+    "thinking_budget",
     "extra_args",
 }
-PATH_FIELDS = {"task_file", "results_dir", "post_run_js_snippet_path", "system_prompt_file"}
+PATH_FIELDS = {"task_file", "results_dir", "post_run_js_snippet_path", "system_prompt_file", "prefix_prompt_file"}
 
 
 @dataclass(slots=True)
@@ -72,8 +77,13 @@ class ExperimentSpec:
     post_run_url: str = ""
     system_prompt: str = ""
     system_prompt_file: str = ""
+    prefix_prompt: str = ""
+    prefix_prompt_file: str = ""
     task_range: str = ""
     initial_delay: float = 0
+    seed: int | None = None
+    reasoning: bool | None = None
+    thinking_budget: int = 10000
     extra_args: list[str] = field(default_factory=list)
 
 
@@ -220,6 +230,10 @@ def _coerce_experiment(raw: dict, base_dir: Path, model_name: str, index: int) -
         raise ValueError(
             f"Experiment #{index + 1} for model '{model_name}' cannot set both 'system_prompt' and 'system_prompt_file'."
         )
+    if raw.get("prefix_prompt") and raw.get("prefix_prompt_file"):
+        raise ValueError(
+            f"Experiment #{index + 1} for model '{model_name}' cannot set both 'prefix_prompt' and 'prefix_prompt_file'."
+        )
 
     values: dict[str, object] = {
         "model": model_name,
@@ -245,8 +259,13 @@ def _coerce_experiment(raw: dict, base_dir: Path, model_name: str, index: int) -
         "post_run_url": raw.get("post_run_url", ""),
         "system_prompt": raw.get("system_prompt", ""),
         "system_prompt_file": raw.get("system_prompt_file", ""),
+        "prefix_prompt": raw.get("prefix_prompt", ""),
+        "prefix_prompt_file": raw.get("prefix_prompt_file", ""),
         "task_range": raw.get("task_range", ""),
         "initial_delay": raw.get("initial_delay", 0),
+        "seed": raw.get("seed"),
+        "reasoning": raw.get("reasoning"),
+        "thinking_budget": raw.get("thinking_budget", 10000),
         "extra_args": raw.get("extra_args", []),
     }
 
@@ -276,8 +295,15 @@ def _coerce_experiment(raw: dict, base_dir: Path, model_name: str, index: int) -
     values["post_run_url"] = _ensure_string(values["post_run_url"], "post_run_url")
     values["system_prompt"] = _ensure_string(values["system_prompt"], "system_prompt")
     values["system_prompt_file"] = _ensure_string(values["system_prompt_file"], "system_prompt_file")
+    values["prefix_prompt"] = _ensure_string(values["prefix_prompt"], "prefix_prompt")
+    values["prefix_prompt_file"] = _ensure_string(values["prefix_prompt_file"], "prefix_prompt_file")
     values["task_range"] = _ensure_string(values["task_range"], "task_range")
     values["initial_delay"] = _ensure_float(values["initial_delay"], "initial_delay")
+    if values["seed"] is not None:
+        values["seed"] = _ensure_int(values["seed"], "seed")
+    if values["reasoning"] is not None:
+        values["reasoning"] = _ensure_bool(values["reasoning"], "reasoning")
+    values["thinking_budget"] = _ensure_int(values["thinking_budget"], "thinking_budget")
     values["extra_args"] = _ensure_string_list(values["extra_args"], "extra_args")
 
     if values["iterations"] < 1:
@@ -427,10 +453,20 @@ def build_main_command(spec: ExperimentSpec, entrypoint: Path) -> list[str]:
         command.extend(["--system-prompt", spec.system_prompt])
     if spec.system_prompt_file:
         command.extend(["--system-prompt-file", spec.system_prompt_file])
+    if spec.prefix_prompt:
+        command.extend(["--prefix-prompt", spec.prefix_prompt])
+    if spec.prefix_prompt_file:
+        command.extend(["--prefix-prompt-file", spec.prefix_prompt_file])
     if spec.task_range:
         command.extend(["--task-range", spec.task_range])
     if spec.initial_delay > 0:
         command.extend(["--initial-delay", str(spec.initial_delay)])
+    if spec.seed is not None:
+        command.extend(["--seed", str(spec.seed)])
+    if spec.reasoning is not None:
+        command.append("--reasoning" if spec.reasoning else "--no-reasoning")
+    if spec.thinking_budget != 10000:
+        command.extend(["--thinking-budget", str(spec.thinking_budget)])
     command.extend(spec.extra_args)
 
     return command

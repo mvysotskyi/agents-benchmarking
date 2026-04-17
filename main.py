@@ -339,7 +339,17 @@ def main():
     parser.add_argument("--post-run-url", type=str, default="", help="Optional URL to open after each testcase before capturing extra page data and running the JS snippet")
     parser.add_argument("--system-prompt", type=str, default="", help="Append extra instructions to the built-in agent system prompt")
     parser.add_argument("--system-prompt-file", type=str, default="", help="Append extra system instructions from a text file")
+    parser.add_argument("--prefix-prompt", type=str, default="", help="Prepend extra text before the task goal prompt")
+    parser.add_argument("--prefix-prompt-file", type=str, default="", help="Prepend extra text from a file before the task goal prompt")
     parser.add_argument("--initial-delay", type=float, default=0, help="Seconds to wait after page load before the agent takes its first action")
+    parser.add_argument("--seed", type=int, default=None, help="Fixed seed for LLM calls (OpenAI/OpenRouter: seed param, Anthropic: temperature=0)")
+    parser.add_argument(
+        "--reasoning",
+        action=argparse.BooleanOptionalAction,
+        default=None,
+        help="Enable or disable reasoning/thinking (--reasoning to enable, --no-reasoning to disable, omit for provider default)",
+    )
+    parser.add_argument("--thinking-budget", type=int, default=10000, help="Max thinking tokens for models that support extended thinking (default: 10000)")
     args = parser.parse_args()
 
     os.environ["VERBOSE"] = "1" if args.verbose else "0"
@@ -369,6 +379,20 @@ def main():
         system_prompt_append = system_prompt_path.read_text()
     elif args.system_prompt:
         system_prompt_append = args.system_prompt
+
+    prefix_prompt_content = None
+    if args.prefix_prompt and args.prefix_prompt_file:
+        log_error("Provide either --prefix-prompt or --prefix-prompt-file, not both.")
+        return {}
+
+    if args.prefix_prompt_file:
+        prefix_prompt_path = Path(args.prefix_prompt_file).expanduser().resolve()
+        if not prefix_prompt_path.exists():
+            log_error(f"Prefix prompt file not found: {prefix_prompt_path}")
+            return {}
+        prefix_prompt_content = prefix_prompt_path.read_text()
+    elif args.prefix_prompt:
+        prefix_prompt_content = args.prefix_prompt
 
     task_source = Path(args.task_file).expanduser().resolve() if args.task_file else TASKS_PATH
     if not task_source.exists():
@@ -451,6 +475,7 @@ def main():
         use_axtree=True,
         use_screenshot=args.use_screenshot,
         system_prompt_append=system_prompt_append,
+        prefix_prompt=prefix_prompt_content,
         use_cache=False,
         force_refresh=True,
         results_dir=args.results_dir,
@@ -463,6 +488,9 @@ def main():
         post_run_url=args.post_run_url or None,
         initial_delay=args.initial_delay,
         registration_paths=[str(task_source.resolve())],
+        seed=args.seed,
+        reasoning=args.reasoning,
+        thinking_budget=args.thinking_budget,
     )
 
     total_task_runs = len(task_names) * args.iterations

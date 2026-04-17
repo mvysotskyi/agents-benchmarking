@@ -634,6 +634,11 @@ def _save_summary_info(
     last_agent_step = _get_last_agent_step(episode_info)
     agent_response = _extract_agent_response(last_agent_step)
     raw_agent_response = _extract_raw_agent_response(last_agent_step)
+
+    # Extract the full prompt from the first step's agent_info
+    full_prompt = None
+    if len(episode_info) > 0 and episode_info[0].agent_info:
+        full_prompt = episode_info[0].agent_info.get("full_prompt")
     
     # Extract task_id from path if possible
     task_id = None
@@ -691,6 +696,7 @@ def _save_summary_info(
         "error": had_error,
         "score": float(sum([step.raw_reward for step in episode_info if step.raw_reward]) or 0.0),
         "task_id": task_id or "",
+        "full_prompt": full_prompt,
         "agent_response": agent_response,
         "raw_agent_response": raw_agent_response,
         "finish_state": finish_state,

@@ -88,7 +88,7 @@ class DemoAgent(Agent):
 
     def __init__(
         self,
-        model_name: str, 
+        model_name: str,
         chat_mode: bool,
         demo_mode: str,
         use_html: bool,
@@ -96,21 +96,28 @@ class DemoAgent(Agent):
         use_screenshot: bool,
         system_message_handling: Literal["separate", "combined"] = "separate",
         system_prompt_append: Optional[str] = None,
+        prefix_prompt: Optional[str] = None,
         thinking_budget: int = 10000,
         openai_api_key: Optional[str] = None,
         openrouter_api_key: Optional[str] = None,
         openrouter_site_url: Optional[str] = None,
         openrouter_site_name: Optional[str] = None,
         anthropic_api_key: Optional[str] = None,
+        seed: Optional[int] = None,
+        reasoning: Optional[bool] = None,
     ) -> None:
         super().__init__()
+        self._last_token_usage = {}
         self.chat_mode = chat_mode
         self.use_html = use_html
         self.use_axtree = use_axtree
         self.use_screenshot = use_screenshot
         self.system_message_handling = system_message_handling
         self.system_prompt_append = system_prompt_append
+        self.prefix_prompt = prefix_prompt
         self.thinking_budget = thinking_budget
+        self.seed = seed
+        self.reasoning = reasoning
 
         if not (use_html or use_axtree):
             raise ValueError(f"Either use_html or use_axtree must be set to True.")
@@ -124,9 +131,13 @@ class DemoAgent(Agent):
             self.client = OpenAI(api_key=openai_api_key)
             self.model_name = model_name
             responses_only_model_prefixes = ("o1-pro", "o3-pro")
+            reasoning_model_prefixes = ("o1", "o3", "gpt-5.4")
 
             def is_responses_only_model(name: str) -> bool:
                 return any(name.startswith(prefix) for prefix in responses_only_model_prefixes)
+
+            def is_reasoning_model(name: str) -> bool:
+                return any(name.startswith(prefix) for prefix in reasoning_model_prefixes)
 
             def build_responses_content(messages: list[dict]) -> list[dict]:
                 content = []
@@ -190,11 +201,21 @@ class DemoAgent(Agent):
                             }
                         ]
 
-                    response = self.client.responses.create(
-                        model=self.model_name,
-                        instructions=instructions,
-                        input=input_messages,
-                    )
+                    responses_kwargs = {
+                        "model": self.model_name,
+                        "instructions": instructions,
+                        "input": input_messages,
+                    }
+                    if self.reasoning is not None:
+                        responses_kwargs["reasoning"] = {"effort": "high" if self.reasoning else "none"}
+                    response = self.client.responses.create(**responses_kwargs)
+
+                    if hasattr(response, "usage") and response.usage:
+                        self._last_token_usage = {
+                            "input_tokens": getattr(response.usage, "input_tokens", 0) or 0,
+                            "output_tokens": getattr(response.usage, "output_tokens", 0) or 0,
+                            "total_tokens": getattr(response.usage, "total_tokens", 0) or 0,
+                        }
 
                     if not response.output_text:
                         raise ValueError(f"No text content returned by Responses API for model {self.model_name}")
@@ -209,20 +230,36 @@ class DemoAgent(Agent):
                     for msg in user_msgs:
                         if msg["type"] == "text":
                             combined_content += msg["text"] + "\n"
-                    response = self.client.chat.completions.create(
-                        model=self.model_name,
-                        messages=[
+                    chat_kwargs = {
+                        "model": self.model_name,
+                        "messages": [
                             {"role": "user", "content": combined_content},
                         ],
-                    )
+                    }
+                    if self.seed is not None:
+                        chat_kwargs["seed"] = self.seed
+                    if self.reasoning is not None and is_reasoning_model(self.model_name):
+                        chat_kwargs["reasoning_effort"] = "high" if self.reasoning else "none"
+                    response = self.client.chat.completions.create(**chat_kwargs)
                 else:
-                    response = self.client.chat.completions.create(
-                        model=self.model_name,
-                        messages=[
+                    chat_kwargs = {
+                        "model": self.model_name,
+                        "messages": [
                             {"role": "system", "content": system_msgs[0]["text"] if system_msgs else ""},
                             {"role": "user", "content": build_chat_user_content(user_msgs)},
                         ],
-                    )
+                    }
+                    if self.seed is not None:
+                        chat_kwargs["seed"] = self.seed
+                    if self.reasoning is not None and is_reasoning_model(self.model_name):
+                        chat_kwargs["reasoning_effort"] = "high" if self.reasoning else "none"
+                    response = self.client.chat.completions.create(**chat_kwargs)
+                if hasattr(response, "usage") and response.usage:
+                    self._last_token_usage = {
+                        "input_tokens": getattr(response.usage, "prompt_tokens", 0) or 0,
+                        "output_tokens": getattr(response.usage, "completion_tokens", 0) or 0,
+                        "total_tokens": getattr(response.usage, "total_tokens", 0) or 0,
+                    }
                 return response.choices[0].message.content
             self.query_model = query_model
             
@@ -250,22 +287,29 @@ class DemoAgent(Agent):
                     for msg in user_msgs:
                         if msg["type"] == "text":
                             combined_content += msg["text"] + "\n"
-                    response = self.client.chat.completions.create(
-                        extra_headers={
+                    chat_kwargs = {
+                        "extra_headers": {
                             "HTTP-Referer": self.openrouter_site_url,
                             "X-Title": self.openrouter_site_name,
                         },
-                        model=self.model_name,
-                        messages=[
+                        "model": self.model_name,
+                        "messages": [
                             {"role": "user", "content": combined_content},
                         ],
-                    )
+                    }
+                    if self.seed is not None:
+                        chat_kwargs["seed"] = self.seed
+                    if self.reasoning is not None:
+                        chat_kwargs.setdefault("extra_body", {})["reasoning"] = {
+                            "effort": "high" if self.reasoning else "none"
+                        }
+                    response = self.client.chat.completions.create(**chat_kwargs)
                 else:
                     # Format messages properly - extract text content
                     formatted_messages = []
                     if system_msgs:
                         formatted_messages.append({"role": "system", "content": system_msgs[0]["text"]})
-                    
+
                     # Convert user messages to OpenAI format
                     user_content = []
                     for msg in user_msgs:
@@ -273,20 +317,33 @@ class DemoAgent(Agent):
                             user_content.append({"type": "text", "text": msg["text"]})
                         elif msg["type"] == "image_url":
                             user_content.append({"type": "image_url", "image_url": msg["image_url"]})
-                    
+
                     formatted_messages.append({"role": "user", "content": user_content})
-                    
-                    response = self.client.chat.completions.create(
-                        extra_headers={
+
+                    chat_kwargs = {
+                        "extra_headers": {
                             "HTTP-Referer": self.openrouter_site_url,
                             "X-Title": self.openrouter_site_name,
                         },
-                        model=self.model_name,
-                        messages=formatted_messages,
-                    )
+                        "model": self.model_name,
+                        "messages": formatted_messages,
+                    }
+                    if self.seed is not None:
+                        chat_kwargs["seed"] = self.seed
+                    if self.reasoning is not None:
+                        chat_kwargs.setdefault("extra_body", {})["reasoning"] = {
+                            "effort": "high" if self.reasoning else "none"
+                        }
+                    response = self.client.chat.completions.create(**chat_kwargs)
+                if hasattr(response, "usage") and response.usage:
+                    self._last_token_usage = {
+                        "input_tokens": getattr(response.usage, "prompt_tokens", 0) or 0,
+                        "output_tokens": getattr(response.usage, "completion_tokens", 0) or 0,
+                        "total_tokens": getattr(response.usage, "total_tokens", 0) or 0,
+                    }
                 return response.choices[0].message.content
             self.query_model = query_model
-        
+
         elif model_name.startswith("local"):
             actual_model_name = model_name.replace("local/", "", 1)
             
@@ -299,19 +356,28 @@ class DemoAgent(Agent):
             
             # Define function to query OpenRouter models
             def query_model(system_msgs, user_msgs):
-                completion = self.client.chat.completions.create(
-                    model=self.model_name,
-                    messages=[
+                chat_kwargs = {
+                    "model": self.model_name,
+                    "messages": [
                         {"role": "system", "content": system_msgs},
                         {"role": "user", "content": user_msgs}
                     ],
-                    max_tokens=500,
-                    temperature=1.0,
-                    top_p=0.95,
-                    extra_body={"top_k": 64}
-                )
+                    "max_tokens": 500,
+                    "temperature": 1.0,
+                    "top_p": 0.95,
+                    "extra_body": {"top_k": 64},
+                }
+                if self.seed is not None:
+                    chat_kwargs["seed"] = self.seed
+                completion = self.client.chat.completions.create(**chat_kwargs)
+                if hasattr(completion, "usage") and completion.usage:
+                    self._last_token_usage = {
+                        "input_tokens": getattr(completion.usage, "prompt_tokens", 0) or 0,
+                        "output_tokens": getattr(completion.usage, "completion_tokens", 0) or 0,
+                        "total_tokens": getattr(completion.usage, "total_tokens", 0) or 0,
+                    }
                 return completion.choices[0].message.content
-                
+
             self.query_model = query_model
     
         elif any(model_name.startswith(prefix) for prefix in ["claude-", "sonnet-"]):
@@ -329,19 +395,24 @@ class DemoAgent(Agent):
             
             # Parse model name and thinking mode
             base_model_name = model_name.replace(":thinking", "")
-            thinking_enabled = model_name.endswith(":thinking")
-            
+            thinking_from_suffix = model_name.endswith(":thinking")
+
             # Get the actual model ID
             if base_model_name in ANTHROPIC_MODELS:
                 self.model_name = ANTHROPIC_MODELS[base_model_name]
             else:
                 # If not in mapping, assume it's a direct model ID
                 self.model_name = base_model_name
-            
+
             # Initialize Anthropic client
             self.client = Anthropic(api_key=anthropic_api_key or os.getenv("ANTHROPIC_API_KEY"))
-            
-            # Configure thinking based on model capabilities and user request
+
+            # Configure thinking: explicit reasoning param overrides :thinking suffix
+            if self.reasoning is not None:
+                thinking_enabled = self.reasoning
+            else:
+                thinking_enabled = thinking_from_suffix
+
             if thinking_enabled:
                 thinking = {
                     "type": "enabled",
@@ -401,13 +472,25 @@ class DemoAgent(Agent):
                     "messages": messages,
                     "thinking": thinking,
                 }
+                # Anthropic has no seed param; temperature=0 is the closest
+                # equivalent for determinism (not allowed when thinking is enabled)
+                if self.seed is not None and thinking.get("type") != "enabled":
+                    create_params["temperature"] = 0.0
                 
                 # Only add system parameter if we have content
                 if system_content is not None:
                     create_params["system"] = system_content
                     
                 response = self.client.messages.create(**create_params)
-                
+
+                if hasattr(response, "usage") and response.usage:
+                    self._last_token_usage = {
+                        "input_tokens": getattr(response.usage, "input_tokens", 0) or 0,
+                        "output_tokens": getattr(response.usage, "output_tokens", 0) or 0,
+                        "total_tokens": (getattr(response.usage, "input_tokens", 0) or 0)
+                            + (getattr(response.usage, "output_tokens", 0) or 0),
+                    }
+
                 # Log response content types for debugging
                 logger.info(f"Response content types: {[content.type for content in response.content]}")
                 
@@ -525,7 +608,16 @@ class DemoAgent(Agent):
                             and executed by a program, make sure to follow the formatting instructions.
                             """
             )
-            # append goal
+            # append goal, with optional prefix prepended directly into the prompt
+            goal_object = list(obs["goal_object"])
+            if self.prefix_prompt and goal_object and goal_object[0].get("type") == "text":
+                goal_object[0] = {
+                    **goal_object[0],
+                    "text": self.prefix_prompt.strip() + "\n\n" + goal_object[0]["text"],
+                }
+            elif self.prefix_prompt:
+                goal_object.insert(0, {"type": "text", "text": self.prefix_prompt.strip()})
+
             user_msgs.append(
                 {
                     "type": "text",
@@ -535,7 +627,7 @@ class DemoAgent(Agent):
                 }
             )
             # goal_object is directly presented as a list of openai-style messages
-            user_msgs.extend(obs["goal_object"])
+            user_msgs.extend(goal_object)
 
         # append page AXTree (if asked)
         if self.use_axtree:
@@ -679,8 +771,15 @@ class DemoAgent(Agent):
         # Don't log the full prompt - too verbose
         # logger.info(full_prompt_txt)
 
+        # Save full prompt text on first step for summary reporting
+        is_first_step = len(self.action_history) == 0
+        if is_first_step:
+            self._first_step_prompt = full_prompt_txt
+
         # query model using the abstraction function
+        self._last_token_usage = {}
         raw_action = self.query_model(system_msgs, user_msgs)
+        token_usage = self._last_token_usage
         action = _normalize_model_action(raw_action)
 
         step_num = len(self.action_history) + 1
@@ -690,10 +789,14 @@ class DemoAgent(Agent):
             rich_logger.task_step(step_num, "no_action", details="Model response was empty or invalid.")
             logger.warning("Model returned an empty or invalid action response: %r", raw_action)
             self.update_last_observation(obs)
-            return None, {
+            info = {
                 "model_response": raw_action,
                 "raw_model_response": raw_action,
+                "stats": token_usage,
             }
+            if is_first_step:
+                info["full_prompt"] = full_prompt_txt
+            return None, info
 
         # Extract action type for a cleaner log message
         action_type = action.split("(")[0] if "(" in action else "unknown"
@@ -711,10 +814,14 @@ class DemoAgent(Agent):
         # Store observation for metrics
         self.update_last_observation(obs)
 
-        return action, {
+        info = {
             "model_response": action,
             "raw_model_response": raw_action,
+            "stats": token_usage,
         }
+        if is_first_step:
+            info["full_prompt"] = full_prompt_txt
+        return action, info
 
 
 @dataclasses.dataclass
@@ -729,6 +836,7 @@ class DemoAgentArgs(AbstractAgentArgs):
     use_screenshot: bool = False
     system_message_handling: Literal["separate", "combined"] = "separate"
     system_prompt_append: Optional[str] = None
+    prefix_prompt: Optional[str] = None
     thinking_budget: int = 10000
     
     # API keys and configuration - these can be None and the agent will fall back to environment variables
@@ -737,6 +845,14 @@ class DemoAgentArgs(AbstractAgentArgs):
     openrouter_site_url: Optional[str] = None
     openrouter_site_name: Optional[str] = None
     anthropic_api_key: Optional[str] = None
+
+    # Seed for reproducibility - passed to OpenAI/OpenRouter as seed param,
+    # for Anthropic sets temperature=0 (no native seed support)
+    seed: Optional[int] = None
+
+    # Reasoning toggle: True=enable, False=disable, None=provider default
+    # Overrides :thinking suffix for Anthropic models
+    reasoning: Optional[bool] = None
 
     def make_agent(self):
         return DemoAgent(
@@ -748,6 +864,7 @@ class DemoAgentArgs(AbstractAgentArgs):
             use_screenshot=self.use_screenshot,
             system_message_handling=self.system_message_handling,
             system_prompt_append=self.system_prompt_append,
+            prefix_prompt=self.prefix_prompt,
             thinking_budget=self.thinking_budget,
             # Pass API keys and configuration
             openai_api_key=self.openai_api_key,
@@ -755,4 +872,6 @@ class DemoAgentArgs(AbstractAgentArgs):
             openrouter_site_url=self.openrouter_site_url,
             openrouter_site_name=self.openrouter_site_name,
             anthropic_api_key=self.anthropic_api_key,
+            seed=self.seed,
+            reasoning=self.reasoning,
         )

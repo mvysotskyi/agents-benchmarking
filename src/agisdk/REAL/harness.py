@@ -176,6 +176,7 @@ class harness:
         model_id_name: str = None,
         system_message_handling: str = None,
         system_prompt_append: str = None,
+        prefix_prompt: str = None,
         save_step_screenshots: bool = False,
         save_step_info: bool = False,
         show_task_completion_summary: bool = True,
@@ -184,6 +185,9 @@ class harness:
         post_run_url: str = None,
         initial_delay: float = 0,
         registration_paths: Optional[List[str]] = None,
+        seed: Optional[int] = None,
+        reasoning: Optional[bool] = None,
+        thinking_budget: int = 10000,
     ):
         """
         Initialize the harness with the provided configuration.
@@ -217,6 +221,7 @@ class harness:
             system_message_handling: How to handle system messages - "separate" (default) or "combined" (no system prompt).
                                    Only applies when using the model parameter. For o1-mini, defaults to "combined".
             system_prompt_append: Optional extra instructions appended to the built-in system prompt.
+            prefix_prompt: Optional text prepended before the task goal prompt.
             save_step_screenshots: Whether to save a screenshot for each step in the experiment directory.
             save_step_info: Whether to save per-step state and agent output payloads to the experiment directory.
             show_task_completion_summary: Whether to print per-task reward/success summary logs after each task.
@@ -271,6 +276,10 @@ class harness:
                 use_screenshot=use_screenshot,
                 system_message_handling=use_system_message_handling,
                 system_prompt_append=system_prompt_append,
+                prefix_prompt=prefix_prompt,
+                seed=seed,
+                reasoning=reasoning,
+                thinking_budget=thinking_budget,
             )
         else:
             raise ValueError("Either model or agentargs must be provided")
