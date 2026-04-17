@@ -303,6 +303,10 @@ class DemoAgent(Agent):
                         chat_kwargs.setdefault("extra_body", {})["reasoning"] = {
                             "effort": "high" if self.reasoning else "none"
                         }
+                    chat_kwargs.setdefault("extra_body", {})["provider"] = {
+                        "quantizations": ["bf16", "fp16", "fp32"],
+                        "allow_fallbacks": True,
+                    }
                     response = self.client.chat.completions.create(**chat_kwargs)
                 else:
                     # Format messages properly - extract text content
@@ -334,6 +338,10 @@ class DemoAgent(Agent):
                         chat_kwargs.setdefault("extra_body", {})["reasoning"] = {
                             "effort": "high" if self.reasoning else "none"
                         }
+                    chat_kwargs.setdefault("extra_body", {})["provider"] = {
+                        "quantizations": ["bf16", "fp16", "fp32"],
+                        "allow_fallbacks": True,
+                    }
                     response = self.client.chat.completions.create(**chat_kwargs)
                 if hasattr(response, "usage") and response.usage:
                     self._last_token_usage = {
