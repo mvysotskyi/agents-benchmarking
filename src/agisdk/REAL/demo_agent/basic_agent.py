@@ -32,6 +32,48 @@ def _normalize_model_action(action: Any) -> Optional[str]:
     action = action.strip()
     return action or None
 
+
+def _openrouter_response_diagnostics(response: Any) -> dict:
+    """Extract diagnostic fields from an OpenRouter/OpenAI chat completion response."""
+    info: dict = {}
+    try:
+        choice = response.choices[0]
+    except (AttributeError, IndexError, TypeError):
+        return {"error": "no choices on response"}
+
+    info["finish_reason"] = getattr(choice, "finish_reason", None)
+    info["native_finish_reason"] = getattr(choice, "native_finish_reason", None)
+
+    message = getattr(choice, "message", None)
+    if message is not None:
+        content = getattr(message, "content", None)
+        info["content_type"] = type(content).__name__
+        info["content_len"] = len(content) if isinstance(content, str) else None
+        info["has_reasoning"] = bool(getattr(message, "reasoning", None))
+        info["refusal"] = getattr(message, "refusal", None)
+
+    usage = getattr(response, "usage", None)
+    if usage is not None:
+        info["prompt_tokens"] = getattr(usage, "prompt_tokens", None)
+        info["completion_tokens"] = getattr(usage, "completion_tokens", None)
+        details = getattr(usage, "completion_tokens_details", None)
+        if details is not None:
+            info["reasoning_tokens"] = getattr(details, "reasoning_tokens", None)
+
+    provider_error = getattr(response, "error", None)
+    if provider_error is not None:
+        info["provider_error"] = provider_error
+
+    return info
+
+
+def _is_empty_content(content: Any) -> bool:
+    if content is None:
+        return True
+    if isinstance(content, str) and not content.strip():
+        return True
+    return False
+
 # Handling Screenshots
 def image_to_jpg_base64_url(image: np.ndarray | Image.Image):
     """Convert a numpy array to a base64 encoded image url."""
@@ -86,6 +128,46 @@ class DemoAgent(Agent):
         """Store the last observation for metrics"""
         self.last_observation = obs
 
+    def _resolve_reasoning_effort(self) -> Optional[str]:
+        if self.reasoning_effort is not None:
+            return self.reasoning_effort
+        if self.reasoning is True:
+            return "high"
+        if self.reasoning is False:
+            return "none"
+        return None
+
+    def _call_openrouter_with_retry(self, chat_kwargs: dict):
+        """Call OpenRouter; if content is empty/None, retry once. Log diagnostics both times."""
+        response = self.client.chat.completions.create(**chat_kwargs)
+        diag = _openrouter_response_diagnostics(response)
+        logger.info("OpenRouter response diagnostics: %s", diag)
+
+        try:
+            content = response.choices[0].message.content
+        except (AttributeError, IndexError, TypeError):
+            content = None
+
+        if _is_empty_content(content):
+            logger.warning(
+                "OpenRouter returned empty content on first attempt (%s). Retrying once.",
+                diag,
+            )
+            retry_response = self.client.chat.completions.create(**chat_kwargs)
+            retry_diag = _openrouter_response_diagnostics(retry_response)
+            logger.info("OpenRouter retry response diagnostics: %s", retry_diag)
+            try:
+                retry_content = retry_response.choices[0].message.content
+            except (AttributeError, IndexError, TypeError):
+                retry_content = None
+            if _is_empty_content(retry_content):
+                logger.warning(
+                    "OpenRouter retry also returned empty content (%s).", retry_diag
+                )
+            return retry_response
+
+        return response
+
     def __init__(
         self,
         model_name: str,
@@ -105,6 +187,8 @@ class DemoAgent(Agent):
         anthropic_api_key: Optional[str] = None,
         seed: Optional[int] = None,
         reasoning: Optional[bool] = None,
+        reasoning_effort: Optional[str] = None,
+        provider: Optional[str] = None,
     ) -> None:
         super().__init__()
         self._last_token_usage = {}
@@ -118,6 +202,8 @@ class DemoAgent(Agent):
         self.thinking_budget = thinking_budget
         self.seed = seed
         self.reasoning = reasoning
+        self.reasoning_effort = reasoning_effort
+        self.provider = provider
 
         if not (use_html or use_axtree):
             raise ValueError(f"Either use_html or use_axtree must be set to True.")
@@ -206,8 +292,9 @@ class DemoAgent(Agent):
                         "instructions": instructions,
                         "input": input_messages,
                     }
-                    if self.reasoning is not None:
-                        responses_kwargs["reasoning"] = {"effort": "high" if self.reasoning else "none"}
+                    effort = self._resolve_reasoning_effort()
+                    if effort is not None:
+                        responses_kwargs["reasoning"] = {"effort": effort}
                     response = self.client.responses.create(**responses_kwargs)
 
                     if hasattr(response, "usage") and response.usage:
@@ -238,8 +325,9 @@ class DemoAgent(Agent):
                     }
                     if self.seed is not None:
                         chat_kwargs["seed"] = self.seed
-                    if self.reasoning is not None and is_reasoning_model(self.model_name):
-                        chat_kwargs["reasoning_effort"] = "high" if self.reasoning else "none"
+                    effort = self._resolve_reasoning_effort()
+                    if effort is not None and is_reasoning_model(self.model_name):
+                        chat_kwargs["reasoning_effort"] = effort
                     response = self.client.chat.completions.create(**chat_kwargs)
                 else:
                     chat_kwargs = {
@@ -251,8 +339,9 @@ class DemoAgent(Agent):
                     }
                     if self.seed is not None:
                         chat_kwargs["seed"] = self.seed
-                    if self.reasoning is not None and is_reasoning_model(self.model_name):
-                        chat_kwargs["reasoning_effort"] = "high" if self.reasoning else "none"
+                    effort = self._resolve_reasoning_effort()
+                    if effort is not None and is_reasoning_model(self.model_name):
+                        chat_kwargs["reasoning_effort"] = effort
                     response = self.client.chat.completions.create(**chat_kwargs)
                 if hasattr(response, "usage") and response.usage:
                     self._last_token_usage = {
@@ -299,15 +388,17 @@ class DemoAgent(Agent):
                     }
                     if self.seed is not None:
                         chat_kwargs["seed"] = self.seed
-                    if self.reasoning is not None:
+                    effort = self._resolve_reasoning_effort()
+                    if effort is not None:
                         chat_kwargs.setdefault("extra_body", {})["reasoning"] = {
-                            "effort": "high" if self.reasoning else "none"
+                            "effort": effort
                         }
-                    chat_kwargs.setdefault("extra_body", {})["provider"] = {
-                        "quantizations": ["bf16", "fp16", "fp32"],
-                        "allow_fallbacks": True,
-                    }
-                    response = self.client.chat.completions.create(**chat_kwargs)
+                    if self.provider:
+                        chat_kwargs.setdefault("extra_body", {})["provider"] = {
+                            "only": [self.provider],
+                            "allow_fallbacks": False,
+                        }
+                    response = self._call_openrouter_with_retry(chat_kwargs)
                 else:
                     # Format messages properly - extract text content
                     formatted_messages = []
@@ -334,15 +425,17 @@ class DemoAgent(Agent):
                     }
                     if self.seed is not None:
                         chat_kwargs["seed"] = self.seed
-                    if self.reasoning is not None:
+                    effort = self._resolve_reasoning_effort()
+                    if effort is not None:
                         chat_kwargs.setdefault("extra_body", {})["reasoning"] = {
-                            "effort": "high" if self.reasoning else "none"
+                            "effort": effort
                         }
-                    chat_kwargs.setdefault("extra_body", {})["provider"] = {
-                        "quantizations": ["bf16", "fp16", "fp32"],
-                        "allow_fallbacks": True,
-                    }
-                    response = self.client.chat.completions.create(**chat_kwargs)
+                    if self.provider:
+                        chat_kwargs.setdefault("extra_body", {})["provider"] = {
+                            "only": [self.provider],
+                            "allow_fallbacks": False,
+                        }
+                    response = self._call_openrouter_with_retry(chat_kwargs)
                 if hasattr(response, "usage") and response.usage:
                     self._last_token_usage = {
                         "input_tokens": getattr(response.usage, "prompt_tokens", 0) or 0,
@@ -862,6 +955,14 @@ class DemoAgentArgs(AbstractAgentArgs):
     # Overrides :thinking suffix for Anthropic models
     reasoning: Optional[bool] = None
 
+    # Explicit reasoning effort ("minimal"|"low"|"medium"|"high"|"none").
+    # When set, overrides the default high/none derived from `reasoning`.
+    reasoning_effort: Optional[str] = None
+
+    # OpenRouter: pin routing to a specific provider (e.g. "fireworks", "together").
+    # Sends provider.only=[provider] with allow_fallbacks=false. Ignored for non-OpenRouter models.
+    provider: Optional[str] = None
+
     def make_agent(self):
         return DemoAgent(
             model_name=self.model_name,
@@ -882,4 +983,6 @@ class DemoAgentArgs(AbstractAgentArgs):
             anthropic_api_key=self.anthropic_api_key,
             seed=self.seed,
             reasoning=self.reasoning,
+            reasoning_effort=self.reasoning_effort,
+            provider=self.provider,
         )

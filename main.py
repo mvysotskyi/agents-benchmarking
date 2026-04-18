@@ -350,6 +350,8 @@ def main():
         help="Enable or disable reasoning/thinking (--reasoning to enable, --no-reasoning to disable, omit for provider default)",
     )
     parser.add_argument("--thinking-budget", type=int, default=10000, help="Max thinking tokens for models that support extended thinking (default: 10000)")
+    parser.add_argument("--reasoning-effort", type=str, default=None, choices=["minimal", "low", "medium", "high", "none"], help="Explicit reasoning effort. Overrides the high/none derived from --reasoning.")
+    parser.add_argument("--provider", type=str, default=None, help="Pin OpenRouter routing to a specific provider (e.g. 'fireworks'). Ignored for non-OpenRouter models.")
     args = parser.parse_args()
 
     os.environ["VERBOSE"] = "1" if args.verbose else "0"
@@ -490,7 +492,9 @@ def main():
         registration_paths=[str(task_source.resolve())],
         seed=args.seed,
         reasoning=args.reasoning,
+        reasoning_effort=args.reasoning_effort,
         thinking_budget=args.thinking_budget,
+        provider=args.provider,
     )
 
     total_task_runs = len(task_names) * args.iterations

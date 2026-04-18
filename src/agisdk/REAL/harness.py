@@ -187,7 +187,9 @@ class harness:
         registration_paths: Optional[List[str]] = None,
         seed: Optional[int] = None,
         reasoning: Optional[bool] = None,
+        reasoning_effort: Optional[str] = None,
         thinking_budget: int = 10000,
+        provider: Optional[str] = None,
     ):
         """
         Initialize the harness with the provided configuration.
@@ -279,7 +281,9 @@ class harness:
                 prefix_prompt=prefix_prompt,
                 seed=seed,
                 reasoning=reasoning,
+                reasoning_effort=reasoning_effort,
                 thinking_budget=thinking_budget,
+                provider=provider,
             )
         else:
             raise ValueError("Either model or agentargs must be provided")
