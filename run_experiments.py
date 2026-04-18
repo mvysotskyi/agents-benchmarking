@@ -14,7 +14,7 @@ from typing import TextIO
 
 ROOT_DIR = Path(__file__).resolve().parent
 DEFAULT_ENTRYPOINT = ROOT_DIR / "main.py"
-MODEL_BLOCK_KEYS = {"defaults", "runs", "experiments", "testcases"}
+MODEL_BLOCK_KEYS = {"defaults", "runs", "experiments", "testcases", "skip_existing_results"}
 EXPERIMENT_KEYS = {
     "name",
     "enabled",
@@ -46,7 +46,10 @@ EXPERIMENT_KEYS = {
     "initial_delay",
     "seed",
     "reasoning",
+    "reasoning_effort",
     "thinking_budget",
+    "provider",
+    "skip_existing_results",
     "extra_args",
 }
 PATH_FIELDS = {"task_file", "results_dir", "post_run_js_snippet_path", "system_prompt_file", "prefix_prompt_file"}
@@ -83,7 +86,10 @@ class ExperimentSpec:
     initial_delay: float = 0
     seed: int | None = None
     reasoning: bool | None = None
+    reasoning_effort: str | None = None
     thinking_budget: int = 10000
+    provider: str | None = None
+    skip_existing_results: bool | None = None
     extra_args: list[str] = field(default_factory=list)
 
 
@@ -93,6 +99,7 @@ class BatchConfig:
     entrypoint: Path
     max_parallel: int
     fail_fast: bool
+    skip_existing_results: bool
     poll_interval: float
     termination_grace_period: float
 
@@ -139,6 +146,11 @@ def parse_args() -> argparse.Namespace:
         action=argparse.BooleanOptionalAction,
         default=None,
         help="Override screenshot usage for all experiments in this batch",
+    )
+    parser.add_argument(
+        "--skip-existing-results",
+        action="store_true",
+        help="Skip experiments whose results directory already contains prior run artifacts",
     )
     return parser.parse_args()
 
@@ -265,7 +277,10 @@ def _coerce_experiment(raw: dict, base_dir: Path, model_name: str, index: int) -
         "initial_delay": raw.get("initial_delay", 0),
         "seed": raw.get("seed"),
         "reasoning": raw.get("reasoning"),
+        "reasoning_effort": raw.get("reasoning_effort"),
         "thinking_budget": raw.get("thinking_budget", 10000),
+        "provider": raw.get("provider"),
+        "skip_existing_results": raw.get("skip_existing_results"),
         "extra_args": raw.get("extra_args", []),
     }
 
@@ -303,7 +318,17 @@ def _coerce_experiment(raw: dict, base_dir: Path, model_name: str, index: int) -
         values["seed"] = _ensure_int(values["seed"], "seed")
     if values["reasoning"] is not None:
         values["reasoning"] = _ensure_bool(values["reasoning"], "reasoning")
+    if values["reasoning_effort"] is not None:
+        effort = _ensure_string(values["reasoning_effort"], "reasoning_effort")
+        valid_efforts = {"minimal", "low", "medium", "high", "none"}
+        if effort not in valid_efforts:
+            raise ValueError(f"'reasoning_effort' must be one of {sorted(valid_efforts)}.")
+        values["reasoning_effort"] = effort
     values["thinking_budget"] = _ensure_int(values["thinking_budget"], "thinking_budget")
+    if values["provider"] is not None:
+        values["provider"] = _ensure_string(values["provider"], "provider")
+    if values["skip_existing_results"] is not None:
+        values["skip_existing_results"] = _ensure_bool(values["skip_existing_results"], "skip_existing_results")
     values["extra_args"] = _ensure_string_list(values["extra_args"], "extra_args")
 
     if values["iterations"] < 1:
@@ -332,7 +357,19 @@ def load_batch_config(config_path: Path) -> BatchConfig:
     raw_config = json.loads(config_path.read_text())
     config = _ensure_mapping(raw_config, "Batch config")
 
-    unknown_root_keys = sorted(set(config) - {"entrypoint", "max_parallel", "fail_fast", "poll_interval", "termination_grace_period", "defaults", "models"})
+    unknown_root_keys = sorted(
+        set(config)
+        - {
+            "entrypoint",
+            "max_parallel",
+            "fail_fast",
+            "skip_existing_results",
+            "poll_interval",
+            "termination_grace_period",
+            "defaults",
+            "models",
+        }
+    )
     if unknown_root_keys:
         raise ValueError(f"Unsupported root config keys: {', '.join(unknown_root_keys)}")
 
@@ -358,6 +395,11 @@ def load_batch_config(config_path: Path) -> BatchConfig:
 
             model_defaults = _ensure_mapping(model_mapping.get("defaults", {}), f"Model defaults for '{model_name}'")
             _validate_experiment_keys(model_defaults, f"Model defaults for '{model_name}'")
+            model_skip_existing_results = model_mapping.get("skip_existing_results")
+            if model_skip_existing_results is not None:
+                model_skip_existing_results = _ensure_bool(
+                    model_skip_existing_results, f"Model block '{model_name}' skip_existing_results"
+                )
 
             raw_experiments = None
             for field_name in ("runs", "experiments", "testcases"):
@@ -369,6 +411,8 @@ def load_batch_config(config_path: Path) -> BatchConfig:
         for index, raw_experiment in enumerate(experiment_list):
             experiment_mapping = _ensure_mapping(raw_experiment, f"Experiment #{index + 1} for model '{model_name}'")
             merged = dict(defaults)
+            if not isinstance(model_block, list) and model_skip_existing_results is not None:
+                merged["skip_existing_results"] = model_skip_existing_results
             merged.update(model_defaults)
             merged.update(experiment_mapping)
             experiments.append(_coerce_experiment(merged, base_dir, model_name, index))
@@ -380,6 +424,7 @@ def load_batch_config(config_path: Path) -> BatchConfig:
     entrypoint = _resolve_config_path(entrypoint_value, base_dir) if entrypoint_value else str(DEFAULT_ENTRYPOINT)
     max_parallel = config.get("max_parallel", 0)
     fail_fast = config.get("fail_fast", False)
+    skip_existing_results = config.get("skip_existing_results", False)
     poll_interval = config.get("poll_interval", 0.5)
     termination_grace_period = config.get("termination_grace_period", 10.0)
 
@@ -391,6 +436,7 @@ def load_batch_config(config_path: Path) -> BatchConfig:
         raise ValueError("'max_parallel' must be 0 or greater.")
 
     fail_fast = _ensure_bool(fail_fast, "fail_fast")
+    skip_existing_results = _ensure_bool(skip_existing_results, "skip_existing_results")
     poll_interval = _ensure_float(poll_interval, "poll_interval")
     termination_grace_period = _ensure_float(termination_grace_period, "termination_grace_period")
     if poll_interval <= 0:
@@ -407,6 +453,7 @@ def load_batch_config(config_path: Path) -> BatchConfig:
         entrypoint=entrypoint_path,
         max_parallel=max_parallel or len(experiments),
         fail_fast=fail_fast,
+        skip_existing_results=skip_existing_results,
         poll_interval=poll_interval,
         termination_grace_period=termination_grace_period,
     )
@@ -465,17 +512,60 @@ def build_main_command(spec: ExperimentSpec, entrypoint: Path) -> list[str]:
         command.extend(["--seed", str(spec.seed)])
     if spec.reasoning is not None:
         command.append("--reasoning" if spec.reasoning else "--no-reasoning")
+    if spec.reasoning_effort is not None:
+        command.extend(["--reasoning-effort", spec.reasoning_effort])
     if spec.thinking_budget != 10000:
         command.extend(["--thinking-budget", str(spec.thinking_budget)])
+    if spec.provider:
+        command.extend(["--provider", spec.provider])
     command.extend(spec.extra_args)
 
     return command
 
 
+def experiment_has_existing_results(spec: ExperimentSpec) -> bool:
+    results_dir = Path(spec.results_dir).resolve()
+    if not results_dir.exists():
+        return False
+
+    # Treat a prior manifest or any task summary as evidence that this experiment already ran.
+    manifests_dir = results_dir / "run_manifests"
+    if manifests_dir.exists() and any(manifests_dir.glob("run_*.json")):
+        return True
+
+    return any(results_dir.glob("**/summary_info.json"))
+
+
+def should_skip_existing_results(
+    spec: ExperimentSpec,
+    config: BatchConfig,
+    *,
+    force_skip_existing_results: bool = False,
+) -> bool:
+    if force_skip_existing_results:
+        return True
+    if spec.skip_existing_results is not None:
+        return spec.skip_existing_results
+    return config.skip_existing_results
+
+
 class BatchRunner:
-    def __init__(self, config: BatchConfig):
+    def __init__(self, config: BatchConfig, *, force_skip_existing_results: bool = False):
         self.config = config
-        self.pending = deque(spec for spec in config.experiments if spec.enabled)
+        enabled_experiments = [spec for spec in config.experiments if spec.enabled]
+        self.skipped: list[ExperimentSpec] = []
+        remaining_experiments: list[ExperimentSpec] = []
+        for spec in enabled_experiments:
+            if should_skip_existing_results(
+                spec,
+                config,
+                force_skip_existing_results=force_skip_existing_results,
+            ) and experiment_has_existing_results(spec):
+                self.skipped.append(spec)
+            else:
+                remaining_experiments.append(spec)
+        enabled_experiments = remaining_experiments
+        self.pending = deque(enabled_experiments)
         self.running: dict[str, RunningExperiment] = {}
         self.finished: list[FinishedExperiment] = []
         self.stop_requested = False
@@ -588,6 +678,10 @@ class BatchRunner:
 
     def run(self) -> int:
         print(f"Loaded {len(self.pending)} enabled experiment(s). Max parallel: {self.config.max_parallel}")
+        if self.skipped:
+            print(f"Skipping {len(self.skipped)} experiment(s) with existing results:")
+            for spec in self.skipped:
+                print(f"[skip] {spec.name} results_dir={Path(spec.results_dir).resolve()}")
 
         while self.pending or self.running:
             while not self.stop_requested and self.pending and len(self.running) < self.config.max_parallel:
@@ -657,14 +751,29 @@ def main() -> int:
     if not enabled_experiments:
         raise ValueError("All experiments are disabled. Nothing to run.")
 
+    skipped_experiments: list[ExperimentSpec] = []
+    remaining_experiments: list[ExperimentSpec] = []
+    for spec in enabled_experiments:
+        if should_skip_existing_results(
+            spec,
+            config,
+            force_skip_existing_results=args.skip_existing_results,
+        ) and experiment_has_existing_results(spec):
+            skipped_experiments.append(spec)
+        else:
+            remaining_experiments.append(spec)
+    enabled_experiments = remaining_experiments
+
     if args.dry_run:
         print(f"Loaded {len(enabled_experiments)} enabled experiment(s).")
+        if skipped_experiments:
+            print(f"Skipping {len(skipped_experiments)} experiment(s) with existing results.")
         for spec in enabled_experiments:
             print(f"\n[{spec.name}]")
             print(shlex.join(build_main_command(spec, config.entrypoint)))
         return 0
 
-    runner = BatchRunner(config)
+    runner = BatchRunner(config, force_skip_existing_results=args.skip_existing_results)
     previous_handlers = install_signal_handlers(runner)
     try:
         return runner.run()
