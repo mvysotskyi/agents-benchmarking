@@ -11,7 +11,7 @@ CircuitJS is a browser-based circuit simulator for analog and logic circuits. Th
 - **Building Circuits:** Add components from the **Draw** menu, the **right-click context menu** on the canvas, or use the **search button** on the top panel to find them by name. Connect components with **Add Wire**. Wires join only at endpoints — crossing wires do not connect automatically. Red dots indicate unconnected terminals.
 - **Logic & Measurement:** For logic circuits, use logic inputs and outputs from the Draw menu. Click a logic input to toggle between `L` (0) and `H` (1). To read a measurement, hover over the component and check the information area at the bottom. Report values exactly in the format the task requires.
 - **Editing Components:** Right-click any component to **Edit** its values, **Duplicate**, or **Delete** it. To set component values (voltage, resistance, etc.), right-click the component and select **Edit**.
-- **General Rule:** Follow the task statement exactly: build the requested circuit, set the specified values, wire it correctly, and report the requested output.
+- **General Rule:** Follow the task statement exactly: build the requested circuit, set the specified values, wire it correctly, and report the requested output; do not calcuate any requested values on your own.
 
 ## Environment Architecture & Interaction Paradigms
 
@@ -28,9 +28,7 @@ To successfully complete tasks within this circuit simulation environment, you m
 
 ### 3. Wiring and Topology
 * **Click-and-Drag Mechanics:** Connections are made by clicking a specific starting terminal, dragging, and releasing on the target terminal. You must possess precise coordinate targeting to hit terminal nodes. The **dot** on a terminal marks the **connection endpoint** — always wire to/from the dot.
-* **Node Sharing:** Multiple wires can connect to a single input or output terminal.
 * **Polarity Awareness:** Certain components (like Voltage Sources) have distinct positive and negative terminals.
-* **Logic Input Direction:** When placing a Logic Input, always draw it from **right to left** (i.e., click on the right side first, then drag and release on the left). This ensures the output terminal faces the correct direction for wiring into your circuit.
 
 ### 4. Simulation State and Measurement
 * **Live Simulation:** The circuit simulates in real-time. You must allow sufficient time for the system to reach a steady state before taking measurements.
