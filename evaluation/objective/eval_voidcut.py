@@ -2,29 +2,24 @@
 """Automatic evaluator for voidcut /finish endpoint outputs.
 
 Compares agent responses from either a run_agent JSON file or a results
-directory full of testcase subfolders against a ground-truth JSON file
-using strict binary block-by-block matching.
+directory full of testcase subfolders against per-test-case ground-truth
+JSON files using strict binary block-by-block matching.
 
 Usage:
-    python eval_voidcut.py <responses_path> <gt_json> [--tolerance_ms=1000] [--verbose]
-    python eval_voidcut.py responses/run1.json gt/voidcut_gt.json --verbose
-    python eval_voidcut.py results_gpt54_video gt/voidcut_gt.json --verbose
+    python eval_voidcut.py <responses_path> [<gt_dir>] [--tolerance_ms=1000] [--verbose]
+    python eval_voidcut.py responses/run1.json assets/video_ground_truth --verbose
+    python eval_voidcut.py results_gpt54_video assets/video_ground_truth --verbose
 
-Ground-truth JSON format::
+Ground-truth directory format::
 
-    {
-      "tc_vid_001": {
-        "scenario": 1,
-        "endpoint_content": {
-          "operations": [ ... ]
-        }
-      },
-      ...
-    }
+    assets/video_ground_truth/
+        tc_vid_001.json   ->  {"scenario": 1, "endpoint_content": {"operations": [...]}}
+        tc_vid_002.json
+        ...
 
-Each key is a test_id matching the response source. ``scenario`` maps to
-effect-validation rules (6-9 have special checks).  ``endpoint_content``
-is the expected /finish JSON payload.
+Each file is named ``<test_id>.json``. ``scenario`` maps to effect-validation
+rules (6-9 have special checks).  ``endpoint_content`` is the expected
+/finish JSON payload.
 """
 
 from __future__ import annotations
@@ -614,17 +609,26 @@ def evaluate_binary(scenario: int, gt_data: dict, result_data: dict, epsilon_ms:
     )
 
 
+def _load_gt_dir(gt_dir: Path) -> dict[str, Any]:
+    """Load all per-test-case GT files from a directory into a single dict."""
+    gt_data: dict[str, Any] = {}
+    for gt_file in sorted(gt_dir.glob("tc_vid_*.json")):
+        test_id = gt_file.stem
+        gt_data[test_id] = json.loads(gt_file.read_text(encoding="utf-8"))
+    return gt_data
+
+
 def evaluate_all(
     responses_json: str,
-    gt_json: str,
+    gt_dir: str = "assets/video_ground_truth",
     tolerance_ms: float = 1000,
     verbose: bool = False,
 ) -> None:
     """Evaluate all test cases from a run_agent response file against ground truths.
 
     Args:
-        responses_json: Path to the agent responses JSON (output of run_agent).
-        gt_json:        Path to the ground-truth JSON file.
+        responses_json: Path to the agent responses JSON or results directory.
+        gt_dir:         Path to the ground-truth directory (one JSON per test case).
         tolerance_ms:   Timing tolerance in milliseconds (default 1000).
         verbose:        Print additional debug info.
     """
@@ -633,16 +637,16 @@ def evaluate_all(
         sys.exit(1)
 
     responses_path = Path(responses_json)
-    gt_path = Path(gt_json)
+    gt_path = Path(gt_dir)
 
     if not responses_path.exists():
         print(f"ERROR: responses file not found: {responses_path}", file=sys.stderr)
         sys.exit(1)
-    if not gt_path.exists():
-        print(f"ERROR: ground-truth file not found: {gt_path}", file=sys.stderr)
+    if not gt_path.is_dir():
+        print(f"ERROR: ground-truth directory not found: {gt_path}", file=sys.stderr)
         sys.exit(1)
 
-    gt_data = json.loads(gt_path.read_text(encoding="utf-8"))
+    gt_data = _load_gt_dir(gt_path)
 
     try:
         agent_responses, model = _load_agent_responses(responses_path)

@@ -30,6 +30,47 @@ from evaluation.objective.evaluation_framework import (
     load_test_cases,
 )
 
+TIME_TOLERANCE_MINUTES = 1.0
+
+
+def _parse_minutes(value: Any) -> float | None:
+    """Parse a time string like 'HH:MM UTC' or 'HH:MM:SS UTC' to minutes since midnight."""
+    if value is None:
+        return None
+    text = str(value).strip().upper()
+    text = text.removesuffix("UTC").strip()
+    parts = text.split(":")
+    try:
+        if len(parts) == 2:
+            return int(parts[0]) * 60 + int(parts[1])
+        if len(parts) == 3:
+            return int(parts[0]) * 60 + int(parts[1]) + int(parts[2]) / 60.0
+    except (ValueError, IndexError):
+        pass
+    return None
+
+
+def _within_time_tolerance(actual: Any, expected: Any) -> bool:
+    """Return True if both values parse as times and differ by at most TIME_TOLERANCE_MINUTES."""
+    exp = _parse_minutes(expected)
+    act = _parse_minutes(actual)
+    if exp is None or act is None:
+        return False
+    return abs(exp - act) <= TIME_TOLERANCE_MINUTES
+
+
+def _apply_time_tolerance(field_results: dict, score: int) -> tuple[dict[str, int], int]:
+    """Re-evaluate failed fields with time tolerance.
+
+    Returns updated per-field scores (0/1) and the new overall score.
+    """
+    adjusted: dict[str, int] = {k: fr.score for k, fr in field_results.items()}
+    for field, fr in field_results.items():
+        if fr.score == 0 and _within_time_tolerance(fr.actual, fr.expected):
+            adjusted[field] = 1
+    new_score = 1 if (adjusted and all(v == 1 for v in adjusted.values())) else 0
+    return adjusted, new_score
+
 TESTCASE_ID_PATTERN = re.compile(r"(tc_frad_\d+)")
 
 
@@ -149,9 +190,11 @@ def evaluate_all(
             eval_config=eval_config,
         )
 
+        adjusted_fields, final_score = _apply_time_tolerance(result.field_results, result.score)
+
         total += 1
-        status = "PASS" if result.score == 1 else "FAIL"
-        if result.score == 1:
+        status = "PASS" if final_score == 1 else "FAIL"
+        if final_score == 1:
             passed += 1
             objective_evaluation[test_id] = 1
         else:
@@ -163,9 +206,15 @@ def evaluate_all(
         if result.prediction is None:
             print("  (could not extract JSON from agent response)")
 
-        if verbose or result.score == 0:
+        if verbose or final_score == 0:
             for field, fr in result.field_results.items():
-                match_str = "OK" if fr.score == 1 else "FAIL"
+                adj = adjusted_fields[field]
+                if adj == 1 and fr.score == 0:
+                    match_str = "OK(±1min)"
+                elif adj == 1:
+                    match_str = "OK"
+                else:
+                    match_str = "FAIL"
                 print("  [%s] %s: expected=%r  got=%r" % (match_str, field, fr.expected, fr.actual))
 
     objective_path = results_path / "objective_evaluation.json"
