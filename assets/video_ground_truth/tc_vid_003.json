@@ -1,0 +1,125 @@
+{
+  "scenario": 3,
+  "endpoint_content": {
+    "operations": [
+      {
+        "type": "MEDIA_UPLOAD",
+        "data": {
+          "filename": "Flower Video.webm",
+          "mediaId": "f020fd2e-6112-469d-84c4-207a7a950ba6",
+          "mediaType": "VIDEO",
+          "duration": 5059
+        },
+        "timestamp": 1774543655964
+      },
+      {
+        "type": "MEDIA_UPLOAD",
+        "data": {
+          "filename": "White Candle.webm",
+          "mediaId": "0c68480d-0f1d-41c6-8247-04ff3d71c222",
+          "mediaType": "VIDEO",
+          "duration": 41766
+        },
+        "timestamp": 1774543660165
+      },
+      {
+        "type": "TIMELINE_ADD",
+        "data": {
+          "mediaId": "f020fd2e-6112-469d-84c4-207a7a950ba6",
+          "mediaName": "Flower Video.webm",
+          "elementId": "eeb48cff-0a47-46d5-9c80-7813c832fe02",
+          "trackIndex": 0,
+          "startTime": 0,
+          "duration": 5059
+        },
+        "timestamp": 1774543662094
+      },
+      {
+        "type": "TIMELINE_ADD",
+        "data": {
+          "mediaId": "0c68480d-0f1d-41c6-8247-04ff3d71c222",
+          "mediaName": "White Candle.webm",
+          "elementId": "0ef1a2be-8e6d-4e40-b9be-be789da29295",
+          "trackIndex": 1,
+          "startTime": 0,
+          "duration": 41766
+        },
+        "timestamp": 1774543666066
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "0ef1a2be-8e6d-4e40-b9be-be789da29295",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 1,
+          "newTrackIndex": 0,
+          "prevStartTime": 5125,
+          "newStartTime": 5125
+        },
+        "timestamp": 1774543675422
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "0ef1a2be-8e6d-4e40-b9be-be789da29295",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 5100,
+          "newStartTime": 5100
+        },
+        "timestamp": 1774543677300
+      },
+      {
+        "type": "EXPORT_COMPLETE",
+        "data": {
+          "finalDurationMs": 46866,
+          "trackCount": 1,
+          "sourceMedia": [
+            {
+              "filename": "Flower Video.webm",
+              "mediaType": "VIDEO",
+              "originalDurationMs": 5059
+            },
+            {
+              "filename": "White Candle.webm",
+              "mediaType": "VIDEO",
+              "originalDurationMs": 41766
+            }
+          ],
+          "timeline": [
+            {
+              "trackIndex": 0,
+              "effectSubTrack": {
+                "items": []
+              },
+              "elements": [
+                {
+                  "elementId": "eeb48cff-0a47-46d5-9c80-7813c832fe02",
+                  "mediaName": "Flower Video.webm",
+                  "mediaType": "VIDEO",
+                  "startTimeMs": 0,
+                  "durationMs": 5059,
+                  "trimFromStartMs": 0,
+                  "trimFromEndMs": 0,
+                  "activeEffectsAtStart": []
+                },
+                {
+                  "elementId": "0ef1a2be-8e6d-4e40-b9be-be789da29295",
+                  "mediaName": "White Candle.webm",
+                  "mediaType": "VIDEO",
+                  "startTimeMs": 5100,
+                  "durationMs": 41766,
+                  "trimFromStartMs": 0,
+                  "trimFromEndMs": 0,
+                  "activeEffectsAtStart": []
+                }
+              ]
+            }
+          ]
+        },
+        "timestamp": 1774543686318
+      }
+    ]
+  }
+}

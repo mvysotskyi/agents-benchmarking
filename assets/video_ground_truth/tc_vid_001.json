@@ -1,0 +1,64 @@
+{
+  "scenario": 1,
+  "endpoint_content": {
+    "operations": [
+      {
+        "type": "MEDIA_UPLOAD",
+        "data": {
+          "filename": "Flower Video.webm",
+          "mediaId": "a1fc2faa-0977-4e94-9db3-759c71104019",
+          "mediaType": "VIDEO",
+          "duration": 5059
+        },
+        "timestamp": 1774542801209
+      },
+      {
+        "type": "TIMELINE_ADD",
+        "data": {
+          "mediaId": "a1fc2faa-0977-4e94-9db3-759c71104019",
+          "mediaName": "Flower Video.webm",
+          "elementId": "0d3001eb-2d1b-42bb-9a27-d556ff246fe8",
+          "trackIndex": 0,
+          "startTime": 0,
+          "duration": 5059
+        },
+        "timestamp": 1774542806198
+      },
+      {
+        "type": "EXPORT_COMPLETE",
+        "data": {
+          "finalDurationMs": 5059,
+          "trackCount": 1,
+          "sourceMedia": [
+            {
+              "filename": "Flower Video.webm",
+              "mediaType": "VIDEO",
+              "originalDurationMs": 5059
+            }
+          ],
+          "timeline": [
+            {
+              "trackIndex": 0,
+              "effectSubTrack": {
+                "items": []
+              },
+              "elements": [
+                {
+                  "elementId": "0d3001eb-2d1b-42bb-9a27-d556ff246fe8",
+                  "mediaName": "Flower Video.webm",
+                  "mediaType": "VIDEO",
+                  "startTimeMs": 0,
+                  "durationMs": 5059,
+                  "trimFromStartMs": 0,
+                  "trimFromEndMs": 0,
+                  "activeEffectsAtStart": []
+                }
+              ]
+            }
+          ]
+        },
+        "timestamp": 1774542813205
+      }
+    ]
+  }
+}

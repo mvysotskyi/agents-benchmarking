@@ -1,0 +1,181 @@
+{
+  "scenario": 14,
+  "endpoint_content": {
+    "operations": [
+      {
+        "type": "MEDIA_UPLOAD",
+        "data": {
+          "filename": "Tuning a Radio.webm",
+          "mediaId": "6c1e89b7-a660-46d7-ac4b-46c868cd4e20",
+          "mediaType": "VIDEO",
+          "duration": 9051
+        },
+        "timestamp": 1772456309032
+      },
+      {
+        "type": "MEDIA_UPLOAD",
+        "data": {
+          "filename": "Flower Video.webm",
+          "mediaId": "d0063738-f732-4e61-a990-d53279515da3",
+          "mediaType": "VIDEO",
+          "duration": 5059
+        },
+        "timestamp": 1772456309566
+      },
+      {
+        "type": "TIMELINE_ADD",
+        "data": {
+          "mediaId": "6c1e89b7-a660-46d7-ac4b-46c868cd4e20",
+          "mediaName": "Tuning a Radio.webm",
+          "elementId": "8bfaf3d0-cfec-40fb-b0ba-f72cda0d9cb0",
+          "trackIndex": 0,
+          "startTime": 0,
+          "duration": 9051
+        },
+        "timestamp": 1772456311422
+      },
+      {
+        "type": "TIMELINE_ADD",
+        "data": {
+          "mediaId": "d0063738-f732-4e61-a990-d53279515da3",
+          "mediaName": "Flower Video.webm",
+          "elementId": "1f79a8da-9cca-442f-bb55-b2b16642c292",
+          "trackIndex": 0,
+          "startTime": 11425,
+          "duration": 5059
+        },
+        "timestamp": 1772456312859
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "1f79a8da-9cca-442f-bb55-b2b16642c292",
+          "mediaName": "Flower Video.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 11425,
+          "newStartTime": 11425
+        },
+        "timestamp": 1772456313473
+      },
+      {
+        "type": "TIMELINE_SNAP",
+        "data": {
+          "elementId": "1f79a8da-9cca-442f-bb55-b2b16642c292",
+          "mediaName": "Flower Video.webm",
+          "prevStartTime": 9051,
+          "newStartTime": 9051
+        },
+        "timestamp": 1772456314186
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "8bfaf3d0-cfec-40fb-b0ba-f72cda0d9cb0",
+          "mediaName": "Tuning a Radio.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 0,
+          "newStartTime": 0
+        },
+        "timestamp": 1772456318374
+      },
+      {
+        "type": "EXPORT_COMPLETE",
+        "data": {
+          "finalDurationMs": 14110,
+          "trackCount": 1,
+          "sourceMedia": [
+            {
+              "filename": "Tuning a Radio.webm",
+              "mediaType": "VIDEO",
+              "originalDurationMs": 9051
+            },
+            {
+              "filename": "Flower Video.webm",
+              "mediaType": "VIDEO",
+              "originalDurationMs": 5059
+            }
+          ],
+          "timeline": [
+            {
+              "trackIndex": 0,
+              "effectSubTrack": {
+                "items": [
+                  {
+                    "effectId": "792cfd08-f929-4506-95b0-74c9b15806b1",
+                    "type": "fade-out",
+                    "startTimeMs": 11126,
+                    "endTimeMs": 14110,
+                    "scope": "segment",
+                    "enabled": true,
+                    "stackOrder": 0,
+                    "params": {
+                      "fadeStartMs": 11126,
+                      "fadeEndMs": 14110,
+                      "fromOpacity": 1,
+                      "toOpacity": 0,
+                      "curve": "ease-out"
+                    }
+                  },
+                  {
+                    "effectId": "bd0da5a4-c101-46ac-8d36-539bf2dcd238",
+                    "type": "light-adjustment",
+                    "startTimeMs": 0,
+                    "endTimeMs": 3976,
+                    "scope": "segment",
+                    "enabled": true,
+                    "stackOrder": 1,
+                    "params": {
+                      "brightness": 0,
+                      "contrast": 1.2,
+                      "saturation": 1
+                    }
+                  }
+                ]
+              },
+              "elements": [
+                {
+                  "elementId": "8bfaf3d0-cfec-40fb-b0ba-f72cda0d9cb0",
+                  "mediaName": "Tuning a Radio.webm",
+                  "mediaType": "VIDEO",
+                  "startTimeMs": 0,
+                  "durationMs": 9051,
+                  "trimFromStartMs": 0,
+                  "trimFromEndMs": 0,
+                  "activeEffectsAtStart": [
+                    {
+                      "effectId": "bd0da5a4-c101-46ac-8d36-539bf2dcd238",
+                      "type": "light-adjustment",
+                      "startTimeMs": 0,
+                      "endTimeMs": 3976,
+                      "scope": "segment",
+                      "enabled": true,
+                      "stackOrder": 1,
+                      "params": {
+                        "brightness": 0,
+                        "contrast": 1.2,
+                        "saturation": 1
+                      }
+                    }
+                  ]
+                },
+                {
+                  "elementId": "1f79a8da-9cca-442f-bb55-b2b16642c292",
+                  "mediaName": "Flower Video.webm",
+                  "mediaType": "VIDEO",
+                  "startTimeMs": 9051,
+                  "durationMs": 5059,
+                  "trimFromStartMs": 0,
+                  "trimFromEndMs": 0,
+                  "activeEffectsAtStart": []
+                }
+              ]
+            }
+          ]
+        },
+        "timestamp": 1772456343938
+      }
+    ]
+  }
+}

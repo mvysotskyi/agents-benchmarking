@@ -1,0 +1,108 @@
+{
+  "scenario": 5,
+  "endpoint_content": {
+    "operations": [
+      {
+        "type": "MEDIA_UPLOAD",
+        "data": {
+          "filename": "Flower Video.webm",
+          "mediaId": "d1a6a841-dce9-4f8a-b14a-e1eff3377200",
+          "mediaType": "VIDEO",
+          "duration": 5059
+        },
+        "timestamp": 1774543799395
+      },
+      {
+        "type": "TIMELINE_ADD",
+        "data": {
+          "mediaId": "d1a6a841-dce9-4f8a-b14a-e1eff3377200",
+          "mediaName": "Flower Video.webm",
+          "elementId": "a6a2298b-cae9-4f88-af90-a339a53f1cfd",
+          "trackIndex": 0,
+          "startTime": 0,
+          "duration": 5059
+        },
+        "timestamp": 1774543800917
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "a6a2298b-cae9-4f88-af90-a339a53f1cfd",
+          "mediaName": "Flower Video.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 0,
+          "newStartTime": 0
+        },
+        "timestamp": 1774543801971
+      },
+      {
+        "type": "EXPORT_COMPLETE",
+        "data": {
+          "finalDurationMs": 5059,
+          "trackCount": 1,
+          "sourceMedia": [
+            {
+              "filename": "Flower Video.webm",
+              "mediaType": "VIDEO",
+              "originalDurationMs": 5059
+            }
+          ],
+          "timeline": [
+            {
+              "trackIndex": 0,
+              "effectSubTrack": {
+                "items": [
+                  {
+                    "effectId": "5009de98-b48a-42cb-bc7e-fe60039fca11",
+                    "type": "light-adjustment",
+                    "startTimeMs": 0,
+                    "endTimeMs": 5059,
+                    "scope": "full-clip",
+                    "targetClipId": "a6a2298b-cae9-4f88-af90-a339a53f1cfd",
+                    "enabled": true,
+                    "stackOrder": 0,
+                    "params": {
+                      "brightness": 0,
+                      "contrast": 2.2,
+                      "saturation": 1
+                    }
+                  }
+                ]
+              },
+              "elements": [
+                {
+                  "elementId": "a6a2298b-cae9-4f88-af90-a339a53f1cfd",
+                  "mediaName": "Flower Video.webm",
+                  "mediaType": "VIDEO",
+                  "startTimeMs": 0,
+                  "durationMs": 5059,
+                  "trimFromStartMs": 0,
+                  "trimFromEndMs": 0,
+                  "activeEffectsAtStart": [
+                    {
+                      "effectId": "5009de98-b48a-42cb-bc7e-fe60039fca11",
+                      "type": "light-adjustment",
+                      "startTimeMs": 0,
+                      "endTimeMs": 5059,
+                      "scope": "full-clip",
+                      "targetClipId": "a6a2298b-cae9-4f88-af90-a339a53f1cfd",
+                      "enabled": true,
+                      "stackOrder": 0,
+                      "params": {
+                        "brightness": 0,
+                        "contrast": 2.2,
+                        "saturation": 1
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "timestamp": 1774543817295
+      }
+    ]
+  }
+}

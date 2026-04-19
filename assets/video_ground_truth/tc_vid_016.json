@@ -1,0 +1,222 @@
+{
+  "scenario": 16,
+  "endpoint_content": {
+    "operations": [
+      {
+        "type": "MEDIA_UPLOAD",
+        "data": {
+          "filename": "Flower Video.webm",
+          "mediaId": "be94e5b5-f17e-42dd-b602-c5d63402c552",
+          "mediaType": "VIDEO",
+          "duration": 5059
+        },
+        "timestamp": 1773396255713
+      },
+      {
+        "type": "MEDIA_UPLOAD",
+        "data": {
+          "filename": "White Candle.webm",
+          "mediaId": "1ad35a6d-b0e9-4224-ba0d-4e07e2482d75",
+          "mediaType": "VIDEO",
+          "duration": 41766
+        },
+        "timestamp": 1773396256274
+      },
+      {
+        "type": "MEDIA_UPLOAD",
+        "data": {
+          "filename": "Tuning a Radio.webm",
+          "mediaId": "1fbcc112-1215-48df-8c73-bac392d79d28",
+          "mediaType": "VIDEO",
+          "duration": 9051
+        },
+        "timestamp": 1773396256689
+      },
+      {
+        "type": "TIMELINE_ADD",
+        "data": {
+          "mediaId": "be94e5b5-f17e-42dd-b602-c5d63402c552",
+          "mediaName": "Flower Video.webm",
+          "elementId": "deb5031a-7af9-4204-8a56-6017fd5a500e",
+          "trackIndex": 0,
+          "startTime": 0,
+          "duration": 5059
+        },
+        "timestamp": 1773396262693
+      },
+      {
+        "type": "TIMELINE_ADD",
+        "data": {
+          "mediaId": "1ad35a6d-b0e9-4224-ba0d-4e07e2482d75",
+          "mediaName": "White Candle.webm",
+          "elementId": "75242a37-3612-49ce-9367-58bc92a943d3",
+          "trackIndex": 0,
+          "startTime": 6225,
+          "duration": 41766
+        },
+        "timestamp": 1773396265333
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "75242a37-3612-49ce-9367-58bc92a943d3",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 6050,
+          "newStartTime": 6050
+        },
+        "timestamp": 1773396278456
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "75242a37-3612-49ce-9367-58bc92a943d3",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 6050,
+          "newStartTime": 6050
+        },
+        "timestamp": 1773396280732
+      },
+      {
+        "type": "TIMELINE_ZOOM",
+        "data": {
+          "prevScale": 40,
+          "newScale": 80,
+          "direction": "in"
+        },
+        "timestamp": 1773396282161
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "75242a37-3612-49ce-9367-58bc92a943d3",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 6038,
+          "newStartTime": 6038
+        },
+        "timestamp": 1773396284310
+      },
+      {
+        "type": "TIMELINE_ZOOM",
+        "data": {
+          "prevScale": 80,
+          "newScale": 40,
+          "direction": "out"
+        },
+        "timestamp": 1773396294801
+      },
+      {
+        "type": "TIMELINE_ZOOM",
+        "data": {
+          "prevScale": 40,
+          "newScale": 20,
+          "direction": "out"
+        },
+        "timestamp": 1773396295145
+      },
+      {
+        "type": "TIMELINE_ZOOM",
+        "data": {
+          "prevScale": 20,
+          "newScale": 10,
+          "direction": "out"
+        },
+        "timestamp": 1773396295456
+      },
+      {
+        "type": "TIMELINE_ADD",
+        "data": {
+          "mediaId": "1fbcc112-1215-48df-8c73-bac392d79d28",
+          "mediaName": "Tuning a Radio.webm",
+          "elementId": "b424d54b-269a-4dd6-851b-462ae15e162d",
+          "trackIndex": 0,
+          "startTime": 52200,
+          "duration": 9051
+        },
+        "timestamp": 1773396297211
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "b424d54b-269a-4dd6-851b-462ae15e162d",
+          "mediaName": "Tuning a Radio.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 49900,
+          "newStartTime": 49900
+        },
+        "timestamp": 1773396312001
+      },
+      {
+        "type": "EXPORT_COMPLETE",
+        "data": {
+          "finalDurationMs": 58951,
+          "trackCount": 1,
+          "sourceMedia": [
+            {
+              "filename": "Flower Video.webm",
+              "mediaType": "VIDEO",
+              "originalDurationMs": 5059
+            },
+            {
+              "filename": "White Candle.webm",
+              "mediaType": "VIDEO",
+              "originalDurationMs": 41766
+            },
+            {
+              "filename": "Tuning a Radio.webm",
+              "mediaType": "VIDEO",
+              "originalDurationMs": 9051
+            }
+          ],
+          "timeline": [
+            {
+              "trackIndex": 0,
+              "effectSubTrack": {
+                "items": []
+              },
+              "elements": [
+                {
+                  "elementId": "deb5031a-7af9-4204-8a56-6017fd5a500e",
+                  "mediaName": "Flower Video.webm",
+                  "mediaType": "VIDEO",
+                  "startTimeMs": 0,
+                  "durationMs": 5059,
+                  "trimFromStartMs": 0,
+                  "trimFromEndMs": 0,
+                  "activeEffectsAtStart": []
+                },
+                {
+                  "elementId": "75242a37-3612-49ce-9367-58bc92a943d3",
+                  "mediaName": "White Candle.webm",
+                  "mediaType": "VIDEO",
+                  "startTimeMs": 6038,
+                  "durationMs": 41766,
+                  "trimFromStartMs": 0,
+                  "trimFromEndMs": 0,
+                  "activeEffectsAtStart": []
+                },
+                {
+                  "elementId": "b424d54b-269a-4dd6-851b-462ae15e162d",
+                  "mediaName": "Tuning a Radio.webm",
+                  "mediaType": "VIDEO",
+                  "startTimeMs": 49900,
+                  "durationMs": 9051,
+                  "trimFromStartMs": 0,
+                  "trimFromEndMs": 0,
+                  "activeEffectsAtStart": []
+                }
+              ]
+            }
+          ]
+        },
+        "timestamp": 1773396321012
+      }
+    ]
+  }
+}

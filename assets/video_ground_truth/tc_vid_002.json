@@ -1,0 +1,185 @@
+{
+  "scenario": 2,
+  "endpoint_content": {
+    "operations": [
+      {
+        "type": "TEXT_BLOCK_ADD",
+        "data": {
+          "mediaId": "37266b4c-474a-4386-baea-8eb522f8acba",
+          "mediaName": "Text block",
+          "elementId": "5f92004a-ddd6-4b41-a640-1c52a9d55c40",
+          "trackIndex": 1,
+          "startTime": 0,
+          "duration": 3000
+        },
+        "timestamp": 1776319997980
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "5f92004a-ddd6-4b41-a640-1c52a9d55c40",
+          "mediaName": "Text block",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 0,
+          "newStartTime": 0
+        },
+        "timestamp": 1776319998686
+      },
+      {
+        "type": "TEXT_BLOCK_ADD",
+        "data": {
+          "mediaId": "bc90d1e8-7ed6-4ddb-8772-233be35891a1",
+          "mediaName": "Text block",
+          "elementId": "c77e3016-65f0-45c0-a6d1-89a6ed5886b3",
+          "trackIndex": 2,
+          "startTime": 0,
+          "duration": 3000
+        },
+        "timestamp": 1776319999591
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "c77e3016-65f0-45c0-a6d1-89a6ed5886b3",
+          "mediaName": "Text block",
+          "prevTrackIndex": 1,
+          "newTrackIndex": 1,
+          "prevStartTime": 0,
+          "newStartTime": 0
+        },
+        "timestamp": 1776320000629
+      },
+      {
+        "type": "TIMELINE_DELETE",
+        "data": {
+          "elementId": "c77e3016-65f0-45c0-a6d1-89a6ed5886b3",
+          "mediaName": "Text block",
+          "trackIndex": 1,
+          "startTime": 0,
+          "duration": 3000
+        },
+        "timestamp": 1776320001519
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "5f92004a-ddd6-4b41-a640-1c52a9d55c40",
+          "mediaName": "Text block",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 0,
+          "newStartTime": 0
+        },
+        "timestamp": 1776320002157
+      },
+      {
+        "type": "TEXT_BLOCK_ADD",
+        "data": {
+          "mediaId": "0bbe2e77-8c2d-4fae-96f3-f8063343d46b",
+          "mediaName": "Text block",
+          "elementId": "18ec74a8-04d6-4a1b-b4d1-29ec522dbe02",
+          "trackIndex": 2,
+          "startTime": 0,
+          "duration": 3000
+        },
+        "timestamp": 1776320006819
+      },
+      {
+        "type": "TIMELINE_DELETE",
+        "data": {
+          "elementId": "18ec74a8-04d6-4a1b-b4d1-29ec522dbe02",
+          "mediaName": "Text block",
+          "trackIndex": 1,
+          "startTime": 0,
+          "duration": 3000
+        },
+        "timestamp": 1776320008955
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "5f92004a-ddd6-4b41-a640-1c52a9d55c40",
+          "mediaName": "Text block",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 0,
+          "newStartTime": 0
+        },
+        "timestamp": 1776320009373
+      },
+      {
+        "type": "TEXT_BLOCK_STYLE_UPDATE",
+        "data": {
+          "field": "text",
+          "value": "Hello!"
+        },
+        "timestamp": 1776320017003
+      },
+      {
+        "type": "TEXT_BLOCK_STYLE_UPDATE",
+        "data": {
+          "field": "fontSize",
+          "value": 32
+        },
+        "timestamp": 1776320017003
+      },
+      {
+        "type": "TEXT_BLOCK_STYLE_UPDATE",
+        "data": {
+          "field": "fontColor",
+          "value": "#ffffff"
+        },
+        "timestamp": 1776320017003
+      },
+      {
+        "type": "TEXT_BLOCK_STYLE_UPDATE",
+        "data": {
+          "field": "backgroundColor",
+          "value": "#00000080"
+        },
+        "timestamp": 1776320017003
+      },
+      {
+        "type": "TEXT_BLOCK_DURATION_UPDATE",
+        "data": {
+          "duration": 3000
+        },
+        "timestamp": 1776320017003
+      },
+      {
+        "type": "EXPORT_COMPLETE",
+        "data": {
+          "finalDurationMs": 3000,
+          "trackCount": 1,
+          "sourceMedia": [],
+          "timeline": [
+            {
+              "trackIndex": 0,
+              "effectSubTrack": {
+                "items": []
+              },
+              "elements": [
+                {
+                  "elementId": "5f92004a-ddd6-4b41-a640-1c52a9d55c40",
+                  "mediaName": "Text block",
+                  "mediaType": "TEXT",
+                  "startTimeMs": 0,
+                  "durationMs": 3000,
+                  "trimFromStartMs": 0,
+                  "trimFromEndMs": 0,
+                  "activeEffectsAtStart": [],
+                  "text": "Hello!",
+                  "fontSize": 32,
+                  "fontColor": "#ffffff",
+                  "backgroundColor": "#00000080"
+                }
+              ]
+            }
+          ]
+        },
+        "timestamp": 1776320104900
+      }
+    ]
+  }
+}

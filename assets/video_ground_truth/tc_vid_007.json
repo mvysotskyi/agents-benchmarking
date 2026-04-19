@@ -1,0 +1,121 @@
+{
+  "scenario": 7,
+  "endpoint_content": {
+    "operations": [
+      {
+        "type": "MEDIA_UPLOAD",
+        "data": {
+          "filename": "Flower Video.webm",
+          "mediaId": "705cbb26-f8b0-4fd1-b73b-7c07fe852eac",
+          "mediaType": "VIDEO",
+          "duration": 5059
+        },
+        "timestamp": 1776322222811
+      },
+      {
+        "type": "MEDIA_UPLOAD",
+        "data": {
+          "filename": "T-Rex Roar.mp3",
+          "mediaId": "4db2b559-75fb-4709-8b9a-6a0d0af60509",
+          "mediaType": "AUDIO",
+          "duration": 2074
+        },
+        "timestamp": 1776322224187
+      },
+      {
+        "type": "TIMELINE_ADD",
+        "data": {
+          "mediaId": "705cbb26-f8b0-4fd1-b73b-7c07fe852eac",
+          "mediaName": "Flower Video.webm",
+          "elementId": "208892a6-91dd-4db0-a759-114100af9125",
+          "trackIndex": 0,
+          "startTime": 0,
+          "duration": 5059
+        },
+        "timestamp": 1776322225259
+      },
+      {
+        "type": "TIMELINE_ADD",
+        "data": {
+          "mediaId": "4db2b559-75fb-4709-8b9a-6a0d0af60509",
+          "mediaName": "T-Rex Roar.mp3",
+          "elementId": "025f6e63-0a1b-4429-b231-dc869fce3fb7",
+          "trackIndex": 1,
+          "startTime": 0,
+          "duration": 2074
+        },
+        "timestamp": 1776322226580
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "025f6e63-0a1b-4429-b231-dc869fce3fb7",
+          "mediaName": "T-Rex Roar.mp3",
+          "prevTrackIndex": 1,
+          "newTrackIndex": 1,
+          "prevStartTime": 2900,
+          "newStartTime": 2900
+        },
+        "timestamp": 1776322228474
+      },
+      {
+        "type": "EXPORT_COMPLETE",
+        "data": {
+          "finalDurationMs": 5059,
+          "trackCount": 2,
+          "sourceMedia": [
+            {
+              "filename": "Flower Video.webm",
+              "mediaType": "VIDEO",
+              "originalDurationMs": 5059
+            },
+            {
+              "filename": "T-Rex Roar.mp3",
+              "mediaType": "AUDIO",
+              "originalDurationMs": 2074
+            }
+          ],
+          "timeline": [
+            {
+              "trackIndex": 0,
+              "effectSubTrack": {
+                "items": []
+              },
+              "elements": [
+                {
+                  "elementId": "208892a6-91dd-4db0-a759-114100af9125",
+                  "mediaName": "Flower Video.webm",
+                  "mediaType": "VIDEO",
+                  "startTimeMs": 0,
+                  "durationMs": 5059,
+                  "trimFromStartMs": 0,
+                  "trimFromEndMs": 0,
+                  "activeEffectsAtStart": []
+                }
+              ]
+            },
+            {
+              "trackIndex": 1,
+              "effectSubTrack": {
+                "items": []
+              },
+              "elements": [
+                {
+                  "elementId": "025f6e63-0a1b-4429-b231-dc869fce3fb7",
+                  "mediaName": "T-Rex Roar.mp3",
+                  "mediaType": "AUDIO",
+                  "startTimeMs": 2900,
+                  "durationMs": 2074,
+                  "trimFromStartMs": 0,
+                  "trimFromEndMs": 0,
+                  "activeEffectsAtStart": []
+                }
+              ]
+            }
+          ]
+        },
+        "timestamp": 1776322236520
+      }
+    ]
+  }
+}

@@ -1,0 +1,392 @@
+{
+  "scenario": 20,
+  "endpoint_content": {
+    "operations": [
+      {
+        "type": "MEDIA_UPLOAD",
+        "data": {
+          "filename": "White Candle.webm",
+          "mediaId": "f0cee778-fb2c-4743-9c2e-d54d93664980",
+          "mediaType": "VIDEO",
+          "duration": 41766
+        },
+        "timestamp": 1773393190820
+      },
+      {
+        "type": "TIMELINE_ADD",
+        "data": {
+          "mediaId": "f0cee778-fb2c-4743-9c2e-d54d93664980",
+          "mediaName": "White Candle.webm",
+          "elementId": "e33033fe-abc7-4112-adb9-11ff8ba8362b",
+          "trackIndex": 0,
+          "startTime": 0,
+          "duration": 41766
+        },
+        "timestamp": 1773393192348
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "e33033fe-abc7-4112-adb9-11ff8ba8362b",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 0,
+          "newStartTime": 0
+        },
+        "timestamp": 1773393201264
+      },
+      {
+        "type": "TIMELINE_SPLIT",
+        "data": {
+          "elementId": "e33033fe-abc7-4112-adb9-11ff8ba8362b",
+          "mediaName": "White Candle.webm",
+          "leftElementId": "e33033fe-abc7-4112-adb9-11ff8ba8362b",
+          "rightElementId": "cfb32c10-b8d5-4829-82bb-014aedb7b636",
+          "splitTimeMs": 9975
+        },
+        "timestamp": 1773393201835
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "cfb32c10-b8d5-4829-82bb-014aedb7b636",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 9975,
+          "newStartTime": 9975
+        },
+        "timestamp": 1773393202773
+      },
+      {
+        "type": "TIMELINE_DELETE",
+        "data": {
+          "elementId": "cfb32c10-b8d5-4829-82bb-014aedb7b636",
+          "mediaName": "White Candle.webm",
+          "trackIndex": 0,
+          "startTime": 9975,
+          "duration": 31791
+        },
+        "timestamp": 1773393204104
+      },
+      {
+        "type": "TEXT_BLOCK_ADD",
+        "data": {
+          "mediaId": "2f4e98e1-1164-4b7a-8697-725cf32e1afd",
+          "mediaName": "Text block",
+          "elementId": "6b91aa9f-a26b-4164-95c5-829a216b92d9",
+          "trackIndex": 2,
+          "startTime": 0,
+          "duration": 3000
+        },
+        "timestamp": 1773393205737
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "6b91aa9f-a26b-4164-95c5-829a216b92d9",
+          "mediaName": "Text block",
+          "prevTrackIndex": 1,
+          "newTrackIndex": 0,
+          "prevStartTime": 14000,
+          "newStartTime": 14000
+        },
+        "timestamp": 1773393207162
+      },
+      {
+        "type": "TIMELINE_SNAP",
+        "data": {
+          "elementId": "6b91aa9f-a26b-4164-95c5-829a216b92d9",
+          "mediaName": "Text block",
+          "prevStartTime": 9975,
+          "newStartTime": 9975
+        },
+        "timestamp": 1773393208315
+      },
+      {
+        "type": "TEXT_BLOCK_STYLE_UPDATE",
+        "data": {
+          "field": "text",
+          "value": "New text"
+        },
+        "timestamp": 1773393260213
+      },
+      {
+        "type": "TEXT_BLOCK_STYLE_UPDATE",
+        "data": {
+          "field": "fontSize",
+          "value": 32
+        },
+        "timestamp": 1773393260213
+      },
+      {
+        "type": "TEXT_BLOCK_STYLE_UPDATE",
+        "data": {
+          "field": "fontColor",
+          "value": "#000000"
+        },
+        "timestamp": 1773393260213
+      },
+      {
+        "type": "TEXT_BLOCK_STYLE_UPDATE",
+        "data": {
+          "field": "backgroundColor",
+          "value": "#ffffff"
+        },
+        "timestamp": 1773393260213
+      },
+      {
+        "type": "TEXT_BLOCK_DURATION_UPDATE",
+        "data": {
+          "duration": 2000
+        },
+        "timestamp": 1773393260213
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "6b91aa9f-a26b-4164-95c5-829a216b92d9",
+          "mediaName": "Text block",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 9975,
+          "newStartTime": 9975
+        },
+        "timestamp": 1773393268935
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "6b91aa9f-a26b-4164-95c5-829a216b92d9",
+          "mediaName": "Text block",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 9975,
+          "newStartTime": 9975
+        },
+        "timestamp": 1773393275377
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "e33033fe-abc7-4112-adb9-11ff8ba8362b",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 0,
+          "newStartTime": 0
+        },
+        "timestamp": 1773393278320
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "e33033fe-abc7-4112-adb9-11ff8ba8362b",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 0,
+          "newStartTime": 0
+        },
+        "timestamp": 1773393286640
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "6b91aa9f-a26b-4164-95c5-829a216b92d9",
+          "mediaName": "Text block",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 9975,
+          "newStartTime": 9975
+        },
+        "timestamp": 1773393343069
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "e33033fe-abc7-4112-adb9-11ff8ba8362b",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 0,
+          "newStartTime": 0
+        },
+        "timestamp": 1773393894238
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "6b91aa9f-a26b-4164-95c5-829a216b92d9",
+          "mediaName": "Text block",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 9975,
+          "newStartTime": 9975
+        },
+        "timestamp": 1773393900542
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "e33033fe-abc7-4112-adb9-11ff8ba8362b",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 0,
+          "newStartTime": 0
+        },
+        "timestamp": 1773393901119
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "e33033fe-abc7-4112-adb9-11ff8ba8362b",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 0,
+          "newStartTime": 0
+        },
+        "timestamp": 1773393903483
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "6b91aa9f-a26b-4164-95c5-829a216b92d9",
+          "mediaName": "Text block",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 9975,
+          "newStartTime": 9975
+        },
+        "timestamp": 1773393904667
+      },
+      {
+        "type": "TEXT_BLOCK_STYLE_UPDATE",
+        "data": {
+          "field": "text",
+          "value": "The End"
+        },
+        "timestamp": 1773393940764
+      },
+      {
+        "type": "TEXT_BLOCK_STYLE_UPDATE",
+        "data": {
+          "field": "fontSize",
+          "value": 32
+        },
+        "timestamp": 1773393940764
+      },
+      {
+        "type": "TEXT_BLOCK_STYLE_UPDATE",
+        "data": {
+          "field": "fontColor",
+          "value": "#000000"
+        },
+        "timestamp": 1773393940764
+      },
+      {
+        "type": "TEXT_BLOCK_STYLE_UPDATE",
+        "data": {
+          "field": "backgroundColor",
+          "value": "#ffffff"
+        },
+        "timestamp": 1773393940764
+      },
+      {
+        "type": "TEXT_BLOCK_DURATION_UPDATE",
+        "data": {
+          "duration": 2000
+        },
+        "timestamp": 1773393940764
+      },
+      {
+        "type": "EXPORT_COMPLETE",
+        "data": {
+          "finalDurationMs": 11975,
+          "trackCount": 1,
+          "sourceMedia": [
+            {
+              "filename": "White Candle.webm",
+              "mediaType": "VIDEO",
+              "originalDurationMs": 41766
+            }
+          ],
+          "timeline": [
+            {
+              "trackIndex": 0,
+              "effectSubTrack": {
+                "items": [
+                  {
+                    "effectId": "a811dd98-dee0-40c4-bf8e-2be99b0006f6",
+                    "type": "fade-out",
+                    "startTimeMs": 9975,
+                    "endTimeMs": 11975,
+                    "scope": "full-clip",
+                    "targetClipId": "6b91aa9f-a26b-4164-95c5-829a216b92d9",
+                    "enabled": true,
+                    "stackOrder": 0,
+                    "params": {
+                      "fadeStartMs": 9975,
+                      "fadeEndMs": 11975,
+                      "fromOpacity": 1,
+                      "toOpacity": 0,
+                      "curve": "linear"
+                    }
+                  }
+                ]
+              },
+              "elements": [
+                {
+                  "elementId": "e33033fe-abc7-4112-adb9-11ff8ba8362b",
+                  "mediaName": "White Candle.webm",
+                  "mediaType": "VIDEO",
+                  "startTimeMs": 0,
+                  "durationMs": 9975,
+                  "trimFromStartMs": 0,
+                  "trimFromEndMs": 31791,
+                  "activeEffectsAtStart": []
+                },
+                {
+                  "elementId": "6b91aa9f-a26b-4164-95c5-829a216b92d9",
+                  "mediaName": "Text block",
+                  "mediaType": "TEXT",
+                  "startTimeMs": 9975,
+                  "durationMs": 2000,
+                  "trimFromStartMs": 0,
+                  "trimFromEndMs": 0,
+                  "activeEffectsAtStart": [
+                    {
+                      "effectId": "a811dd98-dee0-40c4-bf8e-2be99b0006f6",
+                      "type": "fade-out",
+                      "startTimeMs": 9975,
+                      "endTimeMs": 11975,
+                      "scope": "full-clip",
+                      "targetClipId": "6b91aa9f-a26b-4164-95c5-829a216b92d9",
+                      "enabled": true,
+                      "stackOrder": 0,
+                      "params": {
+                        "fadeStartMs": 9975,
+                        "fadeEndMs": 11975,
+                        "fromOpacity": 1,
+                        "toOpacity": 0,
+                        "curve": "linear"
+                      }
+                    }
+                  ],
+                  "text": "The End",
+                  "fontSize": 32,
+                  "fontColor": "#000000",
+                  "backgroundColor": "#ffffff"
+                }
+              ]
+            }
+          ]
+        },
+        "timestamp": 1773393963469
+      }
+    ]
+  }
+}

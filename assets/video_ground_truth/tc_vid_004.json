@@ -1,0 +1,110 @@
+{
+  "scenario": 4,
+  "endpoint_content": {
+    "operations": [
+      {
+        "type": "MEDIA_UPLOAD",
+        "data": {
+          "filename": "White Candle.webm",
+          "mediaId": "541385e8-5d1b-4235-a743-a0d773a5fe0b",
+          "mediaType": "VIDEO",
+          "duration": 41766
+        },
+        "timestamp": 1774543720646
+      },
+      {
+        "type": "TIMELINE_ADD",
+        "data": {
+          "mediaId": "541385e8-5d1b-4235-a743-a0d773a5fe0b",
+          "mediaName": "White Candle.webm",
+          "elementId": "c8121774-4cf5-47fc-b1cb-c75c7e8be1a9",
+          "trackIndex": 0,
+          "startTime": 0,
+          "duration": 41766
+        },
+        "timestamp": 1774543722604
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "c8121774-4cf5-47fc-b1cb-c75c7e8be1a9",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 0,
+          "newStartTime": 0
+        },
+        "timestamp": 1774543745047
+      },
+      {
+        "type": "TIMELINE_SPLIT",
+        "data": {
+          "elementId": "c8121774-4cf5-47fc-b1cb-c75c7e8be1a9",
+          "mediaName": "White Candle.webm",
+          "leftElementId": "c8121774-4cf5-47fc-b1cb-c75c7e8be1a9",
+          "rightElementId": "7ecad14e-e73d-4814-bbd7-9c935ec31b9c",
+          "splitTimeMs": 5000
+        },
+        "timestamp": 1774543746531
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "7ecad14e-e73d-4814-bbd7-9c935ec31b9c",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 5000,
+          "newStartTime": 5000
+        },
+        "timestamp": 1774543748114
+      },
+      {
+        "type": "TIMELINE_DELETE",
+        "data": {
+          "elementId": "7ecad14e-e73d-4814-bbd7-9c935ec31b9c",
+          "mediaName": "White Candle.webm",
+          "trackIndex": 0,
+          "startTime": 5000,
+          "duration": 36766
+        },
+        "timestamp": 1774543757306
+      },
+      {
+        "type": "EXPORT_COMPLETE",
+        "data": {
+          "finalDurationMs": 5000,
+          "trackCount": 1,
+          "sourceMedia": [
+            {
+              "filename": "White Candle.webm",
+              "mediaType": "VIDEO",
+              "originalDurationMs": 41766
+            }
+          ],
+          "timeline": [
+            {
+              "trackIndex": 0,
+              "effectSubTrack": {
+                "items": []
+              },
+              "elements": [
+                {
+                  "elementId": "c8121774-4cf5-47fc-b1cb-c75c7e8be1a9",
+                  "mediaName": "White Candle.webm",
+                  "mediaType": "VIDEO",
+                  "startTimeMs": 0,
+                  "durationMs": 5000,
+                  "trimFromStartMs": 0,
+                  "trimFromEndMs": 36766,
+                  "activeEffectsAtStart": []
+                }
+              ]
+            }
+          ]
+        },
+        "timestamp": 1774543762600
+      }
+    ]
+  }
+}

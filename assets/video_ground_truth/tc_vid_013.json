@@ -1,0 +1,321 @@
+{
+  "scenario": 13,
+  "endpoint_content": {
+    "operations": [
+      {
+        "type": "MEDIA_UPLOAD",
+        "data": {
+          "filename": "Flower Video.webm",
+          "mediaId": "ca79a841-23f4-4cfe-a928-770bcb6367aa",
+          "mediaType": "VIDEO",
+          "duration": 5059
+        },
+        "timestamp": 1772455527649
+      },
+      {
+        "type": "MEDIA_UPLOAD",
+        "data": {
+          "filename": "White Candle.webm",
+          "mediaId": "1f176566-ca92-4be3-8611-fc4fefd68053",
+          "mediaType": "VIDEO",
+          "duration": 41766
+        },
+        "timestamp": 1772455528551
+      },
+      {
+        "type": "MEDIA_UPLOAD",
+        "data": {
+          "filename": "Tuning a Radio.webm",
+          "mediaId": "e03e1e8c-ed95-4f30-a4e1-5ae8cae7d6a9",
+          "mediaType": "VIDEO",
+          "duration": 9051
+        },
+        "timestamp": 1772455528922
+      },
+      {
+        "type": "TIMELINE_ADD",
+        "data": {
+          "mediaId": "ca79a841-23f4-4cfe-a928-770bcb6367aa",
+          "mediaName": "Flower Video.webm",
+          "elementId": "53e48500-5a71-4b0d-ad24-bc0deb7ab2be",
+          "trackIndex": 0,
+          "startTime": 0,
+          "duration": 5059
+        },
+        "timestamp": 1772455530824
+      },
+      {
+        "type": "TIMELINE_ADD",
+        "data": {
+          "mediaId": "1f176566-ca92-4be3-8611-fc4fefd68053",
+          "mediaName": "White Candle.webm",
+          "elementId": "fb114682-b94a-40f1-bd38-e00c3b620b34",
+          "trackIndex": 0,
+          "startTime": 5925,
+          "duration": 41766
+        },
+        "timestamp": 1772455532907
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "fb114682-b94a-40f1-bd38-e00c3b620b34",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 5925,
+          "newStartTime": 5925
+        },
+        "timestamp": 1772455533295
+      },
+      {
+        "type": "TIMELINE_SNAP",
+        "data": {
+          "elementId": "fb114682-b94a-40f1-bd38-e00c3b620b34",
+          "mediaName": "White Candle.webm",
+          "prevStartTime": 5059,
+          "newStartTime": 5059
+        },
+        "timestamp": 1772455534048
+      },
+      {
+        "type": "TIMELINE_ZOOM",
+        "data": {
+          "prevScale": 40,
+          "newScale": 20,
+          "direction": "out"
+        },
+        "timestamp": 1772455535028
+      },
+      {
+        "type": "TIMELINE_ADD",
+        "data": {
+          "mediaId": "e03e1e8c-ed95-4f30-a4e1-5ae8cae7d6a9",
+          "mediaName": "Tuning a Radio.webm",
+          "elementId": "08a229f9-ff58-4055-b6de-05d0c4f7d560",
+          "trackIndex": 0,
+          "startTime": 51050,
+          "duration": 9051
+        },
+        "timestamp": 1772455537378
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "08a229f9-ff58-4055-b6de-05d0c4f7d560",
+          "mediaName": "Tuning a Radio.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 51050,
+          "newStartTime": 51050
+        },
+        "timestamp": 1772455537941
+      },
+      {
+        "type": "TIMELINE_SNAP",
+        "data": {
+          "elementId": "08a229f9-ff58-4055-b6de-05d0c4f7d560",
+          "mediaName": "Tuning a Radio.webm",
+          "prevStartTime": 46825,
+          "newStartTime": 46825
+        },
+        "timestamp": 1772455539087
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "53e48500-5a71-4b0d-ad24-bc0deb7ab2be",
+          "mediaName": "Flower Video.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 0,
+          "newStartTime": 0
+        },
+        "timestamp": 1772455539784
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "fb114682-b94a-40f1-bd38-e00c3b620b34",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 5059,
+          "newStartTime": 5059
+        },
+        "timestamp": 1772455544032
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "08a229f9-ff58-4055-b6de-05d0c4f7d560",
+          "mediaName": "Tuning a Radio.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 46825,
+          "newStartTime": 46825
+        },
+        "timestamp": 1772455545864
+      },
+      {
+        "type": "EXPORT_COMPLETE",
+        "data": {
+          "finalDurationMs": 55876,
+          "trackCount": 1,
+          "sourceMedia": [
+            {
+              "filename": "Flower Video.webm",
+              "mediaType": "VIDEO",
+              "originalDurationMs": 5059
+            },
+            {
+              "filename": "White Candle.webm",
+              "mediaType": "VIDEO",
+              "originalDurationMs": 41766
+            },
+            {
+              "filename": "Tuning a Radio.webm",
+              "mediaType": "VIDEO",
+              "originalDurationMs": 9051
+            }
+          ],
+          "timeline": [
+            {
+              "trackIndex": 0,
+              "effectSubTrack": {
+                "items": [
+                  {
+                    "effectId": "d13d5605-0cdd-4952-a747-df1bc4ebd5a2",
+                    "type": "light-adjustment",
+                    "startTimeMs": 0,
+                    "endTimeMs": 5059,
+                    "scope": "full-clip",
+                    "targetClipId": "53e48500-5a71-4b0d-ad24-bc0deb7ab2be",
+                    "enabled": true,
+                    "stackOrder": 0,
+                    "params": {
+                      "brightness": 0,
+                      "contrast": 1.5,
+                      "saturation": 1
+                    }
+                  },
+                  {
+                    "effectId": "edb1086c-7146-4018-a896-efff0aa5b322",
+                    "type": "light-adjustment",
+                    "startTimeMs": 5059,
+                    "endTimeMs": 46825,
+                    "scope": "full-clip",
+                    "targetClipId": "fb114682-b94a-40f1-bd38-e00c3b620b34",
+                    "enabled": true,
+                    "stackOrder": 1,
+                    "params": {
+                      "brightness": 0.5,
+                      "contrast": 1,
+                      "saturation": 1
+                    }
+                  },
+                  {
+                    "effectId": "2bde68cb-e859-43fc-8f4d-0dd7d300d9b7",
+                    "type": "light-adjustment",
+                    "startTimeMs": 46825,
+                    "endTimeMs": 55876,
+                    "scope": "full-clip",
+                    "targetClipId": "08a229f9-ff58-4055-b6de-05d0c4f7d560",
+                    "enabled": true,
+                    "stackOrder": 2,
+                    "params": {
+                      "brightness": 0,
+                      "contrast": 1,
+                      "saturation": 1.7
+                    }
+                  }
+                ]
+              },
+              "elements": [
+                {
+                  "elementId": "53e48500-5a71-4b0d-ad24-bc0deb7ab2be",
+                  "mediaName": "Flower Video.webm",
+                  "mediaType": "VIDEO",
+                  "startTimeMs": 0,
+                  "durationMs": 5059,
+                  "trimFromStartMs": 0,
+                  "trimFromEndMs": 0,
+                  "activeEffectsAtStart": [
+                    {
+                      "effectId": "d13d5605-0cdd-4952-a747-df1bc4ebd5a2",
+                      "type": "light-adjustment",
+                      "startTimeMs": 0,
+                      "endTimeMs": 5059,
+                      "scope": "full-clip",
+                      "targetClipId": "53e48500-5a71-4b0d-ad24-bc0deb7ab2be",
+                      "enabled": true,
+                      "stackOrder": 0,
+                      "params": {
+                        "brightness": 0,
+                        "contrast": 1.5,
+                        "saturation": 1
+                      }
+                    }
+                  ]
+                },
+                {
+                  "elementId": "fb114682-b94a-40f1-bd38-e00c3b620b34",
+                  "mediaName": "White Candle.webm",
+                  "mediaType": "VIDEO",
+                  "startTimeMs": 5059,
+                  "durationMs": 41766,
+                  "trimFromStartMs": 0,
+                  "trimFromEndMs": 0,
+                  "activeEffectsAtStart": [
+                    {
+                      "effectId": "edb1086c-7146-4018-a896-efff0aa5b322",
+                      "type": "light-adjustment",
+                      "startTimeMs": 5059,
+                      "endTimeMs": 46825,
+                      "scope": "full-clip",
+                      "targetClipId": "fb114682-b94a-40f1-bd38-e00c3b620b34",
+                      "enabled": true,
+                      "stackOrder": 1,
+                      "params": {
+                        "brightness": 0.5,
+                        "contrast": 1,
+                        "saturation": 1
+                      }
+                    }
+                  ]
+                },
+                {
+                  "elementId": "08a229f9-ff58-4055-b6de-05d0c4f7d560",
+                  "mediaName": "Tuning a Radio.webm",
+                  "mediaType": "VIDEO",
+                  "startTimeMs": 46825,
+                  "durationMs": 9051,
+                  "trimFromStartMs": 0,
+                  "trimFromEndMs": 0,
+                  "activeEffectsAtStart": [
+                    {
+                      "effectId": "2bde68cb-e859-43fc-8f4d-0dd7d300d9b7",
+                      "type": "light-adjustment",
+                      "startTimeMs": 46825,
+                      "endTimeMs": 55876,
+                      "scope": "full-clip",
+                      "targetClipId": "08a229f9-ff58-4055-b6de-05d0c4f7d560",
+                      "enabled": true,
+                      "stackOrder": 2,
+                      "params": {
+                        "brightness": 0,
+                        "contrast": 1,
+                        "saturation": 1.7
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "timestamp": 1772455565434
+      }
+    ]
+  }
+}

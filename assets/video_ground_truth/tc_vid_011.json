@@ -1,0 +1,161 @@
+{
+  "scenario": 11,
+  "endpoint_content": {
+    "operations": [
+      {
+        "type": "MEDIA_UPLOAD",
+        "data": {
+          "filename": "Flower Video.webm",
+          "mediaId": "512aae21-b459-4772-8942-addd52aa47e1",
+          "mediaType": "VIDEO",
+          "duration": 5059
+        },
+        "timestamp": 1776323117404
+      },
+      {
+        "type": "TIMELINE_ADD",
+        "data": {
+          "mediaId": "512aae21-b459-4772-8942-addd52aa47e1",
+          "mediaName": "Flower Video.webm",
+          "elementId": "df1fac4a-6b34-4077-b802-48aea2791467",
+          "trackIndex": 0,
+          "startTime": 0,
+          "duration": 5059
+        },
+        "timestamp": 1776323119076
+      },
+      {
+        "type": "TIMELINE_ZOOM",
+        "data": {
+          "prevScale": 40,
+          "newScale": 80,
+          "direction": "in"
+        },
+        "timestamp": 1776323121783
+      },
+      {
+        "type": "TIMELINE_ZOOM",
+        "data": {
+          "prevScale": 80,
+          "newScale": 160,
+          "direction": "in"
+        },
+        "timestamp": 1776323121907
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "df1fac4a-6b34-4077-b802-48aea2791467",
+          "mediaName": "Flower Video.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 0,
+          "newStartTime": 0
+        },
+        "timestamp": 1776323127909
+      },
+      {
+        "type": "TIMELINE_SPLIT",
+        "data": {
+          "elementId": "df1fac4a-6b34-4077-b802-48aea2791467",
+          "mediaName": "Flower Video.webm",
+          "leftElementId": "df1fac4a-6b34-4077-b802-48aea2791467",
+          "rightElementId": "a6a6d03b-df4f-4548-ba5a-0a153e6dc05f",
+          "splitTimeMs": 1994
+        },
+        "timestamp": 1776323128799
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "a6a6d03b-df4f-4548-ba5a-0a153e6dc05f",
+          "mediaName": "Flower Video.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 1994,
+          "newStartTime": 1994
+        },
+        "timestamp": 1776323129413
+      },
+      {
+        "type": "EXPORT_COMPLETE",
+        "data": {
+          "finalDurationMs": 5059,
+          "trackCount": 1,
+          "sourceMedia": [
+            {
+              "filename": "Flower Video.webm",
+              "mediaType": "VIDEO",
+              "originalDurationMs": 5059
+            }
+          ],
+          "timeline": [
+            {
+              "trackIndex": 0,
+              "effectSubTrack": {
+                "items": [
+                  {
+                    "effectId": "8d5579e6-241c-4564-bd5a-ad482ae5da2f",
+                    "type": "fade-out",
+                    "startTimeMs": 1994,
+                    "endTimeMs": 5059,
+                    "scope": "segment",
+                    "enabled": true,
+                    "stackOrder": 0,
+                    "params": {
+                      "fadeStartMs": 1994,
+                      "fadeEndMs": 5059,
+                      "fromOpacity": 1,
+                      "toOpacity": 0,
+                      "curve": "linear"
+                    }
+                  }
+                ]
+              },
+              "elements": [
+                {
+                  "elementId": "df1fac4a-6b34-4077-b802-48aea2791467",
+                  "mediaName": "Flower Video.webm",
+                  "mediaType": "VIDEO",
+                  "startTimeMs": 0,
+                  "durationMs": 1994,
+                  "trimFromStartMs": 0,
+                  "trimFromEndMs": 3065,
+                  "activeEffectsAtStart": []
+                },
+                {
+                  "elementId": "a6a6d03b-df4f-4548-ba5a-0a153e6dc05f",
+                  "mediaName": "Flower Video.webm",
+                  "mediaType": "VIDEO",
+                  "startTimeMs": 1994,
+                  "durationMs": 3065,
+                  "trimFromStartMs": 1994,
+                  "trimFromEndMs": 0,
+                  "activeEffectsAtStart": [
+                    {
+                      "effectId": "8d5579e6-241c-4564-bd5a-ad482ae5da2f",
+                      "type": "fade-out",
+                      "startTimeMs": 1994,
+                      "endTimeMs": 5059,
+                      "scope": "segment",
+                      "enabled": true,
+                      "stackOrder": 0,
+                      "params": {
+                        "fadeStartMs": 1994,
+                        "fadeEndMs": 5059,
+                        "fromOpacity": 1,
+                        "toOpacity": 0,
+                        "curve": "linear"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "timestamp": 1776323157732
+      }
+    ]
+  }
+}
