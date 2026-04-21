@@ -5,59 +5,770 @@
       {
         "type": "MEDIA_UPLOAD",
         "data": {
-          "filename": "Flower Video.webm",
-          "mediaId": "a1fc2faa-0977-4e94-9db3-759c71104019",
+          "filename": "Tuning a Radio.webm",
+          "mediaId": "1e58d967-069e-4613-a6a0-eecf1d9696f5",
           "mediaType": "VIDEO",
-          "duration": 5059
+          "duration": 9051
         },
-        "timestamp": 1774542801209
+        "timestamp": 1776790139207
+      },
+      {
+        "type": "MEDIA_UPLOAD",
+        "data": {
+          "filename": "White Candle.webm",
+          "mediaId": "f001469e-ac44-44a7-be7c-636820579978",
+          "mediaType": "VIDEO",
+          "duration": 41766
+        },
+        "timestamp": 1776790140326
       },
       {
         "type": "TIMELINE_ADD",
         "data": {
-          "mediaId": "a1fc2faa-0977-4e94-9db3-759c71104019",
-          "mediaName": "Flower Video.webm",
-          "elementId": "0d3001eb-2d1b-42bb-9a27-d556ff246fe8",
+          "mediaId": "1e58d967-069e-4613-a6a0-eecf1d9696f5",
+          "mediaName": "Tuning a Radio.webm",
+          "elementId": "cf370c4e-238f-4c76-8b2e-28c11f7718c7",
           "trackIndex": 0,
           "startTime": 0,
-          "duration": 5059
+          "duration": 9051
         },
-        "timestamp": 1774542806198
+        "timestamp": 1776790142672
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "cf370c4e-238f-4c76-8b2e-28c11f7718c7",
+          "mediaName": "Tuning a Radio.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 0,
+          "newStartTime": 0
+        },
+        "timestamp": 1776790147723
+      },
+      {
+        "type": "TIMELINE_SPLIT",
+        "data": {
+          "elementId": "cf370c4e-238f-4c76-8b2e-28c11f7718c7",
+          "mediaName": "Tuning a Radio.webm",
+          "leftElementId": "cf370c4e-238f-4c76-8b2e-28c11f7718c7",
+          "rightElementId": "52c5d108-6914-4b33-8e3c-ffe1f6c6221a",
+          "splitTimeMs": 3025
+        },
+        "timestamp": 1776790148583
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "52c5d108-6914-4b33-8e3c-ffe1f6c6221a",
+          "mediaName": "Tuning a Radio.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 3025,
+          "newStartTime": 3025
+        },
+        "timestamp": 1776790154017
+      },
+      {
+        "type": "TIMELINE_SPLIT",
+        "data": {
+          "elementId": "52c5d108-6914-4b33-8e3c-ffe1f6c6221a",
+          "mediaName": "Tuning a Radio.webm",
+          "leftElementId": "52c5d108-6914-4b33-8e3c-ffe1f6c6221a",
+          "rightElementId": "0c682aeb-11a3-472b-ad4a-b4847d5b04c4",
+          "splitTimeMs": 6000
+        },
+        "timestamp": 1776790155095
+      },
+      {
+        "type": "TIMELINE_ADD",
+        "data": {
+          "mediaId": "f001469e-ac44-44a7-be7c-636820579978",
+          "mediaName": "White Candle.webm",
+          "elementId": "d9d2338b-fa5d-47bc-8894-5208fafca8a7",
+          "trackIndex": 0,
+          "startTime": 3025,
+          "duration": 41766
+        },
+        "timestamp": 1776790158319
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "d9d2338b-fa5d-47bc-8894-5208fafca8a7",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 50817,
+          "newStartTime": 50817
+        },
+        "timestamp": 1776790161229
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "52c5d108-6914-4b33-8e3c-ffe1f6c6221a",
+          "mediaName": "Tuning a Radio.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 3025,
+          "newStartTime": 3025
+        },
+        "timestamp": 1776790163833
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "0c682aeb-11a3-472b-ad4a-b4847d5b04c4",
+          "mediaName": "Tuning a Radio.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 6000,
+          "newStartTime": 6000
+        },
+        "timestamp": 1776790165807
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "d9d2338b-fa5d-47bc-8894-5208fafca8a7",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 9051,
+          "newStartTime": 9051
+        },
+        "timestamp": 1776790168274
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "d9d2338b-fa5d-47bc-8894-5208fafca8a7",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 9051,
+          "newStartTime": 9051
+        },
+        "timestamp": 1776790175637
+      },
+      {
+        "type": "TIMELINE_SPLIT",
+        "data": {
+          "elementId": "d9d2338b-fa5d-47bc-8894-5208fafca8a7",
+          "mediaName": "White Candle.webm",
+          "leftElementId": "d9d2338b-fa5d-47bc-8894-5208fafca8a7",
+          "rightElementId": "7f8a43d1-5e6e-4f8f-b941-291c7d51fa37",
+          "splitTimeMs": 14050
+        },
+        "timestamp": 1776790177044
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "d9d2338b-fa5d-47bc-8894-5208fafca8a7",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 9051,
+          "newStartTime": 9051
+        },
+        "timestamp": 1776790184378
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "7f8a43d1-5e6e-4f8f-b941-291c7d51fa37",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 14050,
+          "newStartTime": 14050
+        },
+        "timestamp": 1776790184858
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "d9d2338b-fa5d-47bc-8894-5208fafca8a7",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 9051,
+          "newStartTime": 9051
+        },
+        "timestamp": 1776790185826
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "7f8a43d1-5e6e-4f8f-b941-291c7d51fa37",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 14050,
+          "newStartTime": 14050
+        },
+        "timestamp": 1776790186370
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "d9d2338b-fa5d-47bc-8894-5208fafca8a7",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 9051,
+          "newStartTime": 9051
+        },
+        "timestamp": 1776790189314
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "d9d2338b-fa5d-47bc-8894-5208fafca8a7",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 9051,
+          "newStartTime": 9051
+        },
+        "timestamp": 1776790205098
+      },
+      {
+        "type": "TIMELINE_DELETE",
+        "data": {
+          "elementId": "d9d2338b-fa5d-47bc-8894-5208fafca8a7",
+          "mediaName": "White Candle.webm",
+          "trackIndex": 0,
+          "startTime": 9051,
+          "duration": 4999
+        },
+        "timestamp": 1776790206040
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "7f8a43d1-5e6e-4f8f-b941-291c7d51fa37",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 14050,
+          "newStartTime": 14050
+        },
+        "timestamp": 1776790206747
+      },
+      {
+        "type": "TIMELINE_DELETE",
+        "data": {
+          "elementId": "7f8a43d1-5e6e-4f8f-b941-291c7d51fa37",
+          "mediaName": "White Candle.webm",
+          "trackIndex": 0,
+          "startTime": 14050,
+          "duration": 36767
+        },
+        "timestamp": 1776790207728
+      },
+      {
+        "type": "TIMELINE_ADD",
+        "data": {
+          "mediaId": "f001469e-ac44-44a7-be7c-636820579978",
+          "mediaName": "White Candle.webm",
+          "elementId": "eac507c1-ee08-428f-8b20-436acda7acae",
+          "trackIndex": 0,
+          "startTime": 9051,
+          "duration": 41766
+        },
+        "timestamp": 1776790209633
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "eac507c1-ee08-428f-8b20-436acda7acae",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 9051,
+          "newStartTime": 9051
+        },
+        "timestamp": 1776790250340
+      },
+      {
+        "type": "TIMELINE_SPLIT",
+        "data": {
+          "elementId": "eac507c1-ee08-428f-8b20-436acda7acae",
+          "mediaName": "White Candle.webm",
+          "leftElementId": "eac507c1-ee08-428f-8b20-436acda7acae",
+          "rightElementId": "3d6a6397-5ec9-4ece-9dea-122cfab65eb6",
+          "splitTimeMs": 22350
+        },
+        "timestamp": 1776790252193
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "3d6a6397-5ec9-4ece-9dea-122cfab65eb6",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 22350,
+          "newStartTime": 22350
+        },
+        "timestamp": 1776790275468
+      },
+      {
+        "type": "TIMELINE_SPLIT",
+        "data": {
+          "elementId": "3d6a6397-5ec9-4ece-9dea-122cfab65eb6",
+          "mediaName": "White Candle.webm",
+          "leftElementId": "3d6a6397-5ec9-4ece-9dea-122cfab65eb6",
+          "rightElementId": "5f8fd432-7247-43ec-8dc3-b0809a7ba618",
+          "splitTimeMs": 35650
+        },
+        "timestamp": 1776790277857
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "eac507c1-ee08-428f-8b20-436acda7acae",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 3025,
+          "newStartTime": 3025
+        },
+        "timestamp": 1776790330581
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "3d6a6397-5ec9-4ece-9dea-122cfab65eb6",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 19299,
+          "newStartTime": 19299
+        },
+        "timestamp": 1776790333030
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "5f8fd432-7247-43ec-8dc3-b0809a7ba618",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 35650,
+          "newStartTime": 35650
+        },
+        "timestamp": 1776790335269
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "5f8fd432-7247-43ec-8dc3-b0809a7ba618",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 35650,
+          "newStartTime": 35650
+        },
+        "timestamp": 1776790336685
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "cf370c4e-238f-4c76-8b2e-28c11f7718c7",
+          "mediaName": "Tuning a Radio.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 0,
+          "newStartTime": 0
+        },
+        "timestamp": 1776790382512
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "52c5d108-6914-4b33-8e3c-ffe1f6c6221a",
+          "mediaName": "Tuning a Radio.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 16324,
+          "newStartTime": 16324
+        },
+        "timestamp": 1776790427302
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "eac507c1-ee08-428f-8b20-436acda7acae",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 3025,
+          "newStartTime": 3025
+        },
+        "timestamp": 1776790451250
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "eac507c1-ee08-428f-8b20-436acda7acae",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 3025,
+          "newStartTime": 3025
+        },
+        "timestamp": 1776790462198
+      },
+      {
+        "type": "TIMELINE_SPLIT",
+        "data": {
+          "elementId": "eac507c1-ee08-428f-8b20-436acda7acae",
+          "mediaName": "White Candle.webm",
+          "leftElementId": "eac507c1-ee08-428f-8b20-436acda7acae",
+          "rightElementId": "0af07aac-f73a-442e-a394-b5db04f6e906",
+          "splitTimeMs": 5975
+        },
+        "timestamp": 1776790463616
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "0af07aac-f73a-442e-a394-b5db04f6e906",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 5975,
+          "newStartTime": 5975
+        },
+        "timestamp": 1776790464437
+      },
+      {
+        "type": "TIMELINE_DELETE",
+        "data": {
+          "elementId": "0af07aac-f73a-442e-a394-b5db04f6e906",
+          "mediaName": "White Candle.webm",
+          "trackIndex": 0,
+          "startTime": 5975,
+          "duration": 10349
+        },
+        "timestamp": 1776790466072
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "3d6a6397-5ec9-4ece-9dea-122cfab65eb6",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 19299,
+          "newStartTime": 19299
+        },
+        "timestamp": 1776790482690
+      },
+      {
+        "type": "TIMELINE_SPLIT",
+        "data": {
+          "elementId": "3d6a6397-5ec9-4ece-9dea-122cfab65eb6",
+          "mediaName": "White Candle.webm",
+          "leftElementId": "3d6a6397-5ec9-4ece-9dea-122cfab65eb6",
+          "rightElementId": "3468df50-d704-4b8c-85d0-614e9f5739ba",
+          "splitTimeMs": 22275
+        },
+        "timestamp": 1776790483896
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "3468df50-d704-4b8c-85d0-614e9f5739ba",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 22275,
+          "newStartTime": 22275
+        },
+        "timestamp": 1776790485158
+      },
+      {
+        "type": "TIMELINE_DELETE",
+        "data": {
+          "elementId": "3468df50-d704-4b8c-85d0-614e9f5739ba",
+          "mediaName": "White Candle.webm",
+          "trackIndex": 0,
+          "startTime": 22275,
+          "duration": 10324
+        },
+        "timestamp": 1776790486956
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "5f8fd432-7247-43ec-8dc3-b0809a7ba618",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 35650,
+          "newStartTime": 35650
+        },
+        "timestamp": 1776790494974
+      },
+      {
+        "type": "TIMELINE_SPLIT",
+        "data": {
+          "elementId": "5f8fd432-7247-43ec-8dc3-b0809a7ba618",
+          "mediaName": "White Candle.webm",
+          "leftElementId": "5f8fd432-7247-43ec-8dc3-b0809a7ba618",
+          "rightElementId": "9ed6aa9c-868c-4735-8ae0-cdcf05cb2f13",
+          "splitTimeMs": 38675
+        },
+        "timestamp": 1776790497172
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "9ed6aa9c-868c-4735-8ae0-cdcf05cb2f13",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 38675,
+          "newStartTime": 38675
+        },
+        "timestamp": 1776790498183
+      },
+      {
+        "type": "TIMELINE_DELETE",
+        "data": {
+          "elementId": "9ed6aa9c-868c-4735-8ae0-cdcf05cb2f13",
+          "mediaName": "White Candle.webm",
+          "trackIndex": 0,
+          "startTime": 38675,
+          "duration": 12142
+        },
+        "timestamp": 1776790499472
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "52c5d108-6914-4b33-8e3c-ffe1f6c6221a",
+          "mediaName": "Tuning a Radio.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 6000,
+          "newStartTime": 6000
+        },
+        "timestamp": 1776790501971
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "3d6a6397-5ec9-4ece-9dea-122cfab65eb6",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 8975,
+          "newStartTime": 8975
+        },
+        "timestamp": 1776790503691
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "0c682aeb-11a3-472b-ad4a-b4847d5b04c4",
+          "mediaName": "Tuning a Radio.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 11975,
+          "newStartTime": 11975
+        },
+        "timestamp": 1776790506551
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "5f8fd432-7247-43ec-8dc3-b0809a7ba618",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 15026,
+          "newStartTime": 15026
+        },
+        "timestamp": 1776790508740
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "0c682aeb-11a3-472b-ad4a-b4847d5b04c4",
+          "mediaName": "Tuning a Radio.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 11951,
+          "newStartTime": 11951
+        },
+        "timestamp": 1776790513900
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "5f8fd432-7247-43ec-8dc3-b0809a7ba618",
+          "mediaName": "White Candle.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 15002,
+          "newStartTime": 15002
+        },
+        "timestamp": 1776790514935
       },
       {
         "type": "EXPORT_COMPLETE",
         "data": {
-          "finalDurationMs": 5059,
+          "finalDurationMs": 18027,
           "trackCount": 1,
           "sourceMedia": [
             {
-              "filename": "Flower Video.webm",
+              "filename": "Tuning a Radio.webm",
               "mediaType": "VIDEO",
-              "originalDurationMs": 5059
+              "originalDurationMs": 9051
+            },
+            {
+              "filename": "White Candle.webm",
+              "mediaType": "VIDEO",
+              "originalDurationMs": 41766
             }
           ],
           "timeline": [
             {
               "trackIndex": 0,
               "effectSubTrack": {
-                "items": []
+                "items": [
+                  {
+                    "effectId": "0e121b96-c6a3-486e-a584-12f6c0915af0",
+                    "type": "light-adjustment",
+                    "startTimeMs": 0,
+                    "endTimeMs": 3025,
+                    "scope": "segment",
+                    "enabled": true,
+                    "stackOrder": 0,
+                    "params": {
+                      "brightness": 0,
+                      "contrast": 3,
+                      "saturation": 1
+                    }
+                  },
+                  {
+                    "effectId": "63cf4f50-9ed9-4f4a-ab98-68a35beb2608",
+                    "type": "light-adjustment",
+                    "startTimeMs": 5999,
+                    "endTimeMs": 8974,
+                    "scope": "segment",
+                    "enabled": true,
+                    "stackOrder": 1,
+                    "params": {
+                      "brightness": 1,
+                      "contrast": 1,
+                      "saturation": 1
+                    }
+                  }
+                ]
               },
               "elements": [
                 {
-                  "elementId": "0d3001eb-2d1b-42bb-9a27-d556ff246fe8",
-                  "mediaName": "Flower Video.webm",
+                  "elementId": "cf370c4e-238f-4c76-8b2e-28c11f7718c7",
+                  "mediaName": "Tuning a Radio.webm",
                   "mediaType": "VIDEO",
                   "startTimeMs": 0,
-                  "durationMs": 5059,
+                  "durationMs": 3025,
                   "trimFromStartMs": 0,
+                  "trimFromEndMs": 6026,
+                  "activeEffectsAtStart": [
+                    {
+                      "effectId": "0e121b96-c6a3-486e-a584-12f6c0915af0",
+                      "type": "light-adjustment",
+                      "startTimeMs": 0,
+                      "endTimeMs": 3025,
+                      "scope": "segment",
+                      "enabled": true,
+                      "stackOrder": 0,
+                      "params": {
+                        "brightness": 0,
+                        "contrast": 3,
+                        "saturation": 1
+                      }
+                    }
+                  ]
+                },
+                {
+                  "elementId": "eac507c1-ee08-428f-8b20-436acda7acae",
+                  "mediaName": "White Candle.webm",
+                  "mediaType": "VIDEO",
+                  "startTimeMs": 3025,
+                  "durationMs": 2950,
+                  "trimFromStartMs": 0,
+                  "trimFromEndMs": 38816,
+                  "activeEffectsAtStart": []
+                },
+                {
+                  "elementId": "52c5d108-6914-4b33-8e3c-ffe1f6c6221a",
+                  "mediaName": "Tuning a Radio.webm",
+                  "mediaType": "VIDEO",
+                  "startTimeMs": 6000,
+                  "durationMs": 2975,
+                  "trimFromStartMs": 3025,
+                  "trimFromEndMs": 3051,
+                  "activeEffectsAtStart": [
+                    {
+                      "effectId": "63cf4f50-9ed9-4f4a-ab98-68a35beb2608",
+                      "type": "light-adjustment",
+                      "startTimeMs": 5999,
+                      "endTimeMs": 8974,
+                      "scope": "segment",
+                      "enabled": true,
+                      "stackOrder": 1,
+                      "params": {
+                        "brightness": 1,
+                        "contrast": 1,
+                        "saturation": 1
+                      }
+                    }
+                  ]
+                },
+                {
+                  "elementId": "3d6a6397-5ec9-4ece-9dea-122cfab65eb6",
+                  "mediaName": "White Candle.webm",
+                  "mediaType": "VIDEO",
+                  "startTimeMs": 8975,
+                  "durationMs": 2976,
+                  "trimFromStartMs": 13299,
+                  "trimFromEndMs": 25491,
+                  "activeEffectsAtStart": []
+                },
+                {
+                  "elementId": "0c682aeb-11a3-472b-ad4a-b4847d5b04c4",
+                  "mediaName": "Tuning a Radio.webm",
+                  "mediaType": "VIDEO",
+                  "startTimeMs": 11951,
+                  "durationMs": 3051,
+                  "trimFromStartMs": 6000,
                   "trimFromEndMs": 0,
+                  "activeEffectsAtStart": []
+                },
+                {
+                  "elementId": "5f8fd432-7247-43ec-8dc3-b0809a7ba618",
+                  "mediaName": "White Candle.webm",
+                  "mediaType": "VIDEO",
+                  "startTimeMs": 15002,
+                  "durationMs": 3025,
+                  "trimFromStartMs": 26599,
+                  "trimFromEndMs": 12142,
                   "activeEffectsAtStart": []
                 }
               ]
             }
           ]
         },
-        "timestamp": 1774542813205
+        "timestamp": 1776790533713
       }
     ]
   }

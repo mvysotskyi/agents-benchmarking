@@ -1,183 +1,343 @@
 {
   "scenario": 10,
   "endpoint_content": {
-    "operations": [
-      {
-        "type": "MEDIA_UPLOAD",
-        "data": {
-          "filename": "Flower Video.webm",
-          "mediaId": "90307ebc-1758-4df0-8f5c-7641a4a80e7a",
-          "mediaType": "VIDEO",
-          "duration": 5059
-        },
-        "timestamp": 1770974000444
+  "operations": [
+    {
+      "type": "MEDIA_UPLOAD",
+      "data": {
+        "filename": "Flower Video.webm",
+        "mediaId": "2b404aae-6be4-464b-8085-d79fbe8f23fe",
+        "mediaType": "VIDEO",
+        "duration": 5059
       },
-      {
-        "type": "TIMELINE_ADD",
-        "data": {
-          "mediaId": "90307ebc-1758-4df0-8f5c-7641a4a80e7a",
-          "mediaName": "Flower Video.webm",
-          "elementId": "bb2fe714-2027-4d4a-b7f3-0bff6b28fbb9",
-          "trackIndex": 0,
-          "startTime": 0,
-          "duration": 5059
-        },
-        "timestamp": 1770974002748
+      "timestamp": 1776794570354
+    },
+    {
+      "type": "TIMELINE_ADD",
+      "data": {
+        "mediaId": "2b404aae-6be4-464b-8085-d79fbe8f23fe",
+        "mediaName": "Flower Video.webm",
+        "elementId": "a529f128-8389-40e9-97ce-1079566a600c",
+        "trackIndex": 0,
+        "startTime": 0,
+        "duration": 5059
       },
-      {
-        "type": "TIMELINE_MOVE",
-        "data": {
-          "elementId": "bb2fe714-2027-4d4a-b7f3-0bff6b28fbb9",
-          "mediaName": "Flower Video.webm",
-          "prevTrackIndex": 0,
-          "newTrackIndex": 0,
-          "prevStartTime": 0,
-          "newStartTime": 0
-        },
-        "timestamp": 1770974008133
+      "timestamp": 1776794571366
+    },
+    {
+      "type": "TIMELINE_MOVE",
+      "data": {
+        "elementId": "a529f128-8389-40e9-97ce-1079566a600c",
+        "mediaName": "Flower Video.webm",
+        "prevTrackIndex": 0,
+        "newTrackIndex": 0,
+        "prevStartTime": 0,
+        "newStartTime": 0
       },
-      {
-        "type": "TIMELINE_MOVE",
-        "data": {
-          "elementId": "348a6177-d5c0-4282-84fb-0e01df8fdfcd",
-          "mediaName": "Flower Video.webm",
-          "prevTrackIndex": 0,
-          "newTrackIndex": 0,
-          "prevStartTime": 3000,
-          "newStartTime": 3000
-        },
-        "timestamp": 1770974009646
+      "timestamp": 1776794575424
+    },
+    {
+      "type": "TIMELINE_SPLIT",
+      "data": {
+        "elementId": "a529f128-8389-40e9-97ce-1079566a600c",
+        "mediaName": "Flower Video.webm",
+        "leftElementId": "a529f128-8389-40e9-97ce-1079566a600c",
+        "rightElementId": "cf95c53d-e681-4394-85e6-84b04eade7eb",
+        "splitTimeMs": 3975
       },
-      {
-        "type": "TIMELINE_DELETE",
-        "data": {
-          "elementId": "348a6177-d5c0-4282-84fb-0e01df8fdfcd",
-          "mediaName": "Flower Video.webm",
-          "trackIndex": 0,
-          "startTime": 3000,
-          "duration": 2059
-        },
-        "timestamp": 1770974011372
+      "timestamp": 1776794576096
+    },
+    {
+      "type": "TIMELINE_MOVE",
+      "data": {
+        "elementId": "cf95c53d-e681-4394-85e6-84b04eade7eb",
+        "mediaName": "Flower Video.webm",
+        "prevTrackIndex": 0,
+        "newTrackIndex": 0,
+        "prevStartTime": 3975,
+        "newStartTime": 3975
       },
-      {
-        "type": "TIMELINE_MOVE",
-        "data": {
-          "elementId": "bb2fe714-2027-4d4a-b7f3-0bff6b28fbb9",
-          "mediaName": "Flower Video.webm",
-          "prevTrackIndex": 0,
-          "newTrackIndex": 0,
-          "prevStartTime": 0,
-          "newStartTime": 0
-        },
-        "timestamp": 1770974012293
+      "timestamp": 1776794576670
+    },
+    {
+      "type": "TIMELINE_DELETE",
+      "data": {
+        "elementId": "cf95c53d-e681-4394-85e6-84b04eade7eb",
+        "mediaName": "Flower Video.webm",
+        "trackIndex": 0,
+        "startTime": 3975,
+        "duration": 1084
       },
-      {
-        "type": "TIMELINE_DUPLICATE",
-        "data": {
-          "sourceElementId": "bb2fe714-2027-4d4a-b7f3-0bff6b28fbb9",
-          "newElementId": "e7a48b4a-1509-495a-a556-cf5b970cacc7",
-          "mediaName": "Flower Video.webm",
-          "newStartTime": 3000
-        },
-        "timestamp": 1770974013617
+      "timestamp": 1776794577480
+    },
+    {
+      "type": "TIMELINE_MOVE",
+      "data": {
+        "elementId": "a529f128-8389-40e9-97ce-1079566a600c",
+        "mediaName": "Flower Video.webm",
+        "prevTrackIndex": 0,
+        "newTrackIndex": 0,
+        "prevStartTime": 0,
+        "newStartTime": 0
       },
-      {
-        "type": "TIMELINE_DUPLICATE",
-        "data": {
-          "sourceElementId": "e7a48b4a-1509-495a-a556-cf5b970cacc7",
-          "newElementId": "eb797792-65a6-4f90-8b1e-76f50ffd849a",
-          "mediaName": "Flower Video.webm",
-          "newStartTime": 6000
-        },
-        "timestamp": 1770974014089
+      "timestamp": 1776794578070
+    },
+    {
+      "type": "TIMELINE_DUPLICATE",
+      "data": {
+        "sourceElementId": "a529f128-8389-40e9-97ce-1079566a600c",
+        "newElementId": "7014d2c6-d390-4e7c-b065-10d4792538b6",
+        "mediaName": "Flower Video.webm",
+        "newStartTime": 3975
       },
-      {
-        "type": "TIMELINE_DUPLICATE",
-        "data": {
-          "sourceElementId": "eb797792-65a6-4f90-8b1e-76f50ffd849a",
-          "newElementId": "9c8481f3-b10d-4bcc-8d3b-9003a7adebca",
-          "mediaName": "Flower Video.webm",
-          "newStartTime": 9000
-        },
-        "timestamp": 1770974014689
+      "timestamp": 1776794579200
+    },
+    {
+      "type": "TIMELINE_DUPLICATE",
+      "data": {
+        "sourceElementId": "7014d2c6-d390-4e7c-b065-10d4792538b6",
+        "newElementId": "be536b49-c27e-4dad-9a30-5e29d6f18b19",
+        "mediaName": "Flower Video.webm",
+        "newStartTime": 7950
       },
-      {
-        "type": "TIMELINE_DUPLICATE",
-        "data": {
-          "sourceElementId": "9c8481f3-b10d-4bcc-8d3b-9003a7adebca",
-          "newElementId": "2370dd3f-a8df-4fb5-b752-5a1151edd77d",
-          "mediaName": "Flower Video.webm",
-          "newStartTime": 12000
-        },
-        "timestamp": 1770974015252
+      "timestamp": 1776794579564
+    },
+    {
+      "type": "TIMELINE_DUPLICATE",
+      "data": {
+        "sourceElementId": "be536b49-c27e-4dad-9a30-5e29d6f18b19",
+        "newElementId": "d7a165c4-ff20-49c7-8f0f-93adb4d7c86f",
+        "mediaName": "Flower Video.webm",
+        "newStartTime": 11925
       },
-      {
-        "type": "EXPORT_COMPLETE",
-        "data": {
-          "finalDurationMs": 15000,
-          "trackCount": 1,
-          "sourceMedia": [
-            {
-              "filename": "Flower Video.webm",
-              "mediaType": "VIDEO",
-              "originalDurationMs": 5059
-            }
-          ],
-          "timeline": [
-            {
-              "trackIndex": 0,
-              "elements": [
-                {
-                  "elementId": "bb2fe714-2027-4d4a-b7f3-0bff6b28fbb9",
-                  "mediaName": "Flower Video.webm",
-                  "mediaType": "VIDEO",
-                  "startTimeMs": 0,
-                  "durationMs": 3000,
-                  "trimFromStartMs": 0,
-                  "trimFromEndMs": 2059
-                },
-                {
-                  "elementId": "e7a48b4a-1509-495a-a556-cf5b970cacc7",
-                  "mediaName": "Flower Video.webm",
-                  "mediaType": "VIDEO",
-                  "startTimeMs": 3000,
-                  "durationMs": 3000,
-                  "trimFromStartMs": 0,
-                  "trimFromEndMs": 2059
-                },
-                {
-                  "elementId": "eb797792-65a6-4f90-8b1e-76f50ffd849a",
-                  "mediaName": "Flower Video.webm",
-                  "mediaType": "VIDEO",
-                  "startTimeMs": 6000,
-                  "durationMs": 3000,
-                  "trimFromStartMs": 0,
-                  "trimFromEndMs": 2059
-                },
-                {
-                  "elementId": "9c8481f3-b10d-4bcc-8d3b-9003a7adebca",
-                  "mediaName": "Flower Video.webm",
-                  "mediaType": "VIDEO",
-                  "startTimeMs": 9000,
-                  "durationMs": 3000,
-                  "trimFromStartMs": 0,
-                  "trimFromEndMs": 2059
-                },
-                {
-                  "elementId": "2370dd3f-a8df-4fb5-b752-5a1151edd77d",
-                  "mediaName": "Flower Video.webm",
-                  "mediaType": "VIDEO",
-                  "startTimeMs": 12000,
-                  "durationMs": 3000,
-                  "trimFromStartMs": 0,
-                  "trimFromEndMs": 2059
-                }
-              ]
-            }
-          ]
-        },
-        "timestamp": 1770974020544
-      }
-    ]
-  }
+      "timestamp": 1776794580216
+    },
+    {
+      "type": "TIMELINE_DUPLICATE",
+      "data": {
+        "sourceElementId": "d7a165c4-ff20-49c7-8f0f-93adb4d7c86f",
+        "newElementId": "170c9397-cda0-4f1d-a0d5-a815c8435b5e",
+        "mediaName": "Flower Video.webm",
+        "newStartTime": 15900
+      },
+      "timestamp": 1776794581664
+    },
+    {
+      "type": "TIMELINE_MOVE",
+      "data": {
+        "elementId": "7014d2c6-d390-4e7c-b065-10d4792538b6",
+        "mediaName": "Flower Video.webm",
+        "prevTrackIndex": 0,
+        "newTrackIndex": 0,
+        "prevStartTime": 3975,
+        "newStartTime": 3975
+      },
+      "timestamp": 1776794583819
+    },
+    {
+      "type": "TIMELINE_MOVE",
+      "data": {
+        "elementId": "d7a165c4-ff20-49c7-8f0f-93adb4d7c86f",
+        "mediaName": "Flower Video.webm",
+        "prevTrackIndex": 0,
+        "newTrackIndex": 0,
+        "prevStartTime": 11925,
+        "newStartTime": 11925
+      },
+      "timestamp": 1776794587983
+    },
+    {
+      "type": "TIMELINE_MOVE",
+      "data": {
+        "elementId": "7014d2c6-d390-4e7c-b065-10d4792538b6",
+        "mediaName": "Flower Video.webm",
+        "prevTrackIndex": 0,
+        "newTrackIndex": 0,
+        "prevStartTime": 3975,
+        "newStartTime": 3975
+      },
+      "timestamp": 1776794589511
+    },
+    {
+      "type": "TIMELINE_SPLIT",
+      "data": {
+        "elementId": "7014d2c6-d390-4e7c-b065-10d4792538b6",
+        "mediaName": "Flower Video.webm",
+        "leftElementId": "7014d2c6-d390-4e7c-b065-10d4792538b6",
+        "rightElementId": "8a88447e-5761-4999-b013-b362a3ba0380",
+        "splitTimeMs": 6075
+      },
+      "timestamp": 1776794592476
+    },
+    {
+      "type": "TIMELINE_DELETE",
+      "data": {
+        "elementId": "7014d2c6-d390-4e7c-b065-10d4792538b6",
+        "mediaName": "Flower Video.webm",
+        "trackIndex": 0,
+        "startTime": 3975,
+        "duration": 2100
+      },
+      "timestamp": 1776794593804
+    },
+    {
+      "type": "TIMELINE_MOVE",
+      "data": {
+        "elementId": "d7a165c4-ff20-49c7-8f0f-93adb4d7c86f",
+        "mediaName": "Flower Video.webm",
+        "prevTrackIndex": 0,
+        "newTrackIndex": 0,
+        "prevStartTime": 11925,
+        "newStartTime": 11925
+      },
+      "timestamp": 1776794602042
+    },
+    {
+      "type": "TIMELINE_SPLIT",
+      "data": {
+        "elementId": "d7a165c4-ff20-49c7-8f0f-93adb4d7c86f",
+        "mediaName": "Flower Video.webm",
+        "leftElementId": "d7a165c4-ff20-49c7-8f0f-93adb4d7c86f",
+        "rightElementId": "67acab68-c634-4d98-9962-9d756813040c",
+        "splitTimeMs": 14000
+      },
+      "timestamp": 1776794602924
+    },
+    {
+      "type": "TIMELINE_DELETE",
+      "data": {
+        "elementId": "d7a165c4-ff20-49c7-8f0f-93adb4d7c86f",
+        "mediaName": "Flower Video.webm",
+        "trackIndex": 0,
+        "startTime": 11925,
+        "duration": 2075
+      },
+      "timestamp": 1776794604428
+    },
+    {
+      "type": "TIMELINE_MOVE",
+      "data": {
+        "elementId": "8a88447e-5761-4999-b013-b362a3ba0380",
+        "mediaName": "Flower Video.webm",
+        "prevTrackIndex": 0,
+        "newTrackIndex": 0,
+        "prevStartTime": 3975,
+        "newStartTime": 3975
+      },
+      "timestamp": 1776794606146
+    },
+    {
+      "type": "TIMELINE_MOVE",
+      "data": {
+        "elementId": "be536b49-c27e-4dad-9a30-5e29d6f18b19",
+        "mediaName": "Flower Video.webm",
+        "prevTrackIndex": 0,
+        "newTrackIndex": 0,
+        "prevStartTime": 5850,
+        "newStartTime": 5850
+      },
+      "timestamp": 1776794608914
+    },
+    {
+      "type": "TIMELINE_MOVE",
+      "data": {
+        "elementId": "67acab68-c634-4d98-9962-9d756813040c",
+        "mediaName": "Flower Video.webm",
+        "prevTrackIndex": 0,
+        "newTrackIndex": 0,
+        "prevStartTime": 9825,
+        "newStartTime": 9825
+      },
+      "timestamp": 1776794610769
+    },
+    {
+      "type": "TIMELINE_MOVE",
+      "data": {
+        "elementId": "170c9397-cda0-4f1d-a0d5-a815c8435b5e",
+        "mediaName": "Flower Video.webm",
+        "prevTrackIndex": 0,
+        "newTrackIndex": 0,
+        "prevStartTime": 11725,
+        "newStartTime": 11725
+      },
+      "timestamp": 1776794612266
+    },
+    {
+      "type": "EXPORT_COMPLETE",
+      "data": {
+        "finalDurationMs": 15700,
+        "trackCount": 1,
+        "sourceMedia": [
+          {
+            "filename": "Flower Video.webm",
+            "mediaType": "VIDEO",
+            "originalDurationMs": 5059
+          }
+        ],
+        "timeline": [
+          {
+            "trackIndex": 0,
+            "effectSubTrack": {
+              "items": []
+            },
+            "elements": [
+              {
+                "elementId": "a529f128-8389-40e9-97ce-1079566a600c",
+                "mediaName": "Flower Video.webm",
+                "mediaType": "VIDEO",
+                "startTimeMs": 0,
+                "durationMs": 3975,
+                "trimFromStartMs": 0,
+                "trimFromEndMs": 1084,
+                "activeEffectsAtStart": []
+              },
+              {
+                "elementId": "8a88447e-5761-4999-b013-b362a3ba0380",
+                "mediaName": "Flower Video.webm",
+                "mediaType": "VIDEO",
+                "startTimeMs": 3975,
+                "durationMs": 1875,
+                "trimFromStartMs": 2100,
+                "trimFromEndMs": 1084,
+                "activeEffectsAtStart": []
+              },
+              {
+                "elementId": "be536b49-c27e-4dad-9a30-5e29d6f18b19",
+                "mediaName": "Flower Video.webm",
+                "mediaType": "VIDEO",
+                "startTimeMs": 5850,
+                "durationMs": 3975,
+                "trimFromStartMs": 0,
+                "trimFromEndMs": 1084,
+                "activeEffectsAtStart": []
+              },
+              {
+                "elementId": "67acab68-c634-4d98-9962-9d756813040c",
+                "mediaName": "Flower Video.webm",
+                "mediaType": "VIDEO",
+                "startTimeMs": 9825,
+                "durationMs": 1900,
+                "trimFromStartMs": 2075,
+                "trimFromEndMs": 1084,
+                "activeEffectsAtStart": []
+              },
+              {
+                "elementId": "170c9397-cda0-4f1d-a0d5-a815c8435b5e",
+                "mediaName": "Flower Video.webm",
+                "mediaType": "VIDEO",
+                "startTimeMs": 11725,
+                "durationMs": 3975,
+                "trimFromStartMs": 0,
+                "trimFromEndMs": 1084,
+                "activeEffectsAtStart": []
+              }
+            ]
+          }
+        ]
+      },
+      "timestamp": 1776794618771
+    }
+  ]
+}
+
 }

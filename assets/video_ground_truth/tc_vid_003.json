@@ -5,86 +5,2214 @@
       {
         "type": "MEDIA_UPLOAD",
         "data": {
-          "filename": "Flower Video.webm",
-          "mediaId": "f020fd2e-6112-469d-84c4-207a7a950ba6",
+          "filename": "Tuning a Radio.webm",
+          "mediaId": "992c1e45-c71f-4185-99f6-32e3e95ad8d9",
           "mediaType": "VIDEO",
-          "duration": 5059
+          "duration": 9051
         },
-        "timestamp": 1774543655964
-      },
-      {
-        "type": "MEDIA_UPLOAD",
-        "data": {
-          "filename": "White Candle.webm",
-          "mediaId": "0c68480d-0f1d-41c6-8247-04ff3d71c222",
-          "mediaType": "VIDEO",
-          "duration": 41766
-        },
-        "timestamp": 1774543660165
+        "timestamp": 1776791211081
       },
       {
         "type": "TIMELINE_ADD",
         "data": {
-          "mediaId": "f020fd2e-6112-469d-84c4-207a7a950ba6",
-          "mediaName": "Flower Video.webm",
-          "elementId": "eeb48cff-0a47-46d5-9c80-7813c832fe02",
+          "mediaId": "992c1e45-c71f-4185-99f6-32e3e95ad8d9",
+          "mediaName": "Tuning a Radio.webm",
+          "elementId": "6eb12c77-a98d-4f7b-a297-0fb4b155aabc",
           "trackIndex": 0,
           "startTime": 0,
-          "duration": 5059
+          "duration": 9051
         },
-        "timestamp": 1774543662094
+        "timestamp": 1776791212297
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "6eb12c77-a98d-4f7b-a297-0fb4b155aabc",
+          "mediaName": "Tuning a Radio.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 0,
+          "newStartTime": 0
+        },
+        "timestamp": 1776791216827
+      },
+      {
+        "type": "TIMELINE_SPLIT",
+        "data": {
+          "elementId": "6eb12c77-a98d-4f7b-a297-0fb4b155aabc",
+          "mediaName": "Tuning a Radio.webm",
+          "leftElementId": "6eb12c77-a98d-4f7b-a297-0fb4b155aabc",
+          "rightElementId": "3b5cf50e-9a31-4d50-8ae3-66e49ee29af9",
+          "splitTimeMs": 3025
+        },
+        "timestamp": 1776791218008
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "3b5cf50e-9a31-4d50-8ae3-66e49ee29af9",
+          "mediaName": "Tuning a Radio.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 3025,
+          "newStartTime": 3025
+        },
+        "timestamp": 1776791222206
+      },
+      {
+        "type": "TIMELINE_SPLIT",
+        "data": {
+          "elementId": "3b5cf50e-9a31-4d50-8ae3-66e49ee29af9",
+          "mediaName": "Tuning a Radio.webm",
+          "leftElementId": "3b5cf50e-9a31-4d50-8ae3-66e49ee29af9",
+          "rightElementId": "403e1afa-551a-4c90-a705-2dab455f958b",
+          "splitTimeMs": 6000
+        },
+        "timestamp": 1776791223304
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "6eb12c77-a98d-4f7b-a297-0fb4b155aabc",
+          "mediaName": "Tuning a Radio.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 0,
+          "newStartTime": 0
+        },
+        "timestamp": 1776791223843
+      },
+      {
+        "type": "TIMELINE_DELETE",
+        "data": {
+          "elementId": "6eb12c77-a98d-4f7b-a297-0fb4b155aabc",
+          "mediaName": "Tuning a Radio.webm",
+          "trackIndex": 0,
+          "startTime": 0,
+          "duration": 3025
+        },
+        "timestamp": 1776791226008
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "403e1afa-551a-4c90-a705-2dab455f958b",
+          "mediaName": "Tuning a Radio.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 6000,
+          "newStartTime": 6000
+        },
+        "timestamp": 1776791226738
+      },
+      {
+        "type": "TIMELINE_DELETE",
+        "data": {
+          "elementId": "403e1afa-551a-4c90-a705-2dab455f958b",
+          "mediaName": "Tuning a Radio.webm",
+          "trackIndex": 0,
+          "startTime": 6000,
+          "duration": 3051
+        },
+        "timestamp": 1776791227712
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "3b5cf50e-9a31-4d50-8ae3-66e49ee29af9",
+          "mediaName": "Tuning a Radio.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 0,
+          "newStartTime": 0
+        },
+        "timestamp": 1776791229450
+      },
+      {
+        "type": "TEXT_BLOCK_ADD",
+        "data": {
+          "mediaId": "66a34ed3-2083-44a0-aa63-85aea46f87fa",
+          "mediaName": "Text block",
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "trackIndex": 2,
+          "startTime": 0,
+          "duration": 3000
+        },
+        "timestamp": 1776791231236
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "prevTrackIndex": 1,
+          "newTrackIndex": 1,
+          "prevStartTime": 0,
+          "newStartTime": 0
+        },
+        "timestamp": 1776791232282
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "prevTrackIndex": 1,
+          "newTrackIndex": 1,
+          "prevStartTime": 0,
+          "newStartTime": 0
+        },
+        "timestamp": 1776791232395
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "prevTrackIndex": 1,
+          "newTrackIndex": 2,
+          "prevStartTime": 0,
+          "newStartTime": 0
+        },
+        "timestamp": 1776791238707
+      },
+      {
+        "type": "TEXT_BLOCK_ADD",
+        "data": {
+          "mediaId": "9647761a-2ddc-43fd-a7c9-20f7ea91df3b",
+          "mediaName": "Text block",
+          "elementId": "c36170fa-0f0a-4a5d-b52d-71ab72329b0d",
+          "trackIndex": 3,
+          "startTime": 0,
+          "duration": 3000
+        },
+        "timestamp": 1776791239572
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "c36170fa-0f0a-4a5d-b52d-71ab72329b0d",
+          "mediaName": "Text block",
+          "prevTrackIndex": 2,
+          "newTrackIndex": 3,
+          "prevStartTime": 0,
+          "newStartTime": 0
+        },
+        "timestamp": 1776791240610
+      },
+      {
+        "type": "TIMELINE_DELETE",
+        "data": {
+          "elementId": "c36170fa-0f0a-4a5d-b52d-71ab72329b0d",
+          "mediaName": "Text block",
+          "trackIndex": 2,
+          "startTime": 0,
+          "duration": 3000
+        },
+        "timestamp": 1776791241504
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "prevTrackIndex": 1,
+          "newTrackIndex": 1,
+          "prevStartTime": 0,
+          "newStartTime": 0
+        },
+        "timestamp": 1776791242118
+      },
+      {
+        "type": "TEXT_BLOCK_STYLE_UPDATE",
+        "data": {
+          "field": "text",
+          "value": "Earlier"
+        },
+        "timestamp": 1776791250137
+      },
+      {
+        "type": "TEXT_BLOCK_STYLE_UPDATE",
+        "data": {
+          "field": "fontSize",
+          "value": 32
+        },
+        "timestamp": 1776791250137
+      },
+      {
+        "type": "TEXT_BLOCK_STYLE_UPDATE",
+        "data": {
+          "field": "fontColor",
+          "value": "#ffffff"
+        },
+        "timestamp": 1776791250137
+      },
+      {
+        "type": "TEXT_BLOCK_STYLE_UPDATE",
+        "data": {
+          "field": "backgroundColor",
+          "value": "#00000080"
+        },
+        "timestamp": 1776791250137
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "prevTrackIndex": 1,
+          "newTrackIndex": 1,
+          "prevStartTime": 0,
+          "newStartTime": 0
+        },
+        "timestamp": 1776791282847
+      },
+      {
+        "type": "TEXT_BLOCK_STYLE_UPDATE",
+        "data": {
+          "field": "text",
+          "value": "Earlier..."
+        },
+        "timestamp": 1776791290240
+      },
+      {
+        "type": "TEXT_BLOCK_STYLE_UPDATE",
+        "data": {
+          "field": "fontSize",
+          "value": 32
+        },
+        "timestamp": 1776791290241
+      },
+      {
+        "type": "TEXT_BLOCK_STYLE_UPDATE",
+        "data": {
+          "field": "fontColor",
+          "value": "#ffffff"
+        },
+        "timestamp": 1776791290241
+      },
+      {
+        "type": "TEXT_BLOCK_STYLE_UPDATE",
+        "data": {
+          "field": "backgroundColor",
+          "value": "#00000080"
+        },
+        "timestamp": 1776791290241
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "prevTrackIndex": 1,
+          "newTrackIndex": 0,
+          "prevStartTime": 2975,
+          "newStartTime": 2975
+        },
+        "timestamp": 1776791306706
       },
       {
         "type": "TIMELINE_ADD",
         "data": {
-          "mediaId": "0c68480d-0f1d-41c6-8247-04ff3d71c222",
-          "mediaName": "White Candle.webm",
-          "elementId": "0ef1a2be-8e6d-4e40-b9be-be789da29295",
-          "trackIndex": 1,
-          "startTime": 0,
-          "duration": 41766
+          "mediaId": "992c1e45-c71f-4185-99f6-32e3e95ad8d9",
+          "mediaName": "Tuning a Radio.webm",
+          "elementId": "0b1562d7-65aa-4a69-815c-d21c6c6a3a74",
+          "trackIndex": 0,
+          "startTime": 2975,
+          "duration": 9051
         },
-        "timestamp": 1774543666066
+        "timestamp": 1776791309137
       },
       {
         "type": "TIMELINE_MOVE",
         "data": {
-          "elementId": "0ef1a2be-8e6d-4e40-b9be-be789da29295",
-          "mediaName": "White Candle.webm",
-          "prevTrackIndex": 1,
-          "newTrackIndex": 0,
-          "prevStartTime": 5125,
-          "newStartTime": 5125
-        },
-        "timestamp": 1774543675422
-      },
-      {
-        "type": "TIMELINE_MOVE",
-        "data": {
-          "elementId": "0ef1a2be-8e6d-4e40-b9be-be789da29295",
-          "mediaName": "White Candle.webm",
+          "elementId": "0b1562d7-65aa-4a69-815c-d21c6c6a3a74",
+          "mediaName": "Tuning a Radio.webm",
           "prevTrackIndex": 0,
           "newTrackIndex": 0,
-          "prevStartTime": 5100,
-          "newStartTime": 5100
+          "prevStartTime": 15026,
+          "newStartTime": 15026
         },
-        "timestamp": 1774543677300
+        "timestamp": 1776791311141
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 2975,
+          "newStartTime": 2975
+        },
+        "timestamp": 1776791312779
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "0b1562d7-65aa-4a69-815c-d21c6c6a3a74",
+          "mediaName": "Tuning a Radio.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 5975,
+          "newStartTime": 5975
+        },
+        "timestamp": 1776791313979
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 2975,
+          "newStartTime": 2975
+        },
+        "timestamp": 1776791316835
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 3000,
+          "newDuration": 2975,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318409
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2975,
+          "newDuration": 2975,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318411
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2975,
+          "newDuration": 2900,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318414
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2900,
+          "newDuration": 2850,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318421
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2850,
+          "newDuration": 2825,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318437
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2825,
+          "newDuration": 2825,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318438
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2825,
+          "newDuration": 2800,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318440
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2800,
+          "newDuration": 2800,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318441
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2800,
+          "newDuration": 2775,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318448
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2775,
+          "newDuration": 2775,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318449
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2775,
+          "newDuration": 2750,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318457
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2750,
+          "newDuration": 2750,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318457
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2750,
+          "newDuration": 2725,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318476
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2725,
+          "newDuration": 2725,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318477
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2725,
+          "newDuration": 2725,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318481
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2725,
+          "newDuration": 2725,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318482
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2725,
+          "newDuration": 2700,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318488
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2700,
+          "newDuration": 2700,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318489
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2700,
+          "newDuration": 2675,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318496
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2675,
+          "newDuration": 2675,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318497
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2675,
+          "newDuration": 2625,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318504
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2625,
+          "newDuration": 2600,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318517
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2600,
+          "newDuration": 2600,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318517
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2600,
+          "newDuration": 2575,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318523
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2575,
+          "newDuration": 2575,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318524
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2575,
+          "newDuration": 2550,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318528
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2550,
+          "newDuration": 2550,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318528
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2550,
+          "newDuration": 2525,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318536
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2525,
+          "newDuration": 2525,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318537
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2525,
+          "newDuration": 2500,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318546
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2500,
+          "newDuration": 2500,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318547
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2500,
+          "newDuration": 2475,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318566
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2475,
+          "newDuration": 2475,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318567
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2475,
+          "newDuration": 2450,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318569
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2450,
+          "newDuration": 2450,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318570
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2450,
+          "newDuration": 2425,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318577
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2425,
+          "newDuration": 2425,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318578
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2425,
+          "newDuration": 2400,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318585
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2400,
+          "newDuration": 2400,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318586
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2400,
+          "newDuration": 2375,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318595
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2375,
+          "newDuration": 2375,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318596
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2375,
+          "newDuration": 2350,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318604
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2350,
+          "newDuration": 2350,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318605
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2350,
+          "newDuration": 2325,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318619
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2325,
+          "newDuration": 2325,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318620
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2325,
+          "newDuration": 2300,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318624
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2300,
+          "newDuration": 2300,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318625
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2300,
+          "newDuration": 2275,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318633
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2275,
+          "newDuration": 2275,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318634
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2275,
+          "newDuration": 2250,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318673
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2250,
+          "newDuration": 2250,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318674
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2250,
+          "newDuration": 2250,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318690
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2250,
+          "newDuration": 2250,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318690
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2250,
+          "newDuration": 2200,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318705
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2200,
+          "newDuration": 2175,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318720
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2175,
+          "newDuration": 2175,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318721
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2175,
+          "newDuration": 2150,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318728
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2150,
+          "newDuration": 2150,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318728
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2150,
+          "newDuration": 2125,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318740
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2125,
+          "newDuration": 2125,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318741
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2125,
+          "newDuration": 2100,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318744
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2100,
+          "newDuration": 2100,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318744
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2100,
+          "newDuration": 2075,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318752
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2075,
+          "newDuration": 2075,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318753
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2075,
+          "newDuration": 2050,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318768
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2050,
+          "newDuration": 2050,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318769
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2050,
+          "newDuration": 2025,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318776
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2025,
+          "newDuration": 2025,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318776
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2025,
+          "newDuration": 2000,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318784
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2000,
+          "newDuration": 2000,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318784
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 2000,
+          "newDuration": 1975,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318792
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1975,
+          "newDuration": 1975,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318793
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1975,
+          "newDuration": 1925,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318800
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1925,
+          "newDuration": 1900,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318810
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1900,
+          "newDuration": 1900,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318811
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1900,
+          "newDuration": 1875,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318816
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1875,
+          "newDuration": 1875,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318817
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1875,
+          "newDuration": 1850,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318824
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1850,
+          "newDuration": 1850,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318825
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1850,
+          "newDuration": 1825,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318832
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1825,
+          "newDuration": 1825,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318833
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1825,
+          "newDuration": 1775,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318845
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1775,
+          "newDuration": 1750,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318856
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1750,
+          "newDuration": 1750,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318857
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1750,
+          "newDuration": 1725,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318869
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1725,
+          "newDuration": 1725,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318870
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1725,
+          "newDuration": 1675,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318873
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1675,
+          "newDuration": 1650,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318880
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1650,
+          "newDuration": 1650,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318880
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1650,
+          "newDuration": 1625,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318888
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1625,
+          "newDuration": 1625,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318889
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1625,
+          "newDuration": 1600,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318896
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1600,
+          "newDuration": 1600,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318896
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1600,
+          "newDuration": 1575,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318904
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1575,
+          "newDuration": 1575,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318904
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1575,
+          "newDuration": 1550,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318912
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1550,
+          "newDuration": 1550,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318913
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1550,
+          "newDuration": 1525,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318922
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1525,
+          "newDuration": 1525,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318922
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1525,
+          "newDuration": 1500,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318931
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1500,
+          "newDuration": 1500,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318932
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1500,
+          "newDuration": 1450,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318941
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1450,
+          "newDuration": 1425,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318951
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1425,
+          "newDuration": 1425,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318951
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1425,
+          "newDuration": 1400,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318952
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1400,
+          "newDuration": 1400,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318953
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1400,
+          "newDuration": 1375,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318960
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1375,
+          "newDuration": 1375,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318961
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1375,
+          "newDuration": 1350,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318970
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1350,
+          "newDuration": 1350,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318971
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1350,
+          "newDuration": 1325,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318989
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1325,
+          "newDuration": 1325,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791318990
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1325,
+          "newDuration": 1300,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791319000
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1300,
+          "newDuration": 1300,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791319001
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1300,
+          "newDuration": 1275,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791319033
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1275,
+          "newDuration": 1275,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791319035
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1275,
+          "newDuration": 1275,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791319081
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1275,
+          "newDuration": 1275,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791319082
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1275,
+          "newDuration": 1250,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791319168
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1250,
+          "newDuration": 1250,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791319170
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1250,
+          "newDuration": 1250,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791319189
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1250,
+          "newDuration": 1250,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791319190
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1250,
+          "newDuration": 1225,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791319425
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1225,
+          "newDuration": 1225,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791319427
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1225,
+          "newDuration": 1225,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791319497
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1225,
+          "newDuration": 1225,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791319498
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1225,
+          "newDuration": 1200,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791319518
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1200,
+          "newDuration": 1200,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791319520
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1200,
+          "newDuration": 1175,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791320220
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1175,
+          "newDuration": 1175,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791320222
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1175,
+          "newDuration": 1175,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791320285
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1175,
+          "newDuration": 1175,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791320287
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1175,
+          "newDuration": 1175,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791320365
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1175,
+          "newDuration": 1175,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791320366
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1175,
+          "newDuration": 1150,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791320555
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1150,
+          "newDuration": 1150,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791320557
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1150,
+          "newDuration": 1150,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791320589
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1150,
+          "newDuration": 1150,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791320590
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1150,
+          "newDuration": 1125,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791320643
+      },
+      {
+        "type": "TIMELINE_RESIZE",
+        "data": {
+          "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+          "mediaName": "Text block",
+          "side": "right",
+          "prevDuration": 1125,
+          "newDuration": 1125,
+          "trimFromStart": 0,
+          "trimFromEnd": 0
+        },
+        "timestamp": 1776791320645
+      },
+      {
+        "type": "TIMELINE_MOVE",
+        "data": {
+          "elementId": "0b1562d7-65aa-4a69-815c-d21c6c6a3a74",
+          "mediaName": "Tuning a Radio.webm",
+          "prevTrackIndex": 0,
+          "newTrackIndex": 0,
+          "prevStartTime": 4100,
+          "newStartTime": 4100
+        },
+        "timestamp": 1776791322729
       },
       {
         "type": "EXPORT_COMPLETE",
         "data": {
-          "finalDurationMs": 46866,
+          "finalDurationMs": 13151,
           "trackCount": 1,
           "sourceMedia": [
             {
-              "filename": "Flower Video.webm",
+              "filename": "Tuning a Radio.webm",
               "mediaType": "VIDEO",
-              "originalDurationMs": 5059
-            },
-            {
-              "filename": "White Candle.webm",
-              "mediaType": "VIDEO",
-              "originalDurationMs": 41766
+              "originalDurationMs": 9051
             }
           ],
           "timeline": [
@@ -95,21 +2223,35 @@
               },
               "elements": [
                 {
-                  "elementId": "eeb48cff-0a47-46d5-9c80-7813c832fe02",
-                  "mediaName": "Flower Video.webm",
+                  "elementId": "3b5cf50e-9a31-4d50-8ae3-66e49ee29af9",
+                  "mediaName": "Tuning a Radio.webm",
                   "mediaType": "VIDEO",
                   "startTimeMs": 0,
-                  "durationMs": 5059,
-                  "trimFromStartMs": 0,
-                  "trimFromEndMs": 0,
+                  "durationMs": 2975,
+                  "trimFromStartMs": 3025,
+                  "trimFromEndMs": 3051,
                   "activeEffectsAtStart": []
                 },
                 {
-                  "elementId": "0ef1a2be-8e6d-4e40-b9be-be789da29295",
-                  "mediaName": "White Candle.webm",
+                  "elementId": "9b0eec05-797c-4b20-b6b7-e26d331158dd",
+                  "mediaName": "Text block",
+                  "mediaType": "TEXT",
+                  "startTimeMs": 2975,
+                  "durationMs": 1125,
+                  "trimFromStartMs": 0,
+                  "trimFromEndMs": 0,
+                  "activeEffectsAtStart": [],
+                  "text": "Earlier...",
+                  "fontSize": 32,
+                  "fontColor": "#ffffff",
+                  "backgroundColor": "#00000080"
+                },
+                {
+                  "elementId": "0b1562d7-65aa-4a69-815c-d21c6c6a3a74",
+                  "mediaName": "Tuning a Radio.webm",
                   "mediaType": "VIDEO",
-                  "startTimeMs": 5100,
-                  "durationMs": 41766,
+                  "startTimeMs": 4100,
+                  "durationMs": 9051,
                   "trimFromStartMs": 0,
                   "trimFromEndMs": 0,
                   "activeEffectsAtStart": []
@@ -118,7 +2260,7 @@
             }
           ]
         },
-        "timestamp": 1774543686318
+        "timestamp": 1776791329329
       }
     ]
   }
