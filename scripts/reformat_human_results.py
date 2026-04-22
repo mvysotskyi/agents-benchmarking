@@ -32,6 +32,12 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 
+# Maps app directory name to the prefix used in test case IDs (e.g. "frad" for flightradar)
+APP_ID_PREFIX: dict[str, str] = {
+    "flightradar": "frad",
+    "video": "vid",
+}
+
 SHOT_META_RE = re.compile(
     r'<div class="shot-meta"><span>(.*?)</span><span>(.*?)</span><span>(.*?)</span></div>'
 )
@@ -133,7 +139,8 @@ def build_summary_info(
     parsed: dict,
 ) -> dict:
     """Build a summary_info.json compatible with the evaluation scripts."""
-    task_id_str = f"tc_{app}_{testcase_number:03d}"
+    app_prefix = APP_ID_PREFIX.get(app, app)
+    task_id_str = f"tc_{app_prefix}_{testcase_number:03d}"
     n_steps = parsed["n_screenshots"] - 1  # last screenshot is "finish"
 
     final_answer = parsed.get("final_answer", "")
@@ -189,7 +196,7 @@ def build_agent_outputs(parsed: dict) -> dict:
     app_export = parsed.get("app_export", "")
 
     return {
-        "primary_output": app_export or final_answer,
+        "primary_output": final_answer,
         "agent_response": final_answer,
         "raw_agent_response": final_answer,
         "post_run_url": None,
@@ -259,7 +266,8 @@ def reformat_human_results(
                     continue
 
                 # Build run directory name matching the expected pattern
-                task_id_str = f"tc_{app}_{testcase_number:03d}"
+                app_prefix = APP_ID_PREFIX.get(app, app)
+                task_id_str = f"tc_{app_prefix}_{testcase_number:03d}"
                 run_uuid = uuid.uuid4().hex
                 rand_num = testcase_number  # deterministic
                 timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d_%H-%M-%S")
@@ -297,7 +305,7 @@ def reformat_human_results(
                 agent_output_path.write_text(agent_output_text)
 
                 n_screenshots = len(parsed["images"])
-                print(f"  tc_{app}_{testcase_number:03d}: {n_screenshots} screenshots -> {run_dir.name}")
+                print(f"  tc_{app_prefix}_{testcase_number:03d}: {n_screenshots} screenshots -> {run_dir.name}")
 
     print(f"\nDone. Output written to {output_dir}")
 
