@@ -1,0 +1,408 @@
+test_cases:
+- id: "tc_vid_001"
+  prompt: |-
+    # Alternating Split Segments with Per-Segment Corrections
+    
+    ## GOAL
+    Split two videos into quarters, interleave them on the timeline, and apply a different light correction to each odd-indexed segment.
+    
+    ## STEPS
+    1. Open the "Sample Media" dropdown and add "Tuning a Radio" and "White Candle".
+    2. Drag "Tuning a Radio"  to the timeline and split it into 3 equal segments (T1, T2, T3).
+    3. Drag "White Candle" to the timeline after "Flower Video" and split it into 3 equal segments (W1, W2, W3).
+    4. Reorder the segments on the timeline so the final order is: T1 -> W1 -> T2 -> W2 -> T3 -> W3.
+    5. Apply light correction to first two odd-positioned segment on the timeline: max out contrast for first segment, max out brightness for last segment.
+    6. Trim each of the segments so that all segments on the timeline have the same duration, equal to the shortest segment.
+    7. Export the result.
+    
+    # RESULT FORMAT
+    
+    ```json
+    {"answer": "done"}
+    ```
+  gt: {}
+- id: "tc_vid_002"
+  prompt: |-
+    # Symmetric Audio Bridge
+    
+    ## GOAL
+    Place an audio clip so its midpoint aligns with the transition between two videos, then trim both videos so the audio has equal silent runway on both sides.
+    
+    ## STEPS
+    1. Open the "Sample Media" dropdown and add "Flower Video", "Tuning a Radio" and audio clip.
+    2. Drag "Flower Video" and "Tuning a Radio" to the timeline back-to-back in that order.
+    3. Place the audio clip on a separate track so that the middle of the audio clip aligns exactly with the cut between the two videos.
+    4. Trim "Flower Video" from its start and "Tuning a Radio" from its end so that the audio clip begins exactly 1 second after the video timeline starts and ends exactly 1 second before the timeline ends.
+    5. Export the result.
+    
+    # RESULT FORMAT
+    
+    ```json
+    {"answer": "done"}
+    ```
+  gt: {}
+- id: "tc_vid_003"
+  prompt: |-
+    # The Quote
+    
+    ## GOAL
+    Lift a middle segment out of a video, play it on its own first, then play the full original video.
+    
+    ## STEPS
+    1. Open the "Sample Media" dropdown and add "Tuning a Radio".
+    2. On the timeline, first play only seconds 3 through 6 of the clip, then immediately after play the full original clip from start to end.
+    3. Add a 1-second text block reading "Earlier..." with white text on black background, placed immediately before the full playthrough begins.
+    4. Export the result.
+    
+    # RESULT FORMAT
+    
+    ```json
+    {"answer": "done"}
+    ```
+  gt: {}
+- id: "tc_vid_004"
+  prompt: |-
+    # Trim a Video to First 5 Seconds
+     
+     ## GOAL
+     Add a video and trim it so that only the first 5 seconds remain.
+     
+     ## STEPS
+     1. Open the "Sample Media" dropdown and select "White Candle" and add it to timeline.
+     2. Trim the clip so that only the first 5 seconds remain.
+     3. Export the result.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_vid_005"
+  prompt: |-
+    # Apply Light Correction and Boost Contrast
+     
+     ## GOAL
+     Add a video, apply light correction, and increase only the contrast.
+     
+     ## STEPS
+     1. Open the "Sample Media" dropdown, select "Flower Video" and add it to the timeline.
+     2. Apply light correction to the entire clip by maxing out only the contrast value.
+     3. Export the result.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_vid_006"
+  prompt: |-
+    # Trim a Video to a Specific Portion
+     
+     ## GOAL
+     Add a video and trim it to keep only the segment from 4s to 11s.
+     
+     ## STEPS
+     1. Open the "Sample Media" dropdown, add "White Candle" video and drag to the timeline.
+     2. Trim the video so that only the 4.00-11.00 seconds chunk remain.
+     3. Export the result.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_vid_007"
+  prompt: |-
+    # Add Background Audio to End of Video
+     
+     ## GOAL
+     Add a video and an audio clip, positioning the audio as background for the end of the video.
+     
+     ## STEPS
+     1. Open the "Sample Media" dropdown, add "Flower Video" and audio clip to the timeline.
+     2. Position the audio clip so that it plays as background audio during the end portion of the video clip.
+     3. Export the result.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_vid_008"
+  prompt: |-
+    # Combine Three Videos in Sequence
+     
+     ## GOAL
+     Place three videos on the timeline in a specific order and export.
+     
+     ## STEPS
+     1. Open the "Sample Media" dropdown and add "Tuning a Radio", "White Candle" and "Flower Video".
+     2. Drag all the videos to timeline and place them in same order.
+     3. Trim ends of all videos so length of each clip matches length of "Flower Video" clip.
+     4. Export the result.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_vid_009"
+  prompt: |-
+    # Two Videos with Audio at Transition
+     
+     ## GOAL
+     Arrange two videos in sequence and place an audio clip so it spans the transition between them.
+     
+     ## STEPS
+     1. Open the "Sample Media" dropdown and add "Flower Video", "Tuning a Radio" and audio clip.
+     2. Drag the videos to the timeline placing "Tuning a Radio" right after "Flower Video".
+     3. Drag the audio clip to the timeline.
+     4. Position the audio clip so that it spans the transition point between the two videos (equally overlapping the end of the first and the beginning of the second).
+     5. Export the result.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_vid_010"
+  prompt: |-
+    # Trim and Duplicate a Video
+     
+     ## GOAL
+     Trim a video, then duplicate several times.
+     
+     ## STEPS
+     1. Open the "Sample Media" dropdown, add "Flower Video" and drag it to timeline.
+     2. Trim the clip so that 4 first seconds remain, duplicate the video 4 times, but trim even numbered video to 2 last seconds.
+     4. Export the result.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_vid_011"
+  prompt: |-
+    # Apply Fade-Out Transition
+     
+     ## GOAL
+     Add a video and apply a fade-out transition to its last few seconds.
+     
+     ## STEPS
+     1. Open the "Sample Media" dropdown, select "Flower Video" and add it to the timeline.
+     2. Apply a fade-out transition targeting the last 3 seconds of the clip.
+     3. Export the result.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_vid_012"
+  prompt: |-
+    # Overlay Text and Audio on a Video
+     
+     ## GOAL
+     Add a video to the timeline, overlay a text block on the first 2 seconds, and add an audio clip playing in parallel for the same 2 seconds.
+     
+     ## STEPS
+     1. Open the "Sample Media" dropdown and add "Flower Video" and audio clip.
+     2. Drag "Flower Video" to the timeline.
+     3. Add a 2-second "Intro" text block with font size of 72 on a track above the video track so it overlays the first 2 seconds of "Flower Video".
+     4. Drag the audio clip to the timeline.
+     5. Position the audio clip so it starts at the beginning of the timeline and plays for the first 2 seconds, in parallel with the video and the text overlay.
+     6. Export the result.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_vid_013"
+  prompt: |-
+    # Different Light Corrections on Three Videos
+     
+     ## GOAL
+     Arrange three videos in sequence and apply a different light correction to each.
+     
+     ## STEPS
+     1. Open the "Sample Media" dropdown and add "Flower Video", "White Candle" and "Tuning a Radio".
+     2. Drag the video to timeline in asked above order.
+     3. Apply light correction one each video clip: max out contrast for first, brightness for second and saturation for last video respectively.
+     4. Export the result.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_vid_014"
+  prompt: |-
+    # Reverse Order, Light Correction, and Fade-Out
+     
+     ## GOAL
+     Arrange two videos in reverse order, apply light correction to a portion of the first, and apply a fade-out to the second.
+     
+     ## STEPS
+     1. Open the "Sample Media" dropdown and add "Flower Video".
+     2. Open the "Sample Media" dropdown and add "Tuning a Radio".
+     3. Drag "Tuning a Radio" to the timeline first.
+     4. Drag "Flower Video" to the timeline, placing it right after "Tuning a Radio".
+     5. Select "Tuning a Radio" and apply light correction to the first 4 seconds of the clip: max out contrast only.
+     6. Select "Flower Video" and apply a fade-out effect with ease-out easing to the last 3 seconds of the clip.
+     7. Export the result.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_vid_015"
+  prompt: |-
+    # Split Video and Insert Another in the Middle
+     
+     ## GOAL
+     Split a video at its midpoint and insert a second video between the two halves.
+     
+     ## STEPS
+     1. Open the "Sample Media" dropdown and select "Flower Video".
+     2. Drag "Flower Video" to the timeline.
+     3. Split the clip at its midpoint.
+     4. Open the "Sample Media" dropdown and select "Tuning a Radio".
+     5. Drag "Tuning a Radio" to the timeline.
+     6. Insert "Tuning a Radio" between the two halves of "Flower Video".
+     7. Export the result.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_vid_016"
+  prompt: |-
+    # Three Videos with Empty Gaps Between Them
+     
+     ## GOAL
+     Arrange three videos in sequence with specific empty gaps between them.
+     
+     ## STEPS
+     1. Open the "Sample Media" dropdown and add "Flower Video", "White Candle" and "Tuning a Radio" videos.
+     2. Drag the videos to timeline in the same order.
+     3. Place the videos with empty gaps of 1 second and 2 seconds between them.
+     4. Export the result.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_vid_017"
+  prompt: |-
+    # Split a Video, Swap Halves, and Insert a Midpoint Title
+     
+     ## GOAL
+     Split a video at its midpoint, swap the two halves, and insert a styled text block between them.
+     
+     ## STEPS
+     1. Open the "Sample Media" dropdown and select "Tuning a Radio".
+     2. Drag "Tuning a Radio" to the timeline.
+     3. Split the clip at its midpoint.
+     4. Move the second half to the beginning of the timeline.
+     5. Add a text block with the text "Midpoint".
+     6. Set the font color to white.
+     7. Set the background color to black.
+     8. Set the text block duration to 1 second.
+     9. Place the text block immediately after the second half.
+     10. Move the first half to immediately after the text block.
+     11. Verify the final timeline order is: second half of "Tuning a Radio" -> "Midpoint" text block -> first half of "Tuning a Radio".
+     12. Export the result.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_vid_018"
+  prompt: |-
+    # Three Colored Text Blocks
+     
+     ## GOAL
+     Create an intro video with different color scenes. 
+     
+     ## STEPS
+     1. Add a half-second text block with white "Second!" text.
+     2. Duplicate the text block two times, setting new blocks texts, so that the timeline reads: "Second!" -> "Third!" -> "First!", resulting in three consecutive blocks on the timeline.
+     3. Change text blocks background colors to be "yellow", "red" and "green" accordingly to their timeline order.
+     4. Change durations of text blocks, so that each one is 2 times longer than previous one, leaving first text block duration unchanged.
+     5. Export the result.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_vid_019"
+  prompt: |-
+    # Act Titles Before Each Video
+     
+     ## GOAL
+     Arrange three videos in sequence, each preceded by a titled text block.
+     
+     ## STEPS
+     1. Open the "Sample Media" dropdown and add "Flower Video".
+     2. Open the "Sample Media" dropdown and add "White Candle".
+     3. Open the "Sample Media" dropdown and add "Tuning a Radio".
+     4. Add a text block with text "Act I", black font color, white background, and 1-second duration. Place it on the timeline.
+     5. Drag "Flower Video" to the timeline, placing it immediately after the "Act I" text block.
+     6. Add a text block with text "Act II", black font color, white background, and 1-second duration. Place it on the timeline immediately after "Flower Video".
+     7. Drag "White Candle" to the timeline, placing it immediately after the "Act II" text block.
+     8. Add a text block with text "Act III", black font color, white background, and 1-second duration. Place it on the timeline immediately after "White Candle".
+     9. Drag "Tuning a Radio" to the timeline, placing it immediately after the "Act III" text block.
+     10. Verify the final timeline order is: "Act I" -> "Flower Video" -> "Act II" -> "White Candle" -> "Act III" -> "Tuning a Radio".
+     11. Export the result.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_vid_020"
+  prompt: |-
+    # Trimmed Video with Closing Titles and Fade-Out
+     
+     ## GOAL
+     Add a video, trim it, append a closing title card, and apply a fade-out to the title.
+     
+     ## STEPS
+     1. Open the "Sample Media" dropdown and select "White Candle".
+     2. Drag "White Candle" to the timeline.
+     3. Trim the end of the clip so that only the first 10 seconds remain.
+     4. Add a text block with the text "The End", black font color, and white background.
+     5. Set the text block duration to 2 seconds.
+     6. Place the text block on the timeline immediately after the trimmed video.
+     7. Select the text block and apply a fade-out effect to it.
+     8. Export the result.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
