@@ -1,0 +1,78 @@
+{
+  "max_parallel": 10,
+  "fail_fast": false,
+  "termination_grace_period": 2,
+  "defaults": {
+    "run_all": true,
+    "headless": true,
+    "max_steps": 100,
+    "seed": 42,
+    "task_file": "test_cases/video.yaml",
+    "prefix_prompt_file": "app_background/video.md",
+    "post_run_url": "/finish",
+    "url": "http://localhost:5173/",
+    "initial_delay": 5
+  },
+  "models": {
+    "gpt-5.4": {
+      "testcases": [
+        { "name": "gpt54-video", "results_dir": "./seed_runs/run1/video/gpt54" }
+      ]
+    },
+    "o3-pro": {
+      "testcases": [
+        { "name": "o3pro-video", "results_dir": "./seed_runs/run1/video/o3pro", "task_range": ":5" },
+        { "name": "o3pro-video", "results_dir": "./seed_runs/run1/video/o3pro", "task_range": "5:10" },
+        { "name": "o3pro-video", "results_dir": "./seed_runs/run1/video/o3pro", "task_range": "10:15" },
+        { "name": "o3pro-video", "results_dir": "./seed_runs/run1/video/o3pro", "task_range": "15:20" }
+      ]
+    },
+    "openrouter/qwen/qwen3-max": {
+      "defaults": {
+        "use_screenshot": false
+      },
+      "testcases": [
+        { "name": "qwen3max-video", "results_dir": "./seed_runs/run1/video/qwen3max", "provider": "alibaba" }
+      ]
+    },
+    "openrouter/x-ai/grok-4": {
+      "defaults": {
+        "max_steps": 70
+      },
+      "testcases": [
+        { "name": "grok4-video", "results_dir": "./seed_runs/run1/video/grok4" }
+      ]
+    },
+    "openrouter/meta-llama/llama-4-maverick": {
+      "testcases": [
+        { "name": "llama4mav-video", "results_dir": "./seed_runs/run1/video/llama4mav"}
+      ]
+    },
+    "openrouter/deepseek/deepseek-v3.2": {
+      "defaults": {
+        "use_screenshot": false
+      },
+      "testcases": [
+        { "name": "dsv32-video", "results_dir": "./seed_runs/run1/video/dsv32", "provider": "google-vertex" }
+      ]
+    },
+    "openrouter/qwen/qwen3-32b": {
+      "defaults": {
+        "use_screenshot": false
+      },
+      "testcases": [
+        { "name": "qwen332b-video", "results_dir": "./seed_runs/run1/video/qwen332b", "provider": "alibaba" }
+      ]
+    },
+    "openrouter/mistralai/mistral-large-2512": {
+      "testcases": [
+        { "name": "mistrallarge-video", "results_dir": "./seed_runs/run1/video/mistrallarge" }
+      ]
+    },
+    "openrouter/google/gemma-4-31b-it": {
+      "testcases": [
+        { "name": "gemma431b-video", "results_dir": "./seed_runs/run1/video/gemma431b", "provider": "novita/bf16"}
+      ]
+    }
+  }
+}
