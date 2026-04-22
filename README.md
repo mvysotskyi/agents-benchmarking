@@ -31,6 +31,9 @@ poetry run python main.py --run-random -n 5 --iterations 3
 
 # Run a batch of experiments from JSON
 poetry run python run_experiments.py --config example/batch_experiments.example.json
+
+# Skip experiments whose results already exist
+poetry run python run_experiments.py --config example/batch_experiments.example.json --skip-existing-results
 ```
 
 ### Key Options
@@ -45,6 +48,9 @@ poetry run python run_experiments.py --config example/batch_experiments.example.
 
 Use `run_experiments.py` to launch many `main.py` runs at once from JSON. The launcher reuses the same CLI under the hood, writes each experiment's combined stdout/stderr to `<results_dir>/batch_runner.log`, and when you stop the launcher it terminates every running experiment process group so browser children do not linger.
 
+Pass `--skip-existing-results` to ignore experiments whose `results_dir` already contains prior run artifacts such as `run_manifests/run_*.json` or task `summary_info.json` files.
+You can also set `"skip_existing_results": true` at the root of a batch config JSON, on an individual model block, or on a specific testcase. The precedence is: CLI flag, then testcase, then model, then root config.
+
 ```json
 {
   "max_parallel": 2,
@@ -55,6 +61,7 @@ Use `run_experiments.py` to launch many `main.py` runs at once from JSON. The la
   },
   "models": {
     "openrouter/x-ai/grok-4": {
+      "skip_existing_results": true,
       "defaults": {
         "url": "http://localhost:3100/"
       },
