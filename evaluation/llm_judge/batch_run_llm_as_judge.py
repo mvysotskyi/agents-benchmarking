@@ -20,10 +20,10 @@ RESULTS_DIR_RE = re.compile(r"^results_([^_]+)_(.+)$")
 DEFAULT_SUMMARY_CSV_NAME = "llm_judge_batch_summary.csv"
 DEFAULT_RUNS_CSV_NAME = "llm_judge_batch_runs.csv"
 DEFAULT_TASK_YAMLS = {
-    "circuit": REPO_ROOT / "tasks" / "circuit.yaml",
-    "frad": REPO_ROOT / "tasks" / "flightradar.yaml",
-    "voidcut": REPO_ROOT / "tasks" / "voidcut.yaml",
-    "3d": REPO_ROOT / "tasks" / "clone3d.yaml"
+    "circuit": REPO_ROOT / "test_cases" / "circuit.yaml",
+    "frad": REPO_ROOT / "test_cases" / "flightradar.yaml",
+    "voidcut": REPO_ROOT / "test_cases" / "voidcut.yaml",
+    "3d": REPO_ROOT / "test_cases" / "clone3d.yaml"
 }
 
 

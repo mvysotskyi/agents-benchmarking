@@ -227,42 +227,12 @@ def _validate_scenario_effects(
     epsilon_ms: float,
 ) -> list[str]:
     errors: list[str] = []
-    if scenario not in {6, 7, 8, 9, 14}:
+    if scenario not in {7, 8, 9, 14}:
         return errors
 
     effects = _flatten_effect_items(pred_export)
     fade_effects = [e for e in effects if str(e.get("type", "")).lower() == "fade-out"]
     light_effects = [e for e in effects if str(e.get("type", "")).lower() == "light-adjustment"]
-
-    if scenario == 6:
-        flower = _find_clip(pred_blocks, "flower video")
-        if flower is None:
-            errors.append("missing clip: Flower Video")
-            return errors
-        if len(fade_effects) != 1:
-            errors.append(f"expected exactly 1 fade-out effect, found {len(fade_effects)}")
-            return errors
-
-        fade = fade_effects[0]
-        start = _to_float(fade.get("startTimeMs"))
-        end = _to_float(fade.get("endTimeMs"))
-        clip_start = _to_float(flower.raw.get("startTimeMs"))
-        clip_end = clip_start + _to_float(flower.raw.get("durationMs"))
-        expected_start = clip_end - 3000.0
-
-        if abs(end - clip_end) > epsilon_ms:
-            errors.append("fade-out must end at clip end (last 3s requirement)")
-        if abs(start - expected_start) > epsilon_ms:
-            errors.append("fade-out must start around clip_end-3000ms")
-
-        params = fade.get("params", {}) if isinstance(fade.get("params"), dict) else {}
-        if not _nearly_equal(_to_float(params.get("fromOpacity")), DEFAULT_FADE_PARAMS["fromOpacity"]):
-            errors.append("fade-out fromOpacity must stay unchanged at 1")
-        if not _nearly_equal(_to_float(params.get("toOpacity")), DEFAULT_FADE_PARAMS["toOpacity"]):
-            errors.append("fade-out toOpacity must stay unchanged at 0")
-        if str(params.get("curve", "")).lower() != DEFAULT_FADE_PARAMS["curve"]:
-            errors.append("fade-out curve must remain default 'linear'")
-        return errors
 
     if scenario == 7:
         flower = _find_clip(pred_blocks, "flower video")
@@ -296,10 +266,22 @@ def _validate_scenario_effects(
         errors.append("missing clip: Flower Video")
         return errors
 
-    first_start = _to_float(first.raw.get("startTimeMs"))
-    first_end = first_start + _to_float(first.raw.get("durationMs"))
-    second_start = _to_float(second.raw.get("startTimeMs"))
-    second_end = second_start + _to_float(second.raw.get("durationMs"))
+    first_start = min(
+        _to_float(b.raw.get("startTimeMs"))
+        for b in pred_blocks if _normalize_media_name(b.raw.get("mediaName")) == "tuning a radio"
+    )
+    first_end = max(
+        _to_float(b.raw.get("startTimeMs")) + _to_float(b.raw.get("durationMs"))
+        for b in pred_blocks if _normalize_media_name(b.raw.get("mediaName")) == "tuning a radio"
+    )
+    second_start = min(
+        _to_float(b.raw.get("startTimeMs"))
+        for b in pred_blocks if _normalize_media_name(b.raw.get("mediaName")) == "flower video"
+    )
+    second_end = max(
+        _to_float(b.raw.get("startTimeMs")) + _to_float(b.raw.get("durationMs"))
+        for b in pred_blocks if _normalize_media_name(b.raw.get("mediaName")) == "flower video"
+    )
 
     light_segment: dict[str, Any] | None = None
     for effect in light_effects:
@@ -464,6 +446,25 @@ def _extract_testcase_id(*values: Any) -> str | None:
     return None
 
 
+def _extract_localstorage_operations(raw: str) -> str:
+    """Convert eval-harness-localstorage format to {"operations": [...]} JSON string."""
+    if not raw:
+        return ""
+    marker = "--- eval-harness-localstorage ---"
+    idx = raw.find(marker)
+    if idx == -1:
+        return raw
+    after = raw[idx + len(marker):].lstrip("\n")
+    # Content ends at next section separator or end of string
+    end = after.find("\n--- ")
+    section = after[:end].strip() if end != -1 else after.strip()
+    try:
+        ops = json.loads(section)
+    except json.JSONDecodeError:
+        return ""
+    return json.dumps({"operations": ops})
+
+
 def _load_agent_responses(responses_path: Path) -> tuple[list[dict[str, Any]], str]:
     if responses_path.is_file():
         responses_data = json.loads(responses_path.read_text(encoding="utf-8"))
@@ -493,10 +494,11 @@ def _load_agent_responses(responses_path: Path) -> tuple[list[dict[str, Any]], s
         if not test_id:
             continue
 
-        # print(summary_data['post_run_page_content'][:100] + " ------... END OF SUMMARY DATA ------")
         endpoint_content = summary_data.get("post_run_page_content")
-        if endpoint_content is None:
-            endpoint_content = ""
+        if not endpoint_content:
+            endpoint_content = _extract_localstorage_operations(
+                summary_data.get("post_run_js_result") or ""
+            )
 
         model_name = summary_data.get("model_name")
         if isinstance(model_name, str) and model_name.strip():

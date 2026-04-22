@@ -27,8 +27,65 @@ import fire
 
 from evaluation.objective.evaluation_framework import (
     evaluate_objective,
+    extract_json_from_fenced_block,
+    extract_json_from_response,
     load_test_cases,
 )
+
+
+def _extract_send_msg_content(response: str) -> str | None:
+    """Extract the decoded string argument from send_msg_to_user(...)."""
+    match = re.search(r"send_msg_to_user\(", response)
+    if not match:
+        return None
+    pos = match.end()
+    while pos < len(response) and response[pos] in " \t":
+        pos += 1
+    if pos >= len(response) or response[pos] not in ("'", '"'):
+        return None
+    quote = response[pos]
+    pos += 1
+    chars: list[str] = []
+    while pos < len(response):
+        ch = response[pos]
+        if ch == "\\" and pos + 1 < len(response):
+            nxt = response[pos + 1]
+            escape_map = {"n": "\n", "t": "\t", "\\": "\\", "'": "'", '"': '"'}
+            chars.append(escape_map.get(nxt, ch + nxt))
+            pos += 2
+        elif ch == quote:
+            break
+        else:
+            chars.append(ch)
+            pos += 1
+    return "".join(chars)
+
+
+def _normalize_response(response: str) -> str:
+    """Normalize agent responses so standard JSON extractors can parse them.
+
+    Opus46 frequently wraps JSON in markdown fences inside send_msg_to_user,
+    e.g.  send_msg_to_user('```json\\n{...}\\n```')  or embeds JSON at the
+    end of a prose message inside the call.  Standard extraction fails on the
+    raw response because the send_msg content is not bare JSON.
+
+    This function decodes the send_msg argument and, if it contains a JSON
+    object (directly or inside a code fence), returns just that JSON so the
+    normal extractors in evaluation_framework succeed.
+    """
+    content = _extract_send_msg_content(response)
+    if content is None:
+        return response
+
+    # Try to find a JSON object inside the decoded content
+    extracted = (
+        extract_json_from_fenced_block(content)
+        or extract_json_from_response(content)
+    )
+    if extracted is not None:
+        return json.dumps(extracted)
+
+    return response
 
 TIME_TOLERANCE_MINUTES = 1.0
 
@@ -59,14 +116,29 @@ def _within_time_tolerance(actual: Any, expected: Any) -> bool:
     return abs(exp - act) <= TIME_TOLERANCE_MINUTES
 
 
-def _apply_time_tolerance(field_results: dict, score: int) -> tuple[dict[str, int], int]:
+def _apply_time_tolerance(
+    field_results: dict, prediction: dict | None
+) -> tuple[dict[str, int], int]:
     """Re-evaluate failed fields with time tolerance.
+
+    For fields where the actual value is None (key name mismatch) but the
+    expected value is a time, also searches all prediction values for a
+    match within tolerance.  This handles cases where the agent uses a
+    different key name (e.g. ``time_utc``) than the ground truth (``answer``).
 
     Returns updated per-field scores (0/1) and the new overall score.
     """
     adjusted: dict[str, int] = {k: fr.score for k, fr in field_results.items()}
     for field, fr in field_results.items():
-        if fr.score == 0 and _within_time_tolerance(fr.actual, fr.expected):
+        if fr.score == 1:
+            continue
+        actual = fr.actual
+        if actual is None and prediction is not None and _parse_minutes(fr.expected) is not None:
+            for v in prediction.values():
+                if _within_time_tolerance(v, fr.expected):
+                    actual = v
+                    break
+        if _within_time_tolerance(actual, fr.expected):
             adjusted[field] = 1
     new_score = 1 if (adjusted and all(v == 1 for v in adjusted.values())) else 0
     return adjusted, new_score
@@ -183,14 +255,14 @@ def evaluate_all(
         eval_config = tc.get("eval_config")
 
         result = evaluate_objective(
-            raw_response=primary_output,
+            raw_response=_normalize_response(primary_output),
             gt=gt,
             test_id=test_id,
             description=description,
             eval_config=eval_config,
         )
 
-        adjusted_fields, final_score = _apply_time_tolerance(result.field_results, result.score)
+        adjusted_fields, final_score = _apply_time_tolerance(result.field_results, result.prediction)
 
         total += 1
         status = "PASS" if final_score == 1 else "FAIL"

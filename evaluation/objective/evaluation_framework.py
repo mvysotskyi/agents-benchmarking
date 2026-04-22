@@ -262,11 +262,12 @@ def extract_json_best_effort(response: str) -> dict | None:
     Returns:
         Parsed dict from the first successful strategy, or None.
     """
-    return (
+    result = (
         extract_json_from_fenced_block(response)
         or extract_json_from_send_msg(response)
         or extract_json_from_response(response)
     )
+    return result if isinstance(result, dict) else None
 
 
 def normalize(value: Any) -> str:
@@ -306,12 +307,24 @@ def normalize_gt_value(value: Any) -> Any:
     return value
 
 
+def _strip_unit_suffix(text: str) -> str:
+    """Return the leading numeric portion of a string, dropping any trailing unit.
+
+    '386 kts' -> '386', '30,407 ft' -> '30,407', 'abc' -> 'abc' (unchanged).
+    """
+    m = re.match(r"^([\d,.]+)", text.strip())
+    return m.group(1) if m else text
+
+
 def compare_values(actual: Any, expected: Any) -> bool:
     """Recursively compare actual and expected values.
 
     Lists are compared order-independently by sorted string representation.
+    A comma-separated string is accepted as equivalent to a list of the same elements.
     Dicts are compared by recursing on each key in expected.
-    Scalars are normalized (lowercase, stripped) before comparison.
+    Scalars are normalized (lowercase, stripped) before comparison; a numeric
+    value without a unit suffix is accepted when the expected value has one
+    (e.g. '386' matches '386 kts').
 
     Args:
         actual: Value from agent response.
@@ -321,6 +334,8 @@ def compare_values(actual: Any, expected: Any) -> bool:
         True if values match according to the rules above.
     """
     if isinstance(expected, list):
+        if isinstance(actual, str):
+            actual = [item.strip() for item in actual.split(",")]
         if not isinstance(actual, list):
             return False
         if len(actual) != len(expected):
@@ -332,7 +347,12 @@ def compare_values(actual: Any, expected: Any) -> bool:
             return False
         return all(compare_values(actual.get(k), v) for k, v in expected.items())
 
-    return normalize(actual) == normalize(expected)
+    if normalize(actual) == normalize(expected):
+        return True
+
+    norm_exp = _strip_unit_suffix(normalize(expected))
+    norm_act = _strip_unit_suffix(normalize(actual))
+    return bool(norm_exp and norm_act and norm_exp == norm_act)
 
 
 def compare_with_tolerance(actual: Any, expected: Any, tolerance: float) -> bool:

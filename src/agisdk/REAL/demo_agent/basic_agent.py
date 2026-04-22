@@ -1,8 +1,10 @@
 import base64
 import dataclasses
+import json
 import numpy as np
 import io
 import logging
+import re
 import time
 
 from PIL import Image
@@ -15,6 +17,64 @@ from agisdk.REAL.browsergym.utils.obs import flatten_axtree_to_str, flatten_dom_
 from ..logging import logger as rich_logger
 
 logger = logging.getLogger(__name__)
+
+
+_CODE_FENCE_RE = re.compile(r"```(?:json|python)?\s*\n?(.*?)\n?```", re.DOTALL)
+
+
+def _unwrap_code_fence(text: str) -> str:
+    """Return the content of the last fenced block if present, else the stripped text.
+
+    The last fence is used because models typically narrate first, then emit the action.
+    """
+    stripped = text.strip()
+    matches = _CODE_FENCE_RE.findall(stripped)
+    if matches:
+        return matches[-1].strip()
+    return stripped
+
+
+def _extract_action_from_json(text: str) -> Optional[str]:
+    """If text is a JSON object with an 'action' field, return the decoded string.
+
+    Returns None if the text isn't JSON-shaped or doesn't contain an action string.
+    This also JSON-decodes escape sequences like \\n into real newlines, which the
+    downstream high-level action parser requires.
+    """
+    stripped = text.strip()
+    if not (stripped.startswith("{") and stripped.endswith("}")):
+        return None
+    try:
+        data = json.loads(stripped)
+    except (json.JSONDecodeError, ValueError):
+        return None
+    if isinstance(data, dict):
+        value = data.get("action")
+        if isinstance(value, str):
+            return value
+    return None
+
+
+def _extract_answer_from_text(text: str) -> Optional[Any]:
+    """Return the value of an 'answer' field if the model emitted a completion JSON.
+
+    Test-case prompts instruct the agent to output ```json\n{"answer": ...}\n```
+    to signal it is done. We look at the last fenced block (same convention as
+    _normalize_model_action) to find it.
+    """
+    if not isinstance(text, str):
+        return None
+    unwrapped = _unwrap_code_fence(text)
+    stripped = unwrapped.strip()
+    if not (stripped.startswith("{") and stripped.endswith("}")):
+        return None
+    try:
+        data = json.loads(stripped)
+    except (json.JSONDecodeError, ValueError):
+        return None
+    if isinstance(data, dict) and "answer" in data and "action" not in data:
+        return data["answer"]
+    return None
 
 
 def _normalize_model_action(action: Any) -> Optional[str]:
@@ -30,7 +90,14 @@ def _normalize_model_action(action: Any) -> Optional[str]:
         return None
 
     action = action.strip()
-    return action or None
+    if not action:
+        return None
+
+    unwrapped = _unwrap_code_fence(action)
+    from_json = _extract_action_from_json(unwrapped)
+    if from_json is not None:
+        return from_json.strip() or None
+    return unwrapped or None
 
 
 def _openrouter_response_diagnostics(response: Any) -> dict:
@@ -442,7 +509,14 @@ class DemoAgent(Agent):
                         "output_tokens": getattr(response.usage, "completion_tokens", 0) or 0,
                         "total_tokens": getattr(response.usage, "total_tokens", 0) or 0,
                     }
-                return response.choices[0].message.content
+                try:
+                    return response.choices[0].message.content
+                except (AttributeError, IndexError, TypeError):
+                    logger.warning(
+                        "OpenRouter response missing choices/message/content: %s",
+                        _openrouter_response_diagnostics(response),
+                    )
+                    return ""
             self.query_model = query_model
 
         elif model_name.startswith("local"):
@@ -881,23 +955,34 @@ class DemoAgent(Agent):
         self._last_token_usage = {}
         raw_action = self.query_model(system_msgs, user_msgs)
         token_usage = self._last_token_usage
-        action = _normalize_model_action(raw_action)
 
         step_num = len(self.action_history) + 1
 
-        if action is None:
-            rich_logger.warning("Model returned no executable action; ending the episode.")
-            rich_logger.task_step(step_num, "no_action", details="Model response was empty or invalid.")
-            logger.warning("Model returned an empty or invalid action response: %r", raw_action)
+        answer = _extract_answer_from_text(raw_action) if raw_action else None
+        if answer is not None:
+            rich_logger.task_step(step_num, "answer", details=f"Agent signaled completion: {answer!r}")
+            logger.info("Agent emitted completion answer %r; ending episode.", answer)
+            self.action_history.append(f'answer({answer!r})')
             self.update_last_observation(obs)
             info = {
-                "model_response": raw_action,
+                "model_response": None,
                 "raw_model_response": raw_action,
+                "answer": answer,
                 "stats": token_usage,
             }
             if is_first_step:
                 info["full_prompt"] = full_prompt_txt
             return None, info
+
+        action = _normalize_model_action(raw_action)
+
+        if action is None:
+            rich_logger.warning("Model returned no executable action; falling back to noop(500) and continuing.")
+            rich_logger.task_step(step_num, "noop", details="Model response was empty or invalid; substituting noop.")
+            logger.warning("Model returned an empty or invalid action response: %r. Substituting noop(500).", raw_action)
+            action = "noop(500)"
+            if not raw_action:
+                raw_action = action
 
         # Extract action type for a cleaner log message
         action_type = action.split("(")[0] if "(" in action else "unknown"
