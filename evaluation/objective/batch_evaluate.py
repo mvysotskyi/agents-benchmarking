@@ -36,6 +36,15 @@ FRAD_PATTERNS = ("_frad",)
 VIDEO_PATTERNS = ("_video", "_voidcut")
 THREE_D_PATTERNS = ("_3d", "_clone3d", "_graph")
 
+ROOT_APP_ALIASES = {
+    "circuit": APP_CIRCUIT,
+    "flightradar": APP_FRAD,
+    "frad": APP_FRAD,
+    "video": APP_VIDEO,
+    "voidcut": APP_VIDEO,
+    "3d": APP_3D,
+}
+
 
 @dataclass
 class EvalJob:
@@ -87,6 +96,15 @@ def discover_jobs(root_dirs: list[Path]) -> list[EvalJob]:
             print(f"WARNING: skipping non-directory {root}", file=sys.stderr)
             continue
 
+        app_from_root = ROOT_APP_ALIASES.get(root.name.lower())
+        if app_from_root is not None:
+            # {app}/{model}/{test_cases} layout — model dir IS the results dir.
+            for model_dir in sorted(root.iterdir()):
+                if not model_dir.is_dir():
+                    continue
+                jobs.append(EvalJob(app=app_from_root, model=model_dir.name, results_dir=model_dir))
+            continue
+
         for model_dir in sorted(root.iterdir()):
             if not model_dir.is_dir():
                 continue
@@ -116,7 +134,7 @@ def _build_command(job: EvalJob) -> list[str]:
     if job.app == APP_FRAD:
         test_cases = TASKS_DIR / "flightradar.yaml"
         return [
-            sys.executable, "-m", "evaluation.objective.evaluate",
+            sys.executable, "-m", "evaluation.objective.evaluate_flightradar",
             "--test-cases", str(test_cases),
             "--responses", str(job.results_dir),
         ]

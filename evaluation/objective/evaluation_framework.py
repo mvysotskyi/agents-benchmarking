@@ -310,9 +310,12 @@ def normalize_gt_value(value: Any) -> Any:
 def _strip_unit_suffix(text: str) -> str:
     """Return the leading numeric portion of a string, dropping any trailing unit.
 
-    '386 kts' -> '386', '30,407 ft' -> '30,407', 'abc' -> 'abc' (unchanged).
+    '386 kts' -> '386', '30,407 ft' -> '30,407', 'abc' -> 'abc' (unchanged),
+    '16:35 UTC' -> '16:35 UTC' (unchanged — times are not numeric+unit).
+    Only strips when the remainder after the number is whitespace + letters,
+    so time strings like 'HH:MM UTC' don't collapse to just the hour.
     """
-    m = re.match(r"^([\d,.]+)", text.strip())
+    m = re.match(r"^([\d,.]+)(?:\s+[A-Za-z]+)?\s*$", text.strip())
     return m.group(1) if m else text
 
 
