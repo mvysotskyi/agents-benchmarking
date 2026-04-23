@@ -1,0 +1,388 @@
+test_cases:
+- id: "tc_3d_001"
+  prompt: |-
+    # Adjust Cube (Cuboid) Scale and Stack Cone
+     
+     ## GOAL
+     Modify the cuboid’s Y-axis scale and reposition it to rest on the XZ plane, then place the cone on top of the cuboid with proper surface contact.
+     
+     ## STEPS
+    1. Open the “Four Objects Scene”.
+    2. Set the cuboid’s scale along the Y-axis to 20, and adjust its position so that its bottom surface is in contact with the XZ plane.
+    3. Adjust the position of the cone so that its bottom surface is in contact with the top surface of the cuboid, without overlap.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_3d_002"
+  prompt: |-
+    # Iterative Volume-Based Filtering and Scaling
+     
+     ## GOAL
+     Iteratively remove the object with the smallest volume, double the Y-axis scale of the remaining objects, and repeat until only one object remains, then set its color to white.
+     
+     ## STEPS
+    1. Open the “Row of Objects Scene”.
+    2. Compute the volumes of all objects (cuboid, cone, ellipsoid, cylinder). The relevant surface area formulas are:
+       * Cube (Cuboid): V = a * b * c
+       * Cylinder: V = pi * r^2 * h
+       * Sphere (Ellipsoid): V = 1/6 * pi * a * b * c
+       * Cone: V = 1/3 * pi * r^2 * h
+    3. Identify and delete the object with the smallest volume.
+    4. Double the Y-axis scale of all remaining objects.
+    5. Repeat Steps 2–4 until only one object remains.
+    6. Set the remaining object’s color to white (255, 255, 255).
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_3d_003"
+  prompt: |-
+    # Complete the Top-Down Plus
+    
+    ## GOAL
+    Look at the scene from above. The four existing objects form an incomplete plus sign — one arm of the plus is missing. Add a single cube that visually completes the plus as seen from the +Y (top-down) direction.
+    
+    ## STEPS
+    1. Open the "Four Objects Scene".
+    2. From top down view figures form a plus sign without one arm. Identify which arm of the top-down plus shape is missing.
+    3. Add a new object named "Plug" in the missing arm position so that, viewed from directly above (+Y), the five objects form a symmetric plus sign. The new object's shape must match the existing object on the opposite arm of the plus, while keeping default rotation and unit scale.
+    4. Place the "Plug" object on the same Y-axis level as all the other objects and color it purple (#aa00ff).
+    
+    # RESULT FORMAT
+    
+    ```json
+    {"answer": "done"}
+    ```
+  gt: {}
+- id: "tc_3d_004"
+  prompt: |-
+    # Double the Cube's Scale
+     
+     ## GOAL
+     Open a single-object scene, double the cube's scale on all axes, and change the scene background color.
+     
+     ## STEPS
+     1. Open the "Single Cube Scene".
+     2. Double its current scale along all three axes, and set the scene's background color to white (#ffffff).
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_3d_005"
+  prompt: |-
+    # Position Elements Relative to Reference
+     
+     ## GOAL
+     Open a scene and reposition two elements at a fixed distance from a reference object along the X-axis, preserving their orientations.
+     
+     ## STEPS
+     1. Open the "Basic Shape Scene".
+     2. Use the blue sphere as the reference point. Position the other two elements at a distance of 3 units from the reference along the X-axis, while preserving their original orientations.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_3d_006"
+  prompt: |-
+    # Place a Torus on the Missing Axis
+     
+     ## GOAL
+     Identify the unoccupied axis in the XZ plane and place a new torus there, matching the distance of existing elements from the center.
+     
+     ## STEPS
+     1. Open the "Four Objects Scene".
+     2. Add a torus and place it along the only axis in the XZ plane that does not contain any existing element. Set its distance from the central point to be the same as that of the other elements.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_3d_007"
+  prompt: |-
+    # Fill the Missing End
+    
+    ## GOAL
+    Add one object that visually extends the row pattern, without disturbing the existing row.
+    
+    ## STEPS
+    1. Open the "Row of Objects Scene".
+    2. In the default camera, observe the four objects as a left-to-right row of distinct silhouettes.
+    3. Add exactly one new object named "Row Extension" at the next equally spaced position beyond the current rightmost visible silhouette, continuing the same straight row and center-to-center spacing.
+    4. The new object's must:
+      * match the shape of the second (starting from the origin) object in the row,
+      * match the row's Y and Z levels, use default rotation and unit scale,
+      * have a purple (#aa00ff) color.
+    5. Preserve every original row object's position, rotation, scale, color, name, visibility, opacity, and wireframe setting.
+    
+    # RESULT FORMAT
+    
+    ```json
+    {"answer": "done"}
+    ```
+  gt: {}
+- id: "tc_3d_008"
+  prompt: |-
+    # Spheres Touching Cube Faces From Inside
+    
+    ## GOAL
+    Create unit spheres that touch the faces of an imagined cube from inside.
+    
+    ## STEPS
+    1. Open the "Empty Scene".
+    2. Imagine a cube of side 6 laying on the XZ plane.
+    3. Add one unit sphere per cube face.
+    4. Place each sphere inside the imagined cube so it touches, but does not intersect, its assigned face at the center of that face.
+    
+    # RESULT FORMAT
+    
+    ```json
+    {"answer": "done"}
+    ```
+  gt: {}
+- id: "tc_3d_009"
+  prompt: |-
+    # Reorder Elements Along X-Axis
+     
+     ## GOAL
+     Rearrange four objects into a specified order along the positive X-axis with uniform spacing between centers.
+     
+     ## STEPS
+     1. Open the "Row of Objects Scene".
+     2. Reorder the elements as sphere, cone, cube, and cylinder along the positive X-axis. Final distance between centers of consecutive objects must be equal to 1.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_3d_010"
+  prompt: |-
+    # Place Cubes in All Octants
+     
+     ## GOAL
+     Create a new scene and place one cube in each of the eight 3D octants at symmetric coordinates.
+     
+     ## STEPS
+     1. Create a new scene named "Octant Cubes".
+     2. Generate cubes by assigning one default cube to each octant in 3D space, positioned at coordinates with absolute values of (1, 1, 1). Name all the cubes as Cube.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_3d_011"
+  prompt: |-
+    # Stack Three Cubes into a Larger Cube (Cuboid)
+     
+     ## GOAL
+     Add two cubes (cuboids) to an existing scene so that all three cubes together form a single larger cube stacked along the Y-axis with no overlap.
+     
+     ## STEPS
+     1. Open the "Single Cube Scene".
+     2. Add two cubes (cuboids) that, together with the given Cube 1, form a unified larger cube (cuboid) with the same rotation. The bottom cubes (cuboids) should have its lower surface in contact with the XZ plane, and the total height along the Y-axis should be 3. Ensure that there is no overlap among the three individual cubes (cuboids). Name the bottom cube Cube 2 and set its color to blue (#0000ff). Name the top cube Cube 3 and set its color to green (#00ff00).
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_3d_012"
+  prompt: |-
+    # Create a Minimum-Surface-Area Cube (Cuboid)
+     
+     ## GOAL
+     Create a cube with a volume of 8 and the smallest possible surface area, then set specific position, rotation, color, opacity, and background.
+     
+     ## STEPS
+    1. Open the “Empty Scene”.
+    2. Create a cube (cuboid) with integer side lengths a, b, and c such that the volume constraint abc = 8 is satisfied. The surface area is given by the formula S = 2(ab + bc + ac). Determine the integer dimensions that minimize the surface area, and construct the cuboid accordingly.
+    3. Set the cuboid’s position to (1, 1, 1), rotation to (45, 45, 45), color to blue (#0000ff), and opacity to 0.5.
+    4. Set the background color to white (#ffffff).
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_3d_013"
+  prompt: |-
+    # Create Cube (Cuboid) with Scale Combinations
+    
+    ## GOAL
+    
+    Find all possible integer scale combinations of a cube using the values 1, 2, and 4 on the x, y, and z axes. The three scale values must be assigned in all possible permutations, and each axis may be either positive or negative.
+    
+    ## STEPS
+    
+    1. Open the "Empty Scene".
+    
+    2. Create cubes (cuboids) for all possible combinations of scale values [1, 2, 4] across the x, y, and z axes, allowing each axis to be positive or negative.
+    
+    3. Set the position of each cube to (0, 0, 0) and assign all of them the same name, Cube 1.
+    
+    ## RESULT FORMAT
+    
+    ```json
+    
+    {"answer": "done"}
+    ```
+  gt: {}
+- id: "tc_3d_014"
+  prompt: |-
+    # Symmetric Scene Around the Origin Object
+    
+    ## GOAL
+    Make the scene symmetric using the object at the origin as the scene center.
+    
+    ## STEPS
+    1. Open the "Two Objects Scene".
+    2. Treat the object located at the origin as the center of the scene. Do not move or modify this center object.
+    3. Change the existing cube's color to red (#ff0000).
+    4. Add exactly one new object.
+    5. Change the new object's properties so that the final scene is symmetric around the center object.
+    6. Do not add any guide objects or extra objects.
+    
+    # RESULT FORMAT
+    
+    ```json
+    {"answer": "done"}
+    ```
+  gt: {}
+- id: "tc_3d_015"
+  prompt: |-
+    # Find and Recolor Nearest Elements
+     
+     ## GOAL
+     Identify the two elements closest to a reference cube and change their color to red.
+     
+     ## STEPS
+     1. Open the "Geometric Garden".
+     2. Use the stone block cube as the reference. Identify the two remaining elements whose centers are closest to that of the stone block cube. Finally, change their color to red (#ff0000).
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_3d_016"
+  prompt: |-
+    # Match Cone Volume to Cylinder and Stack
+     
+     ## GOAL
+     Adjust a cone's Y-axis scale to match the cylinder's volume, place the cone on top of the cylinder, and recolor both to red.
+     
+     ## STEPS
+    1. Open the “Four Objects Scene”.
+    2. Adjust the cone so that its volume matches that of the cylinder by modifying only the scale along the Y-axis. The volume of the cylinder is given by V = πr²h, and the volume of the cone is given by V = (1/3)πr²h. Determine the required Y-axis scaling factor to achieve equal volumes. Next, position the cone on top of the cylinder without any overlap. Finally, treat the cylinder and cone as a single object and change its color to red (#ff0000).
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_3d_017"
+  prompt: |-
+    # Minimize Total Exposed Volume
+     
+     ## GOAL
+     Reposition objects in the XZ plane to minimize total exposed volume by maximizing overlap, keeping Y positions and all rotations/scales fixed.
+     
+     ## STEPS
+     1. Open the "Geometric Garden".
+     2. Use the stone block as the reference. Adjust the positions of the other objects along the X- and Z-axes while keeping their Y-axis positions fixed, with all rotations and scales unchanged. The objective is to minimize the total exposed volume of all objects, excluding any overlapping volume from the calculation.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_3d_018"
+  prompt: |-
+    # Reorder by Surface Area Plus Volume
+     
+     ## GOAL
+     Sort four elements along the positive X-axis by the sum of their surface area and volume (smallest to largest), preserving the original color order.
+     
+     ## STEPS
+    1. Open the “Row of Objects Scene”.
+    2. Reorder the given elements (cube (cuboid), sphere, cylinder, cone) along the positive X-axis, arranging them from smallest to largest based on the sum of their surface area and volume. The relevant formulas are:
+        * Cube (cuboid): surface area S = 2(ab + bc + ac), volume V = abc
+        * Sphere: surface area S = 4πr², volume V = (4/3)πr³
+        * Cylinder: surface area S = 2πr² + 2πrh, volume V = πr²h
+        * Cone: surface area S = πr² + πrl, volume V = (1/3)πr²h (where l is the slant height)
+            Preserve the original color order while reordering.
+    3. Distance between centers of consecutive object must me 2. 
+    
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_3d_019"
+  prompt: |-
+    # Build a 3D Snowman
+     
+     ## GOAL
+     Build a 3D snowman from scratch using multiple primitives (cylinder body, sphere head, torus eyes, cone nose, torus mouth, cube arms) with precise transforms.
+     
+     ## STEPS
+     1. Create a new scene named "Snowman".
+     2. Construct a 3D snowman.
+     First, add a cylinder and name it Body. Set its position to (0, 0.5, 0), using the default rotation, scale, color, and opacity.
+     Second, add a sphere named Head and set its position to (0, 1.4, 0).
+     Third, add a torus named Right Eye. Set its position to (0.45, 1.6, 0.2), rotation to (0, 90, 0), scale to (0.2, 0.2, 0.2), and color to black (#000000).
+     Fourth, duplicate the Right Eye and rename it Left Eye. Set its position symmetrically along the Z-axis opposite to the right eye.
+     Fifth, add a cone named Nose. Set its position to (0.5, 1.5, 0), rotation to (0, 0, -90), scale to (0.1, 0.2, 0.1), and color to yellow (#ffff00).
+     Sixth, add another torus named Mouth. Set its position to (0.5, 1.3, 0), rotation to (0, 90, 0), scale to (0.3, 0.1, 0.1), and color to red (#ff0000).
+     Seventh, add a cube named Right Arm. Set its position to (0, 0.5, 0.6), rotation to (-45, 0, 0), and scale to (0.3, 0.8, 0.3).
+     Finally, duplicate the Right Arm and rename it Left Arm. Set its position symmetrically along the Z-axis opposite to the right arm, and apply the opposite rotation along the X-axis.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_3d_020"
+  prompt: |-
+    # Build a Ball on Table (Open-Ended)
+     
+     ## GOAL
+     Construct a table from a tabletop cube and four cylinder legs, then place a ball on the tabletop, computing positions so all parts are in contact.
+     
+     ## STEPS
+     1. Create a new scene named “Ball on Table.” Then, construct a 3D table and place a ball on the tabletop.
+     The table consists of the following components: a cube named Tabletop, which serves as the reference point, with its position set to (0, 4.2, 0) and scaled to (4, 0.4, 4); four cylinders of equal size named TableLeg, each scaled to (0.5, 4, 0.5); and a sphere named Ball with default settings.
+     These components constitute all the elements required to construct the “Ball on Table” scene. Your task is to determine their positions (except for the Tabletop, which is fixed as the reference). Each element should be connected to or tangent to the others.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+
