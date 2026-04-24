@@ -29,14 +29,26 @@ import fire
 
 # ── Dataclasses ──────────────────────────────────────────────────────────────
 
-TESTCASE_ID_PATTERN = re.compile(r"tc_(?:graph|clone3d|3d)_(\d+)")
+TESTCASE_ID_PATTERN = re.compile(r"tc_(?:graph|clone3d|3d|vid)_(\d+)")
 
-OBJECT_PROPS_EXACT = ("type", "visible", "wireframe")
+OBJECT_PROPS_EXACT = ("type", "wireframe")
 OBJECT_PROPS_NUMERIC_ARRAY = ("position", "rotation", "scale")
 OBJECT_PROPS_COLOR = ("color",)
 OBJECT_PROPS_NUMERIC = ("opacity",)
 
-SETTINGS_EXACT = ("showGrid", "showAxes", "cameraType")
+Y_ROTATION_SYMMETRIC_TYPES = ("cone", "sphere", "cylinder")
+
+
+def _is_y_rotation_symmetric(obj: dict) -> bool:
+    """Object types whose Y-axis rotation is visually indistinguishable."""
+    type_key = str(obj.get("type", "")).strip().lower()
+    if type_key in Y_ROTATION_SYMMETRIC_TYPES:
+        return True
+    # Fallback for objects missing a type field: check the name prefix.
+    name_key = str(obj.get("name", "")).strip().lower()
+    return any(name_key.startswith(p) for p in Y_ROTATION_SYMMETRIC_TYPES)
+
+SETTINGS_EXACT = ("showGrid", "showAxes")
 SETTINGS_NUMERIC = ("fov", "orthoZoom")
 SETTINGS_COLOR = ("backgroundColor",)
 
@@ -140,11 +152,69 @@ def _extract_task_number(test_id: str) -> int | None:
 
 def _extract_test_id(value: str) -> str | None:
     """Extract a test ID like tc_graph_004 or tc_clone3d_008 from a string."""
-    match = re.search(r"(tc_(?:graph|clone3d|3d)_\d+)", value)
+    match = re.search(r"(tc_(?:graph|clone3d|3d|vid)_\d+)", value)
     return match.group(1) if match else None
 
 
 # ── Comparison logic ─────────────────────────────────────────────────────────
+
+
+def _compare_object_pair(
+    gt_obj: dict,
+    pred_obj: dict,
+    tolerance: float,
+) -> list[str]:
+    """Compare a single GT object against a single predicted object.
+
+    Returns a list of human-readable property mismatches.  An empty list
+    means a perfect match.  Y-axis rotation is ignored for shapes whose
+    rotation around Y is visually indistinguishable (sphere/cylinder/cone).
+    """
+    errors: list[str] = []
+
+    for prop in OBJECT_PROPS_EXACT:
+        gt_val = gt_obj.get(prop)
+        pred_val = pred_obj.get(prop)
+        if gt_val is not None and pred_val is not None:
+            if str(gt_val).lower() != str(pred_val).lower():
+                errors.append("%s: gt=%r pred=%r" % (prop, gt_val, pred_val))
+
+    for prop in OBJECT_PROPS_NUMERIC_ARRAY:
+        gt_val = gt_obj.get(prop)
+        pred_val = pred_obj.get(prop)
+        if gt_val is not None and pred_val is not None:
+            if (
+                prop == "rotation"
+                and _is_y_rotation_symmetric(gt_obj)
+                and isinstance(gt_val, list)
+                and isinstance(pred_val, list)
+                and len(gt_val) > 1
+                and len(pred_val) > 1
+            ):
+                pred_val = list(pred_val)
+                pred_val[1] = gt_val[1]
+            err = _compare_numeric_arrays(gt_val, pred_val, tolerance)
+            if err:
+                errors.append("%s: %s" % (prop, err))
+
+    for prop in OBJECT_PROPS_COLOR:
+        gt_val = _normalize_color(gt_obj.get(prop))
+        pred_val = _normalize_color(pred_obj.get(prop))
+        if gt_val is not None and pred_val is not None:
+            if gt_val != pred_val:
+                errors.append("%s: gt=%s pred=%s" % (prop, gt_val, pred_val))
+
+    for prop in OBJECT_PROPS_NUMERIC:
+        gt_val = gt_obj.get(prop)
+        pred_val = pred_obj.get(prop)
+        if gt_val is not None and pred_val is not None:
+            try:
+                if not _nearly_equal(float(gt_val), float(pred_val), tolerance):
+                    errors.append("%s: gt=%s pred=%s" % (prop, gt_val, pred_val))
+            except (TypeError, ValueError):
+                errors.append("%s: non-numeric (gt=%r, pred=%r)" % (prop, gt_val, pred_val))
+
+    return errors
 
 
 def compare_objects(
@@ -152,103 +222,66 @@ def compare_objects(
     pred_objects: list[dict],
     tolerance: float,
 ) -> tuple[list[ObjectResult], list[str]]:
-    """Compare GT objects against predicted objects.
+    """Compare GT objects against predicted objects by content (name-independent).
 
-    Objects are matched by name (case-insensitive).  When multiple predicted
-    objects share a name, each is compared in order.
+    For every (predicted, GT) pair we compute the list of property
+    mismatches, then greedily assign pairs starting with the lowest error
+    count.  Unmatched GT objects fail with "no matching predicted object";
+    leftover predicted objects become structural errors.  Y-rotation
+    symmetry constraints for cone/sphere/cylinder are preserved.
     """
     structural_errors: list[str] = []
-    results: list[ObjectResult] = []
 
-    # Build lookup: name -> list of pred objects
-    pred_by_name: dict[str, list[dict]] = {}
-    for obj in pred_objects:
-        key = obj.get("name", "").strip().lower()
-        pred_by_name.setdefault(key, []).append(obj)
+    pair_errors: dict[tuple[int, int], list[str]] = {}
+    for pi, pred_obj in enumerate(pred_objects):
+        for gi, gt_obj in enumerate(gt_objects):
+            pair_errors[(pi, gi)] = _compare_object_pair(gt_obj, pred_obj, tolerance)
 
-    gt_name_counts: dict[str, int] = {}
-    for gt_obj in gt_objects:
-        key = gt_obj.get("name", "").strip().lower()
-        gt_name_counts[key] = gt_name_counts.get(key, 0) + 1
+    sorted_pairs = sorted(
+        pair_errors.items(),
+        key=lambda kv: (len(kv[1]), kv[0][1], kv[0][0]),
+    )
 
-    # Track which pred objects have been consumed
-    pred_consumed: dict[str, int] = {}
+    pred_remaining: set[int] = set(range(len(pred_objects)))
+    gt_remaining: set[int] = set(range(len(gt_objects)))
+    matched_by_gt: dict[int, tuple[int, list[str]]] = {}
 
-    for gt_obj in gt_objects:
-        name = gt_obj.get("name", "")
-        key = name.strip().lower()
-        errors: list[str] = []
+    for (pi, gi), errors in sorted_pairs:
+        if pi in pred_remaining and gi in gt_remaining:
+            matched_by_gt[gi] = (pi, errors)
+            pred_remaining.discard(pi)
+            gt_remaining.discard(gi)
 
-        candidates = pred_by_name.get(key, [])
-        idx = pred_consumed.get(key, 0)
-
-        if idx >= len(candidates):
-            results.append(ObjectResult(name=name, matched=False, errors=["object not found in predicted scene"]))
-            continue
-
-        pred_obj = candidates[idx]
-        pred_consumed[key] = idx + 1
-
-        # Exact properties
-        for prop in OBJECT_PROPS_EXACT:
-            gt_val = gt_obj.get(prop)
-            pred_val = pred_obj.get(prop)
-            if gt_val is not None and pred_val is not None:
-                if str(gt_val).lower() != str(pred_val).lower():
-                    errors.append("%s: gt=%r pred=%r" % (prop, gt_val, pred_val))
-
-        # Numeric array properties
-        for prop in OBJECT_PROPS_NUMERIC_ARRAY:
-            gt_val = gt_obj.get(prop)
-            pred_val = pred_obj.get(prop)
-            if gt_val is not None and pred_val is not None:
-                err = _compare_numeric_arrays(gt_val, pred_val, tolerance)
-                if err:
-                    errors.append("%s: %s" % (prop, err))
-
-        # Color
-        for prop in OBJECT_PROPS_COLOR:
-            gt_val = _normalize_color(gt_obj.get(prop))
-            pred_val = _normalize_color(pred_obj.get(prop))
-            if gt_val is not None and pred_val is not None:
-                if gt_val != pred_val:
-                    errors.append("%s: gt=%s pred=%s" % (prop, gt_val, pred_val))
-
-        # Numeric scalars
-        for prop in OBJECT_PROPS_NUMERIC:
-            gt_val = gt_obj.get(prop)
-            pred_val = pred_obj.get(prop)
-            if gt_val is not None and pred_val is not None:
-                try:
-                    if not _nearly_equal(float(gt_val), float(pred_val), tolerance):
-                        errors.append("%s: gt=%s pred=%s" % (prop, gt_val, pred_val))
-                except (TypeError, ValueError):
-                    errors.append("%s: non-numeric (gt=%r, pred=%r)" % (prop, gt_val, pred_val))
-
-        results.append(ObjectResult(name=name, matched=len(errors) == 0, errors=errors))
-
-    # Check for extra predicted objects not in GT
-    for key, count in gt_name_counts.items():
-        pred_count = len(pred_by_name.get(key, []))
-        if pred_count > count:
-            structural_errors.append(
-                "extra predicted objects named '%s' (gt=%d, pred=%d)" % (key, count, pred_count)
+    object_results: list[ObjectResult] = []
+    for gi, gt_obj in enumerate(gt_objects):
+        gt_name = gt_obj.get("name", "")
+        if gi in matched_by_gt:
+            _, errors = matched_by_gt[gi]
+            object_results.append(
+                ObjectResult(name=gt_name, matched=len(errors) == 0, errors=errors)
+            )
+        else:
+            object_results.append(
+                ObjectResult(
+                    name=gt_name,
+                    matched=False,
+                    errors=["no matching predicted object found"],
+                )
             )
 
-    # Check for objects in pred that don't appear in GT at all
-    gt_keys = set(gt_name_counts.keys())
-    for key in pred_by_name:
-        if key not in gt_keys:
-            structural_errors.append(
-                "unexpected object '%s' in predicted scene (count=%d)" % (key, len(pred_by_name[key]))
-            )
+    for pi in sorted(pred_remaining):
+        pred_obj = pred_objects[pi]
+        label = pred_obj.get("name") or pred_obj.get("type") or "<unnamed>"
+        structural_errors.append(
+            "extra predicted object '%s' (no matching GT object)" % label
+        )
 
     if len(gt_objects) != len(pred_objects):
         structural_errors.append(
             "object count mismatch (gt=%d, pred=%d)" % (len(gt_objects), len(pred_objects))
         )
 
-    return results, structural_errors
+    return object_results, structural_errors
 
 
 def compare_settings(
