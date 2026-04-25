@@ -1,0 +1,90 @@
+{
+  "max_parallel": 4,
+  "fail_fast": false,
+  "termination_grace_period": 2,
+  "defaults": {
+    "run_all": true,
+    "headless": true,
+    "max_steps": 100,
+    "seed": 200,
+    "task_file": "test_cases/3d.yaml",
+    "prefix_prompt_file": "app_background/3d.md",
+    "post_run_url": "/export-clear",
+    "url": "http://localhost:5175/",
+    "initial_delay": 5
+  },
+  "models": {
+    "claude-opus-4-6": {
+      "testcases": [
+        { "name": "opus46-3d", "results_dir": "./seed_runs/run2/3d/opus46", "task_range": ":7" },
+        { "name": "opus46-3d", "results_dir": "./seed_runs/run2/3d/opus46", "task_range": "7:14" },
+        { "name": "opus46-3d", "results_dir": "./seed_runs/run2/3d/opus46", "task_range": "14:" }
+      ]
+    },
+    "openrouter/google/gemini-3.1-pro-preview": {
+      "testcases": [
+        { "name": "gemini31pro-3d", "results_dir": "./seed_runs/run2/3d/gemini31pro", "task_range": ":5" },
+        { "name": "gemini31pro-3d", "results_dir": "./seed_runs/run2/3d/gemini31pro", "task_range": "5:10" },
+        { "name": "gemini31pro-3d", "results_dir": "./seed_runs/run2/3d/gemini31pro", "task_range": "10:15" },
+        { "name": "gemini31pro-3d", "results_dir": "./seed_runs/run2/3d/gemini31pro", "task_range": "15:" }
+      ]
+    },
+    "gpt-5.4": {
+      "testcases": [
+        { "name": "gpt54-3d", "results_dir": "./seed_runs/run2/3d/gpt54" }
+      ]
+    },
+    "o3-pro": {
+      "testcases": [
+        { "name": "o3pro-3d", "results_dir": "./seed_runs/run2/3d/o3pro", "task_range": ":3" },
+        { "name": "o3pro-3d", "results_dir": "./seed_runs/run2/3d/o3pro", "task_range": "3:6" },
+        { "name": "o3pro-3d", "results_dir": "./seed_runs/run2/3d/o3pro", "task_range": "6:9" },
+        { "name": "o3pro-3d", "results_dir": "./seed_runs/run2/3d/o3pro", "task_range": "9:12" },
+        { "name": "o3pro-3d", "results_dir": "./seed_runs/run2/3d/o3pro", "task_range": "12:15" },
+        { "name": "o3pro-3d", "results_dir": "./seed_runs/run2/3d/o3pro", "task_range": "15:" }
+      ]
+    },
+    "openrouter/qwen/qwen3-max": {
+      "defaults": {
+        "use_screenshot": false
+      },
+      "testcases": [
+        { "name": "qwen3max-3d", "results_dir": "./seed_runs/run2/3d/qwen3max", "provider": "alibaba" }
+      ]
+    },
+    "openrouter/meta-llama/llama-4-maverick": {
+      "testcases": [
+        { "name": "llama4mav-3d", "results_dir": "./seed_runs/run2/3d/llama4mav" }
+      ]
+    },
+    "openrouter/deepseek/deepseek-v3.2": {
+      "defaults": {
+        "use_screenshot": false
+      },
+      "testcases": [
+        { "name": "dsv32-3d", "results_dir": "./seed_runs/run2/3d/dsv32" }
+      ]
+    },
+    "openrouter/qwen/qwen3-32b": {
+      "defaults": {
+        "use_screenshot": false
+      },
+      "testcases": [
+        { "name": "qwen332b-3d", "results_dir": "./seed_runs/run2/3d/qwen332b" }
+      ]
+    },
+    "openrouter/mistralai/mistral-large-2512": {
+      "testcases": [
+        { "name": "mistrallarge-3d", "results_dir": "./seed_runs/run2/3d/mistrallarge", "task_range": ":7" },
+        { "name": "mistrallarge-3d", "results_dir": "./seed_runs/run2/3d/mistrallarge", "task_range": "7:10" },
+        { "name": "mistrallarge-3d", "results_dir": "./seed_runs/run2/3d/mistrallarge", "task_range": "10:15" },
+        { "name": "mistrallarge-3d", "results_dir": "./seed_runs/run2/3d/mistrallarge", "task_range": "15:" }
+      ]
+    },
+    "openrouter/google/gemma-3-27b-it": {
+      "testcases": [
+        { "name": "gemma327b-3d", "results_dir": "./seed_runs/run2/3d/gemma327b" }
+      ]
+    }
+  }
+}
