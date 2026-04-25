@@ -959,7 +959,21 @@ class DemoAgent(Agent):
         step_num = len(self.action_history) + 1
 
         answer = _extract_answer_from_text(raw_action) if raw_action else None
-        if answer is not None:
+        action_from_answer: Optional[str] = None
+        if answer is not None and isinstance(answer, str):
+            candidate = answer.strip()
+            if candidate:
+                try:
+                    self.action_set.to_python_code(candidate)
+                except Exception:
+                    action_from_answer = None
+                else:
+                    action_from_answer = candidate
+                    logger.info(
+                        "Answer field parsed as a valid action %r; treating as action instead of completion.",
+                        candidate,
+                    )
+        if answer is not None and action_from_answer is None:
             rich_logger.task_step(step_num, "answer", details=f"Agent signaled completion: {answer!r}")
             logger.info("Agent emitted completion answer %r; ending episode.", answer)
             self.action_history.append(f'answer({answer!r})')
@@ -974,7 +988,7 @@ class DemoAgent(Agent):
                 info["full_prompt"] = full_prompt_txt
             return None, info
 
-        action = _normalize_model_action(raw_action)
+        action = action_from_answer or _normalize_model_action(raw_action)
 
         if action is None:
             rich_logger.warning("Model returned no executable action; falling back to noop(500) and continuing.")
