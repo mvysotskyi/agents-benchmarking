@@ -1,5 +1,12 @@
 # Agent Evaluation Framework
 
+> **Acknowledgement.** This work is built on top of the **REAL** paper repository
+> ([AGI SDK](https://github.com/agi-inc/agisdk) — *paper:* [arxiv.org/abs/2504.11543](https://arxiv.org/abs/2504.11543)).
+> The agent run mechanics (browser harness, task loop, action/observation interface) are reused directly from the REAL repo.
+> The original upstream README is preserved as [`REAL-README.md`](./REAL-README.md).
+> Everything in this repository — the custom evaluation framework, batch runner, objective and LLM-as-a-judge evaluators,
+> and the new task suites — is my own work built on those run mechanics.
+
 ## Setup
 
 ```bash
