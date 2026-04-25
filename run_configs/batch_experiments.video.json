@@ -1,12 +1,12 @@
 {
-  "max_parallel": 10,
+  "max_parallel": 5,
   "fail_fast": false,
   "termination_grace_period": 2,
   "defaults": {
     "run_all": true,
     "headless": true,
     "max_steps": 100,
-    "seed": 42,
+    "seed": 154,
     "task_file": "test_cases/video.yaml",
     "prefix_prompt_file": "app_background/video.md",
     "post_run_url": "/finish",
@@ -14,17 +14,35 @@
     "initial_delay": 5
   },
   "models": {
+    "claude-opus-4-6": {
+      "testcases": [
+        { "name": "opus46-video", "results_dir": "./seed_runs/run2/video/opus46" }
+      ]
+    },
+    "openrouter/google/gemini-3.1-pro-preview": {
+      "testcases": [
+        { "name": "gemini31pro-video", "results_dir": "./seed_runs/run2/video/gemini31pro", "task_range": ":5" },
+        { "name": "gemini31pro-video", "results_dir": "./seed_runs/run2/video/gemini31pro", "task_range": "5:10" },
+        { "name": "gemini31pro-video", "results_dir": "./seed_runs/run2/video/gemini31pro", "task_range": "10:15" },
+        { "name": "gemini31pro-video", "results_dir": "./seed_runs/run2/video/gemini31pro", "task_range": "15:" }
+      ]
+    },
     "gpt-5.4": {
       "testcases": [
-        { "name": "gpt54-video", "results_dir": "./seed_runs/run1/video/gpt54" }
+        { "name": "gpt54-video", "results_dir": "./seed_runs/run2/video/gpt54" }
       ]
     },
     "o3-pro": {
       "testcases": [
-        { "name": "o3pro-video", "results_dir": "./seed_runs/run1/video/o3pro", "task_range": ":5" },
-        { "name": "o3pro-video", "results_dir": "./seed_runs/run1/video/o3pro", "task_range": "5:10" },
-        { "name": "o3pro-video", "results_dir": "./seed_runs/run1/video/o3pro", "task_range": "10:15" },
-        { "name": "o3pro-video", "results_dir": "./seed_runs/run1/video/o3pro", "task_range": "15:20" }
+        { "name": "o3pro-video", "results_dir": "./seed_runs/run2/video/o3pro", "task_range": ":5" },
+        { "name": "o3pro-video", "results_dir": "./seed_runs/run2/video/o3pro", "task_range": "5:10" },
+        { "name": "o3pro-video", "results_dir": "./seed_runs/run2/video/o3pro", "task_range": "10:15" },
+        { "name": "o3pro-video", "results_dir": "./seed_runs/run2/video/o3pro", "task_range": "15:" }
+      ]
+    },
+    "openrouter/meta-llama/llama-4-maverick": {
+      "testcases": [
+        { "name": "llama4mav-video", "results_dir": "./seed_runs/run2/video/llama4mav"}
       ]
     },
     "openrouter/qwen/qwen3-max": {
@@ -32,20 +50,7 @@
         "use_screenshot": false
       },
       "testcases": [
-        { "name": "qwen3max-video", "results_dir": "./seed_runs/run1/video/qwen3max", "provider": "alibaba" }
-      ]
-    },
-    "openrouter/x-ai/grok-4": {
-      "defaults": {
-        "max_steps": 70
-      },
-      "testcases": [
-        { "name": "grok4-video", "results_dir": "./seed_runs/run1/video/grok4" }
-      ]
-    },
-    "openrouter/meta-llama/llama-4-maverick": {
-      "testcases": [
-        { "name": "llama4mav-video", "results_dir": "./seed_runs/run1/video/llama4mav"}
+        { "name": "qwen3max-video", "results_dir": "./seed_runs/run2/video/qwen3max" }
       ]
     },
     "openrouter/deepseek/deepseek-v3.2": {
@@ -53,7 +58,7 @@
         "use_screenshot": false
       },
       "testcases": [
-        { "name": "dsv32-video", "results_dir": "./seed_runs/run1/video/dsv32", "provider": "google-vertex" }
+        { "name": "dsv32-video", "results_dir": "./seed_runs/run2/video/dsv32" }
       ]
     },
     "openrouter/qwen/qwen3-32b": {
@@ -61,17 +66,19 @@
         "use_screenshot": false
       },
       "testcases": [
-        { "name": "qwen332b-video", "results_dir": "./seed_runs/run1/video/qwen332b", "provider": "alibaba" }
+        { "name": "qwen332b-video", "results_dir": "./seed_runs/run2/video/qwen332b" }
       ]
     },
     "openrouter/mistralai/mistral-large-2512": {
       "testcases": [
-        { "name": "mistrallarge-video", "results_dir": "./seed_runs/run1/video/mistrallarge" }
+        { "name": "mistrallarge-video", "results_dir": "./seed_runs/run2/video/mistrallarge", "task_range": ":7" },
+        { "name": "mistrallarge-video", "results_dir": "./seed_runs/run2/video/mistrallarge", "task_range": "7:14" },
+        { "name": "mistrallarge-video", "results_dir": "./seed_runs/run2/video/mistrallarge", "task_range": "14:" }
       ]
     },
-    "openrouter/google/gemma-4-31b-it": {
+    "openrouter/google/gemma-3-27b-it": {
       "testcases": [
-        { "name": "gemma431b-video", "results_dir": "./seed_runs/run1/video/gemma431b", "provider": "novita/bf16"}
+        { "name": "gemma327b-video", "results_dir": "./seed_runs/run2/video/gemma327b"}
       ]
     }
   }
