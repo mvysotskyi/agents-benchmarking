@@ -1,0 +1,432 @@
+test_cases:
+- id: "tc_graph_001"
+  prompt: |-
+    # Split a Pipeline into Two Conditional Branches
+    
+    ## GOAL
+    Modify an existing linear workflow so that active and inactive users are processed through separate branches.
+    
+    ## STEPS
+    1. Open the "API Data Pipeline" workflow.
+    2. Insert an "If" node between the "Map" node and the next downstream node.
+    3. Configure the "If" condition to check:
+       `item.active === true`
+    4. Add a new "Send Email" node for the true branch.
+    5. Set the new "Send Email" subject to:
+       `Active user report`
+    6. Connect the workflow so that:
+       - `HTTP Request -> Map -> If`
+       - The `true` output of "If" goes to the new "Send Email" node.
+       - The `false` output of "If" goes to the existing downstream path that originally followed "Map".
+    
+    # RESULT FORMAT
+    
+    ```json
+    {"answer": "done"}
+    ```
+  gt: {}
+- id: "tc_graph_002"
+  prompt: |-
+    # Add an Side Branch Without Breaking Existing Output
+    
+    ## GOAL
+    Add a side branch that records processed records while keeping the original main pipeline output unchanged.
+    
+    ## STEPS
+    1. Open the "Order Processing Pipeline" workflow.
+    2. Find the node immediately before the final "Aggregate" output node.
+    3. Add a "No Operation" node.
+    4. Add a "Data Table" node after the "No Operation" node.
+    5. Connect the node immediately before the final output node to the new "No Operation" node, leaving all other existing connections as is.
+    6. Connect "No Operation" to the new "Data Table" node.
+    
+    # RESULT FORMAT
+    
+    ```json
+    {"answer": "done"}
+    ```
+  gt: {}
+- id: "tc_graph_003"
+  prompt: |-
+    # Create a Simple Loop Workflow
+    
+    ## GOAL
+    Create a new workflow where data passes through a loop before reaching the final output.
+    
+    ## STEPS
+    1. Create a new workflow named "Simple Loop Pipeline".
+    2. Add exactly these nodes:
+       - "Manual Trigger"
+       - "Map"
+       - "If"
+       - "Data Table"
+    3. Configure the "Map" node to add or update the field:
+       `counter = (item.counter || 0) + 1`
+    4. Configure the "If" node with the condition:
+       `item.counter < 3`
+    5. Connect the workflow as follows:
+       - `Manual Trigger -> Map -> If`
+       - The `true` output of "If" loops back to the "Map" node.
+       - The `false` output of "If" goes to "Data Table".
+    
+    # RESULT FORMAT
+    
+    ```json
+    {"answer": "done"}
+    ```
+  gt: {}
+- id: "tc_graph_004"
+  prompt: |-
+    # Remove a Node and Reconnect in a Pipeline
+     
+     ## GOAL
+     Remove a node from a multi-step pipeline and reconnect the upstream node to the downstream node.
+     
+     ## STEPS
+     1. Open the "API Data Pipeline" workflow.
+     2. Delete the "Sort" node.
+     3. Reconnect the "Map" node directly to the next downstream node.
+     
+     # RESULT FORMAT
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_graph_005"
+  prompt: |-
+    # Create a Simple Decision Tree Workflow
+    
+    ## GOAL
+    Create a small tree-shaped workflow with 3 If nodes and 4 final outputs.
+    
+    ## STEPS
+    1. Create a new workflow named "Simple Decision Tree Pipeline".
+    2. Add:
+       - 1 Manual Trigger
+       - 3 If nodes
+       - 2 Data Table nodes
+    3. Configure the If nodes:
+       - Root If: `item.score >= 50`
+       - Upper-branch If: `item.score >= 80`
+       - Lower-branch If: `item.score >= 20`
+    4. Connect:
+       - `Manual Trigger -> Root If`
+       - Root If `true` -> Upper-branch If
+       - Root If `false` -> Lower-branch If
+       - Upper-branch If `true` -> first Data Table
+       - Upper-branch If `false` -> second Data Table
+       - Lower-branch If `true` -> first Data Table
+       - Lower-branch If `false` -> second Data Table
+    
+    # RESULT FORMAT
+    
+    ```json
+    {"answer": "done"}
+    ```
+  gt: {}
+- id: "tc_graph_006"
+  prompt: |-
+    # Insert and Configure a Filter Node
+     
+     ## GOAL
+     Add and configure a Filter node in an existing workflow, wiring it into the correct position in the data flow.
+     
+     ## STEPS
+     1. Open the "Range -> Map -> Table (scaffolding)" workflow.
+     2. Delete the rightmost "Table" node.
+     3. Add a "Filter" node and connect "Map" node output to the "Filter" node input .
+     4. Configure the filter to pass only values where `item.value > 10`.
+     5. The final path must be: `Range -> Map -> Filter`.
+     
+     # RESULT FORMAT
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_graph_007"
+  prompt: |-
+    # Insert a Filter Node into an Existing Pipeline
+     
+     ## GOAL
+     Insert a Filter node between two existing nodes in a pipeline and configure it with a specific condition.
+     
+     ## STEPS
+     1. Open the "Order Processing Pipeline" workflow.
+     2. Add a "Filter" node between the "Database Connector" and the "If" node.
+     3. Configure the filter to pass only orders where `item.status === 'completed'`.
+     4. Reconnect the workflow so the path through this section is: `Database Connector -> Filter -> If`.
+     
+     # RESULT FORMAT
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_graph_008"
+  prompt: |-
+    # Create a Multi-Node Workflow with Configuration
+     
+     ## GOAL
+     Create a five-node workflow from scratch with HTTP, mapping, filtering, and email nodes, each configured with specific settings.
+     
+     ## STEPS
+     1. Create a new workflow named "Newsletter System".
+     2. Add exactly these 5 nodes and wire them it the following in sequence: `Manual Trigger -> HTTP Request -> Map -> Filter -> Send Email`.
+     3. Configure the nodes:
+      - "HTTP Request" method: "GET"
+      - "HTTP Request" URL: `https://jsonplaceholder.typicode.com/users`
+      - "Filter" condition: pass only items where `item.address?.city === "Gwenborough"`
+      - "Send Email" From: `newsletter@example.com`
+      - "Send Email" Recipients: `local-subscribers@example.com`
+      - "Send Email" Subject: `Local Newsletter`
+     
+     # RESULT FORMAT
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_graph_009"
+  prompt: |-
+    # Create a Branching Workflow with Merge
+     
+     ## GOAL
+     Build a branching workflow with an If condition that routes data to two different nodes, then merges the branches back together.
+     
+     ## STEPS
+     1. Create a new workflow named "ICML Project".
+     2. Add these nodes and connect them: `Manual Trigger -> Database Connector -> If`.
+     3. Add two more nodes: "Crypto" and "Guardrails".
+     4. From the "If" node:
+      - Connect the "true" output to a "Crypto" node.
+      - Connect the "false" output to a "Guardrails" node.
+     5. Connect both branches into a "Merge" node: `Crypto -> Merge` and `Guardrails -> Merge`.
+     6. Set the "If" condition to check: `item.country === "UK"`.
+     7. Do not add any extra nodes.
+     
+     # RESULT FORMAT
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_graph_010"
+  prompt: |-
+    # Insert a Filter and Modify Sort in a Pipeline
+     
+     ## GOAL
+     Make multiple changes to an existing pipeline: insert a Filter, reconfigure a Sort, and delete a trailing Limit node.
+     
+     ## STEPS
+     1. Open the "API Data Pipeline" workflow.
+     2. Insert a "Filter" node between the "Map" and "Sort" nodes.
+     3. Configure the "Filter" to pass only items where `item.email.includes(".org")`.
+     4. Change the "Sort" node to use field `email` with direction `desc`.
+     5. Delete last "Limit" node.
+     6. The final path must be: `HTTP Request -> Map -> Filter -> Sort`.
+     7. Do not add any other nodes.
+     
+     # RESULT FORMAT
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_graph_011"
+  prompt: |-
+    # Add a New Output Branch to a Switch Node
+     
+     ## GOAL
+     Add a new output case to a Switch node in a complex pipeline and wire it to an existing downstream node.
+     
+     ## STEPS
+     1. Open the "Enterprise Data Pipeline" workflow.
+     2. In the main "Switch" node, add a new case labeled `priority_urgent`, do not include "expr" field.
+     3. Connect the new `priority_urgent` output to the same "Edit Fields (Set)" node currently connected to the "default" output.
+     4. Do not change any other routes or node settings.
+     
+     # RESULT FORMAT
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_graph_012"
+  prompt: |-
+    # Create a Conditional Email Workflow
+     
+     ## GOAL
+     Create a conditional email workflow where the If node routes to two separate Send Email nodes with different subjects.
+     
+     ## STEPS
+     1. Create a new workflow named "ICML Project".
+     2. Add these nodes and connect them in sequence: `Chat Trigger -> Database Connector -> If`.
+     3. Add two "Send Email" nodes.
+     4. Connect first "Send Email" node only to the "false" output of the "If" node.
+     5. Connect second "Send Email" node only to the "true" output of the "If" node.
+     6. Set the "If" condition to check: `item.country === "FR"`.
+     7. Set the first "Send Email" subject to: `ICML Project notification`.
+     8. Set the second "Send Email" subject to: `Notification de projet ICML`.
+     9. Do not add extra nodes.
+     
+     # RESULT FORMAT
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_graph_013"
+  prompt: |-
+    # Rewire Edges in a Pipeline
+     
+     ## GOAL
+     Rewire existing connections in a complex pipeline without adding, deleting, or reconfiguring any nodes.
+     
+     ## STEPS
+     1. Open the "Enterprise Data Pipeline" workflow.
+     2. Disconnect the edge from the top-row "No Operation" node to the top-row "Merge" node.
+     3. Connect that same "No Operation" node to the "Switch" node.
+     4. Rewire the `priority_low` output of the "Switch" to the lower "Edit Fields (Set)" node.
+     5. Do not create, delete, move, or reconfigure any nodes.
+     
+     # RESULT FORMAT
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_graph_014"
+  prompt: |-
+    # Add a Node Using Search
+     
+     ## GOAL
+     Use the node search to find and add a Send Email node, configure its subject, and connect it to the end of a pipeline.
+     
+     ## STEPS
+     1. Open the "API Data Pipeline" workflow.
+     2. Use the node search box to find "Send Email".
+     3. Add the "Send Email" node to the canvas after the "Sort" node.
+     4. Set "Send Email" subject to "Users list".
+     5. Connect the "Sort" node output to the "Send Email" node input.
+     
+     # RESULT FORMAT
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_graph_015"
+  prompt: |-
+    # Delete a Node and Disable Default Port in Switch
+     
+     ## GOAL
+     Delete a branch target node from a Switch-based pipeline and disable the corresponding default port in the Switch settings.
+     
+     ## STEPS
+     1. Open the "Data Categorization Pipeline" workflow.
+     2. Delete one of the "Edit Fields (Set)" node responsible for "Default" branch of a "Switch" node.
+     3. Disable the "Default" port in the "Switch" node settings.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_graph_016"
+  prompt: |-
+    # Add a New Priority Branch to a Switch Node
+     
+     ## GOAL
+     Extend a Switch node with a new priority branch, add a dedicated processing node for it, and wire it into the main pipeline.
+     
+     ## STEPS
+     1. Open the "Enterprise Data Pipeline" workflow.
+     2. Find the "Switch" node that routes items by priority.
+     3. Add a new output branch labeled `priority_urgent`, do not include "expr" field.
+     4. Add a new "Edit Fields (Set)" node for the urgent branch.
+     5. Connect the `priority_urgent` output to the new "Edit Fields (Set)" node.
+     6. Connect the new "Edit Fields (Set)" node back into the "Data Table" node.
+     
+     # RESULT FORMAT
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_graph_017"
+  prompt: |-
+    # Insert a Formula Node into a Workflow
+     
+     ## GOAL
+     Insert a Formula node into a workflow, configure it to compute a derived field, and reconnect the data flow.
+     
+     ## STEPS
+     1. Open the "Range -> Map -> Table (scaffolding)" workflow.
+     2. Insert a "Formula" node between the "Map" and "Table" nodes.
+     3. Configure the "Formula" node to name a new field `double` with value `item.value * 2`.
+     4. Reconnect the workflow so the final path is: `Range -> Map -> Formula -> Table`.
+     
+     # RESULT FORMAT
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_graph_018"
+  prompt: |-
+    # Rewire a Branch Input to a Different Node
+     
+     ## GOAL
+     Rewire a branch input on a downstream node so it feeds into a different merge point in the pipeline.
+     
+     ## STEPS
+     1. Open the "Enterprise Data Pipeline" workflow.
+     2. Find the "Data Table" node that receives inputs from the priority branches.
+     3. Disconnect the input coming from the lower "Edit Fields (Set)" node.
+     4. Reconnect that lower "Edit Fields (Set)" node into the "HTTP Request" node located on the right, below "Send Email" node.
+     
+     # RESULT FORMAT
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_graph_019"
+  prompt: |-
+    # Create a Simple Three-Node Workflow
+     
+     ## GOAL
+     Create a simple three-node workflow from scratch with a Manual Trigger, a configured HTTP Request, and a No Operation node.
+     
+     ## STEPS
+     1. Create a new workflow named "Example Todo Fetch".
+     2. Add these nodes and connect them in sequence: `Manual Trigger -> HTTP Request -> No Operation`.
+     3. Configure the "HTTP Request" node:
+      - Method: "GET"
+      - URL: `https://jsonplaceholder.typicode.com/todos/1`
+     
+     # RESULT FORMAT
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_graph_020"
+  prompt: |-
+    # Insert a Wait Node into a Workflow
+     
+     ## GOAL
+     Insert a Wait node with a 1-second delay between two existing nodes in a workflow and reconnect the flow.
+     
+     ## STEPS
+     1. Open the "Range -> Map -> Table (scaffolding)" workflow.
+     2. Insert a "Wait" node between the "Map" and "Table Preview" nodes.
+     3. Configure the delay to "1 second".
+     4. Reconnect the workflow correctly.
+     
+     # RESULT FORMAT
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {}
+- id: "tc_graph_021"
+  prompt: |-
+    
+  gt: {}
+- id: "tc_graph_022"
+  prompt: |-
+    
+  gt: {}
+- id: "tc_graph_023"
+  prompt: |-
+    
+  gt: {}
