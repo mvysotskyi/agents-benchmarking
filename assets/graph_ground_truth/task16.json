@@ -1,8 +1,8 @@
 {
-  "id": "88f5c302-b4e3-4fb7-a4a8-bab8e8c44609",
+  "id": "236611c7-e35a-4fdf-b194-90275bbb7d14",
   "name": "Enterprise Data Pipeline",
   "createdAt": 1764597200000,
-  "updatedAt": 1776166963772,
+  "updatedAt": 1777051840168,
   "version": 1,
   "metadata": {
     "description": "An API-triggered data pipeline that validates, enriches, routes by priority, logs an audit trail, sends notifications, and responds to the original webhook.",
@@ -366,7 +366,7 @@
         "dragging": false
       },
       {
-        "id": "94d1c44f-7c46-4f52-baad-1d8d5ed7c1f6",
+        "id": "4479b785-a785-4709-950f-8967584801cb",
         "type": "editFields",
         "position": {
           "x": 800,
@@ -474,16 +474,16 @@
       {
         "source": "router-1",
         "sourceHandle": "priority_urgent",
-        "target": "94d1c44f-7c46-4f52-baad-1d8d5ed7c1f6",
+        "target": "4479b785-a785-4709-950f-8967584801cb",
         "targetHandle": null,
-        "id": "reactflow__edge-router-1priority_urgent-94d1c44f-7c46-4f52-baad-1d8d5ed7c1f6"
+        "id": "reactflow__edge-router-1priority_urgent-4479b785-a785-4709-950f-8967584801cb"
       },
       {
-        "source": "94d1c44f-7c46-4f52-baad-1d8d5ed7c1f6",
+        "source": "4479b785-a785-4709-950f-8967584801cb",
         "sourceHandle": null,
         "target": "audit-logger",
         "targetHandle": null,
-        "id": "reactflow__edge-94d1c44f-7c46-4f52-baad-1d8d5ed7c1f6-audit-logger"
+        "id": "reactflow__edge-4479b785-a785-4709-950f-8967584801cb-audit-logger"
       }
     ]
   }

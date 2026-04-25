@@ -1,8 +1,8 @@
 {
-  "id": "f77eba2a-0aeb-4d7e-a8ae-ac5c320a78c5",
-  "name": "Empty Scene",
-  "createdAt": 1775574563521,
-  "updatedAt": 1775574563521,
+  "id": "895fbd59-a7ea-430e-b83b-3dd2905fc038",
+  "name": "Row of Objects Scene",
+  "createdAt": 1776771813379,
+  "updatedAt": 1776771813379,
   "version": 1,
   "metadata": {
     "description": "",
@@ -11,27 +11,27 @@
   "scene": {
     "objects": [
       {
-        "id": "cone-d5a1029c-6246-4566-a1f8-0be3d77ad1bf",
-        "type": "cone",
-        "name": "Yellow Cone",
+        "id": "8929eece-0fa4-422f-b125-42187d7bffd5",
+        "type": "cube",
+        "name": "Cube 1",
         "visible": true,
         "locked": false,
         "position": [
-          0.5,
-          1.5,
+          0,
+          0,
           0
         ],
         "rotation": [
           0,
           0,
-          -90
+          0
         ],
         "scale": [
           1,
-          2,
+          4,
           1
         ],
-        "color": "#ffff00",
+        "color": "#ffffff",
         "opacity": 1,
         "wireframe": false
       }

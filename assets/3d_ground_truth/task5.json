@@ -1,8 +1,8 @@
 {
-  "id": "774ce00e-e16b-45de-a6b6-32cb486ad03f",
-  "name": "Row of Objects Scene",
-  "createdAt": 1775574394576,
-  "updatedAt": 1775574394576,
+  "id": "83cdaf5b-c10f-43f4-ab5c-e2a594fd1a50",
+  "name": "Basic Shapes",
+  "createdAt": 1775568120879,
+  "updatedAt": 1775568146331,
   "version": 1,
   "metadata": {
     "description": "",
@@ -11,14 +11,14 @@
   "scene": {
     "objects": [
       {
-        "id": "49d8e084-7187-43c2-9210-77fb71c81367",
+        "id": "8261a3e3-03b1-4c82-b66a-9720115ae2d1",
         "type": "cube",
-        "name": "Cube 1",
+        "name": "Red Cube",
         "visible": true,
         "locked": false,
         "position": [
-          2,
-          0,
+          -3,
+          0.5,
           0
         ],
         "rotation": [
@@ -31,19 +31,19 @@
           1,
           1
         ],
-        "color": "#ff0000",
+        "color": "#ff4444",
         "opacity": 1,
         "wireframe": false
       },
       {
-        "id": "0f02728e-0816-4097-b511-861d50ca2196",
+        "id": "866bb0b7-7d6c-4dec-9e52-1e0087668d0a",
         "type": "sphere",
-        "name": "Sphere 1",
+        "name": "Blue Sphere",
         "visible": true,
         "locked": false,
         "position": [
           0,
-          0,
+          0.5,
           0
         ],
         "rotation": [
@@ -56,19 +56,19 @@
           1,
           1
         ],
-        "color": "#00ff00",
+        "color": "#4488ff",
         "opacity": 1,
         "wireframe": false
       },
       {
-        "id": "35d8aae1-47c3-489d-a261-cec0f1c24ff1",
+        "id": "af0f2db3-f1e1-4357-b17e-facea07519d2",
         "type": "cylinder",
-        "name": "Cylinder 1",
+        "name": "Green Cylinder",
         "visible": true,
         "locked": false,
         "position": [
           3,
-          0,
+          0.5,
           0
         ],
         "rotation": [
@@ -81,32 +81,7 @@
           1,
           1
         ],
-        "color": "#0000ff",
-        "opacity": 1,
-        "wireframe": false
-      },
-      {
-        "id": "2fa1f11b-0bc4-41d7-976a-5856c9d2cb89",
-        "type": "cone",
-        "name": "Cone 1",
-        "visible": true,
-        "locked": false,
-        "position": [
-          1,
-          0,
-          0
-        ],
-        "rotation": [
-          0,
-          0,
-          0
-        ],
-        "scale": [
-          1,
-          1,
-          1
-        ],
-        "color": "#ffff00",
+        "color": "#44ff88",
         "opacity": 1,
         "wireframe": false
       }

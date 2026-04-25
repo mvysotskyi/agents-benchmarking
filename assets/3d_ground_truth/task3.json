@@ -1,8 +1,8 @@
 {
-  "id": "79cb1e0a-d316-44f2-adf6-6c495ab8a581",
-  "name": "Geometric Garden",
-  "createdAt": 1775574563521,
-  "updatedAt": 1775574563521,
+  "id": "dd136b90-b949-48bb-8563-d5ea49b740ff",
+  "name": "Four Objects Scene",
+  "createdAt": 1776960344402,
+  "updatedAt": 1776960344402,
   "version": 1,
   "metadata": {
     "description": "",
@@ -11,27 +11,127 @@
   "scene": {
     "objects": [
       {
-        "id": "e97433c7-8943-4edc-bc9d-0ffbf94d0f0f",
+        "id": "e4ac2201-68b9-45e2-9f55-96f2fb2e44d8",
         "type": "cube",
-        "name": "Stone Block",
+        "name": "Cube 1",
         "visible": true,
         "locked": false,
         "position": [
           0,
-          0.5,
+          0,
           0
         ],
         "rotation": [
           0,
-          45,
+          0,
           0
         ],
         "scale": [
-          1.5,
           1,
-          1.5
+          1,
+          1
         ],
-        "color": "#888888",
+        "color": "#ffffff",
+        "opacity": 1,
+        "wireframe": false
+      },
+      {
+        "id": "4720e8be-3d38-446b-aa69-8a2ffb291b65",
+        "type": "sphere",
+        "name": "Sphere 1",
+        "visible": true,
+        "locked": false,
+        "position": [
+          3,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "color": "#ffffff",
+        "opacity": 1,
+        "wireframe": false
+      },
+      {
+        "id": "fce0c9fe-54d4-492b-839e-992542f6ea99",
+        "type": "cylinder",
+        "name": "Cylinder 1",
+        "visible": true,
+        "locked": false,
+        "position": [
+          -3,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "color": "#ffffff",
+        "opacity": 1,
+        "wireframe": false
+      },
+      {
+        "id": "351d6d8a-067f-4cf6-98f3-f98a74620fe9",
+        "type": "cone",
+        "name": "Cone 1",
+        "visible": true,
+        "locked": false,
+        "position": [
+          0,
+          0,
+          3
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "color": "#ffffff",
+        "opacity": 1,
+        "wireframe": false
+      },
+      {
+        "id": "cone-f8854d6d-68d5-4df4-8e4e-28e60bf02389",
+        "type": "cone",
+        "name": "Cone 2",
+        "visible": true,
+        "locked": false,
+        "position": [
+          0,
+          0,
+          -3
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "color": "#aa00ff",
         "opacity": 1,
         "wireframe": false
       }

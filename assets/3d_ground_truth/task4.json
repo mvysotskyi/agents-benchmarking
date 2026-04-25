@@ -1,8 +1,8 @@
 {
-  "id": "e0f7c077-4919-44fc-bf38-ddf486c562b0",
+  "id": "8c4c5bd1-8b46-4b66-b6c6-60c094e110fd",
   "name": "Single Cube Scene",
-  "createdAt": 1775574563521,
-  "updatedAt": 1775574563521,
+  "createdAt": 1776960826686,
+  "updatedAt": 1776960826686,
   "version": 1,
   "metadata": {
     "description": "",
@@ -11,7 +11,7 @@
   "scene": {
     "objects": [
       {
-        "id": "3551a01f-c76e-4b10-8446-feede66cddd4",
+        "id": "efafc961-b432-41eb-9ac8-a2422340d754",
         "type": "cube",
         "name": "Cube 1",
         "visible": true,

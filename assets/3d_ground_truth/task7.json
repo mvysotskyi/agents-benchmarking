@@ -1,8 +1,8 @@
 {
-  "id": "2421fc54-a063-4fa8-98dc-e72f8819c874",
-  "name": "Geometric Garden",
-  "createdAt": 1775569726493,
-  "updatedAt": 1775569726493,
+  "id": "349fad10-0c20-437d-a4b8-29e02bb46c25",
+  "name": "Row of Objects Scene",
+  "createdAt": 1776960479109,
+  "updatedAt": 1776960479109,
   "version": 1,
   "metadata": {
     "description": "",
@@ -11,39 +11,89 @@
   "scene": {
     "objects": [
       {
-        "id": "6819bc61-431e-45fb-a6ed-c94c12482316",
+        "id": "3314c063-112d-4d6b-b57a-587330661a75",
         "type": "cube",
-        "name": "Stone Block",
+        "name": "Cube 1",
         "visible": true,
         "locked": false,
         "position": [
           0,
-          0.5,
+          0,
           0
         ],
         "rotation": [
           0,
-          45,
+          0,
           0
         ],
         "scale": [
-          1.5,
           1,
-          1.5
+          1,
+          1
         ],
-        "color": "#888888",
+        "color": "#ff0000",
         "opacity": 1,
         "wireframe": false
       },
       {
-        "id": "5149413b-c0c6-4952-80f1-1c2bd9983687",
+        "id": "cb585880-0229-450f-90d0-91b3d9cb789d",
         "type": "sphere",
-        "name": "Garden Ball",
+        "name": "Sphere 1",
+        "visible": true,
+        "locked": false,
+        "position": [
+          1,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "color": "#00ff00",
+        "opacity": 1,
+        "wireframe": false
+      },
+      {
+        "id": "a2b18aa6-9c7c-4724-93a3-bb815b5a1088",
+        "type": "cylinder",
+        "name": "Cylinder 1",
+        "visible": true,
+        "locked": false,
+        "position": [
+          2,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "color": "#0000ff",
+        "opacity": 1,
+        "wireframe": false
+      },
+      {
+        "id": "79e2cfd8-e620-4c59-b5aa-88215d8eda8c",
+        "type": "cone",
+        "name": "Cone 1",
         "visible": true,
         "locked": false,
         "position": [
           3,
-          0.75,
+          0,
           0
         ],
         "rotation": [
@@ -52,23 +102,23 @@
           0
         ],
         "scale": [
-          1.5,
-          1.5,
-          1.5
+          1,
+          1,
+          1
         ],
-        "color": "#66aa44",
+        "color": "#ffff00",
         "opacity": 1,
         "wireframe": false
       },
       {
-        "id": "ef3ea584-e0b2-4993-8a14-ca0d46ceb9a2",
-        "type": "cylinder",
-        "name": "Pillar",
+        "id": "sphere-f0963d90-0014-43c8-914d-c6cc7e2468b1",
+        "type": "sphere",
+        "name": "Sphere 2",
         "visible": true,
         "locked": false,
         "position": [
-          -3,
-          1,
+          4,
+          0,
           0
         ],
         "rotation": [
@@ -77,36 +127,11 @@
           0
         ],
         "scale": [
-          0.5,
-          2,
-          0.5
-        ],
-        "color": "#ddccaa",
-        "opacity": 1,
-        "wireframe": false
-      },
-      {
-        "id": "858a032c-e496-4869-a617-2857a64c4a59",
-        "type": "cone",
-        "name": "Tree Top",
-        "visible": true,
-        "locked": false,
-        "position": [
-          0,
           1,
-          3
+          1,
+          1
         ],
-        "rotation": [
-          0,
-          0,
-          0
-        ],
-        "scale": [
-          1.5,
-          2,
-          1.5
-        ],
-        "color": "#228833",
+        "color": "#aa00ff",
         "opacity": 1,
         "wireframe": false
       }

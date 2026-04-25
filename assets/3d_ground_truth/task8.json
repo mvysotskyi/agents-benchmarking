@@ -1,8 +1,8 @@
 {
-  "id": "42efccd5-2588-4721-847f-cb72304f6d75",
-  "name": "Two Objects Scene",
-  "createdAt": 1775569726494,
-  "updatedAt": 1775569726494,
+  "id": "36109aef-4a78-4ad0-88e8-fe9ef8a914de",
+  "name": "Empty Scene",
+  "createdAt": 1776960479109,
+  "updatedAt": 1776960479109,
   "version": 1,
   "metadata": {
     "description": "",
@@ -11,14 +11,14 @@
   "scene": {
     "objects": [
       {
-        "id": "b1baa894-c690-48c0-8080-ba099c64725a",
-        "type": "cylinder",
-        "name": "Cylinder 1",
+        "id": "sphere-3c9b09be-6c0d-4476-90fe-1f0bd919afde",
+        "type": "sphere",
+        "name": "Sphere 1",
         "visible": true,
         "locked": false,
         "position": [
           0,
-          0,
+          0.5,
           0
         ],
         "rotation": [
@@ -28,22 +28,22 @@
         ],
         "scale": [
           1,
-          2,
+          1,
           1
         ],
-        "color": "#ff0000",
+        "color": "#ffffff",
         "opacity": 1,
         "wireframe": false
       },
       {
-        "id": "580ffe71-c9ff-4bbb-a945-4df000c5ceea",
-        "type": "cube",
-        "name": "Cube 1",
+        "id": "sphere-0e5a6aab-dac9-497f-b4eb-39e316c6b0c4",
+        "type": "sphere",
+        "name": "Sphere 1 (Copy)",
         "visible": true,
         "locked": false,
         "position": [
-          3,
           0,
+          5.5,
           0
         ],
         "rotation": [
@@ -53,10 +53,110 @@
         ],
         "scale": [
           1,
-          2,
+          1,
           1
         ],
-        "color": "#0000ff",
+        "color": "#ffffff",
+        "opacity": 1,
+        "wireframe": false
+      },
+      {
+        "id": "sphere-514b3b2e-6c37-48cd-a152-24eac3a6adc2",
+        "type": "sphere",
+        "name": "Sphere 1 (Copy)",
+        "visible": true,
+        "locked": false,
+        "position": [
+          -2.5,
+          3,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "color": "#ffffff",
+        "opacity": 1,
+        "wireframe": false
+      },
+      {
+        "id": "sphere-27caa3cd-8b11-46ad-90b4-9ed2ec349908",
+        "type": "sphere",
+        "name": "Sphere 1 (Copy)",
+        "visible": true,
+        "locked": false,
+        "position": [
+          0,
+          3,
+          2.5
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "color": "#ffffff",
+        "opacity": 1,
+        "wireframe": false
+      },
+      {
+        "id": "sphere-693211b1-3ade-466e-b405-3f71bdf4f4d7",
+        "type": "sphere",
+        "name": "Sphere 1 (Copy)",
+        "visible": true,
+        "locked": false,
+        "position": [
+          0,
+          3,
+          -2.5
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "color": "#ffffff",
+        "opacity": 1,
+        "wireframe": false
+      },
+      {
+        "id": "sphere-6f48f409-025e-46c6-a5fc-b0e2a88cd646",
+        "type": "sphere",
+        "name": "Sphere 1 (Copy)",
+        "visible": true,
+        "locked": false,
+        "position": [
+          2.5,
+          3,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "color": "#ffffff",
         "opacity": 1,
         "wireframe": false
       }
@@ -64,7 +164,7 @@
     "settings": {
       "showGrid": true,
       "showAxes": true,
-      "backgroundColor": "#00ff00",
+      "backgroundColor": "#1a1a2e",
       "fov": 50,
       "cameraType": "perspective",
       "orthoZoom": 10

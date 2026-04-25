@@ -1,52 +1,190 @@
 {
-  "id": "97905dbe-52d6-4037-b420-6511fac736b0",
-  "name": "Range → Map → Table",
-  "createdAt": 1776159193133,
-  "updatedAt": 1776159218243,
+  "id": "c428c63d-fe25-43bd-813a-f42c52b79dfd",
+  "name": "API Data Pipeline",
+  "createdAt": 1764595985088,
+  "updatedAt": 1777056374768,
   "version": 1,
   "metadata": {
-    "description": "",
-    "thumbnail": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyODAnIGhlaWdodD0nMTYwJyB2aWV3Qm94PScwIDAgNTQ4IDYwJz48cmVjdCB4PScyMCcgeT0nMjAnIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nMjYnIHk9JzQwJyBmb250LXNpemU9JzEwJyBmaWxsPSd3aGl0ZSc+cmFuZ2VHZW5lcmF0PC90ZXh0PjxyZWN0IHg9JzUyOCcgeT0nMjgnIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nNTM0JyB5PSc0OCcgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPnRhYmxlUHJldmlldzwvdGV4dD48L3N2Zz4="
+    "description": "Fetch data from an API, transform it, and aggregate results.",
+    "thumbnail": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyODAnIGhlaWdodD0nMTYwJyB2aWV3Qm94PScwIDAgMjA3MiA0MTUuMDIyMzQ3MjM1MDgyMic+PGxpbmUgeDE9JzYwJyB5MT0nNTInIHgyPSc0MjAnIHkyPSc1Micgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PGxpbmUgeDE9JzQ2MCcgeTE9JzUyJyB4Mj0nODg0JyB5Mj0nNTInIHN0cm9rZT0nIzY0NzQ4Yicgc3Ryb2tlLXdpZHRoPScyJyAvPjxsaW5lIHgxPScxNzU2JyB5MT0nNTInIHgyPScyMDUyJyB5Mj0nNTInIHN0cm9rZT0nIzY0NzQ4Yicgc3Ryb2tlLXdpZHRoPScyJyAvPjxsaW5lIHgxPSc5MjQnIHkxPSc1MicgeDI9JzEyNTInIHkyPSczNicgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PGxpbmUgeDE9JzEyOTInIHkxPSczNicgeDI9JzE1MDEuMTM4OTgzMjM0NjAyNicgeTI9JzQxMS4wMjIzNDcyMzUwODIyJyBzdHJva2U9JyM2NDc0OGInIHN0cm9rZS13aWR0aD0nMicgLz48bGluZSB4MT0nMTI5MicgeTE9JzM2JyB4Mj0nMTcxNicgeTI9JzUyJyBzdHJva2U9JyM2NDc0OGInIHN0cm9rZS13aWR0aD0nMicgLz48cmVjdCB4PScyMCcgeT0nMzYnIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nMjYnIHk9JzU2JyBmb250LXNpemU9JzEwJyBmaWxsPSd3aGl0ZSc+bWFudWFsVHJpZ2dlPC90ZXh0PjxyZWN0IHg9JzQyMCcgeT0nMzYnIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nNDI2JyB5PSc1NicgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPmh0dHBSZXF1ZXN0PC90ZXh0PjxyZWN0IHg9Jzg4NCcgeT0nMzYnIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nODkwJyB5PSc1NicgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPm1hcDwvdGV4dD48cmVjdCB4PScxNzE2JyB5PSczNicgd2lkdGg9JzgwJyBoZWlnaHQ9JzMyJyByeD0nNCcgZmlsbD0nIzNiODJmNicgb3BhY2l0eT0nMC44NScgLz48dGV4dCB4PScxNzIyJyB5PSc1NicgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPnNvcnQ8L3RleHQ+PHJlY3QgeD0nMjA1MicgeT0nMzYnIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nMjA1OCcgeT0nNTYnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5saW1pdDwvdGV4dD48cmVjdCB4PScxMjUyJyB5PScyMCcgd2lkdGg9JzgwJyBoZWlnaHQ9JzMyJyByeD0nNCcgZmlsbD0nIzNiODJmNicgb3BhY2l0eT0nMC44NScgLz48dGV4dCB4PScxMjU4JyB5PSc0MCcgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPmlmPC90ZXh0PjxyZWN0IHg9JzE1MDEuMTM4OTgzMjM0NjAyNicgeT0nMzk1LjAyMjM0NzIzNTA4MjInIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nMTUwNy4xMzg5ODMyMzQ2MDI2JyB5PSc0MTUuMDIyMzQ3MjM1MDgyMicgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPnNlbmRFbWFpbDwvdGV4dD48L3N2Zz4="
   },
   "graph": {
     "nodes": [
       {
-        "id": "n1",
-        "type": "rangeGenerator",
+        "id": "trigger-1",
+        "type": "manualTrigger",
         "position": {
-          "x": 100,
-          "y": 200
+          "x": -336,
+          "y": 192
         },
-        "data": {
-          "start": 1,
-          "stop": 5,
-          "step": 1
-        },
-        "width": 150,
-        "height": 22,
+        "data": {},
+        "width": 303,
+        "height": 141,
         "selected": false,
+        "positionAbsolute": {
+          "x": -336,
+          "y": 192
+        },
         "dragging": false
       },
       {
-        "id": "n3",
-        "type": "tablePreview",
+        "id": "http-1",
+        "type": "httpRequest",
         "position": {
-          "x": 608,
-          "y": 208
+          "x": 64,
+          "y": 192
         },
         "data": {
-          "limit": 50
+          "method": "GET",
+          "url": "https://jsonplaceholder.typicode.com/users",
+          "headers": {},
+          "body": ""
         },
-        "width": 150,
-        "height": 22,
+        "width": 387,
+        "height": 141,
         "selected": false,
         "positionAbsolute": {
-          "x": 608,
-          "y": 208
+          "x": 64,
+          "y": 192
         },
+        "dragging": false
+      },
+      {
+        "id": "map-1",
+        "type": "map",
+        "position": {
+          "x": 528,
+          "y": 192
+        },
+        "data": {
+          "expression": "({ id: item.id, name: item.name, email: item.email, city: item.address?.city })"
+        },
+        "width": 303,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 528,
+          "y": 192
+        },
+        "dragging": false
+      },
+      {
+        "id": "sort-1",
+        "type": "sort",
+        "position": {
+          "x": 1360,
+          "y": 192
+        },
+        "data": {
+          "field": "name",
+          "direction": "asc"
+        },
+        "width": 276,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 1360,
+          "y": 192
+        },
+        "dragging": false
+      },
+      {
+        "id": "limit-1",
+        "type": "limit",
+        "position": {
+          "x": 1696,
+          "y": 192
+        },
+        "data": {
+          "n": 5
+        },
+        "width": 278,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 1696,
+          "y": 192
+        },
+        "dragging": false
+      },
+      {
+        "id": "018dec2d-90a0-4ff8-9053-7b8ccd330691",
+        "type": "if",
+        "position": {
+          "x": 896,
+          "y": 176
+        },
+        "data": {
+          "expression": "item.active === true",
+          "notes": ""
+        },
+        "width": 379,
+        "height": 169,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 896,
+          "y": 176
+        },
+        "dragging": false
+      },
+      {
+        "id": "8b8dd89f-c3ca-4c03-8ab2-8d7a876d8ae7",
+        "type": "sendEmail",
+        "position": {
+          "x": 1145.1389832346026,
+          "y": 551.0223472350822
+        },
+        "data": {
+          "transport": "smtp",
+          "from": "",
+          "to": "",
+          "subject": "Active user report",
+          "body": ""
+        },
+        "width": 312,
+        "height": 141,
+        "selected": true,
         "dragging": false
       }
     ],
-    "edges": []
+    "edges": [
+      {
+        "id": "e1",
+        "source": "trigger-1",
+        "target": "http-1",
+        "sourceHandle": "trigger"
+      },
+      {
+        "id": "e2",
+        "source": "http-1",
+        "target": "map-1"
+      },
+      {
+        "id": "e4",
+        "source": "sort-1",
+        "target": "limit-1"
+      },
+      {
+        "source": "map-1",
+        "sourceHandle": null,
+        "target": "018dec2d-90a0-4ff8-9053-7b8ccd330691",
+        "targetHandle": null,
+        "id": "reactflow__edge-map-1-018dec2d-90a0-4ff8-9053-7b8ccd330691"
+      },
+      {
+        "source": "018dec2d-90a0-4ff8-9053-7b8ccd330691",
+        "sourceHandle": "onTrue",
+        "target": "8b8dd89f-c3ca-4c03-8ab2-8d7a876d8ae7",
+        "targetHandle": null,
+        "id": "reactflow__edge-018dec2d-90a0-4ff8-9053-7b8ccd330691onTrue-8b8dd89f-c3ca-4c03-8ab2-8d7a876d8ae7"
+      },
+      {
+        "source": "018dec2d-90a0-4ff8-9053-7b8ccd330691",
+        "sourceHandle": "onFalse",
+        "target": "sort-1",
+        "targetHandle": null,
+        "id": "reactflow__edge-018dec2d-90a0-4ff8-9053-7b8ccd330691onFalse-sort-1"
+      }
+    ]
   }
 }

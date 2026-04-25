@@ -1,8 +1,8 @@
 {
-  "id": "b2c78889-e9c6-47d4-a1de-8d8a39f7e31a",
+  "id": "c58082e7-5cce-43b9-87a8-89d46685a195",
   "name": "Row of Objects Scene",
-  "createdAt": 1775215280350,
-  "updatedAt": 1775215280350,
+  "createdAt": 1777018927871,
+  "updatedAt": 1777018927871,
   "version": 1,
   "metadata": {
     "description": "",
@@ -11,13 +11,13 @@
   "scene": {
     "objects": [
       {
-        "id": "034690e2-d0e4-4af4-8520-380da3367587",
+        "id": "fc816501-71f9-4ca0-8adb-80f798094031",
         "type": "cube",
         "name": "Cube 1",
         "visible": true,
         "locked": false,
         "position": [
-          3,
+          6,
           0,
           0
         ],
@@ -31,18 +31,18 @@
           1,
           1
         ],
-        "color": "#ffff00",
+        "color": "#ff0000",
         "opacity": 1,
         "wireframe": false
       },
       {
-        "id": "75e5e07f-bcb4-4f22-9151-b1da18082127",
+        "id": "abfc06a1-ed00-4eed-9a0d-ae92d9130b74",
         "type": "sphere",
         "name": "Sphere 1",
         "visible": true,
         "locked": false,
         "position": [
-          1,
+          2,
           0,
           0
         ],
@@ -61,13 +61,13 @@
         "wireframe": false
       },
       {
-        "id": "85ed48a0-9d4b-4e57-9434-5dce9289f443",
+        "id": "cb6f2443-aa7a-4f15-abfe-7cf389d868d8",
         "type": "cylinder",
         "name": "Cylinder 1",
         "visible": true,
         "locked": false,
         "position": [
-          2,
+          4,
           0,
           0
         ],
@@ -86,7 +86,7 @@
         "wireframe": false
       },
       {
-        "id": "fb3f7757-2fcf-4d54-af73-29abe3e32e15",
+        "id": "123c78c6-8799-4fea-b63e-44dff0df6558",
         "type": "cone",
         "name": "Cone 1",
         "visible": true,
@@ -106,7 +106,7 @@
           1,
           1
         ],
-        "color": "#ff0000",
+        "color": "#ffff00",
         "opacity": 1,
         "wireframe": false
       }

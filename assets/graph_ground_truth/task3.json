@@ -1,79 +1,121 @@
 {
-  "id": "f2962325-5ce5-4376-98d1-633973706d55",
-  "name": "Range → Map → Table",
-  "createdAt": 1776159479277,
-  "updatedAt": 1776159517750,
+  "id": "7938231b-9faf-4b71-9b63-d3f8f8072f78",
+  "name": "Simple Loop Pipeline",
+  "createdAt": 1777057498365,
+  "updatedAt": 1777057741411,
   "version": 1,
   "metadata": {
     "description": "",
-    "thumbnail": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyODAnIGhlaWdodD0nMTYwJyB2aWV3Qm94PScwIDAgNTQ4IDYwJz48bGluZSB4MT0nNjAnIHkxPSc0NCcgeDI9JzE5MicgeTI9JzM2JyBzdHJva2U9JyM2NDc0OGInIHN0cm9rZS13aWR0aD0nMicgLz48bGluZSB4MT0nMjMyJyB5MT0nMzYnIHgyPSc1MjgnIHkyPSc1Micgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PHJlY3QgeD0nMjAnIHk9JzI4JyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzI2JyB5PSc0OCcgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPnJhbmdlR2VuZXJhdDwvdGV4dD48cmVjdCB4PScxOTInIHk9JzIwJyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzE5OCcgeT0nNDAnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5tYXA8L3RleHQ+PHJlY3QgeD0nNTI4JyB5PSczNicgd2lkdGg9JzgwJyBoZWlnaHQ9JzMyJyByeD0nNCcgZmlsbD0nIzNiODJmNicgb3BhY2l0eT0nMC44NScgLz48dGV4dCB4PSc1MzQnIHk9JzU2JyBmb250LXNpemU9JzEwJyBmaWxsPSd3aGl0ZSc+dGFibGVQcmV2aWV3PC90ZXh0Pjwvc3ZnPg=="
+    "thumbnail": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyODAnIGhlaWdodD0nMTYwJyB2aWV3Qm94PScwIDAgMTAzMiAzMjgnPjxsaW5lIHgxPSc1NTYnIHkxPSczNicgeDI9JzQ4NCcgeTI9JzMyNCcgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PGxpbmUgeDE9JzYwJyB5MT0nMTY0JyB4Mj0nNTE2JyB5Mj0nMzYnIHN0cm9rZT0nIzY0NzQ4Yicgc3Ryb2tlLXdpZHRoPScyJyAvPjxsaW5lIHgxPSc1MjQnIHkxPSczMjQnIHgyPSc1MTYnIHkyPSczNicgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PGxpbmUgeDE9JzUyNCcgeTE9JzMyNCcgeDI9JzEwMTInIHkyPScxOTYnIHN0cm9rZT0nIzY0NzQ4Yicgc3Ryb2tlLXdpZHRoPScyJyAvPjxyZWN0IHg9JzUxNicgeT0nMjAnIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nNTIyJyB5PSc0MCcgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPm1hcDwvdGV4dD48cmVjdCB4PScyMCcgeT0nMTQ4JyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzI2JyB5PScxNjgnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5tYW51YWxUcmlnZ2U8L3RleHQ+PHJlY3QgeD0nNDg0JyB5PSczMDgnIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nNDkwJyB5PSczMjgnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5pZjwvdGV4dD48cmVjdCB4PScxMDEyJyB5PScxODAnIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nMTAxOCcgeT0nMjAwJyBmb250LXNpemU9JzEwJyBmaWxsPSd3aGl0ZSc+ZGF0YVRhYmxlPC90ZXh0Pjwvc3ZnPg=="
   },
   "graph": {
     "nodes": [
       {
-        "id": "n1",
-        "type": "rangeGenerator",
-        "position": {
-          "x": 100,
-          "y": 200
-        },
-        "data": {
-          "start": 1,
-          "stop": 5,
-          "step": 1
-        },
-        "width": 150,
-        "height": 22
-      },
-      {
-        "id": "n2",
+        "id": "2cc2dea6-f840-4a28-b608-ae4e73cd1bd0",
         "type": "map",
         "position": {
-          "x": 272,
-          "y": 192
+          "x": 992,
+          "y": 336
         },
         "data": {
-          "expression": "{ squared: item.value * item.value }"
+          "expression": "counter = (item.counter || 0) + 1"
         },
         "width": 303,
         "height": 141,
         "selected": false,
         "positionAbsolute": {
-          "x": 272,
-          "y": 192
+          "x": 992,
+          "y": 336
         },
         "dragging": false
       },
       {
-        "id": "n3",
-        "type": "tablePreview",
+        "id": "6f74c0a8-0c14-4835-85dd-cf0872dd1dc4",
+        "type": "manualTrigger",
         "position": {
-          "x": 608,
-          "y": 208
+          "x": 496,
+          "y": 464
+        },
+        "data": {},
+        "width": 303,
+        "height": 141,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 496,
+          "y": 464
+        },
+        "dragging": false
+      },
+      {
+        "id": "a7779e86-1e83-41e6-9905-e9f5a823d739",
+        "type": "if",
+        "position": {
+          "x": 960,
+          "y": 624
         },
         "data": {
-          "limit": 100
+          "expression": "item.counter < 3",
+          "notes": ""
         },
-        "width": 150,
-        "height": 22,
+        "width": 379,
+        "height": 169,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 960,
+          "y": 624
+        },
+        "dragging": false
+      },
+      {
+        "id": "55e5bdf2-1789-439c-b007-1d5f37060523",
+        "type": "dataTable",
+        "position": {
+          "x": 1488,
+          "y": 496
+        },
+        "data": {
+          "tableName": "records",
+          "operation": "get",
+          "keyField": "id"
+        },
+        "width": 327,
+        "height": 141,
         "selected": true,
         "positionAbsolute": {
-          "x": 608,
-          "y": 208
+          "x": 1488,
+          "y": 496
         },
         "dragging": false
       }
     ],
     "edges": [
       {
-        "id": "e1",
-        "source": "n1",
-        "target": "n2"
+        "source": "2cc2dea6-f840-4a28-b608-ae4e73cd1bd0",
+        "sourceHandle": null,
+        "target": "a7779e86-1e83-41e6-9905-e9f5a823d739",
+        "targetHandle": null,
+        "id": "reactflow__edge-2cc2dea6-f840-4a28-b608-ae4e73cd1bd0-a7779e86-1e83-41e6-9905-e9f5a823d739"
       },
       {
-        "id": "e2",
-        "source": "n2",
-        "target": "n3"
+        "source": "6f74c0a8-0c14-4835-85dd-cf0872dd1dc4",
+        "sourceHandle": "trigger",
+        "target": "2cc2dea6-f840-4a28-b608-ae4e73cd1bd0",
+        "targetHandle": null,
+        "id": "reactflow__edge-6f74c0a8-0c14-4835-85dd-cf0872dd1dc4trigger-2cc2dea6-f840-4a28-b608-ae4e73cd1bd0"
+      },
+      {
+        "source": "a7779e86-1e83-41e6-9905-e9f5a823d739",
+        "sourceHandle": "onTrue",
+        "target": "2cc2dea6-f840-4a28-b608-ae4e73cd1bd0",
+        "targetHandle": null,
+        "id": "reactflow__edge-a7779e86-1e83-41e6-9905-e9f5a823d739onTrue-2cc2dea6-f840-4a28-b608-ae4e73cd1bd0"
+      },
+      {
+        "source": "a7779e86-1e83-41e6-9905-e9f5a823d739",
+        "sourceHandle": "onFalse",
+        "target": "55e5bdf2-1789-439c-b007-1d5f37060523",
+        "targetHandle": null,
+        "id": "reactflow__edge-a7779e86-1e83-41e6-9905-e9f5a823d739onFalse-55e5bdf2-1789-439c-b007-1d5f37060523"
       }
     ]
   }

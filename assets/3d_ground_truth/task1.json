@@ -1,8 +1,8 @@
 {
-  "id": "63c291bf-5f91-4c1f-bdcb-8e1a8c1d5ab2",
+  "id": "bb8271d5-145b-4eeb-9f3a-2d4740f49583",
   "name": "Four Objects Scene",
-  "createdAt": 1775574305842,
-  "updatedAt": 1775574357436,
+  "createdAt": 1776771813379,
+  "updatedAt": 1776771813379,
   "version": 1,
   "metadata": {
     "description": "",
@@ -11,14 +11,14 @@
   "scene": {
     "objects": [
       {
-        "id": "acdd696f-cdda-47af-86e0-2fe5ccd59858",
+        "id": "f1fcc6d4-690a-44f3-aeb8-d6fc67a50b87",
         "type": "cube",
         "name": "Cube 1",
         "visible": true,
         "locked": false,
         "position": [
           0,
-          0,
+          10,
           0
         ],
         "rotation": [
@@ -28,15 +28,15 @@
         ],
         "scale": [
           1,
-          1,
+          20,
           1
         ],
-        "color": "#ff0000",
+        "color": "#ffffff",
         "opacity": 1,
         "wireframe": false
       },
       {
-        "id": "73968009-57d7-44fa-b80b-3ffa62214c8b",
+        "id": "46601716-bea7-4fe5-9455-58af145ef528",
         "type": "sphere",
         "name": "Sphere 1",
         "visible": true,
@@ -56,12 +56,12 @@
           1,
           1
         ],
-        "color": "#ff0000",
+        "color": "#ffffff",
         "opacity": 1,
         "wireframe": false
       },
       {
-        "id": "8c1e9f34-699e-4759-919b-7d1dc6acdd09",
+        "id": "588b95c1-6b02-4e23-b1be-68bb3ecb2c7c",
         "type": "cylinder",
         "name": "Cylinder 1",
         "visible": true,
@@ -81,20 +81,20 @@
           1,
           1
         ],
-        "color": "#ff0000",
+        "color": "#ffffff",
         "opacity": 1,
         "wireframe": false
       },
       {
-        "id": "c264f1e1-f305-4fee-b780-600c17377a27",
+        "id": "2032c303-9983-4cb8-8a65-04b0205abbd6",
         "type": "cone",
         "name": "Cone 1",
         "visible": true,
         "locked": false,
         "position": [
           0,
-          0,
-          3
+          20.5,
+          0
         ],
         "rotation": [
           0,
@@ -106,7 +106,7 @@
           1,
           1
         ],
-        "color": "#ff0000",
+        "color": "#ffffff",
         "opacity": 1,
         "wireframe": false
       }
@@ -116,7 +116,7 @@
       "showAxes": true,
       "backgroundColor": "#1a1a2e",
       "fov": 50,
-      "cameraType": "perspective",
+      "cameraType": "orthographic",
       "orthoZoom": 10
     }
   }
