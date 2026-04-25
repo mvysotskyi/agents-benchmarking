@@ -190,10 +190,21 @@ def build_summary_info(
     }
 
 
+_HARNESS_EXPORT_PREFIX = "--- eval-harness-export ---"
+
+
+def _strip_harness_header(text: str) -> str:
+    """Remove the eval-harness-export header line if present."""
+    if text.startswith(_HARNESS_EXPORT_PREFIX):
+        return text[len(_HARNESS_EXPORT_PREFIX):].lstrip("\n")
+    return text
+
+
 def build_agent_outputs(parsed: dict) -> dict:
     """Build an agent_outputs.json compatible with the evaluation scripts."""
     final_answer = parsed.get("final_answer", "")
     app_export = parsed.get("app_export", "")
+    page_content = _strip_harness_header(app_export) if app_export else None
 
     return {
         "primary_output": final_answer,
@@ -204,7 +215,7 @@ def build_agent_outputs(parsed: dict) -> dict:
         "post_run_js_error": None,
         "post_run_js_snippet_path": None,
         "post_run_page_url": None,
-        "post_run_page_content": None,
+        "post_run_page_content": page_content,
         "post_run_page_html": None,
         "post_run_page_axtree": None,
         "post_run_page_error": None,

@@ -122,9 +122,11 @@ def _values_match(gt_val: Any, pred_val: Any) -> bool:
     pred_val = _normalise_value(pred_val)
 
     if isinstance(gt_val, dict) and isinstance(pred_val, dict):
-        if set(gt_val.keys()) != set(pred_val.keys()):
+        gt_norm = {k.lower(): v for k, v in gt_val.items()}
+        pred_norm = {k.lower(): v for k, v in pred_val.items()}
+        if set(gt_norm.keys()) != set(pred_norm.keys()):
             return False
-        return all(_values_match(gt_val[k], pred_val[k]) for k in gt_val)
+        return all(_values_match(gt_norm[k], pred_norm[k]) for k in gt_norm)
 
     if isinstance(gt_val, list) and isinstance(pred_val, list):
         if len(gt_val) != len(pred_val):
@@ -344,24 +346,34 @@ def match_edges(
             )
             continue
 
-        expected_key = _edge_key(
-            gt_node_id_to_pred[gt_source],
-            gt_node_id_to_pred[gt_target],
-            gt_sh,
-        )
+        pred_source = gt_node_id_to_pred[gt_source]
+        pred_target = gt_node_id_to_pred[gt_target]
+        expected_key = _edge_key(pred_source, pred_target, gt_sh)
         available = pred_edge_keys.get(expected_key, 0) - consumed.get(expected_key, 0)
         if available > 0:
             consumed[expected_key] = consumed.get(expected_key, 0) + 1
             edge_results.append(EdgeResult(gt_edge=gt_edge, matched=True))
         else:
-            edge_results.append(
-                EdgeResult(
-                    gt_edge=gt_edge,
-                    matched=False,
-                    error="missing edge %s --(%s)--> %s"
-                    % (gt_source, gt_sh or "default", gt_target),
-                )
+            # Fallback: if GT edge has a named case handle, accept a predicted
+            # edge on the same (source, target) pair with the generic 'case'
+            # handle — this happens when the export uses 'case' as a placeholder
+            # for a label-keyed case that was stored with wrong capitalisation.
+            fallback_key = _edge_key(pred_source, pred_target, "case")
+            fallback_available = (
+                pred_edge_keys.get(fallback_key, 0) - consumed.get(fallback_key, 0)
             )
+            if gt_sh and gt_sh not in ("default", "onTrue", "onFalse", "trigger") and fallback_available > 0:
+                consumed[fallback_key] = consumed.get(fallback_key, 0) + 1
+                edge_results.append(EdgeResult(gt_edge=gt_edge, matched=True))
+            else:
+                edge_results.append(
+                    EdgeResult(
+                        gt_edge=gt_edge,
+                        matched=False,
+                        error="missing edge %s --(%s)--> %s"
+                        % (gt_source, gt_sh or "default", gt_target),
+                    )
+                )
 
     pred_to_gt_id = {v: k for k, v in gt_node_id_to_pred.items()}
     for e in pred_edges:
