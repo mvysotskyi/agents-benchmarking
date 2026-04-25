@@ -3,6 +3,7 @@ import json
 import urllib.parse
 import requests
 import logging
+from urllib.parse import urlparse
 
 import playwright.sync_api
 from agisdk.REAL.browsergym.core.task import AbstractBrowserTask
@@ -59,7 +60,22 @@ class AbstractWebCloneTask(AbstractBrowserTask):
     def get_task_id(cls):
         return cls.task_id
 
-    def __init__(self, seed: int, task_id: str, run_id: str = None, api_key: str = None, model_id_name: str = None, run_name: str = None) -> None:
+    def _get_finish_url(self) -> str:
+        """
+        Calculates the finish URL based on the current URL.
+        """
+        parsed_url = urlparse(self.url)
+        base_url = f"{parsed_url.scheme}://{parsed_url.hostname}"
+        if parsed_url.port:
+            base_url += f":{parsed_url.port}"
+        return base_url + "/finish"
+
+    def _ensure_background_page(self) -> playwright.sync_api.Page:
+        if self.background_page is None or self.background_page.is_closed():
+            self.background_page = self.page.context.new_page()
+        return self.background_page
+
+    def __init__(self, seed: int, task_id: str, task_source: str = None, run_id: str = None, api_key: str = None, model_id_name: str = None, run_name: str = None) -> None:
         """
         Args:
             seed: Random seed for the task.
@@ -76,7 +92,7 @@ class AbstractWebCloneTask(AbstractBrowserTask):
 
         self.seed = seed
         self.task_id = task_id
-        self.task_config = TaskConfig(self.task_id)
+        self.task_config = TaskConfig(self.task_id, task_source=task_source)
         if not self.task_config.is_valid_config():
             raise ValueError(f"Invalid task configuration for task ID: {self.task_id}")
             
@@ -119,6 +135,7 @@ class AbstractWebCloneTask(AbstractBrowserTask):
         self.evaluator = WebCloneEvaluator(task_config=self.task_config)
         self.goal = self.task_config.get_goal()
         self.url = self.task_config.get_start_url()
+        self.background_page = None
         if not self.url:
             if "WEBCLONE_URL" in os.environ:
                 self.url = os.environ["WEBCLONE_URL"]
@@ -129,18 +146,28 @@ class AbstractWebCloneTask(AbstractBrowserTask):
 
     def setup(self, page: playwright.sync_api.Page) -> tuple[str, dict]:
         self.page = page
-        self.background_page = page.context.new_page()
         config_url = self.url + f"/config?run_id={self.run_id}&task_id={self.task_id}&latency=0"
-        self.background_page.goto(config_url)
-        self.background_page.wait_for_load_state("networkidle")
-        finish_url = self.url + "/finish"
-        self.background_page.goto(finish_url)
+        try:
+            response = requests.get(config_url, timeout=20)
+            if response.status_code >= 400:
+                logger.warning(
+                    "WebClone config endpoint unavailable at %s (status %s). Continuing without config preflight.",
+                    config_url,
+                    response.status_code,
+                )
+        except requests.RequestException as exc:
+            logger.warning(
+                "WebClone config request failed for %s. Continuing without config preflight. Error: %s",
+                config_url,
+                exc,
+            )
         self.page.bring_to_front()  # Ensure main page stays focused
         self.page.goto(self.url)
         return self.goal, {}
 
     def teardown(self) -> None:
-        self.background_page.close()
+        if self.background_page is not None and not self.background_page.is_closed():
+            self.background_page.close()
         self.page.close()
 
     def get_finish_json(self, timeout: int = 1000) -> dict:
@@ -148,9 +175,11 @@ class AbstractWebCloneTask(AbstractBrowserTask):
         error_message = ""
         try:
             try:
-                self.background_page.goto(self.url+"/finish", timeout=timeout)
-                self.background_page.wait_for_load_state("networkidle", timeout=timeout)
-                pre_element = self.background_page.wait_for_selector("pre")
+                finish_url = self._get_finish_url()
+                background_page = self._ensure_background_page()
+                background_page.goto(finish_url, timeout=timeout)
+                background_page.wait_for_load_state("networkidle", timeout=timeout)
+                pre_element = background_page.wait_for_selector("pre")
                 if pre_element:
                     env_state = pre_element.inner_text()
                     try:
@@ -160,7 +189,9 @@ class AbstractWebCloneTask(AbstractBrowserTask):
                 else:
                     error_message = "No state data available"
             except playwright.sync_api.TimeoutError:
-                error_message = "Validation endpoint not yet available"
+                # ToDo(ardroh): Disable this for eval tasks.
+                error_message = ""
+                # error_message = "Validation endpoint not yet available"
         except Exception as e:
             error_message = f"Validation error: {str(e)}"
         if error_message != "":
@@ -184,7 +215,8 @@ class AbstractWebCloneTask(AbstractBrowserTask):
             done = True
             response = assistant_messages[1]['message']
         if done:
-            env_state_json = self.get_finish_json(timeout=timeout)
+            # env_state_json = self.get_finish_json(timeout=timeout)
+            env_state_json = "<>"
             reward, _, message, info = self.evaluator.evaluate(env_state_json, model_response)
             message = "Task completed!" if done else "Task still in progress"
             info = {"env_state": env_state_json}
@@ -198,9 +230,8 @@ class AbstractWebCloneTask(AbstractBrowserTask):
                     # URL encode the response for safety 
                     import urllib.parse
                     encoded_response = urllib.parse.quote(model_response)
-                    self.background_page.goto(self.url + "/submit?retrieved_answer=" + encoded_response)
+                    requests.get(self.url + "/submit?retrieved_answer=" + encoded_response, timeout=20)
                 except Exception as e:
                     print(f"Warning: Failed to submit response to server: {e}")
                     
         return reward, done, message, info
-

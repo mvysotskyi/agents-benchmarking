@@ -15,6 +15,7 @@ from dataclasses import asdict, dataclass, field, is_dataclass
 from datetime import datetime
 from pathlib import Path
 from typing import Optional
+from urllib.parse import urljoin
 
 import gymnasium as gym
 import numpy as np
@@ -22,6 +23,7 @@ from PIL import Image
 from tqdm import tqdm
 
 from agisdk.REAL.browsergym.core.chat import Chat
+from agisdk.REAL.browsergym.utils.obs import flatten_axtree_to_str, flatten_dom_to_str, prune_html
 
 from .agent import Agent
 from .utils import count_messages_token, count_tokens
@@ -153,6 +155,10 @@ class ExpArgs:
     save_screenshot: bool = False
     save_som: bool = False
     save_step_info_pkl: bool = False
+    model_name: str = None
+    post_run_js_snippet: str = None
+    post_run_js_snippet_path: str = None
+    post_run_url: str = None
 
     def prepare(self, exp_root):
         """Prepare the experiment directory and save the experiment arguments.
@@ -206,7 +212,10 @@ class ExpArgs:
         save_package_versions(self.exp_dir)
 
         episode_info = []
-        env, step_info, err_msg, stack_trace = None, None, None, None
+        env, agent, step_info, err_msg, stack_trace = None, None, None, None, None
+        post_run_js_result, post_run_js_error = None, None
+        post_run_page_url, post_run_page_content = None, None
+        post_run_page_html, post_run_page_axtree, post_run_page_error = None, None, None
         
         try:
             logger.info(f"Running experiment {self.exp_name} in:\n  {self.exp_dir}")
@@ -301,6 +310,24 @@ class ExpArgs:
             except Exception as e:
                 logger.error(f"Error while saving step info in the finally block: {e}")
             try:
+                if env is not None and self.post_run_url:
+                    (
+                        post_run_page_url,
+                        post_run_page_content,
+                        post_run_page_html,
+                        post_run_page_axtree,
+                        post_run_page_error,
+                    ) = _capture_post_run_page(
+                        env,
+                        agent,
+                        self.post_run_url,
+                    )
+
+                if env is not None and self.post_run_js_snippet:
+                    post_run_js_result, post_run_js_error = _evaluate_post_run_javascript(
+                        env.page,
+                        self.post_run_js_snippet,
+                    )
                 if (
                     not err_msg
                     and len(episode_info) > 0
@@ -308,7 +335,21 @@ class ExpArgs:
                 ):
                     e = KeyboardInterrupt("Early termination??")
                     err_msg = f"Exception uncaught by agent or environment in task {self.env_args.task_name}.\n{type(e).__name__}:\n{e}"
-                _save_summary_info(episode_info, self.exp_dir, err_msg, stack_trace)
+                _save_summary_info(
+                    episode_info,
+                    self.exp_dir,
+                    err_msg,
+                    stack_trace,
+                    post_run_url=self.post_run_url,
+                    post_run_js_result=post_run_js_result,
+                    post_run_js_error=post_run_js_error,
+                    post_run_js_snippet_path=self.post_run_js_snippet_path,
+                    post_run_page_url=post_run_page_url,
+                    post_run_page_content=post_run_page_content,
+                    post_run_page_html=post_run_page_html,
+                    post_run_page_axtree=post_run_page_axtree,
+                    post_run_page_error=post_run_page_error,
+                )
             except Exception as e:
                 logger.error(f"Error while saving summary info in the finally block: {e}")
             try:
@@ -394,6 +435,7 @@ class StepInfo:
     stats: dict = None
     profiling: StepTimestamps = field(default_factory=StepTimestamps)
     task_info: dict = None
+    model_name: str = None
 
     def from_step(self, env: gym.Env, action: str, obs_preprocessor: callable):
         t = self.profiling
@@ -549,6 +591,15 @@ def _save_summary_info(
     exp_dir,
     err_msg,
     stack_trace,
+    post_run_url=None,
+    post_run_js_result=None,
+    post_run_js_error=None,
+    post_run_js_snippet_path=None,
+    post_run_page_url=None,
+    post_run_page_content=None,
+    post_run_page_html=None,
+    post_run_page_axtree=None,
+    post_run_page_error=None,
 ):
     # bring err from agent_info to the top level
     if err_msg is None:
@@ -572,34 +623,8 @@ def _save_summary_info(
             # If we can't load the existing file, start fresh
             pass
     
-    # Extract agent response (last message from agent or error message)
-    agent_response = ""
-    # Try multiple ways to get the agent response
-    if len(episode_info) > 0:
-        # Method 1: Check chat_messages in agent_info
-        if episode_info[-1].agent_info.get("chat_messages"):
-            for msg in reversed(episode_info[-1].agent_info.get("chat_messages", [])):
-                if msg.get("role") == "assistant":
-                    agent_response = msg.get("message", "")
-                    break
-        
-        # Method 2: Check model_response directly in agent_info
-        if not agent_response and episode_info[-1].agent_info.get("model_response"):
-            agent_response = episode_info[-1].agent_info.get("model_response")
-        
-        # Method 3: Check last action/response message
-        if not agent_response and episode_info[-1].action and "send_msg_to_user" in episode_info[-1].action:
-            # Extract the message from send_msg_to_user("message")
-            match = re.search(r'send_msg_to_user\("(.+?)"\)', episode_info[-1].action)
-            if match:
-                agent_response = match.group(1)
-        
-        # Method 4: Check task_info for criteria responses
-        if not agent_response and episode_info[-1].task_info and "criteria" in episode_info[-1].task_info:
-            for criterion in episode_info[-1].task_info.get("criteria", []):
-                if criterion.get("model_response"):
-                    agent_response = criterion.get("model_response")
-                    break
+    last_agent_step = _get_last_agent_step(episode_info)
+    agent_response = _extract_agent_response(last_agent_step)
     
     # Extract task_id from path if possible
     task_id = None
@@ -624,6 +649,15 @@ def _save_summary_info(
     finish_state = {}
     if len(episode_info) > 0 and episode_info[-1].task_info:
         finish_state = episode_info[-1].task_info
+
+    capture_post_run_artifacts = bool(post_run_js_snippet_path or post_run_page_url)
+    final_page_html = None
+    final_page_axtree = None
+    final_page_content = None
+    if not capture_post_run_artifacts and len(episode_info) > 0 and episode_info[-1].obs:
+        final_page_html = episode_info[-1].obs.get("pruned_html")
+        final_page_axtree = episode_info[-1].obs.get("axtree_txt")
+        final_page_content = final_page_html or final_page_axtree
     
     # Get configuration from the task info if available
     config = {}
@@ -650,6 +684,18 @@ def _save_summary_info(
         "task_id": task_id or "",
         "agent_response": agent_response,
         "finish_state": finish_state,
+        "finish_page_content": final_page_content,
+        "finish_page_html": final_page_html,
+        "finish_page_axtree": final_page_axtree,
+        "post_run_url": post_run_url,
+        "post_run_js_snippet_path": post_run_js_snippet_path,
+        "post_run_js_result": post_run_js_result,
+        "post_run_js_error": post_run_js_error,
+        "post_run_page_url": post_run_page_url,
+        "post_run_page_content": post_run_page_content,
+        "post_run_page_html": post_run_page_html,
+        "post_run_page_axtree": post_run_page_axtree,
+        "post_run_page_error": post_run_page_error,
         "eval_results": [],  # This would need to be populated by an evaluation system
         "env_setup_error": err_msg if "Executable doesn't exist" in str(err_msg) or "playwright" in str(err_msg) else None,
     })
@@ -662,9 +708,422 @@ def _save_summary_info(
         summary_info["terminated"] = episode_info[-1].terminated
         summary_info["truncated"] = episode_info[-1].truncated
 
+    agent_outputs_path, agent_output_text_path = _save_agent_outputs(
+        exp_dir=exp_dir,
+        episode_info=episode_info,
+        agent_response=agent_response,
+        post_run_url=post_run_url,
+        post_run_js_result=post_run_js_result,
+        post_run_js_error=post_run_js_error,
+        post_run_js_snippet_path=post_run_js_snippet_path,
+        post_run_page_url=post_run_page_url,
+        post_run_page_content=post_run_page_content,
+        post_run_page_html=post_run_page_html,
+        post_run_page_axtree=post_run_page_axtree,
+        post_run_page_error=post_run_page_error,
+    )
+    summary_info["agent_outputs_path"] = str(agent_outputs_path.resolve())
+    summary_info["agent_output_text_path"] = str(agent_output_text_path.resolve())
+
     # Write updated summary info
     with open(summary_info_path, "w") as f:
         json.dump(summary_info, f, indent=4)
+
+
+def _get_last_agent_step(episode_info: list[StepInfo]) -> Optional[StepInfo]:
+    for step_info in reversed(episode_info):
+        agent_info = step_info.agent_info or {}
+        if step_info.action:
+            return step_info
+        if agent_info.get("model_response") or agent_info.get("chat_messages"):
+            return step_info
+    return episode_info[-1] if episode_info else None
+
+
+def _extract_agent_response(step_info: Optional[StepInfo]) -> str:
+    if step_info is None:
+        return ""
+
+    agent_info = step_info.agent_info or {}
+
+    chat_messages = agent_info.get("chat_messages") or []
+    for msg in reversed(chat_messages):
+        if msg.get("role") == "assistant":
+            return msg.get("message", "")
+
+    model_response = agent_info.get("model_response")
+    if model_response:
+        return model_response
+
+    if step_info.action and "send_msg_to_user" in step_info.action:
+        match = re.search(r'send_msg_to_user\("(.+?)"\)', step_info.action)
+        if match:
+            return match.group(1)
+
+    task_info = step_info.task_info or {}
+    for criterion in task_info.get("criteria", []):
+        if criterion.get("model_response"):
+            return criterion.get("model_response")
+
+    return step_info.action or ""
+
+
+def _build_agent_outputs_payload(
+    episode_info: list[StepInfo],
+    agent_response: str,
+    post_run_url,
+    post_run_js_result,
+    post_run_js_error,
+    post_run_js_snippet_path,
+    post_run_page_url,
+    post_run_page_content,
+    post_run_page_html,
+    post_run_page_axtree,
+    post_run_page_error,
+):
+    steps = []
+    for step_info in episode_info:
+        agent_info = step_info.agent_info or {}
+        if not (
+            step_info.action
+            or agent_info.get("model_response")
+            or agent_info.get("chat_messages")
+            or agent_info.get("err_msg")
+        ):
+            continue
+
+        steps.append(
+            {
+                "step": step_info.step,
+                "action": step_info.action,
+                "model_response": agent_info.get("model_response"),
+                "chat_messages": agent_info.get("chat_messages"),
+                "err_msg": agent_info.get("err_msg"),
+                "stack_trace": agent_info.get("stack_trace"),
+                "terminated": step_info.terminated,
+                "truncated": step_info.truncated,
+            }
+        )
+
+    primary_output = post_run_js_result
+    if primary_output in (None, ""):
+        primary_output = agent_response
+    if primary_output in (None, "") and steps:
+        primary_output = steps[-1].get("model_response") or steps[-1].get("action") or ""
+
+    return {
+        "primary_output": primary_output,
+        "agent_response": agent_response,
+        "post_run_url": post_run_url,
+        "post_run_js_result": post_run_js_result,
+        "post_run_js_error": post_run_js_error,
+        "post_run_js_snippet_path": post_run_js_snippet_path,
+        "post_run_page_url": post_run_page_url,
+        "post_run_page_content": post_run_page_content,
+        "post_run_page_html": post_run_page_html,
+        "post_run_page_axtree": post_run_page_axtree,
+        "post_run_page_error": post_run_page_error,
+        "steps": steps,
+    }
+
+
+def _save_agent_outputs(
+    exp_dir,
+    episode_info: list[StepInfo],
+    agent_response: str,
+    post_run_url,
+    post_run_js_result,
+    post_run_js_error,
+    post_run_js_snippet_path,
+    post_run_page_url,
+    post_run_page_content,
+    post_run_page_html,
+    post_run_page_axtree,
+    post_run_page_error,
+):
+    payload = _build_agent_outputs_payload(
+        episode_info=episode_info,
+        agent_response=agent_response,
+        post_run_url=post_run_url,
+        post_run_js_result=post_run_js_result,
+        post_run_js_error=post_run_js_error,
+        post_run_js_snippet_path=post_run_js_snippet_path,
+        post_run_page_url=post_run_page_url,
+        post_run_page_content=post_run_page_content,
+        post_run_page_html=post_run_page_html,
+        post_run_page_axtree=post_run_page_axtree,
+        post_run_page_error=post_run_page_error,
+    )
+
+    agent_outputs_path = Path(exp_dir) / "agent_outputs.json"
+    with open(agent_outputs_path, "w") as f:
+        json.dump(payload, f, indent=4, cls=DataclassJSONEncoder)
+
+    agent_output_text_path = Path(exp_dir) / "agent_output.txt"
+    primary_output = payload.get("primary_output")
+    if primary_output is None:
+        primary_output = ""
+    elif not isinstance(primary_output, str):
+        primary_output = json.dumps(primary_output, indent=2)
+    agent_output_text_path.write_text(primary_output)
+
+    return agent_outputs_path, agent_output_text_path
+
+
+def _make_json_safe(value):
+    if value is None or isinstance(value, (str, int, float, bool)):
+        return value
+    if isinstance(value, list):
+        return [_make_json_safe(item) for item in value]
+    if isinstance(value, tuple):
+        return [_make_json_safe(item) for item in value]
+    if isinstance(value, dict):
+        return {str(key): _make_json_safe(val) for key, val in value.items()}
+    return repr(value)
+
+
+def _extract_post_run_capture_result(capture):
+    prompts = capture.get("prompts") or []
+    if len(prompts) == 1:
+        prompt_value = prompts[0].get("defaultValue")
+        if prompt_value is not None:
+            return prompt_value
+        return prompts[0].get("message")
+    if len(prompts) > 1:
+        return [
+            prompt.get("defaultValue")
+            if prompt.get("defaultValue") is not None
+            else prompt.get("message")
+            for prompt in prompts
+        ]
+
+    clipboard_writes = capture.get("clipboardWrites") or []
+    if len(clipboard_writes) == 1:
+        return clipboard_writes[0]
+    if len(clipboard_writes) > 1:
+        return clipboard_writes
+
+    alerts = capture.get("alerts") or []
+    confirms = capture.get("confirms") or []
+    if alerts or confirms:
+        return capture
+
+    return None
+
+
+def _extract_post_run_page_artifacts(post_run_obs: dict):
+    post_run_page_html = post_run_obs.get("pruned_html")
+    post_run_page_axtree = post_run_obs.get("axtree_txt")
+
+    if post_run_page_html is None and post_run_obs.get("dom_object") is not None:
+        post_run_page_html = prune_html(flatten_dom_to_str(post_run_obs["dom_object"]))
+    if post_run_page_axtree is None and post_run_obs.get("axtree_object") is not None:
+        post_run_page_axtree = flatten_axtree_to_str(post_run_obs["axtree_object"])
+
+    post_run_page_content = post_run_page_html or post_run_page_axtree
+    return post_run_page_content, post_run_page_html, post_run_page_axtree
+
+
+def _normalize_post_run_javascript_result(raw_result):
+    if not isinstance(raw_result, dict) or "__agisdk_has_value" not in raw_result:
+        return _make_json_safe(raw_result)
+
+    if raw_result.get("__agisdk_has_value"):
+        value_box = raw_result.get("__agisdk_value_box")
+        if isinstance(value_box, dict) and value_box.get("type") == "undefined":
+            return "undefined"
+        if isinstance(value_box, dict) and value_box.get("type") == "value":
+            return _make_json_safe(value_box.get("value"))
+        return _make_json_safe(raw_result.get("__agisdk_value"))
+
+    capture = raw_result.get("__agisdk_capture") or {}
+    inferred_result = _extract_post_run_capture_result(capture)
+    if inferred_result is not None:
+        return _make_json_safe(inferred_result)
+
+    return None
+
+
+def _build_post_run_wrapper(script_body: str, expect_value: bool):
+    has_value_literal = "true" if expect_value else "false"
+    return f"""async () => {{
+        const __agisdk_boxValue = (value) => {{
+            if (value === undefined) {{
+                return {{ type: "undefined" }};
+            }}
+            return {{ type: "value", value }};
+        }};
+        const __agisdk_capture = {{
+            prompts: [],
+            alerts: [],
+            confirms: [],
+            clipboardWrites: [],
+        }};
+        const __agisdk_originalPrompt = window.prompt;
+        const __agisdk_originalAlert = window.alert;
+        const __agisdk_originalConfirm = window.confirm;
+        const __agisdk_originalClipboardWriteText =
+            navigator.clipboard && navigator.clipboard.writeText
+                ? navigator.clipboard.writeText.bind(navigator.clipboard)
+                : null;
+        let __agisdk_clipboardOverridden = false;
+
+        window.prompt = (message = "", defaultValue = "") => {{
+            __agisdk_capture.prompts.push({{
+                message: String(message),
+                defaultValue: defaultValue == null ? null : String(defaultValue),
+            }});
+            return defaultValue ?? "";
+        }};
+        window.alert = (message = "") => {{
+            __agisdk_capture.alerts.push(String(message));
+        }};
+        window.confirm = (message = "") => {{
+            __agisdk_capture.confirms.push(String(message));
+            return true;
+        }};
+        if (__agisdk_originalClipboardWriteText) {{
+            try {{
+                navigator.clipboard.writeText = async (text) => {{
+                    __agisdk_capture.clipboardWrites.push(text == null ? null : String(text));
+                    return __agisdk_originalClipboardWriteText(text);
+                }};
+                __agisdk_clipboardOverridden = true;
+            }} catch (error) {{
+                __agisdk_clipboardOverridden = false;
+            }}
+        }}
+
+        try {{
+            let __agisdk_value;
+            let __agisdk_has_value = {has_value_literal};
+            {script_body}
+            return {{
+                __agisdk_has_value: __agisdk_has_value,
+                __agisdk_value: __agisdk_value,
+                __agisdk_value_box: __agisdk_boxValue(__agisdk_value),
+                __agisdk_capture: __agisdk_capture,
+            }};
+        }} finally {{
+            window.prompt = __agisdk_originalPrompt;
+            window.alert = __agisdk_originalAlert;
+            window.confirm = __agisdk_originalConfirm;
+            if (__agisdk_clipboardOverridden) {{
+                navigator.clipboard.writeText = __agisdk_originalClipboardWriteText;
+            }}
+        }}
+    }}"""
+
+
+def _evaluate_post_run_javascript(page, script_source: str):
+    script_source = script_source.strip()
+    if not script_source:
+        return None, None
+
+    candidate_scripts = []
+    candidate_scripts.append(
+        _build_post_run_wrapper(
+            f"__agisdk_value = await (0, eval)({json.dumps(script_source)});",
+            expect_value=True,
+        )
+    )
+    if (
+        script_source.startswith("(")
+        or script_source.startswith("async ")
+        or script_source.startswith("function")
+    ):
+        candidate_scripts.append(
+            _build_post_run_wrapper(
+                f"""
+            __agisdk_value = await (async () => {{
+                const __agisdk_candidate = {script_source};
+                if (typeof __agisdk_candidate === "function") {{
+                    return await __agisdk_candidate();
+                }}
+                return await __agisdk_candidate;
+            }})();
+                """,
+                expect_value=True,
+            )
+        )
+    else:
+        candidate_scripts.append(
+            _build_post_run_wrapper(
+                f"__agisdk_value = await (async () => ({script_source}))();",
+                expect_value=True,
+            )
+        )
+        candidate_scripts.append(
+            _build_post_run_wrapper(
+                f"""
+            __agisdk_has_value = false;
+            await (async () => {{
+{script_source}
+            }})();
+                """,
+                expect_value=False,
+            )
+        )
+
+    last_error = None
+    for candidate in candidate_scripts:
+        try:
+            result = page.evaluate(candidate)
+            return _normalize_post_run_javascript_result(result), None
+        except Exception as exc:
+            last_error = exc
+
+    return None, repr(last_error) if last_error else None
+
+
+def _capture_post_run_page(env, agent, post_run_url: str):
+    resolved_url = urljoin(env.page.url, post_run_url)
+    capture_error = None
+
+    try:
+        env.page.goto(resolved_url, wait_until="domcontentloaded")
+    except Exception as exc:
+        capture_error = repr(exc)
+
+    try:
+        env.page.wait_for_load_state("domcontentloaded", timeout=5000)
+    except Exception as exc:
+        if capture_error is None:
+            capture_error = repr(exc)
+
+    try:
+        post_run_obs = env._get_obs()
+        if agent is not None and getattr(agent, "obs_preprocessor", None):
+            post_run_obs = agent.obs_preprocessor(post_run_obs)
+
+        post_run_page_content, post_run_page_html, post_run_page_axtree = (
+            _extract_post_run_page_artifacts(post_run_obs)
+        )
+
+        return (
+            resolved_url,
+            post_run_page_content,
+            post_run_page_html,
+            post_run_page_axtree,
+            capture_error,
+        )
+    except Exception as exc:
+        if capture_error is None:
+            capture_error = repr(exc)
+
+    try:
+        page_html = env.page.content()
+        page_text = None
+        try:
+            page_text = env.page.locator("body").inner_text(timeout=1000)
+        except Exception:
+            pass
+        return resolved_url, page_text or page_html, page_html, None, capture_error
+    except Exception as exc:
+        if capture_error is None:
+            capture_error = repr(exc)
+
+    return resolved_url, None, None, None, capture_error
 
 
 def _is_debugging():
@@ -912,7 +1371,8 @@ def _get_env_name(task_name: str):
     #     import browsergym.visualwebarena
     if task_name.startswith("webclones"):
         import agisdk.REAL.browsergym.webclones
-    else:
+    # Adding exception for 'eval' tasks we registered.
+    elif not task_name.startswith("eval"):
         raise ValueError(
             f"Task {task_name} not found. Please register the task in browsergym."
         )

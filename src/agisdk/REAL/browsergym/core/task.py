@@ -24,7 +24,7 @@ class AbstractBrowserTask(ABC):
         # default values, can be overriden in children classes
         self.viewport = {"width": 1280, "height": 720}
         self.slow_mo = 1000  # ms
-        self.timeout = 5000  # ms
+        self.timeout = 10000  # ms
 
     @abstractmethod
     def setup(self, page: playwright.sync_api.Page) -> tuple[str, dict]:

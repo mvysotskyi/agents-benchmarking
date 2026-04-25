@@ -79,6 +79,7 @@ class DemoAgent(Agent):
         use_axtree: bool,
         use_screenshot: bool,
         system_message_handling: Literal["separate", "combined"] = "separate",
+        system_prompt_append: Optional[str] = None,
         thinking_budget: int = 10000,
         openai_api_key: Optional[str] = None,
         openrouter_api_key: Optional[str] = None,
@@ -92,6 +93,7 @@ class DemoAgent(Agent):
         self.use_axtree = use_axtree
         self.use_screenshot = use_screenshot
         self.system_message_handling = system_message_handling
+        self.system_prompt_append = system_prompt_append
         self.thinking_budget = thinking_budget
 
         if not (use_html or use_axtree):
@@ -105,10 +107,86 @@ class DemoAgent(Agent):
             # Use provided API key or fall back to environment variable
             self.client = OpenAI(api_key=openai_api_key)
             self.model_name = model_name
+            responses_only_model_prefixes = ("o1-pro", "o3-pro")
+
+            def is_responses_only_model(name: str) -> bool:
+                return any(name.startswith(prefix) for prefix in responses_only_model_prefixes)
+
+            def build_responses_content(messages: list[dict]) -> list[dict]:
+                content = []
+                for msg in messages:
+                    if msg["type"] == "text":
+                        content.append({"type": "input_text", "text": msg["text"]})
+                    elif msg["type"] == "image_url":
+                        image_url = msg["image_url"]
+                        detail = "auto"
+                        if isinstance(image_url, dict):
+                            detail = image_url.get("detail", "auto")
+                            image_url = image_url["url"]
+                        content.append(
+                            {
+                                "type": "input_image",
+                                "image_url": image_url,
+                                "detail": detail,
+                            }
+                        )
+                    else:
+                        raise ValueError(f"Unsupported message type for Responses API: {msg['type']}")
+                return content
+
+            def build_chat_user_content(messages: list[dict]) -> list[dict]:
+                content = []
+                for msg in messages:
+                    if msg["type"] == "text":
+                        content.append({"type": "text", "text": msg["text"]})
+                    elif msg["type"] == "image_url":
+                        content.append({"type": "image_url", "image_url": msg["image_url"]})
+                    else:
+                        raise ValueError(f"Unsupported message type for Chat Completions API: {msg['type']}")
+                return content
+
             # Define function to query OpenAI models
             def query_model(system_msgs, user_msgs):
+                if is_responses_only_model(self.model_name):
+                    if self.system_message_handling == "combined":
+                        combined_user_msgs = []
+                        if system_msgs:
+                            combined_user_msgs.append(
+                                {
+                                    "type": "text",
+                                    "text": system_msgs[0]["text"],
+                                }
+                            )
+                        combined_user_msgs.extend(user_msgs)
+                        instructions = None
+                        input_messages = [
+                            {
+                                "role": "user",
+                                "content": build_responses_content(combined_user_msgs),
+                            }
+                        ]
+                    else:
+                        instructions = system_msgs[0]["text"] if system_msgs else None
+                        input_messages = [
+                            {
+                                "role": "user",
+                                "content": build_responses_content(user_msgs),
+                            }
+                        ]
+
+                    response = self.client.responses.create(
+                        model=self.model_name,
+                        instructions=instructions,
+                        input=input_messages,
+                    )
+
+                    if not response.output_text:
+                        raise ValueError(f"No text content returned by Responses API for model {self.model_name}")
+                    return response.output_text
+
                 if self.system_message_handling == "combined":
-                    # Combine system and user messages into a single user message
+                    # Combine system and user text messages into a single user message.
+                    # Chat Completions cannot preserve image blocks in this mode.
                     combined_content = ""
                     if system_msgs:
                         combined_content += system_msgs[0]["text"] + "\n\n"
@@ -125,8 +203,8 @@ class DemoAgent(Agent):
                     response = self.client.chat.completions.create(
                         model=self.model_name,
                         messages=[
-                            {"role": "system", "content": system_msgs},
-                            {"role": "user", "content": user_msgs},
+                            {"role": "system", "content": system_msgs[0]["text"] if system_msgs else ""},
+                            {"role": "user", "content": build_chat_user_content(user_msgs)},
                         ],
                     )
                 return response.choices[0].message.content
@@ -340,10 +418,9 @@ class DemoAgent(Agent):
             raise ValueError(f"Model {model_name} not supported. Use a model name starting with 'gpt-', 'claude-', 'sonnet-', or 'openrouter/' followed by the OpenRouter model ID.")
 
         self.action_set = HighLevelActionSet(
-            subsets=["chat", "bid", "infeas"],  # define a subset of the action space
-            # subsets=["chat", "bid", "coord", "infeas"] # allow the agent to also use x,y coordinates
+            subsets=["chat", "bid", "coord", "infeas"],  # allow the agent to use absolute x,y mouse actions
             strict=False,  # less strict on the parsing of the actions
-            multiaction=False,  # does not enable the agent to take multiple actions at once
+            multiaction=True,  # allow sequential actions in a single turn
             demo_mode=demo_mode,  # add visual effects
         )
         # use this instead to allow the agent to directly use Python code
@@ -366,11 +443,24 @@ class DemoAgent(Agent):
         system_msgs = []
         user_msgs = []
 
-        if self.chat_mode:
+        def append_system_message(default_text: str):
+            system_text = default_text
+            if self.system_prompt_append:
+                system_text = (
+                    default_text.rstrip()
+                    + "\n\n# Additional App-Specific Instructions\n\n"
+                    + self.system_prompt_append.strip()
+                )
             system_msgs.append(
                 {
                     "type": "text",
-                    "text": f"""\
+                    "text": system_text,
+                }
+            )
+
+        if self.chat_mode:
+            append_system_message(
+                f"""\
                             # Instructions
 
                             You are a UI Assistant, your goal is to help the user perform tasks using a web browser. You can
@@ -381,8 +471,7 @@ class DemoAgent(Agent):
                             Review the instructions from the user, the current state of the page and all other information
                             to find the best possible next action to accomplish your goal. Your answer will be interpreted
                             and executed by a program, make sure to follow the formatting instructions.
-                            """,
-                }
+                            """
             )
             # append chat messages
             user_msgs.append(
@@ -410,17 +499,14 @@ class DemoAgent(Agent):
 
         else:
             assert obs["goal_object"], "The goal is missing."
-            system_msgs.append(
-                {
-                    "type": "text",
-                    "text": f"""\
+            append_system_message(
+                f"""\
                             # Instructions
 
                             Review the current state of the page and all other information to find the best
                             possible next action to accomplish your goal. Your answer will be interpreted
                             and executed by a program, make sure to follow the formatting instructions.
-                            """,
-                }
+                            """
             )
             # append goal
             user_msgs.append(
@@ -596,7 +682,9 @@ class DemoAgent(Agent):
         # Store observation for metrics
         self.update_last_observation(obs)
 
-        return action, {}
+        return action, {
+            "model_response": action,
+        }
 
 
 @dataclasses.dataclass
@@ -610,6 +698,7 @@ class DemoAgentArgs(AbstractAgentArgs):
     use_axtree: bool = True
     use_screenshot: bool = False
     system_message_handling: Literal["separate", "combined"] = "separate"
+    system_prompt_append: Optional[str] = None
     thinking_budget: int = 10000
     
     # API keys and configuration - these can be None and the agent will fall back to environment variables
@@ -628,6 +717,7 @@ class DemoAgentArgs(AbstractAgentArgs):
             use_axtree=self.use_axtree,
             use_screenshot=self.use_screenshot,
             system_message_handling=self.system_message_handling,
+            system_prompt_append=self.system_prompt_append,
             thinking_budget=self.thinking_budget,
             # Pass API keys and configuration
             openai_api_key=self.openai_api_key,

@@ -39,8 +39,14 @@ if RAY_AVAILABLE:
         results_dir: str,
         continue_previous: bool = False,
         use_cache: bool = True,
-        run_uuid: Optional[str] = None
-    ) -> Tuple[str, Dict[str, Any]]:
+        run_uuid: Optional[str] = None,
+        save_step_screenshots: bool = False,
+        save_step_info: bool = False,
+    show_task_completion_summary: bool = True,
+    post_run_js_snippet: Optional[str] = None,
+    post_run_js_snippet_path: Optional[str] = None,
+    post_run_url: Optional[str] = None,
+) -> Tuple[str, Dict[str, Any]]:
         """Run a single task."""
         # Import required modules inside the function for Ray workers
         import os
@@ -61,7 +67,12 @@ if RAY_AVAILABLE:
         # Set up experiment
         exp_args = ExpArgs(
             env_args=env_args,
-            agent_args=agent_args
+            agent_args=agent_args,
+            save_screenshot=save_step_screenshots,
+            save_step_info_pkl=save_step_info,
+            post_run_js_snippet=post_run_js_snippet,
+            post_run_js_snippet_path=post_run_js_snippet_path,
+            post_run_url=post_run_url,
         )
         
         # Start timing
@@ -111,13 +122,14 @@ if RAY_AVAILABLE:
         exp_record['exp_dir'] = str(exp_args.exp_dir)
         
         # Print current task result using Rich logging
-        success = exp_record.get('cum_reward', 0) == 1
-        reward = exp_record.get('cum_reward', 0)
-        
-        # Extract task_id from task_name (e.g., "omnizon-1" from "webclones.omnizon-1")
-        task_id = task_name.split('.', 1)[1] if '.' in task_name else task_name
-        
-        rich_logger.task_complete(success, reward, elapsed_time, task_id)
+        if show_task_completion_summary:
+            success = exp_record.get('cum_reward', 0) == 1
+            reward = exp_record.get('cum_reward', 0)
+
+            # Extract task_id from task_name (e.g., "omnizon-1" from "webclones.omnizon-1")
+            task_id = task_name.split('.', 1)[1] if '.' in task_name else task_name
+
+            rich_logger.task_complete(success, reward, elapsed_time, task_id)
         
         return task_name, exp_record
 
@@ -156,6 +168,13 @@ class harness:
         run_name: str = None,
         model_id_name: str = None,
         system_message_handling: str = None,
+        system_prompt_append: str = None,
+        save_step_screenshots: bool = False,
+        save_step_info: bool = False,
+        show_task_completion_summary: bool = True,
+        post_run_js_snippet: str = None,
+        post_run_js_snippet_path: str = None,
+        post_run_url: str = None,
     ):
         """
         Initialize the harness with the provided configuration.
@@ -188,6 +207,13 @@ class harness:
             model_id_name: Model ID name for API (defaults to model parameter)
             system_message_handling: How to handle system messages - "separate" (default) or "combined" (no system prompt).
                                    Only applies when using the model parameter. For o1-mini, defaults to "combined".
+            system_prompt_append: Optional extra instructions appended to the built-in system prompt.
+            save_step_screenshots: Whether to save a screenshot for each step in the experiment directory.
+            save_step_info: Whether to save per-step state and agent output payloads to the experiment directory.
+            show_task_completion_summary: Whether to print per-task reward/success summary logs after each task.
+            post_run_js_snippet: JavaScript source to execute against the final live page before teardown.
+            post_run_js_snippet_path: Original file path for the post-run JavaScript snippet.
+            post_run_url: Optional URL to visit after task completion before capturing extra page data and running post-run JS.
         """
         self.results_dir = results_dir
         self.num_workers = num_workers
@@ -197,6 +223,12 @@ class harness:
         self.leaderboard = leaderboard
         self.run_id = run_id
         self.sample_tasks = sample_tasks
+        self.save_step_screenshots = save_step_screenshots
+        self.save_step_info = save_step_info
+        self.show_task_completion_summary = show_task_completion_summary
+        self.post_run_js_snippet = post_run_js_snippet
+        self.post_run_js_snippet_path = post_run_js_snippet_path
+        self.post_run_url = post_run_url
         
         logger.info(f"Harness initialized with model={model or 'custom'}, task={task_name or task_type}, Sampling each task {sample_tasks} times")
         # Initialize agent arguments
@@ -225,7 +257,8 @@ class harness:
                 use_html=use_html,
                 use_axtree=use_axtree,
                 use_screenshot=use_screenshot,
-                system_message_handling=use_system_message_handling
+                system_message_handling=use_system_message_handling,
+                system_prompt_append=system_prompt_append,
             )
         else:
             raise ValueError("Either model or agentargs must be provided")
@@ -288,7 +321,7 @@ class harness:
         if not os.path.exists(results_dir):
             os.makedirs(results_dir)
     
-    def run(self, tasks: List[str] = None) -> Dict[str, Any]:
+    def run(self, tasks: List[str] = None, format_results: bool = True) -> Dict[str, Any]:
         """
         Run the tasks with the configured agent and environment.
         
@@ -326,11 +359,18 @@ class harness:
             num_workers=self.num_workers,
             use_cache=self.use_cache,
             cache_only=self.cache_only,
-            force_refresh=self.force_refresh
+            force_refresh=self.force_refresh,
+            save_step_screenshots=self.save_step_screenshots,
+            save_step_info=self.save_step_info,
+            show_task_completion_summary=self.show_task_completion_summary,
+            post_run_js_snippet=self.post_run_js_snippet,
+            post_run_js_snippet_path=self.post_run_js_snippet_path,
+            post_run_url=self.post_run_url,
         )
         
         # Format and return results
-        self._format_results(results)
+        if format_results:
+            self._format_results(results)
         
         return results
     
@@ -489,7 +529,13 @@ class harness:
         continue_previous: bool = False,
         use_cache: bool = True,
         cache_only: bool = False,
-        force_refresh: bool = False
+        force_refresh: bool = False,
+        save_step_screenshots: bool = False,
+        save_step_info: bool = False,
+        show_task_completion_summary: bool = True,
+        post_run_js_snippet: Optional[str] = None,
+        post_run_js_snippet_path: Optional[str] = None,
+        post_run_url: Optional[str] = None,
     ) -> Dict[str, Any]:
         """
         Run tasks with the provided agent and environment configuration.
@@ -610,7 +656,13 @@ class harness:
                         results_dir=results_dir,
                         continue_previous=continue_previous,
                         use_cache=use_cache,
-                        run_uuid=run_uuid
+                        run_uuid=run_uuid,
+                        save_step_screenshots=save_step_screenshots,
+                        save_step_info=save_step_info,
+                        show_task_completion_summary=show_task_completion_summary,
+                        post_run_js_snippet=post_run_js_snippet,
+                        post_run_js_snippet_path=post_run_js_snippet_path,
+                        post_run_url=post_run_url,
                     )
                     for task_name in tasks_to_run
                 ]
@@ -631,7 +683,13 @@ class harness:
                         results_dir=results_dir,
                         continue_previous=continue_previous,
                         use_cache=use_cache,
-                        run_uuid=run_uuid
+                        run_uuid=run_uuid,
+                        save_step_screenshots=save_step_screenshots,
+                        save_step_info=save_step_info,
+                        show_task_completion_summary=show_task_completion_summary,
+                        post_run_js_snippet=post_run_js_snippet,
+                        post_run_js_snippet_path=post_run_js_snippet_path,
+                        post_run_url=post_run_url,
                     )
                     results[task_name] = exp_record
         
@@ -676,7 +734,13 @@ class harness:
         results_dir: str,
         continue_previous: bool = False,
         use_cache: bool = True,
-        run_uuid: Optional[str] = None
+        run_uuid: Optional[str] = None,
+        save_step_screenshots: bool = False,
+        save_step_info: bool = False,
+        show_task_completion_summary: bool = True,
+        post_run_js_snippet: Optional[str] = None,
+        post_run_js_snippet_path: Optional[str] = None,
+        post_run_url: Optional[str] = None,
     ) -> Tuple[str, Dict[str, Any]]:
         """
         Run a single task with the provided agent and environment configuration.
@@ -702,9 +766,16 @@ class harness:
         env_args = EnvArgs(**env_args_dict)
         
         # Set up experiment
+        model_name = getattr(agent_args, "model_name", "unknown")
         exp_args = ExpArgs(
             env_args=env_args,
-            agent_args=agent_args
+            agent_args=agent_args,
+            model_name=model_name,
+            save_screenshot=save_step_screenshots,
+            save_step_info_pkl=save_step_info,
+            post_run_js_snippet=post_run_js_snippet,
+            post_run_js_snippet_path=post_run_js_snippet_path,
+            post_run_url=post_run_url,
         )
         
         # Start timing
@@ -719,7 +790,6 @@ class harness:
         
         # Extract metadata for cache key
         agent_type = agent_args.agent_name if hasattr(agent_args, "agent_name") else type(agent_args).__name__
-        model_name = getattr(agent_args, "model_name", "unknown")
         max_steps = env_args.max_steps
         
         # Check if this is a leaderboard run
@@ -760,13 +830,14 @@ class harness:
         exp_record['exp_dir'] = str(exp_args.exp_dir)
         
         # Print current task result using Rich logging
-        success = exp_record.get('cum_reward', 0) == 1
-        reward = exp_record.get('cum_reward', 0)
-        
-        # Extract task_id from task_name (e.g., "omnizon-1" from "webclones.omnizon-1")
-        task_id = task_name.split('.', 1)[1] if '.' in task_name else task_name
-        
-        rich_logger.task_complete(success, reward, elapsed_time, task_id)
+        if show_task_completion_summary:
+            success = exp_record.get('cum_reward', 0) == 1
+            reward = exp_record.get('cum_reward', 0)
+
+            # Extract task_id from task_name (e.g., "omnizon-1" from "webclones.omnizon-1")
+            task_id = task_name.split('.', 1)[1] if '.' in task_name else task_name
+
+            rich_logger.task_complete(success, reward, elapsed_time, task_id)
         
         return task_name, exp_record
     
