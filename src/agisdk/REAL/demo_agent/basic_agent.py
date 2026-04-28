@@ -919,6 +919,8 @@ class DemoAgent(Agent):
                         # Next action
 
                         You will now think step by step and produce your next best action. Reflect on your past actions, any resulting error message, the current state of the page before deciding on your next action.
+
+                        IMPORTANT: Only return your answer in the RESULT FORMAT after you have fully completed the task. Do not emit the result format prematurely — continue taking actions until the task is fully complete.
                         """,
             }
         )
@@ -974,22 +976,19 @@ class DemoAgent(Agent):
                         candidate,
                     )
         if answer is not None and action_from_answer is None:
-            if isinstance(answer, str) and answer.strip().lower() == "done":
-                logger.info("Agent emitted 'answer: done'; ignoring and continuing episode.")
-            else:
-                rich_logger.task_step(step_num, "answer", details=f"Agent signaled completion: {answer!r}")
-                logger.info("Agent emitted completion answer %r; ending episode.", answer)
-                self.action_history.append(f'answer({answer!r})')
-                self.update_last_observation(obs)
-                info = {
-                    "model_response": None,
-                    "raw_model_response": raw_action,
-                    "answer": answer,
-                    "stats": token_usage,
-                }
-                if is_first_step:
-                    info["full_prompt"] = full_prompt_txt
-                return None, info
+            rich_logger.task_step(step_num, "answer", details=f"Agent signaled completion: {answer!r}")
+            logger.info("Agent emitted completion answer %r; ending episode.", answer)
+            self.action_history.append(f'answer({answer!r})')
+            self.update_last_observation(obs)
+            info = {
+                "model_response": None,
+                "raw_model_response": raw_action,
+                "answer": answer,
+                "stats": token_usage,
+            }
+            if is_first_step:
+                info["full_prompt"] = full_prompt_txt
+            return None, info
 
         action = action_from_answer or _normalize_model_action(raw_action)
 

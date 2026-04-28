@@ -134,9 +134,9 @@ def _build_command(job: EvalJob) -> list[str]:
     if job.app == APP_FRAD:
         test_cases = TASKS_DIR / "flightradar.yaml"
         return [
-            sys.executable, "-m", "evaluation.objective.evaluate_flightradar",
-            "--test-cases", str(test_cases),
-            "--responses", str(job.results_dir),
+            sys.executable, "-m", "evaluation.objective.eval_flightradar",
+            str(job.results_dir),
+            "--test_cases_yaml", str(test_cases),
         ]
 
     if job.app == APP_VIDEO:
