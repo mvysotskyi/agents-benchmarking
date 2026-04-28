@@ -418,15 +418,3 @@ test_cases:
      {"answer": "done"}
      ```
   gt: {}
-- id: "tc_graph_021"
-  prompt: |-
-    
-  gt: {}
-- id: "tc_graph_022"
-  prompt: |-
-    
-  gt: {}
-- id: "tc_graph_023"
-  prompt: |-
-    
-  gt: {}

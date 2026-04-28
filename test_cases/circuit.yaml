@@ -1,624 +1,716 @@
 test_cases:
 - id: "tc_circuit_001"
   prompt: |-
-    # Build a Direct Wire from Input to Output
+    # Build a 4-bit Monotonic Sequence Detector
     
     ## GOAL
-    Construct the simplest possible circuit where the output follows the input directly.
+    Construct a combinational circuit with four binary inputs A, B, C, D (read left-to-right as a sequence in that order) and one output Y, such that Y = 1 if and only if the bit sequence A, B, C, D is non-decreasing — i.e., a 1 is never followed by a 0 anywhere in the sequence.
     
     ## STEPS
     
     1. Add the following components:
-       - One input switch: A
-       - One output switch: Y
+    - Four input switches: A, B, C, D
+    - One output switch: Y
+    - AND, OR, NOT, NAND, NOR, XOR, XNOR gates as needed
     
-    2. Wiring:
-       - Connect input A directly to the circuit output Y using only a wire.
-       - Do not add any logic gates.
-    
-    3. Define output:
-       - The direct wire from A must be the circuit output Y.
+    2. Build the circuit so that:
+    - Y must produce the correct value for all 16 possible input combinations.
     
     # RESULT FORMAT
     
     ```json
     {"answer": "done"}
     ```
-  gt: {}
+  gt: {answer: "{\"answer\": \"<cir f=\\\"1\\\" ts=\\\"0.000005\\\" ic=\\\"10.20027730826997\\\" cb=\\\"50\\\" pb=\\\"50\\\" vr=\\\"5\\\" mts=\\\"5e-11\\\">\\n  <L x=\\\"144 64 96 64\\\" f=\\\"0\\\" tid=\\\"elm-1777305368480-361a1\\\" p=\\\"1\\\"/>\\n  <L x=\\\"144 176 96 176\\\" f=\\\"0\\\" tid=\\\"elm-1777305375029-cf6288\\\" p=\\\"1\\\"/>\\n  <L x=\\\"144 272 96 272\\\" f=\\\"0\\\" tid=\\\"elm-1777305381561-fee670\\\" p=\\\"1\\\"/>\\n  <L x=\\\"144 368 96 368\\\" f=\\\"0\\\" tid=\\\"elm-1777305388080-38d96a\\\" p=\\\"1\\\"/>\\n  <I x=\\\"240 144 288 144\\\" f=\\\"0\\\" tid=\\\"elm-1777305695616-3a8532\\\" sl=\\\"0.5\\\" hi=\\\"5\\\"/>\\n  <I x=\\\"240 256 288 256\\\" f=\\\"0\\\" tid=\\\"elm-1777305702199-72e6f6\\\" sl=\\\"0.5\\\" hi=\\\"5\\\"/>\\n  <I x=\\\"240 352 288 352\\\" f=\\\"0\\\" tid=\\\"elm-1777305708713-98ab58\\\" sl=\\\"0.5\\\" hi=\\\"5\\\"/>\\n  <And x=\\\"320 96 368 96\\\" f=\\\"0\\\" tid=\\\"elm-1777305716597-157713\\\"/>\\n  <And x=\\\"320 208 368 208\\\" f=\\\"0\\\" tid=\\\"elm-1777305723148-ab39bf\\\"/>\\n  <And x=\\\"320 304 368 304\\\" f=\\\"0\\\" tid=\\\"elm-1777305729661-ea18a6\\\"/>\\n  <Or x=\\\"448 160 480 160\\\" f=\\\"0\\\" tid=\\\"elm-1777305737279-2ee09b\\\"/>\\n  <Or x=\\\"528 240 576 240\\\" f=\\\"0\\\" tid=\\\"elm-1777305893274-b458f3\\\"/>\\n  <I x=\\\"592 256 624 256\\\" f=\\\"0\\\" tid=\\\"elm-1777305900491-fa894f\\\" sl=\\\"0.5\\\" hi=\\\"5\\\"/>\\n  <M x=\\\"624 256 672 256\\\" f=\\\"0\\\" tid=\\\"elm-1777305907761-8ebcc5\\\"/>\\n  <w x=\\\"144 64 320 80\\\" f=\\\"0\\\" tid=\\\"elm-1777306015486-90440e\\\"/>\\n  <w x=\\\"144 176 240 144\\\" f=\\\"0\\\" tid=\\\"elm-1777306022301-5ca050\\\"/>\\n  <w x=\\\"144 176 320 192\\\" f=\\\"0\\\" tid=\\\"elm-1777306029086-224bc2\\\"/>\\n  <w x=\\\"144 272 240 256\\\" f=\\\"0\\\" tid=\\\"elm-1777306035886-9c3883\\\"/>\\n  <w x=\\\"144 272 320 288\\\" f=\\\"0\\\" tid=\\\"elm-1777306042685-be5b9b\\\"/>\\n  <w x=\\\"144 368 240 352\\\" f=\\\"0\\\" tid=\\\"elm-1777306049503-800965\\\"/>\\n  <w x=\\\"288 144 320 112\\\" f=\\\"0\\\" tid=\\\"elm-1777306056281-53b271\\\"/>\\n  <w x=\\\"288 256 320 224\\\" f=\\\"0\\\" tid=\\\"elm-1777306062915-fe81f2\\\"/>\\n  <w x=\\\"288 352 320 320\\\" f=\\\"0\\\" tid=\\\"elm-1777306069503-68c1ec\\\"/>\\n  <w x=\\\"368 96 448 144\\\" f=\\\"0\\\" tid=\\\"elm-1777306076399-c00904\\\"/>\\n  <w x=\\\"368 208 448 176\\\" f=\\\"0\\\" tid=\\\"elm-1777306082917-381830\\\"/>\\n  <w x=\\\"480 160 512 224\\\" f=\\\"0\\\" tid=\\\"elm-1777306089333-a96990\\\"/>\\n  <w x=\\\"368 304 528 256\\\" f=\\\"0\\\" tid=\\\"elm-1777306096283-4adaba\\\"/>\\n  <w x=\\\"576 240 592 256\\\" f=\\\"0\\\" tid=\\\"elm-1777398464774-fd5598\\\"/>\\n  <w x=\\\"512 224 528 224\\\" f=\\\"0\\\" tid=\\\"elm-1777398466190-614ea7\\\"/>\\n</cir>\"}"}
 - id: "tc_circuit_002"
   prompt: |-
-    # Build a NOT Gate
+    # Build a 2-bit Binary Squarer
     
     ## GOAL
-    Implement a circuit that inverts a single binary input.
+    Construct a combinational circuit with two binary inputs A1, A0 (A1 the most significant bit) representing the unsigned integer N = 2·A1 + A0, and four binary outputs P3, P2, P1, P0 (P3 the most significant bit) representing the unsigned binary value of N², such that for every one of the 4 input combinations:
+    
+    N² = 8·P3 + 4·P2 + 2·P1 + P0
     
     ## STEPS
     
     1. Add the following components:
-       - One input switch: A
-       - One NOT gate
-       - One output switch: Y
+    - Two input switches: A1, A0
+    - Four output switches: P3, P2, P1, P0
+    - AND, OR, NOT, NAND, NOR, XOR, XNOR gates as needed
     
-    2. Wiring:
-       - Connect input A to the input of the NOT gate.
-    
-    3. Define output:
-       - The output of the NOT gate must be the circuit output Y.
+    2. The circuit must produce correct values for all 4 input combinations.
     
     # RESULT FORMAT
     
     ```json
     {"answer": "done"}
     ```
-  gt: {}
+  gt: {answer: "{\"answer\": \"<cir f=\\\"1\\\" ts=\\\"0.000005\\\" ic=\\\"10.20027730826997\\\" cb=\\\"50\\\" pb=\\\"50\\\" vr=\\\"5\\\" mts=\\\"5e-11\\\">\\n  <And x=\\\"800 416 928 416\\\" f=\\\"0\\\"/>\\n  <And x=\\\"800 528 928 528\\\" f=\\\"0\\\"/>\\n  <I x=\\\"544 544 752 544\\\" f=\\\"0\\\" sl=\\\"0.5\\\" hi=\\\"5\\\"/>\\n  <L x=\\\"544 400 432 400\\\" f=\\\"0\\\"/>\\n  <L x=\\\"544 544 432 544\\\" f=\\\"0\\\"/>\\n  <M x=\\\"912 704 976 704\\\" f=\\\"0\\\"/>\\n  <M x=\\\"928 528 976 528\\\" f=\\\"0\\\"/>\\n  <M x=\\\"928 416 976 416\\\" f=\\\"0\\\"/>\\n  <w x=\\\"544 624 720 624\\\" f=\\\"0\\\"/>\\n  <M x=\\\"912 624 976 624\\\" f=\\\"0\\\"/>\\n  <w x=\\\"720 624 768 624\\\" f=\\\"0\\\"/>\\n  <w x=\\\"544 544 544 624\\\" f=\\\"0\\\"/>\\n  <w x=\\\"752 544 800 544\\\" f=\\\"0\\\"/>\\n  <w x=\\\"544 544 544 432\\\" f=\\\"0\\\"/>\\n  <w x=\\\"544 400 656 512\\\" f=\\\"0\\\"/>\\n  <w x=\\\"544 432 800 432\\\" f=\\\"0\\\"/>\\n  <w x=\\\"544 400 800 400\\\" f=\\\"0\\\"/>\\n  <w x=\\\"656 512 800 512\\\" f=\\\"0\\\"/>\\n  <w x=\\\"768 624 912 624\\\" f=\\\"0\\\"/>\\n  <w x=\\\"720 720 800 720\\\" f=\\\"0\\\"/>\\n  <w x=\\\"800 688 768 688\\\" f=\\\"0\\\"/>\\n  <w x=\\\"720 624 720 720\\\" f=\\\"0\\\"/>\\n  <w x=\\\"768 624 768 688\\\" f=\\\"0\\\"/>\\n  <Xor x=\\\"800 704 912 704\\\" f=\\\"0\\\"/>\\n</cir>\"}"}
 - id: "tc_circuit_003"
   prompt: |-
-    # Build a 2-Input AND Gate Circuit
+    # Build a 1-to-4 Demultiplexer
     
     ## GOAL
-    Implement a circuit whose output is 1 only when both inputs are 1.
+    
+    Implement a circuit with one data input D, two select bits S1 and S0, and four outputs Y0..Y3, such that D is routed to exactly one output chosen by (S1, S0) while the others stay low:
+    
+    Y0 = (NOT S1 AND NOT S0 AND D), Y1 = (NOT S1 AND S0 AND D), Y2 = (S1 AND NOT S0 AND D), Y3 = (S1 AND S0 AND D)
     
     ## STEPS
     
     1. Add the following components:
-       - Two input switches: A and B
-       - One AND gate
-       - One output switch: Y
+    - One data input switch: D
+    - Two select input switches: S1, S0
+    - Four output switches: Y0, Y1, Y2, Y3
+    - Logical gates as needed
     
-    2. Wiring:
-       - Connect A and B to the two inputs of the AND gate.
+    2. Build the circuit so that:
+    - For each Yi, build the 3-input AND of D and the select pattern for i.
+    - Exactly one Yi can be 1 at any time, and only when D = 1.
     
-    3. Define output:
-       - The output of the AND gate must be the circuit output Y.
+    3. Define outputs:
+    - The four circuit outputs must be Y0, Y1, Y2, Y3.
     
     # RESULT FORMAT
     
     ```json
     {"answer": "done"}
     ```
-  gt: {}
+  gt: {answer: "{\"answer\": \"<cir f=\\\"1\\\" ts=\\\"0.000005\\\" ic=\\\"1.700203994009402\\\" cb=\\\"50\\\" pb=\\\"50\\\" vr=\\\"5\\\" mts=\\\"5e-11\\\">\\n  <L x=\\\"128 80 48 80\\\" f=\\\"0\\\" tid=\\\"elm-1777316755393-364dbd\\\"/>\\n  <L x=\\\"96 160 48 160\\\" f=\\\"0\\\" tid=\\\"elm-1777316761854-7dd3d9\\\"/>\\n  <L x=\\\"96 256 48 256\\\" f=\\\"0\\\" tid=\\\"elm-1777316768331-c5758d\\\"/>\\n  <I x=\\\"160 80 208 80\\\" f=\\\"0\\\" tid=\\\"elm-1777316776067-f7f49\\\" sl=\\\"0.5\\\" hi=\\\"5\\\"/>\\n  <And x=\\\"384 96 432 96\\\" f=\\\"0\\\" tid=\\\"elm-1777316790207-57791e\\\" o=\\\"5\\\"/>\\n  <And x=\\\"384 192 432 192\\\" f=\\\"0\\\" tid=\\\"elm-1777316796663-c2394c\\\"/>\\n  <And x=\\\"384 288 432 288\\\" f=\\\"0\\\" tid=\\\"elm-1777316803118-b8b7c6\\\"/>\\n  <And x=\\\"384 384 432 384\\\" f=\\\"0\\\" tid=\\\"elm-1777316809565-f7a001\\\"/>\\n  <M x=\\\"640 128 688 128\\\" f=\\\"0\\\" tid=\\\"elm-1777316817481-9605c\\\"/>\\n  <M x=\\\"640 224 688 224\\\" f=\\\"0\\\" tid=\\\"elm-1777316823943-670d25\\\"/>\\n  <M x=\\\"640 320 688 320\\\" f=\\\"0\\\" tid=\\\"elm-1777316830404-b8d9a\\\"/>\\n  <M x=\\\"640 416 688 416\\\" f=\\\"0\\\" tid=\\\"elm-1777316836861-99d372\\\"/>\\n  <w x=\\\"128 80 160 80\\\" f=\\\"0\\\" tid=\\\"elm-1777316865550-b24c94\\\"/>\\n  <w x=\\\"208 80 224 80\\\" f=\\\"0\\\" tid=\\\"elm-1777316871798-d94794\\\"/>\\n  <w x=\\\"240 160 240 400\\\" f=\\\"0\\\" tid=\\\"elm-1777316892845-27a3f\\\"/>\\n  <w x=\\\"96 160 112 160\\\" f=\\\"0\\\" tid=\\\"elm-1777316899757-86d26\\\"/>\\n  <w x=\\\"96 256 272 256\\\" f=\\\"0\\\" tid=\\\"elm-1777316932311-12985b\\\"/>\\n  <w x=\\\"272 256 272 448\\\" f=\\\"0\\\" tid=\\\"elm-1777316938877-3425b2\\\"/>\\n  <w x=\\\"384 80 224 80\\\" f=\\\"0\\\" tid=\\\"elm-1777316946319-e3e107\\\"/>\\n  <w x=\\\"384 112 272 112\\\" f=\\\"0\\\" tid=\\\"elm-1777316959836-b03ba4\\\"/>\\n  <w x=\\\"384 208 272 208\\\" f=\\\"0\\\" tid=\\\"elm-1777316980227-a6cf9c\\\"/>\\n  <w x=\\\"384 368 128 368\\\" f=\\\"0\\\" tid=\\\"elm-1777317008025-9c90bc\\\"/>\\n  <And x=\\\"544 416 640 416\\\" f=\\\"0\\\" tid=\\\"elm-1777401352158-dca223\\\"/>\\n  <And x=\\\"544 320 640 320\\\" f=\\\"0\\\" tid=\\\"elm-1777401359194-4939cd\\\"/>\\n  <And x=\\\"544 224 640 224\\\" f=\\\"0\\\" tid=\\\"elm-1777401362137-31b1d9\\\"/>\\n  <And x=\\\"544 128 640 128\\\" f=\\\"0\\\" tid=\\\"elm-1777401364569-f90240\\\"/>\\n  <w x=\\\"432 96 544 112\\\" f=\\\"0\\\" tid=\\\"elm-1777401373626-940f2f\\\"/>\\n  <w x=\\\"432 192 544 208\\\" f=\\\"0\\\" tid=\\\"elm-1777401375869-c3fd80\\\"/>\\n  <w x=\\\"432 288 544 304\\\" f=\\\"0\\\" tid=\\\"elm-1777401378397-e73803\\\"/>\\n  <w x=\\\"432 384 544 400\\\" f=\\\"0\\\" tid=\\\"elm-1777401380585-352c2\\\"/>\\n  <w x=\\\"272 448 544 432\\\" f=\\\"0\\\" tid=\\\"elm-1777401551249-436043\\\"/>\\n  <w x=\\\"240 400 384 400\\\" f=\\\"0\\\" tid=\\\"elm-1777401555781-ccb944\\\"/>\\n  <w x=\\\"112 160 240 160\\\" f=\\\"0\\\" tid=\\\"elm-1777401772772-4f470b\\\"/>\\n  <I x=\\\"160 192 208 192\\\" f=\\\"0\\\" tid=\\\"elm-1777401874476-7fa64b\\\" sl=\\\"0.5\\\" hi=\\\"5\\\"/>\\n  <w x=\\\"112 160 112 192\\\" f=\\\"0\\\" tid=\\\"elm-1777401877476-58fc33\\\"/>\\n  <w x=\\\"208 192 208 272\\\" f=\\\"0\\\" tid=\\\"elm-1777401886608-4a5334\\\"/>\\n  <w x=\\\"208 272 384 272\\\" f=\\\"0\\\" tid=\\\"elm-1777401888448-afa5a3\\\"/>\\n  <w x=\\\"128 304 384 304\\\" f=\\\"0\\\" tid=\\\"elm-1777401915180-1b63f5\\\"/>\\n  <w x=\\\"128 304 128 336\\\" f=\\\"0\\\" tid=\\\"elm-1777401936823-ae052d\\\"/>\\n  <w x=\\\"128 368 128 336\\\" f=\\\"0\\\" tid=\\\"elm-1777401938447-74f006\\\"/>\\n  <w x=\\\"128 336 544 336\\\" f=\\\"0\\\" tid=\\\"elm-1777401941123-876bf6\\\"/>\\n  <w x=\\\"272 256 272 208\\\" f=\\\"0\\\" tid=\\\"elm-1777401982055-783af7\\\"/>\\n  <w x=\\\"112 192 160 192\\\" f=\\\"0\\\" tid=\\\"elm-1777402002362-893657\\\"/>\\n  <w x=\\\"544 240 224 240\\\" f=\\\"0\\\" tid=\\\"elm-1777402022859-ad737e\\\"/>\\n  <w x=\\\"128 80 128 240\\\" f=\\\"0\\\" tid=\\\"elm-1777402030267-3e2c9b\\\"/>\\n  <w x=\\\"128 240 128 304\\\" f=\\\"0\\\" tid=\\\"elm-1777402034259-23c4d7\\\"/>\\n  <w x=\\\"240 160 384 176\\\" f=\\\"0\\\" tid=\\\"elm-1777402132358-428f12\\\"/>\\n  <w x=\\\"224 80 224 240\\\" f=\\\"0\\\" tid=\\\"elm-1777402153579-21ea2c\\\"/>\\n  <w x=\\\"208 192 208 112\\\" f=\\\"0\\\" tid=\\\"elm-1777402213278-fd5014\\\"/>\\n  <w x=\\\"208 112 272 112\\\" f=\\\"0\\\" tid=\\\"elm-1777402214382-5ca069\\\"/>\\n  <w x=\\\"272 208 272 144\\\" f=\\\"0\\\" tid=\\\"elm-1777402242134-5309ad\\\"/>\\n  <w x=\\\"272 144 544 144\\\" f=\\\"0\\\" tid=\\\"elm-1777402245162-8e6789\\\"/>\\n</cir>\"}"}
 - id: "tc_circuit_004"
   prompt: |-
-    # Fan Out One Input to Two Outputs
+    # Build a 3-bit Two's-Complement Negator with Overflow Flag
     
     ## GOAL
-    Construct a circuit where one input signal is copied directly to two outputs.
+    Construct a combinational circuit that takes a 3-bit two's-complement signed integer A = (A2, A1, A0), where A2 is the sign bit and the represented value is
+    
+      val(A) = -4·A2 + 2·A1 + A0   (range: -4 .. +3)
+    
+    and produces:
+    - A 3-bit two's-complement output Y = (Y2, Y1, Y0) such that val(Y) = -val(A) whenever -val(A) is representable in 3-bit two's complement.
+    - A 1-bit overflow flag OVF that is 1 if and only if A = 100 (i.e. val(A) = -4), because +4 cannot be represented in 3-bit two's complement. When OVF = 1, the value of Y is unconstrained (don't-care).
+    
+    The negation must be computed as Y = (NOT A) + 1 using bitwise inversion followed by a 3-bit ripple-carry incrementer. 
     
     ## STEPS
     
     1. Add the following components:
-       - One input switch: A
-       - Two output switches: Y1, Y2
+     - Three input switches: A2, A1, A0
+     - Four output switches: Y2, Y1, Y0, OVF
+     - AND, OR, NOT, NAND, NOR, XOR, XNOR gates as needed
     
-    2. Wiring:
-       - Connect input A directly to circuit output Y1.
-       - Also connect input A directly to circuit output Y2.
-       - Use only wires.
-       - Do not add any logic gates.
+    2. Build the circuit so that:
+     - First stage: compute B0 = NOT A0, B1 = NOT A1, B2 = NOT A2 using NOT gates.
+     - Second stage: ripple-carry increment B by 1 using three half-adders chained by carry:
+       - Bit 0: Y0 = B0 XOR 1 = NOT B0 (equivalently, Y0 = A0); carry C1 = B0 AND 1 = B0.
+       - Bit 1: Y1 = B1 XOR C1; carry C2 = B1 AND C1.
+       - Bit 2: Y2 = B2 XOR C2. (The final carry-out is discarded — it does not feed OVF.)
+     - Overflow: OVF = A2 AND (NOT A1) AND (NOT A0). This is the only input pattern for which the negation overflows.
+     - Y must produce the correct value for all 7 non-overflow input combinations, and OVF must be correct for all 8 input combinations.
     
     3. Define outputs:
-       - The first direct wire from A must be the circuit output Y1.
-       - The second direct wire from A must be the circuit output Y2.
+     - The four circuit outputs must be Y2, Y1, Y0, OVF.
     
     # RESULT FORMAT
     
     ```json
     {"answer": "done"}
     ```
-  gt: {}
+  gt: {answer: "{\"answer\": \"<cir f=\\\"1\\\" ts=\\\"0.000005\\\" ic=\\\"10.20027730826997\\\" cb=\\\"50\\\" pb=\\\"50\\\" vr=\\\"5\\\" mts=\\\"5e-11\\\">\\n  <L x=\\\"144 48 96 48\\\" f=\\\"0\\\" tid=\\\"elm-1777395535871-765264\\\"/>\\n  <L x=\\\"144 176 96 176\\\" f=\\\"0\\\" tid=\\\"elm-1777395542367-3fc54f\\\"/>\\n  <L x=\\\"144 272 96 272\\\" f=\\\"0\\\" tid=\\\"elm-1777395548867-8d248d\\\"/>\\n  <I x=\\\"144 48 192 48\\\" f=\\\"0\\\" tid=\\\"elm-1777395556618-49dfde\\\" sl=\\\"0.5\\\" hi=\\\"5\\\"/>\\n  <I x=\\\"144 176 192 176\\\" f=\\\"0\\\" tid=\\\"elm-1777395563115-4bb585\\\" sl=\\\"0.5\\\" hi=\\\"5\\\"/>\\n  <I x=\\\"144 272 192 272\\\" f=\\\"0\\\" tid=\\\"elm-1777395569605-61d62a\\\" sl=\\\"0.5\\\" hi=\\\"5\\\"/>\\n  <M x=\\\"592 64 656 64\\\" f=\\\"0\\\" tid=\\\"elm-1777395577935-ae68c8\\\"/>\\n  <M x=\\\"592 176 656 176\\\" f=\\\"0\\\" tid=\\\"elm-1777395584432-53dc45\\\"/>\\n  <M x=\\\"592 272 656 272\\\" f=\\\"0\\\" tid=\\\"elm-1777395590949-c76474\\\"/>\\n  <M x=\\\"720 416 784 416\\\" f=\\\"0\\\" tid=\\\"elm-1777395597448-5bb1df\\\"/>\\n  <Xor x=\\\"544 176 592 176\\\" f=\\\"0\\\" tid=\\\"elm-1777395605563-8fed6\\\"/>\\n  <Xor x=\\\"544 64 592 64\\\" f=\\\"0\\\" tid=\\\"elm-1777395612149-5d6412\\\"/>\\n  <And x=\\\"352 224 400 224\\\" f=\\\"0\\\" tid=\\\"elm-1777395620002-6478de\\\" o=\\\"5\\\"/>\\n  <And x=\\\"496 368 544 368\\\" f=\\\"0\\\" tid=\\\"elm-1777395626628-b3f048\\\"/>\\n  <w x=\\\"144 272 144 320\\\" f=\\\"0\\\" tid=\\\"elm-1777395635115-662e02\\\"/>\\n  <w x=\\\"144 320 576 320\\\" f=\\\"0\\\" tid=\\\"elm-1777395642282-f0887f\\\"/>\\n  <w x=\\\"576 320 576 272\\\" f=\\\"0\\\" tid=\\\"elm-1777395648731-bfef5\\\"/>\\n  <w x=\\\"576 272 592 272\\\" f=\\\"0\\\" tid=\\\"elm-1777395654880-8cf713\\\"/>\\n  <w x=\\\"192 272 304 272\\\" f=\\\"0\\\" tid=\\\"elm-1777395693800-c1caa3\\\"/>\\n  <w x=\\\"304 272 304 240\\\" f=\\\"0\\\" tid=\\\"elm-1777395712777-cff9b\\\"/>\\n  <w x=\\\"304 240 352 240\\\" f=\\\"0\\\" tid=\\\"elm-1777395719014-45e74e\\\"/>\\n  <w x=\\\"400 224 448 224\\\" f=\\\"0\\\" tid=\\\"elm-1777395732580-ab4e2b\\\"/>\\n  <w x=\\\"448 224 448 80\\\" f=\\\"0\\\" tid=\\\"elm-1777395739042-9a5f57\\\"/>\\n  <w x=\\\"448 80 496 80\\\" f=\\\"0\\\" tid=\\\"elm-1777395745327-9e42f2\\\"/>\\n  <w x=\\\"192 48 416 48\\\" f=\\\"0\\\" tid=\\\"elm-1777395766058-43295b\\\"/>\\n  <w x=\\\"416 48 496 48\\\" f=\\\"0\\\" tid=\\\"elm-1777395778493-90299f\\\"/>\\n  <w x=\\\"144 48 144 0\\\" f=\\\"0\\\" tid=\\\"elm-1777395792208-6f9061\\\"/>\\n  <w x=\\\"144 0 480 0\\\" f=\\\"0\\\" tid=\\\"elm-1777395799126-aac6c0\\\"/>\\n  <w x=\\\"544 368 592 368\\\" f=\\\"0\\\" tid=\\\"elm-1777395818625-dd3536\\\"/>\\n  <w x=\\\"496 80 544 80\\\" f=\\\"0\\\" tid=\\\"elm-1777400168873-892ed7\\\"/>\\n  <w x=\\\"496 48 544 48\\\" f=\\\"0\\\" tid=\\\"elm-1777400170604-2856b4\\\"/>\\n  <w x=\\\"304 272 512 272\\\" f=\\\"0\\\" tid=\\\"elm-1777400413691-d9d74a\\\"/>\\n  <w x=\\\"512 272 512 192\\\" f=\\\"0\\\" tid=\\\"elm-1777400415127-54285c\\\"/>\\n  <w x=\\\"512 192 544 192\\\" f=\\\"0\\\" tid=\\\"elm-1777400416319-b6a605\\\"/>\\n  <w x=\\\"320 176 320 160\\\" f=\\\"0\\\" tid=\\\"elm-1777400424135-641869\\\"/>\\n  <w x=\\\"320 160 544 160\\\" f=\\\"0\\\" tid=\\\"elm-1777400426351-254da7\\\"/>\\n  <w x=\\\"320 176 320 208\\\" f=\\\"0\\\" tid=\\\"elm-1777400526517-3b15cd\\\"/>\\n  <w x=\\\"320 208 352 208\\\" f=\\\"0\\\" tid=\\\"elm-1777400528203-1c6a04\\\"/>\\n  <w x=\\\"480 0 480 352\\\" f=\\\"0\\\" tid=\\\"elm-1777400609518-ec72e6\\\"/>\\n  <w x=\\\"480 352 496 352\\\" f=\\\"0\\\" tid=\\\"elm-1777400610923-544711\\\"/>\\n  <w x=\\\"304 272 304 480\\\" f=\\\"0\\\" tid=\\\"elm-1777400672230-5f7ccc\\\"/>\\n  <w x=\\\"304 480 592 480\\\" f=\\\"0\\\" tid=\\\"elm-1777400674378-3db634\\\"/>\\n  <And x=\\\"592 416 720 416\\\" f=\\\"0\\\" tid=\\\"elm-1777400688959-14a711\\\"/>\\n  <w x=\\\"592 368 592 400\\\" f=\\\"0\\\" tid=\\\"elm-1777400701198-9735a6\\\"/>\\n  <w x=\\\"592 432 592 480\\\" f=\\\"0\\\" tid=\\\"elm-1777400702798-8ee3d5\\\"/>\\n  <w x=\\\"192 176 256 176\\\" f=\\\"0\\\" tid=\\\"elm-1777400747664-7b82b7\\\"/>\\n  <w x=\\\"256 176 320 176\\\" f=\\\"0\\\" tid=\\\"elm-1777400751699-389d0c\\\"/>\\n  <w x=\\\"256 176 256 384\\\" f=\\\"0\\\" tid=\\\"elm-1777400754750-6cf1b9\\\"/>\\n  <w x=\\\"256 384 496 384\\\" f=\\\"0\\\" tid=\\\"elm-1777400756910-e24f25\\\"/>\\n</cir>\"}"}
 - id: "tc_circuit_005"
   prompt: |-
-    # Build a Direct Wire and an Inverted Output from the Same Input
+    # Build a 4-to-2 Priority Encoder with Valid Flag
     
     ## GOAL
-    Construct a circuit where one input is sent directly to one output and inverted for a second output.
+    Construct a combinational circuit with four request inputs R3, R2, R1, R0 (R3 is the highest priority) and three outputs Y1, Y0, V such that:
+    
+    - V = 1 if at least one request is high; V = 0 otherwise.
+    - When V = 1, (Y1, Y0) is the binary index of the highest-priority asserted input:
+      R3 high → (Y1, Y0) = (1, 1)
+      R3 low, R2 high → (1, 0)
+      R3 low, R2 low, R1 high → (0, 1)
+      only R0 high → (0, 0)
+    - When V = 0, (Y1, Y0) is don't-care.
+    
+    Implement the outputs using these expressions (priority is enforced by masking lower-priority requests with NOT of higher-priority ones):
+    
+      Y1 = R3 OR (NOT R3 AND R2)         = R3 OR R2
+      Y0 = R3 OR (NOT R2 AND R1)
+      V  = R3 OR R2 OR R1 OR R0
+    
+    Outputs must be correct for all 16 input combinations.
     
     ## STEPS
     
     1. Add the following components:
-       - One input switch: A
-       - Two output switches: Y1, Y2
-       - One NOT gate
+     - Four input switches: R3, R2, R1, R0
+     - Three output switches: Y1, Y0, V
+     - AND, OR, NOT, NAND, NOR, XOR, XNOR gates as needed
     
-    2. Wiring:
-       - Connect input A directly to circuit output Y1 using only a wire.
-       - Also connect input A to the input of the NOT gate.
-       - Connect the output of the NOT gate to circuit output Y2.
+    2. Build Y1, Y0, V exactly as given above.
     
     3. Define outputs:
-       - The direct wire from A must be the circuit output Y1.
-       - The output of the NOT gate must be the circuit output Y2.
+     - The three circuit outputs must be Y1, Y0, V.
     
     # RESULT FORMAT
     
     ```json
     {"answer": "done"}
     ```
-  gt: {}
+  gt: {answer: "{\"answer\": \"<cir f=\\\"1\\\" ts=\\\"0.000005\\\" ic=\\\"10.20027730826997\\\" cb=\\\"50\\\" pb=\\\"50\\\" vr=\\\"5\\\" mts=\\\"5e-11\\\">\\n  <L x=\\\"128 64 80 64\\\" f=\\\"0\\\" tid=\\\"elm-1777398145249-ce7ceb\\\"/>\\n  <L x=\\\"128 128 80 128\\\" f=\\\"0\\\" tid=\\\"elm-1777398151679-8c15d8\\\"/>\\n  <L x=\\\"128 192 80 192\\\" f=\\\"0\\\" tid=\\\"elm-1777398158097-be7267\\\"/>\\n  <L x=\\\"128 272 80 272\\\" f=\\\"0\\\" tid=\\\"elm-1777398164514-ed64ec\\\"/>\\n  <M x=\\\"704 96 752 96\\\" f=\\\"0\\\" tid=\\\"elm-1777398173361-afe152\\\"/>\\n  <M x=\\\"704 192 752 192\\\" f=\\\"0\\\" tid=\\\"elm-1777398179846-addb24\\\"/>\\n  <M x=\\\"704 288 752 288\\\" f=\\\"0\\\" tid=\\\"elm-1777398186345-33fe2b\\\"/>\\n  <I x=\\\"192 128 240 128\\\" f=\\\"0\\\" tid=\\\"elm-1777398195028-102f9d\\\" sl=\\\"0.5\\\" hi=\\\"5\\\"/>\\n  <And x=\\\"288 160 336 160\\\" f=\\\"0\\\" tid=\\\"elm-1777398202397-185412\\\"/>\\n  <Or x=\\\"448 96 496 96\\\" f=\\\"0\\\" tid=\\\"elm-1777398209978-5df5d0\\\"/>\\n  <Or x=\\\"448 192 496 192\\\" f=\\\"0\\\" tid=\\\"elm-1777398216497-ef1eb5\\\"/>\\n  <Or x=\\\"384 256 432 256\\\" f=\\\"0\\\" tid=\\\"elm-1777398223082-331f05\\\"/>\\n  <Or x=\\\"560 288 608 288\\\" f=\\\"0\\\" tid=\\\"elm-1777398229663-9ee12\\\"/>\\n  <w x=\\\"128 64 352 64\\\" f=\\\"0\\\" tid=\\\"elm-1777398238680-bc0021\\\"/>\\n  <w x=\\\"352 64 416 64\\\" f=\\\"0\\\" tid=\\\"elm-1777398244981-a4d0e5\\\"/>\\n  <w x=\\\"416 64 416 80\\\" f=\\\"0\\\" tid=\\\"elm-1777398251177-305724\\\"/>\\n  <w x=\\\"416 80 448 80\\\" f=\\\"0\\\" tid=\\\"elm-1777398257396-28a005\\\"/>\\n  <w x=\\\"352 64 352 176\\\" f=\\\"0\\\" tid=\\\"elm-1777398264042-e96a67\\\"/>\\n  <w x=\\\"352 176 448 176\\\" f=\\\"0\\\" tid=\\\"elm-1777398270394-cf7e9a\\\"/>\\n  <w x=\\\"128 128 160 128\\\" f=\\\"0\\\" tid=\\\"elm-1777398277395-45b568\\\"/>\\n  <w x=\\\"160 128 192 128\\\" f=\\\"0\\\" tid=\\\"elm-1777398283609-f61115\\\"/>\\n  <w x=\\\"160 128 160 112\\\" f=\\\"0\\\" tid=\\\"elm-1777398289859-43b1ae\\\"/>\\n  <w x=\\\"160 112 448 112\\\" f=\\\"0\\\" tid=\\\"elm-1777398296707-b7db63\\\"/>\\n  <w x=\\\"240 128 272 128\\\" f=\\\"0\\\" tid=\\\"elm-1777398303445-9aaa92\\\"/>\\n  <w x=\\\"272 128 272 144\\\" f=\\\"0\\\" tid=\\\"elm-1777398309610-ab869b\\\"/>\\n  <w x=\\\"272 144 288 144\\\" f=\\\"0\\\" tid=\\\"elm-1777398315778-82e01d\\\"/>\\n  <w x=\\\"128 192 240 192\\\" f=\\\"0\\\" tid=\\\"elm-1777398322615-f19449\\\"/>\\n  <w x=\\\"240 192 272 192\\\" f=\\\"0\\\" tid=\\\"elm-1777398328823-6c0067\\\"/>\\n  <w x=\\\"272 192 272 176\\\" f=\\\"0\\\" tid=\\\"elm-1777398334990-dc3925\\\"/>\\n  <w x=\\\"272 176 288 176\\\" f=\\\"0\\\" tid=\\\"elm-1777398341157-61cdbd\\\"/>\\n  <w x=\\\"240 192 240 240\\\" f=\\\"0\\\" tid=\\\"elm-1777398347507-6493b\\\"/>\\n  <w x=\\\"240 240 384 240\\\" f=\\\"0\\\" tid=\\\"elm-1777398353990-375d6c\\\"/>\\n  <w x=\\\"128 272 288 272\\\" f=\\\"0\\\" tid=\\\"elm-1777398361175-db898c\\\"/>\\n  <w x=\\\"288 272 384 272\\\" f=\\\"0\\\" tid=\\\"elm-1777398373723-f798bc\\\"/>\\n  <w x=\\\"336 160 416 160\\\" f=\\\"0\\\" tid=\\\"elm-1777398380341-85c4a5\\\"/>\\n  <w x=\\\"416 160 416 208\\\" f=\\\"0\\\" tid=\\\"elm-1777398386610-4f7ba\\\"/>\\n  <w x=\\\"416 208 448 208\\\" f=\\\"0\\\" tid=\\\"elm-1777398392805-89277b\\\"/>\\n  <w x=\\\"432 256 528 256\\\" f=\\\"0\\\" tid=\\\"elm-1777398399325-256e98\\\"/>\\n  <w x=\\\"528 256 528 304\\\" f=\\\"0\\\" tid=\\\"elm-1777398405574-f39f5f\\\"/>\\n  <w x=\\\"528 304 560 304\\\" f=\\\"0\\\" tid=\\\"elm-1777398411771-b12368\\\"/>\\n  <w x=\\\"496 96 512 96\\\" f=\\\"0\\\" tid=\\\"elm-1777398418490-349981\\\"/>\\n  <w x=\\\"512 96 704 96\\\" f=\\\"0\\\" tid=\\\"elm-1777398425107-9fb8a3\\\"/>\\n  <w x=\\\"512 96 512 272\\\" f=\\\"0\\\" tid=\\\"elm-1777398432172-b945a2\\\"/>\\n  <w x=\\\"512 272 560 272\\\" f=\\\"0\\\" tid=\\\"elm-1777398438406-663aa3\\\"/>\\n  <w x=\\\"496 192 704 192\\\" f=\\\"0\\\" tid=\\\"elm-1777398445320-9e1105\\\"/>\\n  <w x=\\\"608 288 704 288\\\" f=\\\"0\\\" tid=\\\"elm-1777398452055-74d350\\\"/>\\n</cir>\"}"}
 - id: "tc_circuit_006"
   prompt: |-
-    # Design a 2-to-1 Multiplexer Using Logic Gates
-    
-    ## GOAL
-    Implement a circuit whose output follows the equation:
-    Y = S' * A + S * B
-    
-    ## STEPS
-    
-    1. Add the following components:
-       - Two input switches: A and B
-       - One select switch: S
-       - One NOT gate
-       - Two AND gates
-       - One OR gate
-       - One output switch: Y
-    
-    2. Wiring:
-       - Invert S using the NOT gate to generate S'.
-       - Connect S' and A to the first AND gate.
-       - Connect S and B to the second AND gate.
-       - Connect the outputs of both AND gates to the OR gate.
-    
-    3. Define output:
-       - The output of the OR gate must be the circuit output Y.
-    
-    # RESULT FORMAT
-    
-    ```json
-    {"answer": "done"}
-    ```
-  gt: {}
+    # Build a Full-Adder Using Logic Gates
+     
+     ## GOAL
+     Construct a circuit that computes the 1-bit full-adder functions:
+     
+     SUM = A XOR B XOR CIN
+     COUT = (A AND B) OR (A AND CIN) OR (B AND CIN)
+     
+     ## STEPS
+     
+     1. Add the following components:
+      - Three input switches: A, B, CIN
+      - Two output switches: SUM and COUT
+      - Logical gates as needed
+     
+     2. Build the circuit so that:
+      - SUM is computed as the XOR of A, B, and CIN
+      - COUT is computed as the carry bit of the full adder
+     
+     3. Define outputs:
+      - The output of the second XOR gate must be the circuit output SUM.
+      - The output of the second OR gate must be the circuit output COUT.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {answer: "{\"answer\": \"<cir f=\\\"1\\\" ts=\\\"0.000005\\\" ic=\\\"10.20027730826997\\\" cb=\\\"50\\\" pb=\\\"50\\\" vr=\\\"5\\\" mts=\\\"5e-11\\\">\\n  <L x=\\\"100 100 64 100\\\" f=\\\"0\\\" tid=\\\"elm-1776241505166-6d0188\\\" p=\\\"1\\\"/>\\n  <L x=\\\"100 200 64 200\\\" f=\\\"0\\\" tid=\\\"elm-1776241505166-151671\\\"/>\\n  <L x=\\\"100 300 64 300\\\" f=\\\"0\\\" tid=\\\"elm-1776241505167-aea71a\\\" p=\\\"1\\\"/>\\n  <Xor x=\\\"200 150 232 150\\\" f=\\\"0\\\" tid=\\\"elm-1776241505167-97c00b\\\" o=\\\"5\\\"/>\\n  <Xor x=\\\"300 200 332 200\\\" f=\\\"0\\\" tid=\\\"elm-1776241505167-881f2e\\\"/>\\n  <And x=\\\"200 350 232 350\\\" f=\\\"0\\\" tid=\\\"elm-1776241505167-e44c65\\\"/>\\n  <And x=\\\"200 450 232 450\\\" f=\\\"0\\\" tid=\\\"elm-1776241505167-d35ffc\\\" o=\\\"5\\\"/>\\n  <And x=\\\"200 550 232 550\\\" f=\\\"0\\\" tid=\\\"elm-1776241505167-b902d6\\\"/>\\n  <Or x=\\\"300 400 332 400\\\" f=\\\"0\\\" tid=\\\"elm-1776241505167-4395db\\\" o=\\\"5\\\"/>\\n  <Or x=\\\"400 480 432 480\\\" f=\\\"0\\\" tid=\\\"elm-1776241505167-5ecc2\\\" o=\\\"5\\\"/>\\n  <M x=\\\"332 200 380 200\\\" f=\\\"0\\\" tid=\\\"elm-1776241505167-1d04ef\\\"/>\\n  <M x=\\\"432 480 480 480\\\" f=\\\"0\\\" tid=\\\"elm-1776241505167-9522e8\\\"/>\\n  <w x=\\\"100 100 200 134\\\" f=\\\"0\\\" tid=\\\"elm-1776241505167-7630c\\\"/>\\n  <w x=\\\"100 200 200 166\\\" f=\\\"0\\\" tid=\\\"elm-1776241505167-897a2d\\\"/>\\n  <w x=\\\"232 150 300 184\\\" f=\\\"0\\\" tid=\\\"elm-1776241505167-4fdf5\\\"/>\\n  <w x=\\\"100 300 300 216\\\" f=\\\"0\\\" tid=\\\"elm-1776241505167-fde323\\\"/>\\n  <w x=\\\"100 100 200 334\\\" f=\\\"0\\\" tid=\\\"elm-1776241505167-1bf879\\\"/>\\n  <w x=\\\"100 200 200 366\\\" f=\\\"0\\\" tid=\\\"elm-1776241505167-627ad8\\\"/>\\n  <w x=\\\"100 100 200 434\\\" f=\\\"0\\\" tid=\\\"elm-1776241505167-1e5e73\\\"/>\\n  <w x=\\\"100 300 200 466\\\" f=\\\"0\\\" tid=\\\"elm-1776241505167-a8350b\\\"/>\\n  <w x=\\\"100 200 200 534\\\" f=\\\"0\\\" tid=\\\"elm-1776241505167-2a80f9\\\"/>\\n  <w x=\\\"100 300 200 566\\\" f=\\\"0\\\" tid=\\\"elm-1776241505167-128547\\\"/>\\n  <w x=\\\"232 350 300 384\\\" f=\\\"0\\\" tid=\\\"elm-1776241505167-12ee80\\\"/>\\n  <w x=\\\"232 450 300 416\\\" f=\\\"0\\\" tid=\\\"elm-1776241505167-d0b380\\\"/>\\n  <w x=\\\"332 400 400 464\\\" f=\\\"0\\\" tid=\\\"elm-1776241505167-70c017\\\"/>\\n  <w x=\\\"232 550 400 496\\\" f=\\\"0\\\" tid=\\\"elm-1776241505167-4022c4\\\"/>\\n </cir>\"}"}
 - id: "tc_circuit_007"
   prompt: |-
     # Build a NOT Gate Using a NAND Gate
-    
-    ## GOAL
-    Implement a logical NOT function using only a universal NAND gate.
-    
-    ## STEPS
-    
-    1. Add the following components:
-       - One input switch: A
-       - One 2-input NAND gate
-       - One output switch: Y
-    
-    2. Wiring:
-       - Connect input A to both input pins of the NAND gate (fanning out the signal).
-    
-    3. Define output:
-       - The output of the NAND gate must be the circuit output Y.
-    
-    # RESULT FORMAT
-    
-    ```json
-    {"answer": "done"}
-    ```
-  gt: {}
+     
+     ## GOAL
+     Implement a logical NOT function using only a universal NAND gate.
+     
+     ## STEPS
+     
+     1. Add the following components:
+      - One input switch: A
+      - One output switch: Y
+      - Logical gates as needed
+     
+     2. Wiring:
+      - Make a NOT gate using only NAND gate.
+     
+     3. Define output:
+      - The output of the scheme must be the circuit output Y.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {answer: "{\"answer\": \"<cir f=\\\"1\\\" ts=\\\"0.000005\\\" ic=\\\"10.20027730826997\\\" cb=\\\"50\\\" pb=\\\"50\\\" vr=\\\"5\\\" mts=\\\"5e-11\\\">\\n  <L x=\\\"80 160 32 160\\\" f=\\\"0\\\" tid=\\\"elm-1776241698533-a6e2ff\\\"/>\\n  <Nand x=\\\"144 160 320 160\\\" f=\\\"0\\\" tid=\\\"elm-1776241698534-5055fb\\\" o=\\\"5\\\"/>\\n  <w x=\\\"80 160 144 144\\\" f=\\\"0\\\" tid=\\\"elm-1776241698534-5e1804\\\"/>\\n  <w x=\\\"80 160 144 176\\\" f=\\\"0\\\" tid=\\\"elm-1776241698534-53e4c3\\\"/>\\n  <M x=\\\"320 160 416 160\\\" f=\\\"0\\\" tid=\\\"elm-1776241698534-b0628a\\\"/>\\n </cir>\"}"}
 - id: "tc_circuit_008"
   prompt: |-
-    # Build a Half-Adder Using Logic Gates
+    # Build a BCD-to-7-Segment Decoder for Segment a
     
     ## GOAL
-    Implement a circuit that computes the binary half-adder functions:
+    Implement a circuit that takes a BCD input D = (D3, D2, D1, D0) and drives output SEG_A high when segment a of a 7-segment display must be lit.
     
-    SUM   = A XOR B
-    CARRY = A AND B
+    Use the following Boolean expression:
+    SEG_A = D3 + D1 + (D2 AND D0) + (NOT D2 AND NOT D0)
     
     ## STEPS
     
     1. Add the following components:
-       - Two input switches: A and B
-       - One XOR gate
-       - One AND gate
-       - Two output switches: SUM and CARRY
+     - Four input switches: D3, D2, D1, D0
+     - One output switch: SEG_A
+     - Logical gates as needed
     
-    2. Wiring:
-       - Connect A and B to the inputs of the XOR gate.
-       - Connect A and B to the inputs of the AND gate.
-       - Both A and B must fan out to both gates.
+    2. Build the circuit:
+     - Treat D3 as the most significant bit.
+     - Implement `SEG_A` exactly as given in the goal equation.
+     - Use NOT gates where negated signals are required.
+     - Combine the terms using the necessary AND and OR gates.
     
-    3. Define outputs:
-       - The output of the XOR gate must be the circuit output SUM.
-       - The output of the AND gate must be the circuit output CARRY.
+    3. Define the output:
+     - The single circuit output must be SEG_A.
     
     # RESULT FORMAT
     
     ```json
     {"answer": "done"}
     ```
-  gt: {}
+  gt: {answer: "{\"answer\": \"<cir f=\\\"1\\\" ts=\\\"0.000005\\\" ic=\\\"10.20027730826997\\\" cb=\\\"50\\\" pb=\\\"50\\\" vr=\\\"5\\\" mts=\\\"5e-11\\\">\\n  <L x=\\\"144 64 96 64\\\" f=\\\"0\\\" tid=\\\"elm-1777338581616-4da193\\\"/>\\n  <L x=\\\"144 176 96 176\\\" f=\\\"0\\\" tid=\\\"elm-1777338588131-17b1dc\\\"/>\\n  <L x=\\\"144 272 96 272\\\" f=\\\"0\\\" tid=\\\"elm-1777338594650-7d5225\\\"/>\\n  <L x=\\\"144 368 96 368\\\" f=\\\"0\\\" tid=\\\"elm-1777338601166-979a78\\\"/>\\n  <I x=\\\"256 176 304 176\\\" f=\\\"0\\\" tid=\\\"elm-1777338608964-e276ae\\\" sl=\\\"0.5\\\" hi=\\\"5\\\"/>\\n  <I x=\\\"256 400 304 400\\\" f=\\\"0\\\" tid=\\\"elm-1777338615715-4e35bd\\\" sl=\\\"0.5\\\" hi=\\\"5\\\"/>\\n  <And x=\\\"416 240 464 240\\\" f=\\\"0\\\" tid=\\\"elm-1777338623480-488a10\\\"/>\\n  <And x=\\\"400 320 448 320\\\" f=\\\"0\\\" tid=\\\"elm-1777338629978-aa43a0\\\" o=\\\"5\\\"/>\\n  <Or x=\\\"512 128 560 128\\\" f=\\\"0\\\" tid=\\\"elm-1777338637779-cc0373\\\"/>\\n  <Or x=\\\"544 272 592 272\\\" f=\\\"0\\\" tid=\\\"elm-1777338644396-8a6599\\\" o=\\\"5\\\"/>\\n  <Or x=\\\"704 192 752 192\\\" f=\\\"0\\\" tid=\\\"elm-1777338650946-4bfe09\\\" o=\\\"5\\\"/>\\n  <M x=\\\"800 192 848 192\\\" f=\\\"0\\\" tid=\\\"elm-1777338840270-10e522\\\"/>\\n  <w x=\\\"144 176 256 176\\\" f=\\\"0\\\" tid=\\\"elm-1777338849387-8ed802\\\"/>\\n  <w x=\\\"144 368 256 400\\\" f=\\\"0\\\" tid=\\\"elm-1777338856253-344b66\\\"/>\\n  <w x=\\\"144 176 416 224\\\" f=\\\"0\\\" tid=\\\"elm-1777338863620-bd4a19\\\"/>\\n  <w x=\\\"144 368 416 256\\\" f=\\\"0\\\" tid=\\\"elm-1777338871184-8e0395\\\"/>\\n  <w x=\\\"304 176 400 304\\\" f=\\\"0\\\" tid=\\\"elm-1777338877901-9fb541\\\"/>\\n  <w x=\\\"304 400 400 336\\\" f=\\\"0\\\" tid=\\\"elm-1777338884633-500199\\\"/>\\n  <w x=\\\"144 64 512 112\\\" f=\\\"0\\\" tid=\\\"elm-1777338892635-16a13e\\\"/>\\n  <w x=\\\"144 272 512 144\\\" f=\\\"0\\\" tid=\\\"elm-1777338900883-925ca9\\\"/>\\n  <w x=\\\"464 240 544 256\\\" f=\\\"0\\\" tid=\\\"elm-1777338907584-527262\\\"/>\\n  <w x=\\\"448 320 544 288\\\" f=\\\"0\\\" tid=\\\"elm-1777338914249-52d45f\\\"/>\\n  <w x=\\\"560 128 704 176\\\" f=\\\"0\\\" tid=\\\"elm-1777338921068-ff716c\\\"/>\\n  <w x=\\\"592 272 704 208\\\" f=\\\"0\\\" tid=\\\"elm-1777338927801-7294e5\\\"/>\\n  <w x=\\\"752 192 800 192\\\" f=\\\"0\\\" tid=\\\"elm-1777338934148-e91f9a\\\"/>\\n</cir>\"}"}
 - id: "tc_circuit_009"
   prompt: |-
     # Build a 1-Bit Comparator with Three Outputs
-    
-    ## GOAL
-    Construct a circuit that compares two 1-bit inputs A and B and produces three outputs:
-    
-    A_GT_B = 1 when A > B
-    A_EQ_B = 1 when A = B
-    A_LT_B = 1 when A < B
-    
-    ## STEPS
-    
-    1. Add the following components:
-       - Two input switches: A and B
-       - Two NOT gates
-       - Two AND gates
-       - One XNOR gate
-       - Three output switches: A_GT_B, A_EQ_B, and A_LT_B
-    
-    2. Wiring:
-       - Connect input B to the first NOT gate.
-       - Connect input A and the output of the first NOT gate to the inputs of the first AND gate.
-       - Connect input A to the second NOT gate.
-       - Connect the output of the second NOT gate and input B to the inputs of the second AND gate.
-       - Connect inputs A and B to the inputs of the XNOR gate.
-    
-    3. Define outputs:
-       - The output of the first AND gate must be the circuit output A_GT_B.
-       - The output of the second AND gate must be the circuit output A_LT_B.
-       - The output of the XNOR gate must be the circuit output A_EQ_B.
-    
-    # RESULT FORMAT
-    
-    ```json
-    {"answer": "done"}
-    ```
-  gt: {}
+     
+     ## GOAL
+     Construct a circuit that compares two 1-bit inputs A and B and produces three outputs:
+     
+     A_GT_B = 1 when A > B
+     A_EQ_B = 1 when A = B
+     A_LT_B = 1 when A < B
+     
+     ## STEPS
+     
+     1. Add the following components:
+      - Two input switches: A and B
+      - Two NOT gates
+      - Two AND gates
+      - One XNOR gate
+      - Three output switches: A_GT_B, A_EQ_B, and A_LT_B
+     
+     2. Wiring:
+      - Connect input B to the first NOT gate.
+      - Connect input A and the output of the first NOT gate to the inputs of the first AND gate.
+      - Connect input A to the second NOT gate.
+      - Connect the output of the second NOT gate and input B to the inputs of the second AND gate.
+      - Connect inputs A and B to the inputs of the XNOR gate.
+     
+     3. Define outputs:
+      - The output of the first AND gate must be the circuit output A_GT_B.
+      - The output of the second AND gate must be the circuit output A_LT_B.
+      - The output of the XNOR gate must be the circuit output A_EQ_B.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {answer: "{\"answer\": \"<cir f=\\\"1\\\" ts=\\\"0.000005\\\" ic=\\\"10.20027730826997\\\" cb=\\\"50\\\" pb=\\\"50\\\" vr=\\\"5\\\" mts=\\\"5e-11\\\">\\n  <L x=\\\"48 96 0 96\\\" f=\\\"0\\\" tid=\\\"elm-1776241579023-1606b7\\\"/>\\n  <L x=\\\"48 144 0 144\\\" f=\\\"0\\\" tid=\\\"elm-1776241579023-487fad\\\"/>\\n  <M x=\\\"352 32 416 32\\\" f=\\\"0\\\" tid=\\\"elm-1776241579023-ebb25a\\\"/>\\n  <M x=\\\"352 192 416 192\\\" f=\\\"0\\\" tid=\\\"elm-1776241579023-d37bd2\\\"/>\\n  <M x=\\\"448 320 512 320\\\" f=\\\"0\\\" tid=\\\"elm-1776241579023-570888\\\"/>\\n  <Xor x=\\\"240 320 368 320\\\" f=\\\"0\\\" tid=\\\"elm-1776241579023-5db13d\\\"/>\\n  <And x=\\\"256 192 352 192\\\" f=\\\"0\\\" tid=\\\"elm-1776241579023-d285b\\\"/>\\n  <And x=\\\"256 32 352 32\\\" f=\\\"0\\\" tid=\\\"elm-1776241579023-e1d4da\\\"/>\\n  <I x=\\\"368 320 448 320\\\" f=\\\"0\\\" tid=\\\"elm-1776241579023-be42b6\\\" sl=\\\"0.5\\\" hi=\\\"5\\\"/>\\n  <I x=\\\"48 96 192 96\\\" f=\\\"0\\\" tid=\\\"elm-1776241579023-3bf2d2\\\" sl=\\\"0.5\\\" hi=\\\"5\\\"/>\\n  <I x=\\\"48 144 192 144\\\" f=\\\"0\\\" tid=\\\"elm-1776241579023-24660f\\\" sl=\\\"0.5\\\" hi=\\\"5\\\"/>\\n  <w x=\\\"48 96 256 16\\\" f=\\\"0\\\" tid=\\\"elm-1776241579023-c9fb93\\\"/>\\n  <w x=\\\"192 144 256 48\\\" f=\\\"0\\\" tid=\\\"elm-1776241579023-8db2f3\\\"/>\\n  <w x=\\\"192 96 256 176\\\" f=\\\"0\\\" tid=\\\"elm-1776241579023-db1ac7\\\"/>\\n  <w x=\\\"48 144 256 208\\\" f=\\\"0\\\" tid=\\\"elm-1776241579023-da099f\\\"/>\\n  <w x=\\\"48 144 240 304\\\" f=\\\"0\\\" tid=\\\"elm-1776241579023-82f45e\\\"/>\\n  <w x=\\\"48 96 240 336\\\" f=\\\"0\\\" tid=\\\"elm-1776241579023-d2d05\\\"/>\\n </cir>\"}"}
 - id: "tc_circuit_010"
   prompt: |-
-    # Build a 2-Input Priority Encoder
+    # Build a 3-Input Majority and Minority Detector
     
     ## GOAL
-    Construct a circuit with two inputs, A (high priority) and B (low priority), that generates two outputs to indicate if the system is active and which input is being serviced.
+    Construct a combinational circuit with three binary inputs A, B, C and two outputs MAJ and MIN such that:
+    
+    - MAJ = 1 when at least two of the three inputs are 1
+    - MIN = 1 when at least two of the three inputs are 0
+    
+    Exactly one of MAJ and MIN is high for every input combination, and they are logical complements.
+    
+    Implement the outputs using these expressions, sharing the three pairwise-AND terms across both outputs:
+    
+      T_AB = A AND B
+      T_AC = A AND C
+      T_BC = B AND C
+      MAJ  = T_AB OR T_AC OR T_BC
+      MIN  = (NOT T_AB) AND (NOT T_AC) AND (NOT T_BC)
+    
+    The three pairwise-AND wires (T_AB, T_AC, T_BC) must each be computed by a single AND gate and fan out to both the MAJ OR-tree and the MIN NOT/AND-tree.
     
     ## STEPS
     
     1. Add the following components:
-       - Two input switches: A and B
-       - One OR gate
-       - Two output switches: ACTIVE and ID
+     - Three input switches: A, B, C
+     - Two output switches: MAJ, MIN
+     - AND, OR, NOT, NAND, NOR, XOR, XNOR gates as needed
     
-    2. Wiring:
-       - Connect both A and B to the inputs of the OR gate.
-       - Connect input A directly to the circuit output ID.
+    2. Build T_AB, T_AC, T_BC exactly as given. Then build MAJ and MIN by reusing those three wires.
     
     3. Define outputs:
-       - The output of the OR gate must be the circuit output ACTIVE.
-       - The direct wire from A must be the circuit output ID.
+     - The two circuit outputs must be MAJ and MIN.
+     - Outputs must be correct for all 8 input combinations.
     
     # RESULT FORMAT
     
     ```json
     {"answer": "done"}
     ```
-  gt: {}
+  gt: {answer: "{\"answer\": \"<cir f=\\\"1\\\" ts=\\\"0.000005\\\" ic=\\\"10.20027730826997\\\" cb=\\\"50\\\" pb=\\\"50\\\" vr=\\\"5\\\" mts=\\\"5e-11\\\">\\n  <L x=\\\"128 96 96 96\\\" f=\\\"0\\\" tid=\\\"elm-1777374919089-9f29a6\\\"/>\\n  <L x=\\\"128 160 96 160\\\" f=\\\"0\\\" tid=\\\"elm-1777374925425-439059\\\"/>\\n  <L x=\\\"128 224 96 224\\\" f=\\\"0\\\" tid=\\\"elm-1777374931758-8d211\\\"/>\\n  <And x=\\\"256 96 304 96\\\" f=\\\"0\\\" tid=\\\"elm-1777374939491-977faa\\\"/>\\n  <And x=\\\"256 160 304 160\\\" f=\\\"0\\\" tid=\\\"elm-1777374945911-24919\\\"/>\\n  <And x=\\\"256 224 304 224\\\" f=\\\"0\\\" tid=\\\"elm-1777374952325-82e8df\\\"/>\\n  <Or x=\\\"448 128 496 128\\\" f=\\\"0\\\" tid=\\\"elm-1777374959957-29570f\\\"/>\\n  <Or x=\\\"576 176 624 176\\\" f=\\\"0\\\" tid=\\\"elm-1777374966407-7edac5\\\"/>\\n  <I x=\\\"384 288 432 288\\\" f=\\\"0\\\" tid=\\\"elm-1777374974289-8024ed\\\" sl=\\\"0.5\\\" hi=\\\"5\\\"/>\\n  <I x=\\\"384 352 432 352\\\" f=\\\"0\\\" tid=\\\"elm-1777374980705-173c73\\\" sl=\\\"0.5\\\" hi=\\\"5\\\"/>\\n  <I x=\\\"384 416 432 416\\\" f=\\\"0\\\" tid=\\\"elm-1777374987123-82b891\\\" sl=\\\"0.5\\\" hi=\\\"5\\\"/>\\n  <And x=\\\"512 320 560 320\\\" f=\\\"0\\\" tid=\\\"elm-1777374994656-fc391\\\" o=\\\"5\\\"/>\\n  <And x=\\\"640 368 688 368\\\" f=\\\"0\\\" tid=\\\"elm-1777375001087-de5e26\\\" o=\\\"5\\\"/>\\n  <M x=\\\"656 176 704 176\\\" f=\\\"0\\\" tid=\\\"elm-1777375008773-8e1f4e\\\"/>\\n  <M x=\\\"736 368 784 368\\\" f=\\\"0\\\" tid=\\\"elm-1777375015471-4951c\\\"/>\\n  <w x=\\\"128 96 256 80\\\" f=\\\"0\\\" tid=\\\"elm-1777375024656-faf740\\\"/>\\n  <w x=\\\"128 160 256 112\\\" f=\\\"0\\\" tid=\\\"elm-1777375031468-f10e51\\\"/>\\n  <w x=\\\"128 96 256 144\\\" f=\\\"0\\\" tid=\\\"elm-1777375038220-e88a58\\\"/>\\n  <w x=\\\"128 224 256 176\\\" f=\\\"0\\\" tid=\\\"elm-1777375045038-b51949\\\"/>\\n  <w x=\\\"128 160 256 208\\\" f=\\\"0\\\" tid=\\\"elm-1777375051788-77afeb\\\"/>\\n  <w x=\\\"128 224 256 240\\\" f=\\\"0\\\" tid=\\\"elm-1777375058520-ee477\\\"/>\\n  <w x=\\\"304 96 448 112\\\" f=\\\"0\\\" tid=\\\"elm-1777375065353-84b62f\\\"/>\\n  <w x=\\\"304 160 448 144\\\" f=\\\"0\\\" tid=\\\"elm-1777375072203-3069b9\\\"/>\\n  <w x=\\\"496 128 576 160\\\" f=\\\"0\\\" tid=\\\"elm-1777375078635-4fc309\\\"/>\\n  <w x=\\\"304 224 576 192\\\" f=\\\"0\\\" tid=\\\"elm-1777375086118-3382c4\\\"/>\\n  <w x=\\\"624 176 656 176\\\" f=\\\"0\\\" tid=\\\"elm-1777375092401-811c7\\\"/>\\n  <w x=\\\"304 96 384 288\\\" f=\\\"0\\\" tid=\\\"elm-1777375099919-db747d\\\"/>\\n  <w x=\\\"304 160 384 352\\\" f=\\\"0\\\" tid=\\\"elm-1777375106885-6af8e3\\\"/>\\n  <w x=\\\"304 224 384 416\\\" f=\\\"0\\\" tid=\\\"elm-1777375113884-2eba71\\\"/>\\n  <w x=\\\"432 288 512 304\\\" f=\\\"0\\\" tid=\\\"elm-1777375120516-9652d3\\\"/>\\n  <w x=\\\"432 352 512 336\\\" f=\\\"0\\\" tid=\\\"elm-1777375127048-2d6648\\\"/>\\n  <w x=\\\"560 320 640 352\\\" f=\\\"0\\\" tid=\\\"elm-1777375133465-4d7961\\\"/>\\n  <w x=\\\"432 416 640 384\\\" f=\\\"0\\\" tid=\\\"elm-1777375140615-279949\\\"/>\\n  <w x=\\\"688 368 736 368\\\" f=\\\"0\\\" tid=\\\"elm-1777375146950-8ca63c\\\"/>\\n</cir>\"}"}
 - id: "tc_circuit_011"
   prompt: |-
     # Build a 3-Input Odd-Parity Circuit
-    
-    ## GOAL
-    Construct a circuit with three binary inputs (A, B, C) and one output (Y) such that:
-    - Y = 1 when an odd number of inputs are 1
-    - Y = 0 when an even number of inputs are 1
-    
-    ## STEPS
-    
-    1. Add the following components:
-       - Three input switches: A, B, C
-       - Two XOR gates
-       - One output switch: Y
-    
-    2. Wiring:
-       - Connect A and B to the inputs of the first XOR gate.
-       - Connect the output of the first XOR gate and C to the inputs of the second XOR gate.
-    
-    3. Define output:
-       - The output of the second XOR gate must be the circuit output Y.
-    
-    # RESULT FORMAT
-    
-    ```json
-    {"answer": "done"}
-    ```
-  gt: {}
+     
+     ## GOAL
+     Construct a circuit with three binary inputs (A, B, C) and one output (Y) such that:
+     - Y = 1 when an odd number of inputs are 1
+     - Y = 0 when an even number of inputs are 1
+     
+     ## STEPS
+     
+     1. Add the following components:
+      - Three input switches: A, B, C
+      - Two XOR gates
+      - One output switch: Y
+     
+     2. Wiring:
+      - Connect A and B to the inputs of the first XOR gate.
+      - Connect the output of the first XOR gate and C to the inputs of the second XOR gate.
+     
+     3. Define output:
+      - The output of the second XOR gate must be the circuit output Y.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {"answer": "done"}
+     ```
+  gt: {answer: "{\"answer\": \"<cir f=\\\"1\\\" ts=\\\"0.000005\\\" ic=\\\"10.20027730826997\\\" cb=\\\"50\\\" pb=\\\"50\\\" vr=\\\"5\\\" mts=\\\"5e-11\\\">\\n  <L x=\\\"80 144 32 144\\\" f=\\\"0\\\" tid=\\\"elm-1776241529726-8135e1\\\" p=\\\"1\\\"/>\\n  <L x=\\\"80 176 32 192\\\" f=\\\"0\\\" tid=\\\"elm-1776241529726-1e775e\\\" p=\\\"1\\\"/>\\n  <L x=\\\"192 192 32 240\\\" f=\\\"0\\\" tid=\\\"elm-1776241529726-1175e7\\\"/>\\n  <Xor x=\\\"80 160 192 160\\\" f=\\\"0\\\" tid=\\\"elm-1776241529726-df79f5\\\"/>\\n  <Xor x=\\\"192 176 336 176\\\" f=\\\"0\\\" tid=\\\"elm-1776241529726-2e9568\\\"/>\\n  <M x=\\\"336 176 432 176\\\" f=\\\"0\\\" tid=\\\"elm-1776241529726-57f01b\\\"/>\\n </cir>\"}"}
 - id: "tc_circuit_012"
   prompt: |-
-    # Build a Full-Adder Using Logic Gates
+    # Build a 1-Bit ALU With 2 Operations
     
     ## GOAL
-    Construct a circuit that computes the 1-bit full-adder functions:
+    Construct a simple 1-bit ALU that takes two data inputs A, B and one operation-select bit OP, then produces one output RESULT.
     
-    SUM  = A XOR B XOR CIN
-    COUT = (A AND B) OR (A AND CIN) OR (B AND CIN)
+    The ALU must support two operations OR and AND
     
     ## STEPS
     
-    1. Add the following components:
-       - Three input switches: A, B, CIN
-       - Two XOR gates
-       - Three AND gates
-       - Two OR gates
-       - Two output switches: SUM and COUT
+    1. Add three input switches: A, B and OP
     
-    2. Wiring:
-       - Connect A and B to the inputs of the first XOR gate.
-       - Connect the output of the first XOR gate and CIN to the inputs of the second XOR gate.
-       - Connect A and B to the inputs of the first AND gate.
-       - Connect A and CIN to the inputs of the second AND gate.
-       - Connect B and CIN to the inputs of the third AND gate.
-       - Connect the outputs of the first and second AND gates to the inputs of the first OR gate.
-       - Connect the output of the first OR gate and the output of the third AND gate to the inputs of the second OR gate.
+    2. Add one output switch: RESULT
     
-    3. Define outputs:
-       - The output of the second XOR gate must be the circuit output SUM.
-       - The output of the second OR gate must be the circuit output COUT.
+    3. Build both candidate operation wires:
+       - W_AND = A AND B
+       - W_OR = A OR B
+    
+    4. Use OP to select which operation appears at RESULT:
+       - When OP = 0, RESULT = W_AND
+       - When OP = 1, RESULT = W_OR
+    
+    5. Verification:
+       - For OP = 0, the circuit must behave like an AND gate.
+       - For OP = 1, the circuit must behave like an OR gate.
     
     # RESULT FORMAT
     
     ```json
     {"answer": "done"}
     ```
-  gt: {}
+  gt: {answer: "{\"answer\": \"<cir f=\\\"1\\\" ts=\\\"0.000005\\\" ic=\\\"10.20027730826997\\\" cb=\\\"50\\\" pb=\\\"50\\\" vr=\\\"5\\\" mts=\\\"5e-11\\\">\\n  <L x=\\\"752 528 688 528\\\" f=\\\"0\\\" tid=\\\"elm-1777403259291-faca20\\\"/>\\n  <L x=\\\"752 704 688 704\\\" f=\\\"0\\\" tid=\\\"elm-1777403261398-b07262\\\"/>\\n  <L x=\\\"912 896 832 896\\\" f=\\\"0\\\" tid=\\\"elm-1777403264231-4cf0e7\\\" p=\\\"1\\\"/>\\n  <And x=\\\"848 544 976 544\\\" f=\\\"0\\\" tid=\\\"elm-1777403274151-d826c4\\\"/>\\n  <Or x=\\\"848 720 992 720\\\" f=\\\"0\\\" tid=\\\"elm-1777403297459-debf53\\\"/>\\n  <Or x=\\\"1296 720 1424 720\\\" f=\\\"0\\\" tid=\\\"elm-1777403299167-3c1def\\\"/>\\n  <w x=\\\"752 704 848 560\\\" f=\\\"0\\\" tid=\\\"elm-1777403321038-81305e\\\"/>\\n  <w x=\\\"752 528 848 528\\\" f=\\\"0\\\" tid=\\\"elm-1777403322490-a20119\\\"/>\\n  <w x=\\\"752 704 848 704\\\" f=\\\"0\\\" tid=\\\"elm-1777403323962-3dd6e9\\\"/>\\n  <w x=\\\"752 528 848 736\\\" f=\\\"0\\\" tid=\\\"elm-1777403327299-2c7113\\\"/>\\n  <I x=\\\"912 896 1104 896\\\" f=\\\"0\\\" tid=\\\"elm-1777403355390-2ff3b3\\\" sl=\\\"0.5\\\" hi=\\\"5\\\"/>\\n  <And x=\\\"1120 624 1248 624\\\" f=\\\"0\\\" tid=\\\"elm-1777403386078-f8750a\\\"/>\\n  <And x=\\\"1120 800 1248 800\\\" f=\\\"0\\\" tid=\\\"elm-1777403387862-b906a6\\\"/>\\n  <w x=\\\"1248 624 1296 704\\\" f=\\\"0\\\" tid=\\\"elm-1777403425202-33158f\\\"/>\\n  <w x=\\\"1248 800 1296 736\\\" f=\\\"0\\\" tid=\\\"elm-1777403426602-40fd01\\\"/>\\n  <M x=\\\"1424 720 1504 720\\\" f=\\\"0\\\" tid=\\\"elm-1777403431118-9935a8\\\"/>\\n  <w x=\\\"992 720 992 816\\\" f=\\\"0\\\" tid=\\\"elm-1777403472275-b2c8d\\\"/>\\n  <w x=\\\"992 816 1120 816\\\" f=\\\"0\\\" tid=\\\"elm-1777403475266-b11dad\\\"/>\\n  <w x=\\\"976 544 976 608\\\" f=\\\"0\\\" tid=\\\"elm-1777403477878-3e0c2c\\\"/>\\n  <w x=\\\"976 608 1120 608\\\" f=\\\"0\\\" tid=\\\"elm-1777403479862-c329d1\\\"/>\\n  <w x=\\\"1104 896 1120 784\\\" f=\\\"0\\\" tid=\\\"elm-1777403507706-5db285\\\"/>\\n  <w x=\\\"912 896 912 800\\\" f=\\\"0\\\" tid=\\\"elm-1777403523762-f65aa6\\\"/>\\n  <w x=\\\"912 800 1056 800\\\" f=\\\"0\\\" tid=\\\"elm-1777403526914-83c00\\\"/>\\n  <w x=\\\"1056 800 1056 640\\\" f=\\\"0\\\" tid=\\\"elm-1777403528950-56fce7\\\"/>\\n  <w x=\\\"1056 640 1120 640\\\" f=\\\"0\\\" tid=\\\"elm-1777403530894-fce5a6\\\"/>\\n</cir>\"}"}
 - id: "tc_circuit_013"
   prompt: |-
-    # Build a 3-Bit Binary to Gray Code Converter
-    
-    ## GOAL
-    Construct a circuit that converts a standard 3-bit binary number (B2, B1, B0) into a 3-bit Gray code (G2, G1, G0).
-    
-    ## STEPS
-    
-    1. Add the following components:
-       - Three input switches: B2 (most significant bit), B1, and B0 (least significant bit)
-       - Two XOR gates
-       - Three output switches: G2, G1, and G0
-    
-    2. Wiring:
-       - Connect input B2 directly to the circuit output G2.
-       - Connect inputs B2 and B1 to the first XOR gate.
-       - Connect inputs B1 and B0 to the second XOR gate.
-    
-    3. Define outputs:
-       - The direct wire from B2 must be the circuit output G2.
-       - The output of the first XOR gate must be the circuit output G1.
-       - The output of the second XOR gate must be the circuit output G0.
-    
-    # RESULT FORMAT
-    
-    ```json
-    {"answer": "done"}
-    ```
-  gt: {}
+    # 555 Timer Astable: Output Frequency
+     
+     ## GOAL
+     Configure a 555 timer in astable (free-running) mode and measure the exact output frequency and duty cycle on the oscilloscope.
+     
+     ## STEPS
+     
+     1. Add and configure components:
+      - Add a 555 Timer chip.
+      - Add a Voltage Source 1-terminal (Vcc) and set it to 5 V.
+      - Add a Resistor (Ra) and set its resistance to 10 k ohms.
+      - Add a Resistor (Rb) and set its resistance to 22 k ohms.
+      - Add a Capacitor (Ct) and set its capacitance to 100 nF.
+      - Add a Ground connection.
+     
+     2. Wiring:
+      - Connect Vcc to Pin 8 (V+) of the 555.
+      - Connect Pin 1 (GND) of the 555 to Ground.
+      - Connect Pin 4 (RESET) of the 555 directly to Vcc (keep reset inactive).
+      - Connect Ra between Vcc and Pin 7 (DISCH).
+      - Connect Rb between Pin 7 (DISCH) and Pin 6 (THRESH).
+      - Connect Pin 6 (THRESH) directly to Pin 2 (TRIG).
+      - Connect Ct between Pin 6 (THRESH) and Ground.
+     
+     3. Right-click Pin 3 (OUT) of the 555 and select "View in New Scope". In the scope's properties, enable BOTH "Show Frequency" AND "Show Duty Cycle". Let the simulation run for at least 30 output cycles to let the measurements settle, then report the exact Frequency and Duty Cycle values displayed on the scope.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {
+      "output_frequency": "value",
+      "duty_cycle": "value"
+     }
+     ```
+  gt: {answer: "{\n  \"output_frequency\": \"260.417 Hz\",\n  \"duty_cycle\": \"58%\"\n }"}
 - id: "tc_circuit_014"
   prompt: |-
-    # Non-Standard Voltage Divider
-    
-    ## GOAL
-    Construct a voltage divider circuit and measure the voltage drop across the second resistor.
-    
-    ## STEPS
-    
-    1. Add and configure components:
-       - Add a 2-terminal DC Voltage Source and set its voltage to 12 V.
-       - Add a Resistor (R1) and set its resistance to 3.3 k ohms.
-       - Add a second Resistor (R2) and set its resistance to 4.7 k ohms.
-       - Add a Ground connection.
-    
-    2. Wiring:
-       - Connect one end of R1 to the positive terminal of the voltage source.
-       - Connect the other end of R1 to one end of R2.
-       - Connect the free end of R2 to the negative terminal of the voltage source to close the loop.
-       - Connect Ground to the negative terminal of the voltage source.
-    
-    3. Once the circuit reaches a steady state, hover your mouse over Resistor R2 and report the exact Voltage Drop (Vd) displayed in the information box at the bottom right corner of the screen.
-    
-    # RESULT FORMAT
-    
-    ```json
-    {
-        "voltage_drop_R2": "value"
-    }
-    ```
-  gt: {answer: "{\n    \"voltage_drop_R2\": \"7.05 V\"\n}"}
+    # Common-Emitter BJT Amplifier: Mid-Band Peak-to-Peak Output
+     
+     ## GOAL
+     Build a classic common-emitter BJT voltage amplifier with a voltage-divider bias network and a bypassed emitter resistor, and measure the peak-to-peak output voltage at the collector for a small AC input.
+     
+     ## STEPS
+     
+     1. Add and configure components:
+      - Add a Voltage Source 1-terminal (Vcc) and set it to 12 V.
+      - Add a Transistor (bipolar, NPN). Leave default model parameters.
+      - Add a Resistor (R1) and set it to 47 k ohms (top bias).
+      - Add a Resistor (R2) and set it to 10 k ohms (bottom bias).
+      - Add a Resistor (Rc) and set it to 3.3 k ohms (collector).
+      - Add a Resistor (Re) and set it to 1 k ohms (emitter).
+      - Add a Capacitor (Cin) and set it to 1 uF (input coupling).
+      - Add a Capacitor (Ce) and set it to 100 uF (emitter bypass).
+      - Add a Capacitor (Cout) and set it to 1 uF (output coupling).
+      - Add a Resistor (R_load) and set it to 10 k ohms.
+      - Add a 1-terminal A/C Voltage Source (Vin) and set: Max Voltage = 10 mV, Frequency = 10 kHz, DC offset = 0, phase = 0.
+      - Add a Ground connection.
+     
+     2. Wiring:
+      - Connect Vcc to the top of R1 and to the top of Rc.
+      - Connect the bottom of R1 and the top of R2 together — call this node "Base_Bias". Connect the transistor's base to Base_Bias.
+      - Connect the bottom of R2 to Ground.
+      - Connect the bottom of Rc to the transistor's collector. Call this node "Collector".
+      - Connect the transistor's emitter to the top of Re. Call this node "Emitter".
+      - Connect the bottom of Re to Ground.
+      - Connect Ce between Emitter and Ground (parallel with Re).
+      - Connect Cin between Vin and Base_Bias.
+      - Connect Cout between Collector and one end of R_load. Call the other end of R_load "Node OUT".
+      - Connect Node OUT to Ground through R_load (i.e., R_load is between Cout and Ground, and Node OUT is the junction with Cout).
+     
+     3. Right-click the wire at Node OUT (the load side of Cout) and select "View in New Scope". In the scope's properties, enable "Show Peak-to-Peak". Let the simulation run for at least 50 input cycles so all coupling capacitors fully charge and the amplifier settles into its operating point, then report the exact Peak-to-Peak value displayed on the scope.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {
+      "amplifier_output_peak_to_peak": "value"
+     }
+     ```
+  gt: {answer: "{\n  \"amplifier_output_peak_to_peak\": \"2.605 V\"\n  }"}
 - id: "tc_circuit_015"
   prompt: |-
-    # Current Source Parallel Network
-    
-    ## GOAL
-    Construct a parallel resistor network driven by a current source and measure the voltage across the current source.
-    
-    ## STEPS
-    
-    1. Add and configure components:
-       - Add a DC Current Source and set its current to 15 mA.
-       - Add a Resistor (R1) and set its resistance to 500 ohms.
-       - Add a Resistor (R2) and set its resistance to 1 k ohms.
-       - Add a Resistor (R3) and set its resistance to 2 k ohms.
-       - Add a Ground connection.
-    
-    2. Wiring:
-       - Create a parallel network of R1, R2, and R3 connected across the terminals of the current source.
-       - Connect Ground to the negative terminal of the current source.
-    
-    3. Once the circuit reaches a steady state, hover your mouse over the Current Source and report the exact Voltage (V) displayed in the information box at the bottom right corner of the screen.
-    
-    # RESULT FORMAT
-    
-    ```json
-    {
-        "current_source_voltage": "value"
-    }
-    ```
-  gt: {answer: "{\n    \"current_source_voltage\": \"4.286 V\"\n}"}
+    # 4-Bit Asynchronous Ripple Counter: MSB Output Frequency
+     
+     ## GOAL
+     Build a 4-bit asynchronous (ripple) counter from JK flip-flops driven by a 1 kHz clock, and measure the output frequency at the MSB (Q3). Each flip-flop divides its clock input by 2, so a 4-bit ripple counter divides the master clock by 2^4 = 16.
+     
+     ## STEPS
+     
+     1. Add and configure components:
+      - Add a Clock source (Inputs/Outputs menu → Clock, or use a Square-wave Voltage Source). Set: frequency = 1000 Hz, duty cycle = 50%, high level = 5 V, low level = 0 V.
+      - Add four JK Flip-Flops (Chips menu → JK Flip-Flop). Label them FF0 (LSB) through FF3 (MSB).
+      - Add a Logic Input set permanently to high (5 V) — used as a constant logic-1 source for the J and K pins.
+      - Add a Logic Output for visualising Q3.
+      - Add Ground.
+     
+     2. Wiring (asynchronous toggle counter):
+      - Tie BOTH J and K of every flip-flop (FF0–FF3) to the constant-high Logic Input — this configures each one to toggle on every clock edge.
+      - Connect the Clock source to the CLK input of FF0.
+      - Connect Q (output) of FF0 → CLK of FF1.
+      - Connect Q of FF1 → CLK of FF2.
+      - Connect Q of FF2 → CLK of FF3.
+      - Connect Q of FF3 → the Logic Output indicator.
+      - Leave the !Q (inverted) outputs unconnected, and leave any RESET/SET pins unconnected (or tie them to the inactive level if the chip block exposes them).
+     
+     3. Click RUN.
+     
+     4. Right-click the wire at Q3 (the output of FF3) → View in New Scope. In the scope's properties, enable "Show Frequency". Let the simulation run for at least 1 second of simulated time so the counter cycles through all 16 states many times and the frequency overlay locks in.
+     
+     5. Report the frequency value displayed on the scope at Q3.
+     
+     # RESULT FORMAT
+     
+     The value must be a string containing the numeric frequency in Hz with units, e.g. "62.5 Hz". Do NOT emit the literal placeholder text "value". Do NOT omit units. Round to 1 decimal place if needed.
+     
+     ```json
+     {
+      "msb_output_frequency": "<frequency>"
+     }
+     ```
+  gt: {answer: "{\n  \"msb_output_frequency\": \"62.5 Hz\"\n }"}
 - id: "tc_circuit_016"
   prompt: |-
-    # Loaded Divider Power Dissipation
-    
-    ## GOAL
-    Construct a loaded voltage divider and measure the power dissipated by the first resistor.
-    
-    ## STEPS
-    
-    1. Add and configure components:
-       - Add a 2-terminal DC Voltage Source and set its voltage to 24 V.
-       - Add a Resistor (R1) and set its resistance to 150 ohms.
-       - Add a Resistor (R2) and set its resistance to 330 ohms.
-       - Add a Resistor (R3) and set its resistance to 470 ohms.
-       - Add a Ground connection.
-    
-    2. Wiring:
-       - Connect Ground to the negative terminal of the voltage source.
-       - Connect one end of R1 to the positive terminal of the source.
-       - From the other end of R1, connect R2 and R3 in parallel, both going to Ground.
-    
-    3. Once the circuit reaches a steady state, hover your mouse over Resistor R1 (150 ohms) and report the exact Power dissipated (P) displayed in the information box at the bottom right corner of the screen.
-    
-    # RESULT FORMAT
-    
-    ```json
-    {
-        "power_R1": "value"
-    }
-    ```
-  gt: {answer: "{\n    \"power_R1\": \"731 mW\"\n}"}
+    # Wien Bridge Oscillator with Diode AGC
+     
+     ## GOAL
+     Build a Wien-bridge oscillator using an op-amp with positive-feedback RC network and a negative-feedback gain network. Use anti-parallel diodes for soft amplitude limiting (automatic gain control), let the loop self-start from a small initial-condition seed, and report both the steady-state oscillation frequency and the peak-to-peak output voltage at the op-amp output.
+     
+     ## STEPS
+     
+     1. Add and configure components:
+      - Add an Op Amp (use the default model, finite-GBW, rails at ±15 V).
+      - Positive-feedback (Wien) network:
+      - Resistor Rs = 10 k ohms (series arm).
+      - Capacitor Cs = 10 nF (series arm).
+      - Resistor Rp = 10 k ohms (parallel arm).
+      - Capacitor Cp = 10 nF (parallel arm).
+      - Negative-feedback (gain-setting) network with diode AGC:
+      - Resistor Rg = 10 k ohms (from − input to ground).
+      - Resistor Rf_a = 12 k ohms (first half of the feedback resistor).
+      - Resistor Rf_b = 10 k ohms (second half of the feedback resistor; the diodes shunt this part as the swing grows).
+      - Two anti-parallel diodes (default Si model), each connected across Rf_b.
+      - Add Ground connections.
+     
+     2. Wiring:
+      - Positive-feedback network (between op-amp OUTPUT and the + input):
+      - Rs from op-amp OUTPUT to a node "Node_S".
+      - Cs from Node_S to the op-amp + input (call this node "Node_Plus").
+      - Rp from Node_Plus to Ground.
+      - Cp from Node_Plus to Ground (in parallel with Rp).
+      - Negative-feedback network:
+      - Rg from the op-amp − input to Ground.
+      - Rf_a from the op-amp − input to a midpoint node "Node_FB_Mid".
+      - Rf_b from Node_FB_Mid to op-amp OUTPUT.
+      - Diode D1 from Node_FB_Mid (anode) to op-amp OUTPUT (cathode) — i.e., across Rf_b.
+      - Diode D2 from op-amp OUTPUT (anode) to Node_FB_Mid (cathode) — i.e., the anti-parallel partner of D1, also across Rf_b.
+     
+     3. Seed start-up:
+      - Right-click Cp (the cap in the parallel arm) → Edit → set Initial Voltage = 0.1 V (or higher if needed). CircuitJS1's components are noiseless, so without a seed the oscillator will not spontaneously start.
+     
+     4. Run the simulation.
+     
+     5. Right-click the op-amp OUTPUT terminal node and select "View in New Scope". In the scope's properties, enable BOTH "Show Frequency" AND "Show Peak-to-Peak". Let the simulation run long enough for the amplitude to grow into the diode-clamped steady state (~50–100 ms simulated). The frequency overlay needs at least 5–10 cycles visible per screen to lock in — if it reads blank, zoom the scope's TIME axis (not the voltage axis) until cycles are clearly resolved, then wait for the readout to stabilise.
+     
+     6. Report the exact Frequency and Peak-to-Peak values displayed on the scope.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {
+      "oscillation_frequency": "value",
+      "output_peak_to_peak": "value"
+     }
+     ```
+  gt: {answer: "{\n  \"oscillation_frequency\": \"1.589 kHz\",\n  \"output_peak_to_peak\": \"1.422 V\"\n }"}
 - id: "tc_circuit_017"
   prompt: |-
     # Inverting Summing Amplifier
-    
-    ## GOAL
-    Construct an inverting summing amplifier using an ideal op-amp and measure its output voltage.
-    
-    ## STEPS
-    
-    1. Add and configure components:
-       - Add an Ideal Op-Amp.
-       - Add a 1-terminal DC Voltage Source (V1) and set it to 1.5 V.
-       - Add a Resistor (R1) and set its resistance to 2 k ohms.
-       - Add a 1-terminal DC Voltage Source (V2) and set it to -3.0 V.
-       - Add a Resistor (R2) and set its resistance to 5 k ohms.
-       - Add a Feedback Resistor (Rf) and set its resistance to 10 k ohms.
-       - Add a Ground connection.
-    
-    2. Wiring:
-       - Connect the non-inverting (+) input of the Op-Amp directly to Ground.
-       - Connect V1 to one end of R1.
-       - Connect V2 to one end of R2.
-       - Connect the free ends of both R1 and R2 to the inverting (-) input of the Op-Amp.
-       - Connect Rf between the Op-Amp's output terminal and its inverting (-) input terminal.
-    
-    3. Once the circuit reaches a steady state, hover your mouse over the Op-Amp and report the exact Output Voltage (Vout) displayed in the information box at the bottom right corner of the screen.
-    
-    # RESULT FORMAT
-    
-    ```json
-    {
-        "opamp_output_voltage": "value"
-    }
-    ```
-  gt: {answer: "{\n    \"opamp_output_voltage\": \"-1.5 V\"\n}"}
+     
+     ## GOAL
+     Construct an inverting summing amplifier using an ideal op-amp and measure its output voltage.
+     
+     ## STEPS
+     
+     1. Add and configure components:
+      - Add an Ideal Op-Amp.
+      - Add a 1-terminal DC Voltage Source (V1) and set it to 1.5 V.
+      - Add a Resistor (R1) and set its resistance to 2 k ohms.
+      - Add a 1-terminal DC Voltage Source (V2) and set it to -3.0 V.
+      - Add a Resistor (R2) and set its resistance to 5 k ohms.
+      - Add a Feedback Resistor (Rf) and set its resistance to 10 k ohms.
+      - Add a Ground connection.
+     
+     2. Wiring:
+      - Connect the non-inverting (+) input of the Op-Amp directly to Ground.
+      - Connect V1 to one end of R1.
+      - Connect V2 to one end of R2.
+      - Connect the free ends of both R1 and R2 to the inverting (-) input of the Op-Amp.
+      - Connect Rf between the Op-Amp's output terminal and its inverting (-) input terminal.
+     
+     3. Once the circuit reaches a steady state, hover your mouse over the Op-Amp and report the exact Output Voltage (Vout) displayed in the information box at the bottom right corner of the screen.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {
+      "opamp_output_voltage": "value"
+     }
+     ```
+  gt: {answer: "{\n  \"opamp_output_voltage\": \"-1.5 V\"\n }"}
 - id: "tc_circuit_018"
   prompt: |-
-    # Multi-Loop DC Network (Kirchhoff's Test)
+    # BJT Differential Pair with Resistor Loads
     
     ## GOAL
-    Construct a multi-loop DC network and measure the current through the grounded resistor.
+    Build a BJT differential pair with resistor collector loads and an NPN current-mirror tail. Apply a small differential input and measure the peak-to-peak output voltage at the collector of the right-side transistor.
     
     ## STEPS
     
     1. Add and configure components:
-       - Add a 2-terminal DC Voltage Source (left side) and set its voltage to 15 V.
-       - Add a 2-terminal DC Voltage Source (right side) and set its voltage to 9 V.
-       - Add a Resistor (R1) and set its resistance to 1 k ohms.
-       - Add a Resistor (R2) and set its resistance to 2.2 k ohms.
-       - Add a Resistor (R3) and set its resistance to 3.3 k ohms.
-       - Add a Ground connection.
+     - Add three supply nodes: Vcc = +10 V, Vee = -10 V, and Ground.
+     - Add two default NPN transistors for the input pair: Q1 and Q2.
+     - Add two collector-load resistors:
+       - Rc1 = 10 k ohms
+       - Rc2 = 10 k ohms
+     - Add two default NPN transistors for the tail current mirror: Q5 and Q6.
+     - Add a reference resistor Rref and set its resistance to 19 k ohms.
+     - Add a 1-terminal A/C Voltage Source (Vin) and set: Max Voltage = 1 mV, Frequency = 1000 Hz, DC offset = 0 V, phase = 0 deg.
     
     2. Wiring:
-       - Ground the negative terminal of the 15 V source.
-       - Ground the negative terminal of the 9 V source.
-       - Connect one end of R1 to the positive terminal of the 15 V source.
-       - Connect one end of R2 to the positive terminal of the 9 V source.
-       - Connect the free ends of R1 and R2 together at a single top junction.
-       - Connect the top end of R3 to the junction between R1 and R2.
-       - Connect the bottom end of R3 to Ground.
+     - Connect the emitters of Q1 and Q2 together. Call this node TAIL.
+     - Connect Rc1 from Vcc to the collector of Q1.
+     - Connect Rc2 from Vcc to the collector of Q2. Call the collector of Q2 OUT.
+     - Connect the emitters of Q5 and Q6 to Vee.
+     - Diode-connect Q5 by shorting its collector to its base.
+     - Connect Rref from Vcc to the collector/base node of Q5.
+     - Connect the base of Q6 to the base of Q5.
+     - Connect the collector of Q6 to the TAIL node.
+     - Connect Vin to the base of Q1.
+     - Connect the base of Q2 directly to Ground.
     
-    3. Once the circuit reaches a steady state, hover your mouse over Resistor R3 (the 3.3 k ohm resistor) and report the exact Current (I) displayed in the information box at the bottom right corner of the screen.
+    3. Measurement:
+     - Run the simulation.
+     - Confirm that the DC operating point places OUT between the rails, approximately around +5 V DC.
+     - Scope the OUT node.
+     - In steady state, read the Peak-to-Peak value shown in the scope overlay.
+     - Report the measured peak-to-peak AC voltage at OUT.
     
     # RESULT FORMAT
     
     ```json
     {
-        "current_R3": "value"
+      "diff_pair_output_peak_to_peak": "value"
     }
-    ```
-  gt: {answer: "{\n    \"current_R3\": \"3.29 mA\"\n}"}
+  gt: {answer: "{\n  \"diff_pair_output_peak_to_peak\": \"191.615 mV\"\n }"}
 - id: "tc_circuit_019"
   prompt: |-
     # RLC DC Steady-State Trick
-    
-    ## GOAL
-    Construct an RLC circuit driven by DC and measure the capacitor voltage at steady state.
-    
-    ## STEPS
-    
-    1. Add and configure components:
-       - Add a 2-terminal DC Voltage Source and set its voltage to 24 V.
-       - Add a Resistor (R1) and set its resistance to 1 k ohms.
-       - Add an Inductor and set its inductance to 100 mH.
-       - Add a Resistor (R2) and set its resistance to 2.2 k ohms.
-       - Add a Capacitor and set its capacitance to 10 uF.
-       - Add a Resistor (R3) and set its resistance to 4.7 k ohms.
-       - Add a Ground connection.
-    
-    2. Wiring:
-       - Ground the negative terminal of the voltage source.
-       - Connect one end of R1 to the positive terminal of the source. Call the other end of R1 "Node A".
-       - From Node A, create a path to Ground containing the Inductor in series with R2.
-       - From Node A, create a second parallel path to Ground containing the Capacitor in series with R3.
-    
-    3. Hover your mouse over the Capacitor. Wait for the simulation to charge the capacitor and reach a complete DC steady state (capacitor current displayed in the information box is less than 20 nA) and report the exact Voltage Drop (Vd) displayed in the information box at the bottom right corner of the screen.
-    
-    # RESULT FORMAT
-    
-    ```json
-    {
-        "capacitor_voltage_drop": "value"
-    }
-    ```
-  gt: {answer: "{\n    \"capacitor_voltage_drop\": \"16.5 V\"\n}"}
+     
+     ## GOAL
+     Construct an RLC circuit driven by DC and measure the capacitor voltage at steady state.
+     
+     ## STEPS
+     
+     1. Add and configure components:
+      - Add a 2-terminal DC Voltage Source and set its voltage to 24 V.
+      - Add a Resistor (R1) and set its resistance to 1 k ohms.
+      - Add an Inductor and set its inductance to 100 mH.
+      - Add a Resistor (R2) and set its resistance to 2.2 k ohms.
+      - Add a Capacitor and set its capacitance to 10 uF.
+      - Add a Resistor (R3) and set its resistance to 4.7 k ohms.
+      - Add a Ground connection.
+     
+     2. Wiring:
+      - Ground the negative terminal of the voltage source.
+      - Connect one end of R1 to the positive terminal of the source. Call the other end of R1 "Node A".
+      - From Node A, create a path to Ground containing the Inductor in series with R2.
+      - From Node A, create a second parallel path to Ground containing the Capacitor in series with R3.
+     
+     3. Hover your mouse over the Capacitor. Wait for the simulation to charge the capacitor and reach a complete DC steady state (capacitor current displayed in the information box is less than 20 nA) and report the exact Voltage Drop (Vd) displayed in the information box at the bottom right corner of the screen.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {
+      "capacitor_voltage_drop": "value"
+     }
+     ```
+  gt: {answer: "{\n  \"capacitor_voltage_drop\": \"16.5 V\"\n }"}
 - id: "tc_circuit_020"
   prompt: |-
     # Wheatstone Bridge Voltage Measurement
-    
-    ## GOAL
-    Construct a Wheatstone bridge circuit and measure the voltage drop across one of the bridge resistors.
-    
-    ## STEPS
-    
-    1. Add and configure components:
-       - Add a 2-terminal DC Voltage Source and set its voltage to 10 V.
-       - Add a Resistor (R1) and set its resistance to 1 k ohms.
-       - Add a Resistor (R2) and set its resistance to 2.2 k ohms.
-       - Add a Resistor (R3) and set its resistance to 3.3 k ohms.
-       - Add a Resistor (R4) and set its resistance to 4.7 k ohms.
-       - Add a Ground connection.
-    
-    2. Wiring:
-       - Ground the negative terminal of the voltage source.
-       - Connect one end of R1 to the positive terminal of the voltage source.
-       - Connect one end of R2 to the positive terminal of the voltage source.
-       - Connect the free end of R1 to one end of R3.
-       - Connect the free end of R2 to one end of R4.
-       - Connect the free ends of R3 and R4 together and to Ground.
-    
-    3. Once the circuit reaches a steady state, hover your mouse over Resistor R4 (the 4.7 k ohm resistor) and report the exact Voltage Drop (Vd) displayed in the information box at the bottom right corner of the screen.
-    
-    # RESULT FORMAT
-    
-    ```json
-    {
-        "voltage_drop_R4": "value"
-    }
-    ```
-  gt: {answer: "{\n    \"voltage_drop_R4\": \"6.812 V\"\n}"}
+     
+     ## GOAL
+     Construct a Wheatstone bridge circuit and measure the voltage drop across one of the bridge resistors.
+     
+     ## STEPS
+     
+     1. Add and configure components:
+      - Add a 2-terminal DC Voltage Source and set its voltage to 10 V.
+      - Add a Resistor (R1) and set its resistance to 1 k ohms.
+      - Add a Resistor (R2) and set its resistance to 2.2 k ohms.
+      - Add a Resistor (R3) and set its resistance to 3.3 k ohms.
+      - Add a Resistor (R4) and set its resistance to 4.7 k ohms.
+      - Add a Ground connection.
+     
+     2. Wiring:
+      - Ground the negative terminal of the voltage source.
+      - Connect one end of R1 to the positive terminal of the voltage source.
+      - Connect one end of R2 to the positive terminal of the voltage source.
+      - Connect the free end of R1 to one end of R3.
+      - Connect the free end of R2 to one end of R4.
+      - Connect the free ends of R3 and R4 together and to Ground.
+     
+     3. Once the circuit reaches a steady state, hover your mouse over Resistor R4 (the 4.7 k ohm resistor) and report the exact Voltage Drop (Vd) displayed in the information box at the bottom right corner of the screen.
+     
+     # RESULT FORMAT
+     
+     ```json
+     {
+      "voltage_drop_R4": "value"
+     }
+     ```
+  gt: {answer: "{\n  \"voltage_drop_R4\": \"6.812 V\"\n }"}
