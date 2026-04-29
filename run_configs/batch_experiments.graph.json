@@ -1,0 +1,68 @@
+{
+  "max_parallel": 10,
+  "fail_fast": false,
+  "termination_grace_period": 2,
+  "defaults": {
+    "run_all": true,
+    "headless": true,
+    "max_steps": 100,
+    "seed": 42,
+    "task_file": "test_cases/graph.yaml",
+    "prefix_prompt_file": "app_background/graph.md",
+    "post_run_url": "/export",
+    "url": "https://graph-clone.vercel.app/"
+  },
+  "models": {
+    "claude-opus-4-6": {
+      "testcases": [
+        { "name": "opus46-graph", "results_dir": "./seed_runs/run1/graph/opus46" }
+      ]
+    },
+    "gpt-5.4": {
+      "testcases": [
+        { "name": "gpt54-graph", "results_dir": "./seed_runs/run1/graph/gpt54" }
+      ]
+    },
+    "o3-pro": {
+      "testcases": [
+        { "name": "o3pro-graph", "results_dir": "./seed_runs/run1/graph/o3pro" }
+      ]
+    },
+    "openrouter/google/gemini-3.1-pro-preview": {
+      "testcases": [
+        { "name": "gemini31pro-graph", "results_dir": "./seed_runs/run1/graph/gemini31pro", "reasoning": true, "reasoning_effort": "high" }
+      ]
+    },
+    "openrouter/qwen/qwen3-max": {
+      "defaults": {
+        "use_screenshot": false
+      },
+      "testcases": [
+        { "name": "qwen3max-graph", "results_dir": "./seed_runs/run1/graph/qwen3max", "provider": "alibaba" }
+      ]
+    },
+    "openrouter/meta-llama/llama-4-maverick": {
+      "testcases": [
+        { "name": "llama4mav-graph", "results_dir": "./seed_runs/run1/graph/llama4mav" }
+      ]
+    },
+    "openrouter/deepseek/deepseek-v3.2": {
+      "defaults": {
+        "use_screenshot": false
+      },
+      "testcases": [
+        { "name": "dsv32-graph", "results_dir": "./seed_runs/run1/graph/dsv32" }
+      ]
+    },
+    "openrouter/mistralai/mistral-large-2512": {
+      "testcases": [
+        { "name": "mistrallarge-graph", "results_dir": "./seed_runs/run1/graph/mistrallarge" }
+      ]
+    },
+    "openrouter/google/gemma-3-27b-it": {
+      "testcases": [
+        { "name": "gemma327b-graph", "results_dir": "./seed_runs/run1/graph/gemma327b" }
+      ]
+    }
+  }
+}

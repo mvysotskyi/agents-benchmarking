@@ -1,0 +1,165 @@
+{
+  "max_parallel": 4,
+  "fail_fast": false,
+  "termination_grace_period": 2,
+  "defaults": {
+    "run_all": true,
+    "headless": true,
+    "max_steps": 100,
+    "seed": 42
+  },
+  "models": {
+    "gpt-5.4-nano": {
+      "testcases": [
+        {
+          "name": "gpt54nano-graph",
+          "task_file": "test_cases/graph.yaml",
+          "prefix_prompt_file": "app_background/graph.md",
+          "url": "https://graph-clone.vercel.app/",
+          "post_run_url": "/export",
+          "results_dir": "./size_runs/run1/graph/gpt54nano"
+        },
+        {
+          "name": "gpt54nano-3d",
+          "task_file": "test_cases/3d.yaml",
+          "prefix_prompt_file": "app_background/3d.md",
+          "url": "https://3d-clone-rouge.vercel.app/",
+          "post_run_url": "/export-clear",
+          "results_dir": "./size_runs/run1/3d/gpt54nano",
+          "initial_delay": 5
+        },
+        {
+          "name": "gpt54nano-video",
+          "task_file": "test_cases/video.yaml",
+          "prefix_prompt_file": "app_background/video.md",
+          "url": "http://localhost:5173/",
+          "post_run_url": "/finish",
+          "results_dir": "./size_runs/run1/video/gpt54nano",
+          "initial_delay": 5
+        },
+        {
+          "name": "gpt54nano-frad",
+          "task_file": "test_cases/flightradar.yaml",
+          "prefix_prompt_file": "app_background/flightradar.md",
+          "url": "http://localhost:3100/",
+          "results_dir": "./size_runs/run1/flightradar/gpt54nano",
+          "initial_delay": 10
+        }
+      ]
+    },
+    "gpt-5.4-mini": {
+      "testcases": [
+        {
+          "name": "gpt54mini-graph",
+          "task_file": "test_cases/graph.yaml",
+          "prefix_prompt_file": "app_background/graph.md",
+          "url": "https://graph-clone.vercel.app/",
+          "post_run_url": "/export",
+          "results_dir": "./size_runs/run1/graph/gpt54mini"
+        },
+        {
+          "name": "gpt54mini-3d",
+          "task_file": "test_cases/3d.yaml",
+          "prefix_prompt_file": "app_background/3d.md",
+          "url": "https://3d-clone-rouge.vercel.app/",
+          "post_run_url": "/export-clear",
+          "results_dir": "./size_runs/run1/3d/gpt54mini",
+          "initial_delay": 5
+        },
+        {
+          "name": "gpt54mini-video",
+          "task_file": "test_cases/video.yaml",
+          "prefix_prompt_file": "app_background/video.md",
+          "url": "http://localhost:5173/",
+          "post_run_url": "/finish",
+          "results_dir": "./size_runs/run1/video/gpt54mini",
+          "initial_delay": 5
+        },
+        {
+          "name": "gpt54mini-frad",
+          "task_file": "test_cases/flightradar.yaml",
+          "prefix_prompt_file": "app_background/flightradar.md",
+          "url": "http://localhost:3100/",
+          "results_dir": "./size_runs/run1/flightradar/gpt54mini",
+          "initial_delay": 10
+        }
+      ]
+    },
+    "claude-sonnet-4-6": {
+      "testcases": [
+        {
+          "name": "sonnet46-graph",
+          "task_file": "test_cases/graph.yaml",
+          "prefix_prompt_file": "app_background/graph.md",
+          "url": "https://graph-clone.vercel.app/",
+          "post_run_url": "/export",
+          "results_dir": "./size_runs/run1/graph/sonnet46"
+        },
+        {
+          "name": "sonnet46-3d",
+          "task_file": "test_cases/3d.yaml",
+          "prefix_prompt_file": "app_background/3d.md",
+          "url": "https://3d-clone-rouge.vercel.app/",
+          "post_run_url": "/export-clear",
+          "results_dir": "./size_runs/run1/3d/sonnet46",
+          "initial_delay": 5
+        },
+        {
+          "name": "sonnet46-video",
+          "task_file": "test_cases/video.yaml",
+          "prefix_prompt_file": "app_background/video.md",
+          "url": "http://localhost:5173/",
+          "post_run_url": "/finish",
+          "results_dir": "./size_runs/run1/video/sonnet46",
+          "initial_delay": 5
+        },
+        {
+          "name": "sonnet46-frad",
+          "task_file": "test_cases/flightradar.yaml",
+          "prefix_prompt_file": "app_background/flightradar.md",
+          "url": "http://localhost:3100/",
+          "results_dir": "./size_runs/run1/flightradar/sonnet46",
+          "initial_delay": 10
+        }
+      ]
+    },
+    "claude-haiku-4-5-20251001": {
+      "testcases": [
+        {
+          "name": "haiku45-graph",
+          "task_file": "test_cases/graph.yaml",
+          "prefix_prompt_file": "app_background/graph.md",
+          "url": "https://graph-clone.vercel.app/",
+          "post_run_url": "/export",
+          "results_dir": "./size_runs/run1/graph/haiku45"
+        },
+        {
+          "name": "haiku45-3d",
+          "task_file": "test_cases/3d.yaml",
+          "prefix_prompt_file": "app_background/3d.md",
+          "url": "https://3d-clone-rouge.vercel.app/",
+          "post_run_url": "/export-clear",
+          "results_dir": "./size_runs/run1/3d/haiku45",
+          "initial_delay": 5
+        },
+        {
+          "name": "haiku45-video",
+          "task_file": "test_cases/video.yaml",
+          "prefix_prompt_file": "app_background/video.md",
+          "url": "http://localhost:5173/",
+          "post_run_url": "/finish",
+          "results_dir": "./size_runs/run1/video/haiku45",
+          "initial_delay": 5
+        },
+        {
+          "name": "haiku45-frad",
+          "task_file": "test_cases/flightradar.yaml",
+          "prefix_prompt_file": "app_background/flightradar.md",
+          "url": "http://localhost:3100/",
+          "results_dir": "./size_runs/run1/flightradar/haiku45",
+          "initial_delay": 10
+        }
+      ]
+    }
+  }
+}

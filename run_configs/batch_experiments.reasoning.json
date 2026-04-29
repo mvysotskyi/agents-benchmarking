@@ -1,0 +1,154 @@
+{
+  "max_parallel": 4,
+  "fail_fast": false,
+  "termination_grace_period": 2,
+  "defaults": {
+    "run_all": true,
+    "headless": true,
+    "max_steps": 100
+  },
+  "models": {
+    "openrouter/google/gemini-3.1-pro-preview": {
+      "testcases": [
+        {
+          "name": "gemini31pro-low-graph",
+          "task_file": "test_cases/graph.yaml",
+          "prefix_prompt_file": "app_background/graph.md",
+          "url": "https://graph-clone.vercel.app/",
+          "post_run_url": "/export",
+          "results_dir": "./reasoning_runs/run1/graph/gemini31pro-low",
+          "reasoning": true,
+          "reasoning_effort": "low",
+          "seed": 42
+        },
+        {
+          "name": "gemini31pro-low-3d",
+          "task_file": "test_cases/3d.yaml",
+          "prefix_prompt_file": "app_background/3d.md",
+          "url": "https://3d-clone-rouge.vercel.app/",
+          "post_run_url": "/export-clear",
+          "results_dir": "./reasoning_runs/run1/3d/gemini31pro-low",
+          "reasoning": true,
+          "reasoning_effort": "low",
+          "initial_delay": 5,
+          "seed": 42
+        },
+        {
+          "name": "gemini31pro-low-video",
+          "task_file": "test_cases/video.yaml",
+          "prefix_prompt_file": "app_background/video.md",
+          "url": "http://localhost:5173/",
+          "post_run_url": "/finish",
+          "results_dir": "./reasoning_runs/run1/video/gemini31pro-low",
+          "reasoning": true,
+          "reasoning_effort": "low",
+          "initial_delay": 5,
+          "seed": 42
+        },
+        {
+          "name": "gemini31pro-low-frad",
+          "task_file": "test_cases/flightradar.yaml",
+          "prefix_prompt_file": "app_background/flightradar.md",
+          "url": "http://localhost:3100/",
+          "results_dir": "./reasoning_runs/run1/flightradar/gemini31pro-low",
+          "reasoning": true,
+          "reasoning_effort": "low",
+          "initial_delay": 10,
+          "seed": 42
+        }
+      ]
+    },
+    "claude-opus-4-6": {
+      "testcases": [
+        {
+          "name": "opus46-thinking-graph",
+          "task_file": "test_cases/graph.yaml",
+          "prefix_prompt_file": "app_background/graph.md",
+          "url": "https://graph-clone.vercel.app/",
+          "post_run_url": "/export",
+          "results_dir": "./reasoning_runs/run1/graph/opus46-thinking",
+          "thinking_budget": 1000,
+          "seed": 42
+        },
+        {
+          "name": "opus46-thinking-3d",
+          "task_file": "test_cases/3d.yaml",
+          "prefix_prompt_file": "app_background/3d.md",
+          "url": "https://3d-clone-rouge.vercel.app/",
+          "post_run_url": "/export-clear",
+          "results_dir": "./reasoning_runs/run1/3d/opus46-thinking",
+          "thinking_budget": 1000,
+          "initial_delay": 5,
+          "seed": 42
+        },
+        {
+          "name": "opus46-thinking-video",
+          "task_file": "test_cases/video.yaml",
+          "prefix_prompt_file": "app_background/video.md",
+          "url": "http://localhost:5173/",
+          "post_run_url": "/finish",
+          "results_dir": "./reasoning_runs/run1/video/opus46-thinking",
+          "thinking_budget": 1000,
+          "initial_delay": 5,
+          "seed": 42
+        },
+        {
+          "name": "opus46-thinking-frad",
+          "task_file": "test_cases/flightradar.yaml",
+          "prefix_prompt_file": "app_background/flightradar.md",
+          "url": "http://localhost:3100/",
+          "results_dir": "./reasoning_runs/run1/flightradar/opus46-thinking",
+          "thinking_budget": 1000,
+          "initial_delay": 10,
+          "seed": 42
+        }
+      ]
+    },
+    "gpt-5.4": {
+      "testcases": [
+        {
+          "name": "gpt54-noreasoning-graph",
+          "task_file": "test_cases/graph.yaml",
+          "prefix_prompt_file": "app_background/graph.md",
+          "url": "https://graph-clone.vercel.app/",
+          "post_run_url": "/export",
+          "results_dir": "./reasoning_runs/run1/graph/gpt54-noreasoning",
+          "reasoning": false,
+          "seed": 42
+        },
+        {
+          "name": "gpt54-noreasoning-3d",
+          "task_file": "test_cases/3d.yaml",
+          "prefix_prompt_file": "app_background/3d.md",
+          "url": "https://3d-clone-rouge.vercel.app/",
+          "post_run_url": "/export-clear",
+          "results_dir": "./reasoning_runs/run1/3d/gpt54-noreasoning",
+          "reasoning": false,
+          "initial_delay": 5,
+          "seed": 42
+        },
+        {
+          "name": "gpt54-noreasoning-video",
+          "task_file": "test_cases/video.yaml",
+          "prefix_prompt_file": "app_background/video.md",
+          "url": "http://localhost:5173/",
+          "post_run_url": "/finish",
+          "results_dir": "./reasoning_runs/run1/video/gpt54-noreasoning",
+          "reasoning": false,
+          "initial_delay": 5,
+          "seed": 42
+        },
+        {
+          "name": "gpt54-noreasoning-frad",
+          "task_file": "test_cases/flightradar.yaml",
+          "prefix_prompt_file": "app_background/flightradar.md",
+          "url": "http://localhost:3100/",
+          "results_dir": "./reasoning_runs/run1/flightradar/gpt54-noreasoning",
+          "reasoning": false,
+          "initial_delay": 10,
+          "seed": 42
+        }
+      ]
+    }
+  }
+}

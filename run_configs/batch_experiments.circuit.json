@@ -1,0 +1,148 @@
+{
+  "max_parallel": 15,
+  "fail_fast": false,
+  "termination_grace_period": 2,
+  "defaults": {
+    "run_all": true,
+    "headless": true,
+    "max_steps": 60,
+    "task_file": "test_cases/circuit.yaml",
+    "post_run_url": "",
+    "prefix_prompt_file": "app_background/circuit.md",
+    "post_run_js_snippet_path": "assets/circuit_txt_export_snippet.js",
+    "url": "https://circuitjs1-production.up.railway.app/circuitjs.html?startCircuit=blank.txt",
+    "seed": 42
+  },
+  "models": {
+    "gpt-5.4": {
+      "testcases": [
+        {
+          "name": "gpt54-circuit",
+          "results_dir": "final_results/circuit/gpt54",
+          "reasoning": true,
+          "task_range": "2:"
+        },
+        {
+          "skip_existing_results": true,
+          "name": "gpt54-circuit-no-reasoning",
+          "results_dir": "final_results/circuit/gpt54_no_reasoning",
+          "reasoning": false
+        }
+      ]
+    },
+    "o3-pro": {
+      "testcases": [
+        {
+          "name": "o3pro-circuit",
+          "results_dir": "final_results/circuit/o3pro",
+          "reasoning_effort": "high",
+          "task_range": "3:"
+        }
+      ]
+    },
+    "openrouter/google/gemini-3.1-pro-preview": {
+      "testcases": [
+        {
+          "name": "gemini31pro-circuit",
+          "results_dir": "final_results/circuit/gemini31pro",
+          "reasoning": true,
+          "reasoning_effort": "high",
+          "task_range": "6:"
+        }
+      ]
+    },
+    "openrouter/qwen/qwen3-max": {
+      "defaults": {
+        "use_screenshot": false
+      },
+      "testcases": [
+        {
+          "name": "qwen3max-circuit",
+          "results_dir": "final_results/circuit/qwen3max",
+          "provider": "alibaba"
+        }
+      ]
+    },
+    "openrouter/qwen/qwen3-max-thinking": {
+      "defaults": {
+        "use_screenshot": false
+      },
+      "testcases": [
+        {
+          "name": "qwen3max-thinking-circuit",
+          "results_dir": "final_results/circuit/qwen3max-thinking",
+          "provider": "alibaba"
+        }
+      ]
+    },
+    "openrouter/meta-llama/llama-4-maverick": {
+      "testcases": [
+        {
+          "name": "llama4mav-circuit",
+          "results_dir": "final_results/circuit/llama4mav",
+          "provider": "google-vertex"
+        }
+      ]
+    },
+    "openrouter/deepseek/deepseek-v3.2": {
+      "defaults": {
+        "use_screenshot": false
+      },
+      "testcases": [
+        {
+          "name": "dsv32-circuit",
+          "results_dir": "final_results/circuit/dsv32",
+          "reasoning": true,
+          "provider": "google-vertex",
+          "reasoning_effort": "high",
+          "task_range": "11:"
+        },
+        {
+          "name": "dsv32-circuit",
+          "results_dir": "final_results/circuit/dsv32-low-reasoning",
+          "reasoning": true,
+          "provider": "google-vertex",
+          "reasoning_effort": "low"
+        }
+      ]
+    },
+    "openrouter/qwen/qwen3-32b": {
+      "defaults": {
+        "use_screenshot": false
+      },
+      "testcases": [
+        {
+          "name": "qwen332b-circuit",
+          "results_dir": "final_results/circuit/qwen332b",
+          "reasoning": true,
+          "provider": "alibaba"
+        },
+        {
+          "name": "qwen332b-circuit-no-reasoning",
+          "results_dir": "final_results/circuit/qwen332b_no_reasoning",
+          "reasoning": false,
+          "provider": "alibaba"
+        }
+      ]
+    },
+    "openrouter/mistralai/mistral-large-2512": {
+      "testcases": [
+        {
+          "name": "mistrallarge-circuit",
+          "results_dir": "final_results/circuit/mistrallarge",
+          "task_range": "4:"
+        }
+      ]
+    },
+    "openrouter/google/gemma-3-27b-it": {
+      "skip_existing_results": true,
+      "testcases": [
+        {
+          "name": "gemma327b-circuit",
+          "results_dir": "final_results/circuit/gemma327b",
+          "provider": "phala"
+        }
+      ]
+    }
+  }
+}

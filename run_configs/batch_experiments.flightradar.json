@@ -31,14 +31,6 @@
         { "name": "qwen3max-frad", "results_dir": "./seed_runs/run1/flightradar/qwen3max", "provider": "alibaba" }
       ]
     },
-    "openrouter/x-ai/grok-4": {
-      "defaults": {
-        "max_steps": 70
-      },
-      "testcases": [
-        { "name": "grok4-frad", "results_dir": "./seed_runs/run1/flightradar/grok4"}
-      ]
-    },
     "openrouter/meta-llama/llama-4-maverick": {
       "testcases": [
         { "name": "llama4mav-frad", "results_dir": "./seed_runs/run1/flightradar/llama4mav" }

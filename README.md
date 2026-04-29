@@ -97,6 +97,8 @@ Automated pass/fail scoring by comparing agent outputs against ground truth answ
 - **Circuit** — builds component graphs from circuit exports and computes graph edit distance (requires `networkx`)
 - **Flightradar** — extracts JSON from agent responses and compares field-by-field against expected values
 - **Voidcut** — validates video editor timeline exports block-by-block against scenario rules
+- **3D editor** — compares scene exports against per-task ground-truth scene files with numeric tolerances and rotation symmetries
+- **Graph editor** — matches nodes by content (greedy cost-minimising pairing) and verifies edges via the resulting ID mapping
 
 ```bash
 # Evaluate all result directories under a root
@@ -107,7 +109,7 @@ poetry run python -m evaluation.objective.batch_evaluate \
   clean_results/open_source clean_results/closed_source --workers 8
 ```
 
-Result directories are auto-discovered by naming convention (`_circuit`, `_frad`, `_video`/`_voidcut`). Each directory gets an `objective_evaluation.json` file with `{test_id: 0|1}` scores.
+Result directories are auto-discovered by naming convention (`_circuit`, `_frad`, `_video`/`_voidcut`, `_3d`, `_graph`). Each directory gets an `objective_evaluation.json` file with `{test_id: 0|1}` scores.
 
 You can also run individual evaluators directly:
 
@@ -123,6 +125,14 @@ poetry run python -m evaluation.objective.evaluate \
 # Voidcut
 poetry run python -m evaluation.objective.eval_voidcut \
   results/results_gpt54_video gt_all.json --tolerance_ms 1000 --verbose
+
+# 3D editor
+poetry run python -m evaluation.objective.eval_3d_editor \
+  results/results_opus46_3d assets/3d_ground_truth --tolerance 0.15 --verbose
+
+# Graph editor
+poetry run python -m evaluation.objective.eval_graph \
+  results/results_opus46_graph assets/graph_ground_truth --verbose
 ```
 
 ### LLM-as-a-Judge Evaluation
@@ -174,6 +184,24 @@ Each result directory gets an `llm_judgments.json` file. The optional summary CS
 - `--stage2-image-detail` / `--stage3-image-detail` — image detail level (`low`/`auto`/`high`)
 - `--max-judgments` — cap Stage 2 API calls per directory
 - `--base-url` — custom OpenAI-compatible API endpoint
+
+### Partial Success Rate (PSR)
+
+[evaluation/batch_psr_evaluate.py](evaluation/batch_psr_evaluate.py) combines objective scores with the LLM judge to estimate a partial-success rate per `(collection, run, app, model)`. It runs the LLM judge on every objective-pass case, samples a subset of failed cases, and scales the sampled scores to estimate the full distribution. PSR is aggregated as mean ± std across `run1`/`run2`/`run3`.
+
+```bash
+poetry run python -m evaluation.batch_psr_evaluate \
+  --api-key sk-... \
+  --sample-size 5 \
+  --stage2-model gpt-4o-mini --stage3-model gpt-5.1 \
+  --max-concurrent 20 \
+  --output-dir psr_results \
+  --skip-existing
+```
+
+## Computer Use Agent
+
+The [computer_use/](computer_use/) directory contains a self-contained CLI agent that drives a Playwright browser via Anthropic's [Computer Use API](https://docs.anthropic.com/en/docs/agents-and-tools/computer-use), with provider adapters for Anthropic, Bedrock, OpenAI, and LiteLLM. It ships its own task suites under [computer_use/test_cases/](computer_use/test_cases/) (`circuit`, `flightradar`, `3d`, `graph`, `video`). See [computer_use/README.md](computer_use/README.md) for setup and usage.
 
 ## Adding New Tasks
 
