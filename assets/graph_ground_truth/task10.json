@@ -1,12 +1,12 @@
 {
-  "id": "b398e447-1d98-406d-b081-ad201180081b",
+  "id": "7e1624e8-d170-48d6-ada2-3f62bc028170",
   "name": "API Data Pipeline",
   "createdAt": 1764595985088,
-  "updatedAt": 1776162603902,
+  "updatedAt": 1777125593301,
   "version": 1,
   "metadata": {
     "description": "Fetch data from an API, transform it, and aggregate results.",
-    "thumbnail": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyODAnIGhlaWdodD0nMTYwJyB2aWV3Qm94PScwIDAgMTUyOCA2MCc+PGxpbmUgeDE9JzYwJyB5MT0nMzYnIHgyPSczNzInIHkyPSczNicgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PGxpbmUgeDE9JzEyMTInIHkxPSczNicgeDI9JzE1MDgnIHkyPSczNicgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PGxpbmUgeDE9JzQxMicgeTE9JzM2JyB4Mj0nODA0JyB5Mj0nMzYnIHN0cm9rZT0nIzY0NzQ4Yicgc3Ryb2tlLXdpZHRoPScyJyAvPjxsaW5lIHgxPSc4NDQnIHkxPSczNicgeDI9JzExNzInIHkyPSczNicgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PHJlY3QgeD0nMjAnIHk9JzIwJyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzI2JyB5PSc0MCcgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPm1hbnVhbFRyaWdnZTwvdGV4dD48cmVjdCB4PSczNzInIHk9JzIwJyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzM3OCcgeT0nNDAnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5odHRwUmVxdWVzdDwvdGV4dD48cmVjdCB4PScxMTcyJyB5PScyMCcgd2lkdGg9JzgwJyBoZWlnaHQ9JzMyJyByeD0nNCcgZmlsbD0nIzNiODJmNicgb3BhY2l0eT0nMC44NScgLz48dGV4dCB4PScxMTc4JyB5PSc0MCcgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPm1hcDwvdGV4dD48cmVjdCB4PScxNTA4JyB5PScyMCcgd2lkdGg9JzgwJyBoZWlnaHQ9JzMyJyByeD0nNCcgZmlsbD0nIzNiODJmNicgb3BhY2l0eT0nMC44NScgLz48dGV4dCB4PScxNTE0JyB5PSc0MCcgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPnNvcnQ8L3RleHQ+PHJlY3QgeD0nODA0JyB5PScyMCcgd2lkdGg9JzgwJyBoZWlnaHQ9JzMyJyByeD0nNCcgZmlsbD0nIzNiODJmNicgb3BhY2l0eT0nMC44NScgLz48dGV4dCB4PSc4MTAnIHk9JzQwJyBmb250LXNpemU9JzEwJyBmaWxsPSd3aGl0ZSc+ZmlsdGVyPC90ZXh0Pjwvc3ZnPg=="
+    "thumbnail": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyODAnIGhlaWdodD0nMTYwJyB2aWV3Qm94PScwIDAgMTUyOCA2MCc+PGxpbmUgeDE9JzYwJyB5MT0nMzYnIHgyPSczNzInIHkyPSczNicgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PGxpbmUgeDE9Jzg2MCcgeTE9JzM2JyB4Mj0nMTE1NicgeTI9JzM2JyBzdHJva2U9JyM2NDc0OGInIHN0cm9rZS13aWR0aD0nMicgLz48bGluZSB4MT0nMTE5NicgeTE9JzM2JyB4Mj0nMTUwOCcgeTI9JzM2JyBzdHJva2U9JyM2NDc0OGInIHN0cm9rZS13aWR0aD0nMicgLz48bGluZSB4MT0nNDEyJyB5MT0nMzYnIHgyPSc4MjAnIHkyPSczNicgc3Ryb2tlPScjNjQ3NDhiJyBzdHJva2Utd2lkdGg9JzInIC8+PHJlY3QgeD0nMjAnIHk9JzIwJyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzI2JyB5PSc0MCcgZm9udC1zaXplPScxMCcgZmlsbD0nd2hpdGUnPm1hbnVhbFRyaWdnZTwvdGV4dD48cmVjdCB4PSczNzInIHk9JzIwJyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzM3OCcgeT0nNDAnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5odHRwUmVxdWVzdDwvdGV4dD48cmVjdCB4PSc4MjAnIHk9JzIwJyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzgyNicgeT0nNDAnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5tYXA8L3RleHQ+PHJlY3QgeD0nMTUwOCcgeT0nMjAnIHdpZHRoPSc4MCcgaGVpZ2h0PSczMicgcng9JzQnIGZpbGw9JyMzYjgyZjYnIG9wYWNpdHk9JzAuODUnIC8+PHRleHQgeD0nMTUxNCcgeT0nNDAnIGZvbnQtc2l6ZT0nMTAnIGZpbGw9J3doaXRlJz5zb3J0PC90ZXh0PjxyZWN0IHg9JzExNTYnIHk9JzIwJyB3aWR0aD0nODAnIGhlaWdodD0nMzInIHJ4PSc0JyBmaWxsPScjM2I4MmY2JyBvcGFjaXR5PScwLjg1JyAvPjx0ZXh0IHg9JzExNjInIHk9JzQwJyBmb250LXNpemU9JzEwJyBmaWxsPSd3aGl0ZSc+ZmlsdGVyPC90ZXh0Pjwvc3ZnPg=="
   },
   "graph": {
     "nodes": [
@@ -53,7 +53,7 @@
         "id": "map-1",
         "type": "map",
         "position": {
-          "x": 816,
+          "x": 464,
           "y": 192
         },
         "data": {
@@ -63,7 +63,7 @@
         "height": 141,
         "selected": false,
         "positionAbsolute": {
-          "x": 816,
+          "x": 464,
           "y": 192
         },
         "dragging": false
@@ -92,7 +92,7 @@
         "id": "7025ff37-b340-4ea4-b1df-80d2f655876f",
         "type": "filter",
         "position": {
-          "x": 448,
+          "x": 800,
           "y": 192
         },
         "data": {
@@ -102,7 +102,7 @@
         "height": 141,
         "selected": false,
         "positionAbsolute": {
-          "x": 448,
+          "x": 800,
           "y": 192
         },
         "dragging": false
@@ -116,23 +116,25 @@
         "sourceHandle": "trigger"
       },
       {
-        "id": "e3",
         "source": "map-1",
-        "target": "sort-1"
-      },
-      {
-        "source": "http-1",
         "sourceHandle": null,
         "target": "7025ff37-b340-4ea4-b1df-80d2f655876f",
         "targetHandle": null,
-        "id": "reactflow__edge-http-1-7025ff37-b340-4ea4-b1df-80d2f655876f"
+        "id": "reactflow__edge-map-1-7025ff37-b340-4ea4-b1df-80d2f655876f"
       },
       {
         "source": "7025ff37-b340-4ea4-b1df-80d2f655876f",
         "sourceHandle": null,
+        "target": "sort-1",
+        "targetHandle": null,
+        "id": "reactflow__edge-7025ff37-b340-4ea4-b1df-80d2f655876f-sort-1"
+      },
+      {
+        "source": "http-1",
+        "sourceHandle": null,
         "target": "map-1",
         "targetHandle": null,
-        "id": "reactflow__edge-7025ff37-b340-4ea4-b1df-80d2f655876f-map-1"
+        "id": "reactflow__edge-http-1-map-1"
       }
     ]
   }
