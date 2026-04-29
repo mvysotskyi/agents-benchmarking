@@ -46,10 +46,11 @@ from evaluation.objective.batch_evaluate import EvalJob, run_job
 # Known apps under seed_runs/run*/. Maps directory name → (app code used by
 # batch_evaluate, display column heading for image-1 success table).
 APPS: list[tuple[str, str, str]] = [
-    ("graph",       "3d",   "Graph"),    # graph testcases live under the 3d evaluator
+    ("graph",       "graph", "Graph"),
     ("flightradar", "frad", "Flight"),
     ("video",       "video", "Video"),
     ("3d",          "3d",   "3D"),
+    ("circuit",     "circuit", "Circuit"),
 ]
 
 # Pretty model names — fall back to the raw dir name if not listed.
@@ -68,6 +69,7 @@ MODEL_DISPLAY: dict[str, str] = {
     "mistrallarge": "Mistral Large 3",
     "gemma431b":   "Gemma 4 31B",
     "gemma327b":   "Gemma 3 27B",
+    "gemini3flash": "Gemini 3 Flash",
     # size_runs/
     "sonnet46":    "Claude Sonnet 4.6",
     "haiku45":     "Claude Haiku 4.5",
@@ -79,7 +81,7 @@ MODEL_DISPLAY: dict[str, str] = {
     "gemini31pro-low":     "Gemini 3.1 Pro (low reasoning)",
 }
 
-TASK_ID_RE = re.compile(r"tc_(?:graph|3d|frad|vid|clone3d)_\d+")
+TASK_ID_RE = re.compile(r"tc_(?:graph|3d|frad|vid|clone3d|circuit)_\d+")
 
 
 # ── Discovery + evaluation ───────────────────────────────────────────────────

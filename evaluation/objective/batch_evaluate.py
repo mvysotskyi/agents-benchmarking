@@ -25,16 +25,19 @@ from pathlib import Path
 TASKS_DIR = Path("test_cases")
 GT_VOIDCUT = Path("assets/video_ground_truth")
 GT_3D = Path("assets/3d_ground_truth")
+GT_GRAPH = Path("assets/graph_ground_truth")
 
 APP_CIRCUIT = "circuit"
 APP_FRAD = "frad"
 APP_VIDEO = "video"
 APP_3D = "3d"
+APP_GRAPH = "graph"
 
 CIRCUIT_PATTERNS = ("_circuit",)
 FRAD_PATTERNS = ("_frad",)
 VIDEO_PATTERNS = ("_video", "_voidcut")
-THREE_D_PATTERNS = ("_3d", "_clone3d", "_graph")
+THREE_D_PATTERNS = ("_3d", "_clone3d")
+GRAPH_PATTERNS = ("_graph",)
 
 ROOT_APP_ALIASES = {
     "circuit": APP_CIRCUIT,
@@ -43,6 +46,7 @@ ROOT_APP_ALIASES = {
     "video": APP_VIDEO,
     "voidcut": APP_VIDEO,
     "3d": APP_3D,
+    "graph": APP_GRAPH,
 }
 
 
@@ -81,6 +85,9 @@ def classify_app(dirname: str) -> str | None:
     for pattern in VIDEO_PATTERNS:
         if pattern in lower:
             return APP_VIDEO
+    for pattern in GRAPH_PATTERNS:
+        if pattern in lower:
+            return APP_GRAPH
     for pattern in THREE_D_PATTERNS:
         if pattern in lower:
             return APP_3D
@@ -151,6 +158,13 @@ def _build_command(job: EvalJob) -> list[str]:
             sys.executable, "-m", "evaluation.objective.eval_3d_editor",
             str(job.results_dir),
             str(GT_3D),
+        ]
+
+    if job.app == APP_GRAPH:
+        return [
+            sys.executable, "-m", "evaluation.objective.eval_graph",
+            str(job.results_dir),
+            str(GT_GRAPH),
         ]
 
     raise ValueError(f"Unknown app type: {job.app}")

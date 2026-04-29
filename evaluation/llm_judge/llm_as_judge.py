@@ -20,7 +20,7 @@ from tqdm.auto import tqdm
 
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-TASK_ID_RE = re.compile(r"(tc_[a-z]+_\d+)")
+TASK_ID_RE = re.compile(r"(tc_[a-z0-9]+_\d+)")
 CODE_BLOCK_RE = re.compile(r"```(?:[\w+-]+\n)?(.*?)```", re.DOTALL)
 PROMPTS_DIR = Path(__file__).resolve().parent / "prompts"
 STAGE2_SYSTEM_PROMPT_PATH = PROMPTS_DIR / "stage2_sys_prompt.txt"
