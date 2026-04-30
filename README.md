@@ -27,29 +27,44 @@ echo "OPENROUTER_API_KEY=your_key_here" >> .env
 
 ```bash
 # Run a specific task
-poetry run python main.py --task crm-1
+poetry run python main.py --task tc_frad_001
 
 # Run all tasks in an application
-poetry run python main.py --application crm
+poetry run python main.py --application flightradar
 
 # Run tasks with options
 poetry run python main.py --run-all --concurrent --headless
 poetry run python main.py --run-random -n 5 --iterations 3
 
 # Run a batch of experiments from JSON
-poetry run python run_experiments.py --config example/batch_experiments.example.json
+poetry run python run_experiments.py --config run_configs/batch_experiments.circuit.json
 
 # Skip experiments whose results already exist
-poetry run python run_experiments.py --config example/batch_experiments.example.json --skip-existing-results
+poetry run python run_experiments.py --config run_configs/batch_experiments.circuit.json --skip-existing-results
 ```
 
 ### Key Options
-- `--model`: Model to use (default: gpt-4.1)
+- `--model`: Model to use (default: `o3`)
+- `--task-file`: Path to a YAML task file (e.g. `test_cases/circuit.yaml`)
 - `--concurrent`: Run tasks in parallel
 - `--headless`: Run browser in headless mode
 - `--iterations`: Number of times to run each task
-- `--ignore-completed`: Skip tasks already in results.json
-- `--rerun-errors`: Only run tasks that previously failed
+- `--task-range`: Slice of tasks to run, e.g. `2:5`, `3:`, `:5`
+- `--seed`: Fixed seed for LLM calls
+- `--reasoning` / `--reasoning-effort`: Enable extended thinking / set effort level
+- `--results-dir`: Where to save task artifacts (default: `results`)
+
+### Benchmark Applications
+
+Task files live in `test_cases/`. Each file is a YAML list of test cases for one app:
+
+| File | App | URL |
+|------|-----|-----|
+| `test_cases/flightradar.yaml` | Flight radar tracker | hosted |
+| `test_cases/circuit.yaml` | Logic circuit builder | hosted |
+| `test_cases/video.yaml` | Video editor (Voidcut) | hosted |
+| `test_cases/3d.yaml` | 3-D scene editor | hosted |
+| `test_cases/graph.yaml` | Graph editor | hosted |
 
 ### Batch Config
 
@@ -74,8 +89,8 @@ You can also set `"skip_existing_results": true` at the root of a batch config J
       },
       "testcases": [
         {
-          "name": "grok4-flightradar8",
-          "task_file": "example/tasks/flightradar8.yaml",
+          "name": "grok4-flightradar",
+          "task_file": "test_cases/flightradar.yaml",
           "results_dir": "results/results_grok4_frad"
         }
       ]
@@ -84,7 +99,9 @@ You can also set `"skip_existing_results": true` at the root of a batch config J
 }
 ```
 
-Each model key can define shared `defaults` plus a `testcases` list. Each testcase can override any supported `main.py` option, including `results_dir`, `max_steps`, `post_run_url`, `post_run_js_snippet_path` (or the legacy alias `js_snippet_file`), `system_prompt`, and `extra_args`.
+Each model key can define shared `defaults` plus a `testcases` list. Each testcase can override any supported `main.py` option, including `results_dir`, `max_steps`, `post_run_url`, `post_run_js_snippet_path` (or the legacy alias `js_snippet_file`), `system_prompt`, `prefix_prompt_file`, and `extra_args`.
+
+Ready-made configs for all apps and models are in [`run_configs/`](./run_configs/).
 
 ## Evaluation
 
@@ -96,7 +113,7 @@ Automated pass/fail scoring by comparing agent outputs against ground truth answ
 
 - **Circuit** — builds component graphs from circuit exports and computes graph edit distance (requires `networkx`)
 - **Flightradar** — extracts JSON from agent responses and compares field-by-field against expected values
-- **Voidcut** — validates video editor timeline exports block-by-block against scenario rules
+- **Video** — validates video editor timeline exports block-by-block against scenario rules
 - **3D editor** — compares scene exports against per-task ground-truth scene files with numeric tolerances and rotation symmetries
 - **Graph editor** — matches nodes by content (greedy cost-minimising pairing) and verifies edges via the resulting ID mapping
 
@@ -116,13 +133,13 @@ You can also run individual evaluators directly:
 ```bash
 # Circuit
 poetry run python -m evaluation.objective.evaluate_circuit_scheme \
-  --test-cases tasks/circuit.yaml --responses results/results_gpt54_circuit
+  --test-cases test_cases/circuit.yaml --responses results/results_gpt54_circuit
 
 # Flightradar
-poetry run python -m evaluation.objective.evaluate \
-  --test-cases tasks/flightradar.yaml --responses results/results_gpt54_frad
+poetry run python -m evaluation.objective.eval_flightradar \
+  --test-cases test_cases/flightradar.yaml --responses results/results_gpt54_frad
 
-# Voidcut
+# Video
 poetry run python -m evaluation.objective.eval_voidcut \
   results/results_gpt54_video gt_all.json --tolerance_ms 1000 --verbose
 
@@ -152,8 +169,8 @@ poetry run python -m evaluation.llm_judge.batch_run_llm_as_judge results/
 # Parallel with task YAML overrides
 poetry run python -m evaluation.llm_judge.batch_run_llm_as_judge results/ \
   --parallel 4 \
-  --task-yaml circuit=tasks/circuit.yaml \
-  --task-yaml frad=tasks/flightradar.yaml
+  --task-yaml circuit=test_cases/circuit.yaml \
+  --task-yaml frad=test_cases/flightradar.yaml
 
 # Generate summary CSVs
 poetry run python -m evaluation.llm_judge.batch_run_llm_as_judge results/ \
@@ -185,48 +202,33 @@ Each result directory gets an `llm_judgments.json` file. The optional summary CS
 - `--max-judgments` — cap Stage 2 API calls per directory
 - `--base-url` — custom OpenAI-compatible API endpoint
 
-### Partial Success Rate (PSR)
-
-[evaluation/batch_psr_evaluate.py](evaluation/batch_psr_evaluate.py) combines objective scores with the LLM judge to estimate a partial-success rate per `(collection, run, app, model)`. It runs the LLM judge on every objective-pass case, samples a subset of failed cases, and scales the sampled scores to estimate the full distribution. PSR is aggregated as mean ± std across `run1`/`run2`/`run3`.
-
-```bash
-poetry run python -m evaluation.batch_psr_evaluate \
-  --api-key sk-... \
-  --sample-size 5 \
-  --stage2-model gpt-4o-mini --stage3-model gpt-5.1 \
-  --max-concurrent 20 \
-  --output-dir psr_results \
-  --skip-existing
-```
-
 ## Computer Use Agent
 
 The [computer_use/](computer_use/) directory contains a self-contained CLI agent that drives a Playwright browser via Anthropic's [Computer Use API](https://docs.anthropic.com/en/docs/agents-and-tools/computer-use), with provider adapters for Anthropic, Bedrock, OpenAI, and LiteLLM. It ships its own task suites under [computer_use/test_cases/](computer_use/test_cases/) (`circuit`, `flightradar`, `3d`, `graph`, `video`). See [computer_use/README.md](computer_use/README.md) for setup and usage.
 
 ## Adding New Tasks
 
-Create a JSON file in `tasks/eval/<application>/<task-id>.json`:
+Create a YAML file in `test_cases/` (or add test cases to an existing one):
 
-```json
-{
-  "id": "app-1",
-  "goal": "Task description for the agent",
-  "website": {
-    "id": "app",
-    "name": "Application Name",
-    "url": "http://localhost:8901"
-  },
-  "difficulty": "easy|medium|hard",
-  "challengeType": "retrieval|interaction|form",
-  "evals": [
-    {
-      "type": "llm_boolean",
-      "expected_value": true,
-      "rubric": "Evaluation criteria"
-    }
-  ],
-  "points": 1
-}
+```yaml
+test_cases:
+- id: "tc_myapp_001"
+  prompt: |-
+    # Task Title
+
+    ## GOAL
+    Description of what the agent must accomplish.
+
+    ## STEPS
+    1. Step one
+    2. Step two
+
+    # RESULT FORMAT
+
+    ```json
+    {"answer": "<value>"}
+    ```
+  gt: {answer: '{"answer": "expected_value"}'}
 ```
 
-Tasks are automatically discovered from the `tasks/eval/` directory.
+Then reference the file with `--task-file test_cases/myapp.yaml` when running `main.py`, or add it to a batch config under `task_file`.
